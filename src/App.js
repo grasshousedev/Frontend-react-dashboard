@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.scss';
+import { Header } from './scaffold/Header/Header';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <p>
-            First commit
-          </p>
-        </header>
+        <Header />
+        <p>
+          First commit
+        </p>
       </div>
     );
   }

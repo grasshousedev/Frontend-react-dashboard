@@ -1,0 +1,59 @@
+/* General variables */
+$dashboard-menu-height: 46px;
+$dashboard-menu-header-bg-color: #292929;
+$dashboard-menu-header-color: #AFAFAF;
+
+/* Body */
+$dashboard-menu-body-border-color: $dashboard-menu-header-bg-color;
+$dashboard-menu-body-bg-color: $dashboard-menu-header-color;
+
+body {
+    padding-top: $dashboard-menu-height;
+}
+
+.dashboard-menu__container {
+
+}
+
+.dashboard-menu__header {
+    /* Position and dimension */
+    position: absolute;
+    top: 0;
+    width: 100%;      
+    height: $dashboard-menu-height;
+    /* Colors */
+    background-color: $dashboard-menu-header-bg-color;
+    color: $dashboard-menu-header-color;
+    /* Flex configuration and Children spacing */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+}
+
+.dashboard-menu__header-block {
+
+}
+
+.dashboard-menu__header-item {
+    display: inline-flex;
+    align-items: center;
+    height: 46px;
+    cursor: pointer;
+    padding: 0 15px;
+
+    &:hover {
+      color: rgba(85,172,238 ,1);
+    }
+
+    &:not(:last-child) {
+      border-right: 1px solid $dashboard-menu-header-color;
+    }
+
+    i {
+      font-size: 1.3em;
+    }
+}
+
+.dashboard-menu__body {
+    border: 1px solid $dashboard-menu-body-border-color;
+}
