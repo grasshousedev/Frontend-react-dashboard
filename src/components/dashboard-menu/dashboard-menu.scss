@@ -50,10 +50,6 @@ This is the element that contains the entire menu, both header and body
     &:not(:last-child) {
       border-right: 1px solid $dashboard-menu-header-color;
     }
-
-    i {
-      font-size: 1.3em;
-    }
 }
 
 /* DashboardMenu body */
