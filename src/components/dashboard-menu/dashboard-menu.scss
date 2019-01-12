@@ -3,18 +3,20 @@ $dashboard-menu-height: 46px;
 $dashboard-menu-header-bg-color: #292929;
 $dashboard-menu-header-color: #AFAFAF;
 
-/* Body */
 $dashboard-menu-body-border-color: $dashboard-menu-header-bg-color;
 $dashboard-menu-body-bg-color: $dashboard-menu-header-color;
 
+/* Body */
 body {
     padding-top: $dashboard-menu-height;
 }
 
-.dashboard-menu__container {
+/* DashboardMenu container:
+This is the element that contains the entire menu, both header and body
+*/
+.dashboard-menu__container {}
 
-}
-
+/* DashboardMenu header, the always visible part */
 .dashboard-menu__header {
     /* Position and dimension */
     position: absolute;
@@ -30,10 +32,10 @@ body {
     align-items: center;    
 }
 
-.dashboard-menu__header-block {
+/* Block is an element within the header, that can contains many items */
+.dashboard-menu__header-block {}
 
-}
-
+/* A single item inside header */
 .dashboard-menu__header-item {
     display: inline-flex;
     align-items: center;
@@ -54,6 +56,8 @@ body {
     }
 }
 
+/* DashboardMenu body */
 .dashboard-menu__body {
     border: 1px solid $dashboard-menu-body-border-color;
+    background-color: $dashboard-menu-body-bg-color;
 }
