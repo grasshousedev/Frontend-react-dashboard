@@ -1,10 +1,46 @@
 /* General variables */
 $dashboard-menu-height: 46px;
+$dashboard-menu-padding: 15px;
+$dashboard-menu-padding-small: 7px;
+
+/* Header */
 $dashboard-menu-header-bg-color: #292929;
 $dashboard-menu-header-color: #AFAFAF;
 
-$dashboard-menu-body-border-color: $dashboard-menu-header-bg-color;
-$dashboard-menu-body-bg-color: $dashboard-menu-header-color;
+/* Body */
+$dashboard-menu-body-header-bg-color: #ececec;
+$dashboard-menu-body-border-color: $dashboard-menu-body-header-bg-color;
+$dashboard-menu-body-bg-color: #FCFCFC;
+$dashboard-menu-body-controls-width: 80px;
+$dashboard-menu-query-bg-color: $dashboard-menu-body-header-bg-color;
+$dashboard-menu-query-color: #898989;
+$dashboard-menu-query-focus-border-color: #7e8dda;
+$dashboard-menu-body-column-border-color: $dashboard-menu-query-color;
+
+/* Utils */
+@mixin optional-at-root($sel) {
+    @at-root #{if(not &, $sel, selector-append(&, $sel))} {
+        @content;
+    }
+}
+  
+@mixin placeholder {
+    @include optional-at-root('::-webkit-input-placeholder') {
+        @content;
+    }
+  
+    @include optional-at-root(':-moz-placeholder') {
+        @content;
+    }
+  
+    @include optional-at-root('::-moz-placeholder') {
+        @content;
+    }
+  
+    @include optional-at-root(':-ms-input-placeholder') {
+        @content;
+    }
+}
 
 /* Body */
 body {
@@ -35,25 +71,90 @@ This is the element that contains the entire menu, both header and body
 /* Block is an element within the header, that can contains many items */
 .dashboard-menu__header-block {}
 
+.dashboard-menu__header-block--left {
+    text-align: left;
+}
+
+.dashboard-menu__header-block--center {
+    text-align: center;
+}
+
+.dashboard-menu__header-block--right {
+    text-align: right;
+    padding-right: 5px;
+}
+
 /* A single item inside header */
 .dashboard-menu__header-item {
     display: inline-flex;
     align-items: center;
-    height: 46px;
-    cursor: pointer;
-    padding: 0 15px;
-
-    &:hover {
-      color: rgba(85,172,238 ,1);
-    }
+    height: $dashboard-menu-height;
+    padding: 0 $dashboard-menu-padding;
 
     &:not(:last-child) {
       border-right: 1px solid $dashboard-menu-header-color;
     }
 }
 
+.dashboard-menu__header-dashboard-item {
+    cursor: pointer;
+}
+
 /* DashboardMenu body */
 .dashboard-menu__body {
     border: 1px solid $dashboard-menu-body-border-color;
     background-color: $dashboard-menu-body-bg-color;
+}
+
+.dashboard-menu__body-header {
+    width: 100%;
+    /* Flex configuration and Children spacing */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;  
+}
+
+.dashboard-menu__body-query {
+    width: calc(100% - #{$dashboard-menu-body-controls-width});
+    text-align: left; 
+}
+
+.dashboard-menu__body-query__input {
+    width: 98%;
+    border: 0;
+    border-bottom: 1px solid $dashboard-menu-body-bg-color; /* assign a border bottom to not change spacing on focus */
+    font-size: 1.1em;
+    color: $dashboard-menu-query-color;
+    padding: 5px;
+    margin-bottom: 1px;
+    margin-right: 10px;
+
+    &:focus {
+      background-color: $dashboard-menu-query-bg-color;
+      outline: none;
+      border-bottom: 1px solid $dashboard-menu-query-focus-border-color;
+    }
+
+    @include placeholder {
+      color: lighten($dashboard-menu-query-color, 25%);
+      font-weight:100;
+    }
+}
+
+.dashboard-menu__body-controls {
+    width: $dashboard-menu-body-controls-width;
+    text-align: right;
+    padding-right: $dashboard-menu-padding-small; 
+}
+
+.dashboard-menu__body-controls__control {
+    cursor: pointer;
+}
+
+.dashboard-menu__body__column {
+    border-right: 1px solid $dashboard-menu-body-column-border-color;
+}
+
+.dashboard-menu__body__column--fixed {
+    width: 200px;
 }
