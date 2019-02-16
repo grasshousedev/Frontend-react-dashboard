@@ -3,9 +3,7 @@ import { DashboardMenu } from 'components/dashboard-menu/DashboardMenu';
 import { DashboardItem } from 'components/dashboard-menu/DashboardItem';
 import './header.scss';
 
-const RightComponent = () => {
-    return <span>Hello User!</span>;
-};
+import { Login } from 'components/authentication/Login';
 
 class Applications extends DashboardItem {
     
@@ -19,13 +17,19 @@ class Applications extends DashboardItem {
 
 }
 
+class User extends DashboardItem {
+    render() {
+        return <Login />;
+    }
+}
+
 export class Header extends Component {
     render() {
         return <header>
             <DashboardMenu
                 left={[{ headerLabel: 'Applications', bodyItem: Applications, name: 'applications' }, 'Menu Item 2']}
                 center='Dashboard'
-                right={<RightComponent />}
+                right={[{ headerLabel: 'User', bodyItem: User, name: 'user' }]}
             />
         </header>;
     }
