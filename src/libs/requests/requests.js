@@ -1,4 +1,5 @@
 import { BACKEND_URL } from 'config';
+import Exception from 'libs/exceptions/exceptions';
 
 export const METHODS = {
     GET: 'GET',
@@ -8,10 +9,20 @@ export const METHODS = {
     DELETE: 'DELETE'
 };
 
+let commonHeaders = {};
+
+export function setCommonHeaders(common) {
+    commonHeaders = { ...common };
+}
+
+export function getCommonHeaders() {
+    return { ...commonHeaders };
+}
+
 export default function request(url, { payload, method = 'GET', headers = {}, body, extraOptions = {} }) {
     const params = {
         method,
-        headers,
+        headers: { ...getCommonHeaders(), ...headers },
         mode: 'cors',
         cache: 'no-cache',
         credentials: 'same-origin',
@@ -21,8 +32,8 @@ export default function request(url, { payload, method = 'GET', headers = {}, bo
     };
 
     // Set auto header to JSON
-    if (!headers['Content-Type']) {
-        headers['Content-Type'] = 'application/json';
+    if (!params.headers['Content-Type']) {
+        params.headers['Content-Type'] = 'application/json';
     }
 
     if (body) {
@@ -33,14 +44,30 @@ export default function request(url, { payload, method = 'GET', headers = {}, bo
 
     const requestUrl = url.indexOf('http://') >= 0 || url.indexOf('https://') >= 0 ? url : `${BACKEND_URL}${url}`;
 
+    console.log(`Request [${params.method}]: `, url, params);
     return fetch(requestUrl, params)
-        .then(response => response.json()); // parses response to JSON
+        .then(response => {
+            console.log('Request: response to ', url, response);
+            if (!response.ok) {
+                console.error('Request: Invalid!', response.status, response.statusText);
+                throw new RequestInvalid(response);
+            }
+            return response.json();
+        })
+        .catch(error => {
+            if (error instanceof RequestInvalid) throw error;
+
+            throw new RequestError(error);
+        });
 }
 
-export function get(url, options) {
+export function get(url, options = {}) {
     return request(url, options);
 }
 
-export function post(url, payload, options) {
+export function post(url, payload, options = {}) {
     return request(url, { payload, method: 'POST', ...options });
 }
+
+export class RequestInvalid extends Exception {}
+export class RequestError extends Exception {}
