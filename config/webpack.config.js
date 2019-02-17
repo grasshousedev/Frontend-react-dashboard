@@ -113,6 +113,15 @@ module.exports = function(webpackEnv) {
     return loaders;
   };
 
+  let serverConfig = {};
+  if (isEnvProduction && fs.existsSync('./config/serverConfig.prod.json')) {
+    serverConfig = require('./serverConfig.prod.json');
+  } else
+  if (isEnvDevelopment && fs.existsSync('./config/serverConfig.dev.json')) {
+    serverConfig = require('./serverConfig.dev.json');
+  }  
+  serverConfig = JSON.stringify(serverConfig);
+
   return {
     mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
     // Stop compilation early in production
@@ -605,9 +614,13 @@ module.exports = function(webpackEnv) {
       net: 'empty',
       tls: 'empty',
       child_process: 'empty',
-    },
+    },    
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter
     performance: false,
+    // external configurations
+    externals: {
+      serverConfig,
+    }
   };
 };
