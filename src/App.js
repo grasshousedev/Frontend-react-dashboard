@@ -1,17 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+
 import './App.scss';
+
 import { Header } from './scaffold/Header/Header';
 import { Routes } from 'routes/Routes';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <Header />
-        <Routes />
-      </div>
-    );
-  }
-}
 
-export default App;
+export default function App ({ store }) {
+    return (
+        <Provider store={store}>
+            <BrowserRouter>
+                <div className="App">
+                    <Header />
+                    <Routes />
+                </div>
+            </BrowserRouter>
+        </Provider>
+    );
+};
+
+App.propTypes = {
+  store: PropTypes.object.isRequired
+};
