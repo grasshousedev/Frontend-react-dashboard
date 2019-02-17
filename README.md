@@ -152,6 +152,28 @@ store      |       requests
  |-- authentication --|
 ```
 
+# Config
+
+Few configuration variables can be customized. They can be defined inside `config` folder in two files:
+- `serverConfig.dev.json`;
+- `serverConfig.prod.json`;
+
+The two files are **not saved** in the repository.
+
+The content will be loaded accordingly.
+Keys of the JSON file will be used to create configuration constants in `config.js` file.
+
+| Key | Default | Description |
+| --- | --- | --- |
+| BACKEND_URL | `http://localhost/` | Base URL used by `requests` module. |
+
+For example, to override `BACKEND_URL` in Dev mode, you can use the following `serverConfig.dev.json`:
+
+```json
+{
+    "BACKEND_URL": "http://localhost:8091/"
+}
+```
 
 # Credits
 
