@@ -1,20 +1,46 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from "react-router-dom";
 
 import { DashboardMenu } from 'components/dashboard-menu/DashboardMenu';
 import { DashboardItem } from 'components/dashboard-menu/DashboardItem';
 import './header.scss';
 
 import { Login } from 'components/authentication/Login';
+import { generateTags, hasTag } from './headerUtils';
 
 class Applications extends DashboardItem {
+    applications = [
+        {
+            name: 'Machine Learning',
+            tags: generateTags('Machine Learning'),
+            icon: <i className="fas fa-cogs"></i>,
+            link: '/machine-learning'
+        }
+    ]
     
     render() {
         const { query } = this.props;
 
         return <div className="applications-container">
-            This will be the list of installed applications! Query: {query}
+            {this.applications.map(application => {
+                if (hasTag(application.tags, query)) {
+                    return <Link
+                        to={application.link}
+                        className="applications__application"
+                        key={application.name}
+                    >
+                        <div className="applications__application__icon">
+                            {application.icon}
+                        </div>
+                        <div className="applications__application__name">
+                            {application.name}
+                        </div>
+                    </Link>;
+                }
+                return <Fragment key={application.name} />;
+            })}
         </div>;
     }
 
@@ -27,6 +53,7 @@ class User extends DashboardItem {
 }
 
 class Header extends Component {
+
     render() {
         const { authentication } = this.props;
 
@@ -36,7 +63,7 @@ class Header extends Component {
                 left={[
                     { headerLabel: 'Applications', bodyItem: Applications, name: 'applications' },
                 ]}
-                center='Dashboard'
+                center={<Link to="/">Dashboard</Link>}
                 right={[
                     { headerLabel: userLabel, bodyItem: User, name: 'user' }
                 ]}

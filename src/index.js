@@ -2,7 +2,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-
+import { BrowserRouter } from 'react-router-dom';
 
 // styles
 import './index.css';
@@ -17,7 +17,9 @@ store.registerReducer('authentication', authReducers.authentication);
 
 render(
     <Provider store={store}>
-        <App />,
-    </Provider>,    
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </Provider>,
     document.getElementById('root')
 );
