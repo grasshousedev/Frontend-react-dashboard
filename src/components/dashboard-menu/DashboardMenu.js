@@ -3,16 +3,22 @@ import PropTypes from 'prop-types';
 import './dashboard-menu.scss';
 import { ELEMENTS_PROPS } from './constants';
 
+const INITIAL_STATE = {
+    bodyOpen: false,
+    selectedItem: null,
+    query: '',
+};
+
 export class DashboardMenu extends Component {
     constructor(props) {
         super(props);
         this.elementsProps = [ELEMENTS_PROPS.LEFT, ELEMENTS_PROPS.CENTER, ELEMENTS_PROPS.RIGHT];
 
-        this.state = {
-            bodyOpen: false,
-            selectedItem: null,
-            query: '',
-        };
+        this.state = INITIAL_STATE;
+    }
+
+    resetDashboardMenu = () => {
+        this.setState(INITIAL_STATE);
     }
 
     toggleBodyOpen = (forcedStatus) => {
@@ -98,7 +104,7 @@ export class DashboardMenu extends Component {
                     </div>
                     {SelectedItemBody &&
                         <div className="dashboard-menu__body-item">
-                            <SelectedItemBody query={query} />
+                            <SelectedItemBody query={query} resetDashboardMenu={this.resetDashboardMenu} />
                         </div>
                     }
                 </div>

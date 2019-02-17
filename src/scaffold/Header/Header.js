@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 import { DashboardMenu } from 'components/dashboard-menu/DashboardMenu';
 import { DashboardItem } from 'components/dashboard-menu/DashboardItem';
@@ -20,16 +20,23 @@ class Applications extends DashboardItem {
         }
     ]
     
+    navigate = (path) => {
+        const { history, resetDashboardMenu } = this.props;
+        
+        history.push(path);
+        resetDashboardMenu();
+    }
+
     render() {
         const { query } = this.props;
 
         return <div className="applications-container">
             {this.applications.map(application => {
                 if (hasTag(application.tags, query)) {
-                    return <Link
-                        to={application.link}
+                    return <span                        
                         className="applications__application"
                         key={application.name}
+                        onClick={() => this.navigate(application.link)}
                     >
                         <div className="applications__application__icon">
                             {application.icon}
@@ -37,7 +44,7 @@ class Applications extends DashboardItem {
                         <div className="applications__application__name">
                             {application.name}
                         </div>
-                    </Link>;
+                    </span>;
                 }
                 return <Fragment key={application.name} />;
             })}
@@ -45,6 +52,14 @@ class Applications extends DashboardItem {
     }
 
 }
+
+Applications.propTypes = {
+    query: PropTypes.string,
+    resetDashboardMenu: PropTypes.func,
+    history: PropTypes.object,
+};
+
+const ApplicationsRouter = withRouter(Applications);
 
 class User extends DashboardItem {
     render() {
@@ -61,7 +76,7 @@ class Header extends Component {
         return <header>
             <DashboardMenu
                 left={[
-                    { headerLabel: 'Applications', bodyItem: Applications, name: 'applications' },
+                    { headerLabel: 'Applications', bodyItem: ApplicationsRouter, name: 'applications' },
                 ]}
                 center={<Link to="/">Dashboard</Link>}
                 right={[
