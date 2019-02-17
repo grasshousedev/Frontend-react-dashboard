@@ -1,8 +1,6 @@
 // Libraries
 import React from 'react';
 import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
 
 // styles
 import './index.css';
@@ -16,10 +14,6 @@ import { reducers as authReducers } from './libs/authentication/reducers';
 store.registerReducer('authentication', authReducers.authentication);
 
 render(
-    <Provider store={store}>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </Provider>,
+    <App store={store} />,
     document.getElementById('root')
 );
