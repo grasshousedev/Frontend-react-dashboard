@@ -24,6 +24,8 @@
       "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1 }],
       "no-tabs": "error",
       "no-this-before-super": "error",
-      "semi": ["error", "always"]
+      "semi": ["error", "always"],
+
+      "react/prop-types": "warn"
     }
 }

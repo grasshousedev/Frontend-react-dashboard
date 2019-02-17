@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 import { DashboardMenu } from 'components/dashboard-menu/DashboardMenu';
 import { DashboardItem } from 'components/dashboard-menu/DashboardItem';
 import './header.scss';
 
-const RightComponent = () => {
-    return <span>Hello User!</span>;
-};
+import { Login } from 'components/authentication/Login';
 
 class Applications extends DashboardItem {
     
@@ -19,14 +20,42 @@ class Applications extends DashboardItem {
 
 }
 
-export class Header extends Component {
+class User extends DashboardItem {
     render() {
+        return <Login />;
+    }
+}
+
+class Header extends Component {
+    render() {
+        const { authentication } = this.props;
+
+        const userLabel = authentication.user ? `Welcome ${authentication.user.first_name}!` : 'Login';
         return <header>
             <DashboardMenu
-                left={[{ headerLabel: 'Applications', bodyItem: Applications, name: 'applications' }, 'Menu Item 2']}
+                left={[
+                    { headerLabel: 'Applications', bodyItem: Applications, name: 'applications' },
+                ]}
                 center='Dashboard'
-                right={<RightComponent />}
+                right={[
+                    { headerLabel: userLabel, bodyItem: User, name: 'user' }
+                ]}
             />
         </header>;
     }
 }
+
+Header.propTypes = {
+    authentication: PropTypes.object,
+};
+
+function mapStateToProps(state) {
+    const { authentication } = state;
+
+    return {
+        authentication
+    };
+}
+
+const connectedHeader = connect(mapStateToProps)(Header);
+export { connectedHeader as Header };
