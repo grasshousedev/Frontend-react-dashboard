@@ -12,8 +12,8 @@ const createReducer = asyncReducers =>
  * Initialize the store.
  * Add a method to inject reducers from the tree.
  */
-const initializeStore = (initialReducers = {}) => {
-    const store = createStore(createReducer(initialReducers));
+const initializeStore = () => {
+    const store = createStore(s => s, {});
   
     store.asyncReducers = {};
     store.registerReducer = (key, reducer) => {
@@ -24,5 +24,8 @@ const initializeStore = (initialReducers = {}) => {
   
     return store;
 };
-  
-export default initializeStore;
+
+export const store = initializeStore();
+
+if (process.env.NODE_ENV === 'development')
+    window.store = store;
