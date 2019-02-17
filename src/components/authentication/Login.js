@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-import { authentication } from 'libs/authentication/authentication';
+import { authenticationService } from 'libs/authentication/authentication';
 
-export class Login extends Component {
+class Login extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             username: '',
             password: '',
-            loggedIn: false,
             isLoading: false,
             error: null,
         };
@@ -19,28 +20,37 @@ export class Login extends Component {
         this.setState({ [field]: value });
     }
 
-    login = () => {
+    login = () => {        
         const { username, password } = this.state;
 
         this.setState(
-            () => { return { isLoading: true, error: null }; },
             () => {
-                authentication.login(username, password)
-                    .then(response => {
-                        this.setState({ isLoading: false, loggedIn: true });
+                return { isLoading: true, error: false };
+            },
+            () => {
+                authenticationService.requestAuthentication(username, password)
+                    .then(() => {
+                        this.setState({ isLoading: false });
                     })
-                    .catch(error => {
-                        this.setState({ isLoading: false, error });
+                    .catch(exception => {
+                        this.setState({ isLoading: false, error: exception.getErrorData() });
                     });
             }
         );
     }
 
     render() {
-        const { isLoading, loggedIn, username, password } = this.state;
+        const { authentication } = this.props;
+        const { isLoading, username, password, error } = this.state;
 
-        if (loggedIn) { 
-            return <h1>You are logged in!</h1>;
+        if (authentication.loggedIn) { 
+            return <div>
+                <h1>You are logged in!</h1>
+                <div>{JSON.stringify(authentication.user)}</div>
+                <div>
+                    <button onClick={authenticationService.logout}>Logout</button>
+                </div>
+            </div>;
         }
 
         return <div>
@@ -59,6 +69,27 @@ export class Login extends Component {
                     {isLoading && <i className="fas fa-spinner fa-pulse"></i>}
                 </div>
             </form>
+            {error && 
+                <div>
+                    <h4>Error</h4>
+                    <div>{error.status}: {error.statusText}</div>
+                </div>
+            }
         </div>;
     }
 };
+
+Login.propTypes = {
+    authentication: PropTypes.object,
+};
+
+function mapStateToProps(state) {
+    const { authentication } = state;
+
+    return {
+        authentication
+    };
+}
+
+const connectedLogin = connect(mapStateToProps)(Login);
+export { connectedLogin as Login };
