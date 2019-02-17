@@ -30,7 +30,7 @@ http-server build/
 ```
 This will create a local server listening on port 8080.
 
-# Configuration
+# Dashboard blocks
 
 ## DashboardMenu
 `DashboardMenu` component allows to create menus in the dashboard header.
@@ -102,6 +102,56 @@ export class Header extends Component {
     }
 }
 ```
+
+# Store
+
+Store management is implemented by using `redux`.
+An empty store is created inside `store/store.js` file with a mechanism to add reducers dynamically by using the following command:
+
+```js
+store.registerReducer(STORE_KEY, REDUCER_FUNCTION);
+```
+
+Whenever a new reducer is registered, the `store` will replace all the reducers using `replaceReducer` method adding the new one as well.
+
+Example used in the application:
+
+```js
+store.registerReducer('authentication', authReducers.authentication);
+```
+
+
+# Libs
+
+## Requests
+`requests` is a module based on `fetch` that simplifies calls by adding headers and payload conversion facilitations. There are two shorthands: `get` and `post`. 
+
+For a more detailed description, see README.md file in `libs/requests` folder.
+
+## Exceptions
+Provides a simple error class called `Exception` that takes an object when instanciated and stores it in `errorData`. This can be retrieved by using `getErrorData` method.
+
+## Authentication
+`authentication` module helps to authenticate the user on server.
+The idea is to have a valid token and store it locally after a successfull login by using localStorage.
+When the page is loaded the first time and a token is set, the `authentication` module will attempt to auto-login with that token. If the token is no longer valid, it will be deleted.
+
+When a new token is obtained or after the successfull auto-login, it's added to common headers in `requests` module.
+
+For a more detailed description, see README.md file in `libs/authentication` folder.
+
+
+# Internal Depencency Tree
+
+Libs talks to each other, as well as with store, generating the following tree.
+
+```
+       exceptions ----|
+           |          |
+store      |       requests
+ |-- authentication --|
+```
+
 
 # Credits
 

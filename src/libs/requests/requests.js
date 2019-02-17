@@ -19,7 +19,10 @@ export function getCommonHeaders() {
     return { ...commonHeaders };
 }
 
-export default function request(url, { payload, method = 'GET', headers = {}, body, extraOptions = {} }) {
+export default function request(
+    url,
+    { payload, method = METHODS.GET, headers = {}, body, extraOptions = {} }
+) {
     const params = {
         method,
         headers: { ...getCommonHeaders(), ...headers },
@@ -66,7 +69,7 @@ export function get(url, options = {}) {
 }
 
 export function post(url, payload, options = {}) {
-    return request(url, { payload, method: 'POST', ...options });
+    return request(url, { payload, method: METHODS.POST, ...options });
 }
 
 export class RequestInvalid extends Exception {}
