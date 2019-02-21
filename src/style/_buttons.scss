@@ -1,0 +1,37 @@
+@import "colors";
+@import "fonts";
+
+button:not(:first-of-type) {
+    margin-left: 10px;
+}
+
+.button {
+    font-family: Lato;
+    font-size: $text-standard;
+    border: 1px solid $neutral-l2;
+    border-radius: 7px;
+    color: $neutral;
+    background-color: $neutral-light-l2;
+    padding: 5px 8px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: $neutral-light-d2;
+    color: $neutral-light-l2;
+}
+
+.button.button--small {
+    font-size: $text-small;
+    padding: 4px 6px;
+    border-radius: 5px;
+}
+
+.button--primary {
+    color: $neutral-light-l2;
+    background-color: $primary;
+}
+.button--primary:hover {
+    background-color: $neutral-light-l2;
+    color: $primary;
+}
