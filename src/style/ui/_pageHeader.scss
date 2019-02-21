@@ -1,0 +1,14 @@
+.page-header__container {
+    border-bottom: 1px solid $neutral-light;
+    padding-left: $page-padding;
+    padding-right: $page-padding;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.page-header {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color: $neutral-d1;
+}
