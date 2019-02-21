@@ -17,6 +17,12 @@ class Applications extends DashboardItem {
             tags: generateTags('Machine Learning'),
             icon: <i className="fas fa-cogs"></i>,
             link: '/machine-learning'
+        },
+        {
+            name: 'Styles Showcase',
+            tags: generateTags('Styles Showcase'),
+            icon: <i className="fas fa-palette"></i>,
+            link: '/style-showcase'
         }
     ]
     
