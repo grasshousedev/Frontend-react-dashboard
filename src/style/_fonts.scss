@@ -1,0 +1,13 @@
+/* Font size */
+
+$text-smaller: 10px;
+$text-small: 13px;
+$text-standard: 16px;
+$text-big: 20px;
+$text-bigger: 24px;
+
+.text__smaller { font-size: $text-smaller; }
+.text__small { font-size: $text-small; }
+.text__standard { font-size: $text-standard; }
+.text__big { font-size: $text-big; }
+.text_bigger { font-size: $text-bigger; }
