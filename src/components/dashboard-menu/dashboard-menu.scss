@@ -4,8 +4,10 @@ $dashboard-menu-padding: 15px;
 $dashboard-menu-padding-small: 7px;
 
 /* Header */
+$dashboard-menu-header-bg-color-light: #5b666bb8;
 $dashboard-menu-header-bg-color: #292929;
-$dashboard-menu-header-color: #AFAFAF;
+$dashboard-menu-header-color-light: #f1f6f9;
+$dashboard-menu-header-color: #c8ccd4;
 
 /* Body */
 $dashboard-menu-body-header-bg-color: #ececec;
@@ -76,7 +78,6 @@ This is the element that contains the entire menu, both header and body
 
 .dashboard-menu__header-block--right {
     text-align: right;
-    padding-right: 5px;
 }
 
 /* A single item inside header */
@@ -91,6 +92,19 @@ This is the element that contains the entire menu, both header and body
     }
 }
 
+.dashboard-menu__header__link {
+    color: $dashboard-menu-header-color;
+    text-decoration: none; 
+    padding: 14px 10px;
+}
+
+.dashboard-menu__header-item:hover, 
+.dashboard-menu__header__link:hover {
+    color: $dashboard-menu-header-color-light;
+    background-color: $dashboard-menu-header-bg-color-light;
+    background: linear-gradient(to bottom, lighten($dashboard-menu-header-bg-color-light, 5%) 0%,$dashboard-menu-header-bg-color-light 100%);    
+}
+
 .dashboard-menu__header-dashboard-item {
     cursor: pointer;
 }
@@ -100,7 +114,7 @@ This is the element that contains the entire menu, both header and body
     position: absolute;
     z-index: 10;
     top: $dashboard-menu-height;
-    width: 100%;
+    width: calc(100% - 2px); /* 2px of border */
     border: 1px solid $dashboard-menu-body-border-color;
     background-color: $dashboard-menu-body-bg-color;
 }
