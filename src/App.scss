@@ -1,3 +1,10 @@
+/* Local variables */
+$header-height: 46px;
+
+/* Global variables */
+$dashboard-header-height: $header-height;
+$dashboard-footer-height: 0;
+$dashboard-menu-height: $header-height;
 $page-padding: 15px;
 
 @import 'style/buttons';
@@ -18,3 +25,7 @@ h1, h2, h3, h4, h5 {
     font-family: 'Lato Light';
 }
 
+.dashboard-content {
+    height: calc(100vh - #{($dashboard-header-height + $dashboard-footer-height)});
+    overflow: auto;
+}

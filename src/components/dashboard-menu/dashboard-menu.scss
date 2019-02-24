@@ -42,11 +42,6 @@ $dashboard-menu-body-column-border-color: $dashboard-menu-query-color;
     }
 }
 
-/* Body */
-body {
-    padding-top: $dashboard-menu-height;
-}
-
 /* DashboardMenu container:
 This is the element that contains the entire menu, both header and body
 */
@@ -102,6 +97,10 @@ This is the element that contains the entire menu, both header and body
 
 /* DashboardMenu body */
 .dashboard-menu__body {
+    position: absolute;
+    z-index: 10;
+    top: $dashboard-menu-height;
+    width: 100%;
     border: 1px solid $dashboard-menu-body-border-color;
     background-color: $dashboard-menu-body-bg-color;
 }
