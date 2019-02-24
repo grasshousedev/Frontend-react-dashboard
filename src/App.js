@@ -15,7 +15,9 @@ export default function App ({ store }) {
             <BrowserRouter>
                 <div className="App">
                     <Header />
-                    <Routes />
+                    <div className="dashboard-content">
+                        <Routes />
+                    </div>
                 </div>
             </BrowserRouter>
         </Provider>
