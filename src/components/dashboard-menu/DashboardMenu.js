@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import './dashboard-menu.scss';
 import { ELEMENTS_PROPS } from './constants';
+import { DashboardMenuBodyHeader } from './DashboardMenuBodyHeader';
 
 const INITIAL_STATE = {
     bodyOpen: false,
@@ -92,16 +93,10 @@ export class DashboardMenu extends Component {
             </div>
             {bodyOpen &&
                 <div className="dashboard-menu__body">
-                    <div className="dashboard-menu__body-header">
-                        <div className="dashboard-menu__body-query">
-                            <input type="text" value={query} placeholder="Type your query here..."
-                                className="dashboard-menu__body-query__input"
-                                onChange={this.handleChangeQuery} />
-                        </div>
-                        <div className="dashboard-menu__body-controls">
-                            <i className="fas fa-times dashboard-menu__body-controls__control" onClick={() => this.toggleBodyOpen(false)}></i>
-                        </div>
-                    </div>
+                    <DashboardMenuBodyHeader query={query}
+                        handleChangeQuery={this.handleChangeQuery}
+                        toggleBodyOpen={this.toggleBodyOpen}
+                    />
                     {SelectedItemBody &&
                         <div className="dashboard-menu__body-item">
                             <SelectedItemBody query={query} resetDashboardMenu={this.resetDashboardMenu} />

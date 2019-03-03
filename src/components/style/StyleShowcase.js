@@ -27,12 +27,12 @@ export class StyleShowcase extends Component {
         return <div>
             <PageHeader controls={controls}>Style Showcase</PageHeader>
             {sectionName === SECTIONS.TYPOGRAPHY &&
-                <div>
+                <div className="page-body__container">
                     <Headers />
                 </div>
             }
             {sectionName === SECTIONS.COLORS &&
-                <div>
+                <div className="page-body__container">
                     <Colors />
                 </div>
             }
@@ -42,7 +42,7 @@ export class StyleShowcase extends Component {
 
 function Controls({ setSection }) {
     return <Fragment>
-        <button className="button button--small" onClick={() => setSection(SECTIONS.COLORS)}>Colors</button>
+        <button className="button button" onClick={() => setSection(SECTIONS.COLORS)}>Colors</button>
         <button className="button button--small button--primary" onClick={() => setSection(SECTIONS.TYPOGRAPHY)}>Typography</button>
     </Fragment>;
 }

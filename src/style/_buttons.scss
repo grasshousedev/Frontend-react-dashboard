@@ -9,22 +9,25 @@ button:not(:first-of-type) {
     font-family: Lato;
     font-size: $text-standard;
     border: 1px solid $neutral-l2;
-    border-radius: 7px;
+    border-radius: 17px;
     color: $neutral;
     background-color: $neutral-light-l2;
-    padding: 5px 8px;
+    padding: 7px 15px;
     cursor: pointer;
+    
+    &:focus { outline: none; }
+
 }
 
 .button:hover {
-    background-color: $neutral-light-d2;
-    color: $neutral-light-l2;
+    color: $neutral-light-d2;
+    border-color: $neutral-light;
 }
 
 .button.button--small {
     font-size: $text-small;
-    padding: 4px 6px;
-    border-radius: 5px;
+    padding: 4px 10px;
+    border-radius: 15px;
 }
 
 .button--primary {
@@ -32,6 +35,6 @@ button:not(:first-of-type) {
     background-color: $primary;
 }
 .button--primary:hover {
-    background-color: $neutral-light-l2;
-    color: $primary;
+    color: $neutral-light-l2;
+    background-color: $primary-light-d2;
 }

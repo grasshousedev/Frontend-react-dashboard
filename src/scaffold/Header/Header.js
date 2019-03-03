@@ -84,7 +84,7 @@ class Header extends Component {
                 left={[
                     { headerLabel: 'Applications', bodyItem: ApplicationsRouter, name: 'applications' },
                 ]}
-                center={<Link to="/">Dashboard</Link>}
+                center={<Link className="dashboard-menu__header__link" to="/">Dashboard</Link>}
                 right={[
                     { headerLabel: userLabel, bodyItem: User, name: 'user' }
                 ]}
