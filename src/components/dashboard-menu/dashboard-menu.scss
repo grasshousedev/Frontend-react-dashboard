@@ -1,3 +1,5 @@
+@import '~style/colors';
+
 /* General variables */
 $dashboard-menu-height: 46px;
 $dashboard-menu-padding: 15px;
@@ -13,10 +15,10 @@ $dashboard-menu-header-color: #c8ccd4;
 $dashboard-menu-body-header-bg-color: #ececec;
 $dashboard-menu-body-border-color: $dashboard-menu-body-header-bg-color;
 $dashboard-menu-body-bg-color: #FCFCFC;
-$dashboard-menu-body-controls-width: 80px;
+/*$dashboard-menu-body-controls-width: 80px;*/
 $dashboard-menu-query-bg-color: $dashboard-menu-body-header-bg-color;
 $dashboard-menu-query-color: #898989;
-$dashboard-menu-query-focus-border-color: #7e8dda;
+$dashboard-menu-query-focus-border-color: $primary-l2;
 $dashboard-menu-body-column-border-color: $dashboard-menu-query-color;
 
 /* Utils */
@@ -117,6 +119,7 @@ This is the element that contains the entire menu, both header and body
     width: calc(100% - 2px); /* 2px of border */
     border: 1px solid $dashboard-menu-body-border-color;
     background-color: $dashboard-menu-body-bg-color;
+    box-shadow: 0 10px 20px rgba(0,0,0,.15), 0 3px 6px rgba(0,0,0,.10);
 }
 
 .dashboard-menu__body-header {
@@ -127,25 +130,43 @@ This is the element that contains the entire menu, both header and body
     align-items: center;  
 }
 
+.dashboard-menu__body-header__icon {
+    margin: 15px;
+    cursor: pointer;
+}
+
+.dashboard-menu__body-item {
+    padding-bottom: 15px;
+}
+
 .dashboard-menu__body-query {
-    width: calc(100% - #{$dashboard-menu-body-controls-width});
+    width: calc(100%);
     text-align: left; 
+    display: flex;
+}
+
+.dashboard-menu__body-header__icon-search {
+    order: 1;
 }
 
 .dashboard-menu__body-query__input {
     width: 98%;
     border: 0;
-    border-bottom: 1px solid $dashboard-menu-body-bg-color; /* assign a border bottom to not change spacing on focus */
+    border-bottom: 2px solid $dashboard-menu-body-bg-color; /* assign a border bottom to not change spacing on focus */
     font-size: 1.1em;
     color: $dashboard-menu-query-color;
     padding: 5px;
     margin-bottom: 1px;
     margin-right: 10px;
+    order: 2;
 
     &:focus {
-      background-color: $dashboard-menu-query-bg-color;
       outline: none;
-      border-bottom: 1px solid $dashboard-menu-query-focus-border-color;
+      border-bottom: 2px solid $dashboard-menu-query-focus-border-color;
+
+      & ~ i.dashboard-menu__body-header__icon-search {
+        color: $dashboard-menu-query-focus-border-color;
+      }
     }
 
     @include placeholder {
@@ -155,13 +176,24 @@ This is the element that contains the entire menu, both header and body
 }
 
 .dashboard-menu__body-controls {
-    width: $dashboard-menu-body-controls-width;
+    /* width: $dashboard-menu-body-controls-width; */
     text-align: right;
     padding-right: $dashboard-menu-padding-small; 
 }
 
 .dashboard-menu__body-controls__control {
+    margin: 15px;
     cursor: pointer;
+    color: $grey-light-d1;
+    padding: 8px 11px;
+    border: 1px solid transparent;
+    border-radius: 18px;
+
+    &:hover {
+        color: $grey-l2;
+        background-color: $grey-light-l1;
+        border: 1px solid $grey-light-l1;
+    }
 }
 
 .dashboard-menu__body__column {
