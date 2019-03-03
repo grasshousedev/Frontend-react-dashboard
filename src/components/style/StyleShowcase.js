@@ -42,7 +42,7 @@ export class StyleShowcase extends Component {
 
 function Controls({ setSection }) {
     return <Fragment>
-        <button className="button button--small" onClick={() => setSection(SECTIONS.COLORS)}>Colors</button>
+        <button className="button button" onClick={() => setSection(SECTIONS.COLORS)}>Colors</button>
         <button className="button button--small button--primary" onClick={() => setSection(SECTIONS.TYPOGRAPHY)}>Typography</button>
     </Fragment>;
 }
