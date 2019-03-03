@@ -27,12 +27,12 @@ export class StyleShowcase extends Component {
         return <div>
             <PageHeader controls={controls}>Style Showcase</PageHeader>
             {sectionName === SECTIONS.TYPOGRAPHY &&
-                <div>
+                <div className="page-body__container">
                     <Headers />
                 </div>
             }
             {sectionName === SECTIONS.COLORS &&
-                <div>
+                <div className="page-body__container">
                     <Colors />
                 </div>
             }
