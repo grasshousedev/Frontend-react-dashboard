@@ -1,0 +1,118 @@
+/* Colors */
+/*
+Each color can be customized in a theme.
+Properties that uses colors should re-define colors in themes.
+If you are adding a new feature that requires a color,
+keep in mind that you need to update themes as well.
+ */
+$container-border-color: #efefef;
+$section-border-color: #ded7d7;
+$header-background-color: #efefef;
+$header-color: #7d7d7d;
+$row-color: #202020;
+$row-background-color: #f9f9f9;
+$row-background-color-even: #f3f3f3; /* zebra */
+$row-border-color: #efefef;
+/* Spacing and size */
+/* If changed, reflect also in constants */
+$header-font-size: 12px;
+$cell-font-size: 12px;
+$cell-height: 21px;
+$cell-padding: 5px;
+
+.grid__container {
+  border: 1px solid $container-border-color;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.grid__section {
+  display: inline-block;
+  vertical-align: top;
+  position: absolute;
+  top: 0;
+}
+.grid__section__left, .grid__section__main {
+  left: 0;
+}
+.grid__section__left, .grid__section__right {
+  z-index: 1;
+}
+
+.grid__header {
+  color: $header-color;
+  background-color: $header-background-color;
+  overflow: hidden !important; /* this has to override react-virtualized Grid */
+  white-space: nowrap;
+
+  &:focus {
+    outline: none;
+  }  
+}
+
+.grid__row__container {
+  overflow: auto;
+  display: block;
+  white-space: nowrap;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.grid__row__container.grid__row__container__left,
+.grid__row__container.grid__row__container__right {
+  overflow: hidden !important; /* this has to override react-virtualized Grid */
+}
+
+.grid__row__container__left.grid__row__container--border {
+  border-right: 1px solid $section-border-color;
+}
+
+.grid__row__container__right.grid__row__container--border {
+  border-left: 1px solid $section-border-color;
+}
+
+.grid__row {
+  color: $row-color;
+  background-color: $row-background-color;
+  border-bottom: 1px solid $row-background-color; /* Used to keep same height */
+}
+
+.grid__row.grid__row--border {
+  border-bottom: 1px solid $row-border-color;
+}
+
+.grid__row.grid__row__even {
+  background-color: $row-background-color-even;
+}
+
+.grid__cell_container {
+  display: inline-block;
+}
+
+.grid__cell {
+  /* font-family: 'Source Sans Pro', 'Open Sans', Segoe UI, sans-serif; */
+  display: inline-block;
+  /* spacing and size */
+  font-size: $cell-font-size;
+  padding: $cell-padding;
+  /* ellipsis */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.grid__cell.grid__cell--expanded {
+  white-space: normal;
+  word-break: break-all;
+  overflow: auto;
+  vertical-align: top;
+  padding-bottom: 10px;
+}
+
+.grid_cell.grid__cell__header {
+  font-size: $header-font-size;
+  font-weight: 600;
+}
