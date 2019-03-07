@@ -136,27 +136,39 @@ $yellow-light-l1: hsl(48, 100%, 88%);
 .background-yellow-light { background-color: $yellow-light; }
 .background-yellow-light-l1 { background-color: $yellow-light-l1; }
 
+$teal-d2: hsl(170, 97%, 15%);
 $teal-d1: hsl(168, 80%, 23%);
-$teal: hsl(166, 72%, 34%);
+$teal: hsl(166, 72%, 28%);
 $teal-l1: hsl(164, 71%, 34%);
+$teal-l2: hsl(162, 63%, 41%);
 
+.teal-d2 { color: $teal-d2; }
 .teal-d1 { color: $teal-d1; }
 .teal { color: $teal; }
 .teal-l1 { color: $teal-l1; }
+.teal-l2 { color: $teal-l2; }
+.background-teal-d2 { background-color: $teal-d2; }
 .background-teal-d1 { background-color: $teal-d1; }
 .background-teal { background-color: $teal; }
 .background-teal-l1 { background-color: $teal-l1; }
+.background-teal-l2 { background-color: $teal-l2; }
 
+$teal-light-d2: hsl(160, 51%, 49%);
 $teal-light-d1: hsl(158, 58%, 62%);
 $teal-light: hsl(156, 73%, 74%);
 $teal-light-l1: hsl(154, 75%, 87%);
+$teal-light-l2: hsl(152, 68%, 96%);
 
+.teal-light-d2 { color: $teal-light-d2; }
 .teal-light-d1 { color: $teal-light-d1; }
 .teal-light { color: $teal-light; }
 .teal-light-l1 { color: $teal-light-l1; }
+.teal-light-l2 { color: $teal-light-l2; }
+.background-teal-light-d2 { background-color: $teal-light-d2; }
 .background-teal-light-d1 { background-color: $teal-light-d1; }
 .background-teal-light { background-color: $teal-light; }
 .background-teal-light-l1 { background-color: $teal-light-l1; }
+.background-teal-light-l2 { background-color: $teal-light-l2; }
 
 /*********************/
 /* Meaningful colors */
