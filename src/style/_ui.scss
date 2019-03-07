@@ -1,3 +1,10 @@
 @import 'ui/dashboardHeader';
 @import 'ui/pageHeader';
 @import 'ui/pageBody';
+@import 'ui/sections';
+
+input[type='checkbox'],
+label[for]:not([for=''])
+{
+    cursor: pointer;
+}
