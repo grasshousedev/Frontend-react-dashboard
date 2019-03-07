@@ -1,0 +1,23 @@
+@import "../colors";
+
+$ui-form-field-padding: 7px 0 !default;
+
+.ui-form-container,
+.ui-section.ui-form-container
+{
+    display: block;
+}
+
+.ui-form-field {
+    display: flex;
+    padding: $ui-form-field-padding;
+}
+
+.ui-form-label {
+    color: $grey-d2;
+    display: inline-block;
+}
+
+.ui-form-input {
+    display: inline-block;
+}
