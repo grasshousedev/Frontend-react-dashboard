@@ -40,7 +40,7 @@ export class GridSection extends Component {
 
         const cols = columns.map(column => {
             const width = this.getColumnWidth(column);
-            return `<div class="grid__cell" style="width: ${width}px">${columnsLabel[column]}</div>`;
+            return `<div class="grid__cell" style="width: ${width}px">${columnsLabel[column] ? columnsLabel[column] : column}</div>`;
         }).join('');
 
         if (section === 'main') return `${this.getRowSpacer('left')}${cols}${this.getRowSpacer('right')}`;
