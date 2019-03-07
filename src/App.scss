@@ -7,10 +7,10 @@ $dashboard-footer-height: 0;
 $dashboard-menu-height: $header-height;
 $page-padding: 15px;
 
-@import 'style/shadows';
-@import 'style/buttons';
 @import 'style/colors';
 @import 'style/fonts';
+@import 'style/shadows';
+@import 'style/buttons';
 @import 'style/helpers';
 @import 'style/titles';
 @import 'style/ui';
@@ -19,8 +19,9 @@ $page-padding: 15px;
 body {
     font-family: Lato;
     font-weight: 400;
-    font-size: 16px;
-    background-color: $grey-light-l2;
+    font-size: $text-small;
+    background-color: white;
+    color: $grey-d1;
 }
 
 h1, h2, h3, h4, h5 {
