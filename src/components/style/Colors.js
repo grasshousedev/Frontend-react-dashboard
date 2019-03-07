@@ -12,7 +12,7 @@ export function Colors() {
         { name: 'pink', type: partial },
         { name: 'red', type: partial },
         { name: 'yellow', type: partial },
-        { name: 'teal', type: partial },
+        { name: 'teal', type: full },
     ];
     return <Fragment>
         <h2>Colors</h2>
