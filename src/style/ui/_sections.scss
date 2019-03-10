@@ -4,10 +4,14 @@
     padding-bottom: 0.7rem;
 }
 
-.ui-section-title {
+.ui-section__title {
     margin-top: 0;
 }
 
-.ui-section-column {
+.ui-section__column {
     display: inline-block;
+}
+
+.ui-section__text {
+    max-width: 900px;
 }
