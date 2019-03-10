@@ -37,7 +37,9 @@ export function TabContent({ tabs, selectedTab }) {
 
 TabContent.propTypes = {
     tabs: PropTypes.arrayOf(
-        PropTypes.oneOfType([PropTypes.string, PropTypes.node])
+        PropTypes.shape({
+            content: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired
+        })
     ).isRequired,
     selectedTab: PropTypes.number.isRequired,
 };
