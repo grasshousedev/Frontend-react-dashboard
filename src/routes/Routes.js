@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 
 import { Home } from 'components/Home';
 import { Landing as MachineLearningLanding } from 'applications/machine-learning/Landing';
-import { StyleShowcase } from 'components/style/StyleShowcase';
+import { StyleShowcase } from 'applications/style-showcase/StyleShowcase';
 
 export class Routes extends Component {
 
