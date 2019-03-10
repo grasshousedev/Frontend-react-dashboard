@@ -138,7 +138,8 @@ export class Grid extends Component {
         const calculatedWidths = this.calculateWidths(generatedColumns);
         const totalWidth = calculatedWidths.left + calculatedWidths.main + calculatedWidths.right + scrollBarsSize.vertical * 2;
 
-        const containerWidth = width ? Math.min(width, containerMaxWidth, totalWidth) : Math.min(containerMaxWidth, totalWidth);
+        let containerWidth = width ? Math.min(width, containerMaxWidth, totalWidth) : Math.min(containerMaxWidth, totalWidth);
+        if (scrollBarsSize.vertical) containerWidth -= scrollBarsSize.vertical;
 
         return <div ref={this.outerContainer}>
             <ScrollSync>

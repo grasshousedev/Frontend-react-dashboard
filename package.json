@@ -15,6 +15,7 @@
     "dotenv-expand": "4.2.0",
     "file-loader": "2.0.0",
     "fs-extra": "7.0.0",
+    "highlight.js": "^9.15.6",
     "identity-obj-proxy": "3.0.0",
     "react": "^16.8",
     "react-app-polyfill": "^0.2.0",
