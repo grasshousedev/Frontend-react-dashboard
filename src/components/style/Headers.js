@@ -1,26 +1,38 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
+import { Lorem } from 'components/ui/Lorem';
 
 export function Headers() {
-    const [showHeaders, setShowHeaders] = useState(true);
-
     return <Fragment>
-        <h2 onClick={() => setShowHeaders(!showHeaders)} style={{ cursor: 'pointer' }}>Headers</h2>
-        {showHeaders && <Fragment>
-            <div className="flex-container">
-                <div className="w-300"><h1>h1 Title</h1></div>
+        <h2>Headers</h2>
+        <div className="ui-section">
+            <div className="ui-section__text">
+                <h1>h1 Title</h1>
+                <Lorem />
             </div>
-            <div className="flex-container">
-                <div className="w-300"><h2>h2 Title</h2></div>
+        </div>
+        <div className="ui-section">
+            <div className="ui-section__text">
+                <h2>h2 Title</h2>
+                <Lorem />
             </div>
-            <div className="flex-container">
-                <div className="w-300"><h3>h3 Title</h3></div>
+        </div>
+        <div className="ui-section">
+            <div className="ui-section__text">
+                <h3>h3 Title</h3>
+                <Lorem />
             </div>
-            <div className="flex-container">
-                <div className="w-300"><h4>h4 Title</h4></div>
+        </div>
+        <div className="ui-section">
+            <div className="ui-section__text">
+                <h4>h4 Title</h4>
+                <Lorem />
             </div>
-            <div className="flex-container">
-                <div className="w-300"><h5>h5 Title</h5></div>
+        </div>
+        <div className="ui-section">
+            <div className="ui-section__text">
+                <h5>h5 Title</h5>
+                <Lorem />
             </div>
-        </Fragment>}
+        </div>
     </Fragment>;
 };

@@ -1,9 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
+import { PageHeader } from 'components/ui/PageHeader';
+
 import { Colors } from './Colors';
 import { Headers } from './Headers';
-import { PageHeader } from 'components/ui/PageHeader';
 import { GridComponent } from './GridComponent';
 
 const SECTIONS = {
@@ -14,7 +15,7 @@ const SECTIONS = {
 
 export class StyleShowcase extends Component {
     state = {
-        sectionName: SECTIONS.GRID_COMPONENT,
+        sectionName: SECTIONS.TYPOGRAPHY,
     }
 
     setSection = (sectionName) => {

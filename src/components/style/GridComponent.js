@@ -52,7 +52,7 @@ export function GridComponent() {
         </div>
         {showControls && <Fragment>            
             <div className="ui-section"> 
-                <div className="ui-section-column w-50pc">
+                <div className="ui-section__column w-50pc">
                     <h2 className="ui-title">Sizes</h2>
                     <div className="ui-section ui-form-container">
                         <div className="ui-form-field">
@@ -73,11 +73,11 @@ export function GridComponent() {
                         <button className={`button button--small ${sectionBorder ? 'button--positive' : ''}`} onClick={() => setSectionBorder(!sectionBorder) }>Section Border</button>
                     </div>
                 </div>
-                <div className="ui-section-column w-50pc">
+                <div className="ui-section__column w-50pc">
                     <h2 className="ui-title">Pinned Columns</h2>
                     <div className="ui-section">
-                        <div className="ui-section-column w-50pc">
-                            <h4 className="ui-title ui-section-title">Left</h4>
+                        <div className="ui-section__column w-50pc">
+                            <h4 className="ui-title ui-section__title">Left</h4>
                             {columns.map(column => {
                                 return <div key={`pinned-left-${column}`}>
                                     <input
@@ -87,8 +87,8 @@ export function GridComponent() {
                                 </div>;
                             })}                    
                         </div>
-                        <div className="ui-section-column w-50pc">
-                            <h4 className="ui-title ui-section-title">Right</h4>
+                        <div className="ui-section__column w-50pc">
+                            <h4 className="ui-title ui-section__title">Right</h4>
                             {columns.map(column => {
                                 return <div key={`pinned-right-${column}`}>
                                     <input
