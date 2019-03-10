@@ -6,16 +6,18 @@ import { PageHeader } from 'components/ui/PageHeader';
 import { Colors } from './Colors';
 import { Headers } from './Headers';
 import { GridComponent } from './GridComponent';
+import { TabsComponent } from './TabsComponent';
 
 const SECTIONS = {
     COLORS: 'colors',
     TYPOGRAPHY: 'typography',
-    GRID_COMPONENT: 'grid-component'
+    GRID_COMPONENT: 'grid-component',
+    TABS_COMPONENT: 'tabs-component',
 };
 
 export class StyleShowcase extends Component {
     state = {
-        sectionName: SECTIONS.TYPOGRAPHY,
+        sectionName: SECTIONS.TABS_COMPONENT,
     }
 
     setSection = (sectionName) => {
@@ -33,6 +35,7 @@ export class StyleShowcase extends Component {
                 {sectionName === SECTIONS.TYPOGRAPHY && <Headers />}
                 {sectionName === SECTIONS.COLORS && <Colors />}
                 {sectionName === SECTIONS.GRID_COMPONENT && <GridComponent />}
+                {sectionName === SECTIONS.TABS_COMPONENT && <TabsComponent />}
             </div>
         </div>;
     }
@@ -50,6 +53,9 @@ function Controls({ sectionName, setSection }) {
         <button
             className={`${baseClass} ${sectionName === SECTIONS.GRID_COMPONENT ? 'button--primary' : ''}`}
             onClick={() => setSection(SECTIONS.GRID_COMPONENT)}>Grid</button>
+        <button
+            className={`${baseClass} ${sectionName === SECTIONS.TABS_COMPONENT ? 'button--primary' : ''}`}
+            onClick={() => setSection(SECTIONS.TABS_COMPONENT)}>Tabs</button>
     </Fragment>;
 }
 
