@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { PageHeader } from 'components/ui/PageHeader';
 
 import { Colors } from './Colors';
-import { Headers } from './Headers';
+import { Typography } from './typography/Typography';
 import { GridComponent } from './GridComponent';
 import { TabsComponent } from './TabsComponent';
 
@@ -17,7 +17,7 @@ const SECTIONS = {
 
 export class StyleShowcase extends Component {
     state = {
-        sectionName: SECTIONS.TABS_COMPONENT,
+        sectionName: SECTIONS.TYPOGRAPHY,
     }
 
     setSection = (sectionName) => {
@@ -32,7 +32,7 @@ export class StyleShowcase extends Component {
         return <div>
             <PageHeader controls={controls}>Style Showcase</PageHeader>
             <div className="page-body__container">
-                {sectionName === SECTIONS.TYPOGRAPHY && <Headers />}
+                {sectionName === SECTIONS.TYPOGRAPHY && <Typography />}
                 {sectionName === SECTIONS.COLORS && <Colors />}
                 {sectionName === SECTIONS.GRID_COMPONENT && <GridComponent />}
                 {sectionName === SECTIONS.TABS_COMPONENT && <TabsComponent />}

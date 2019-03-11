@@ -3,7 +3,6 @@ import { Lorem } from 'components/ui/Lorem';
 
 export function Headers() {
     return <Fragment>
-        <h2>Headers</h2>
         <div className="ui-section">
             <div className="ui-section__text">
                 <h1>h1 Title</h1>
