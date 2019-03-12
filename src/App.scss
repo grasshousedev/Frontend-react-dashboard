@@ -28,6 +28,10 @@ h1, h2, h3, h4, h5 {
     font-family: 'Lato Light';
 }
 
+p {
+    margin-top: 0;
+}
+
 .dashboard-content {
     height: calc(100vh - #{($dashboard-header-height + $dashboard-footer-height + $page-padding)});
     overflow: auto;
