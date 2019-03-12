@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { Tabs } from 'components/ui/Tabs';
 import { Lorem } from 'components/ui/Lorem';
+import { CodeHighlight } from 'components/style/CodeHighlight';
 
 function TabContent1() {
     const [counter, setCounter] = useState(0);
@@ -35,9 +36,24 @@ const tabsSample = [
     { label: 'Tab 4', content: <Lorem /> },
 ];
 
+const sample = `// declare a list of objects
+const tabsSample = [
+    { label: 'Tab 1', content: <TabContent1 /> },
+    { label: 'Tab 2', content: <Lorem paragraphs={3} /> },
+    { label: 'Tab 3', content: <Lorem paragraphs={3} /> },
+    { label: 'Tab 4', content: <Lorem /> },
+];
+// then
+<Tabs tabs={tabsSample} />
+`;
+
+
 export function TabsComponent () {    
     return <Fragment>
         <h2>Tabs</h2>
         <Tabs tabs={tabsSample} />
+        <CodeHighlight>
+            {sample}
+        </CodeHighlight>
     </Fragment>;
 }
