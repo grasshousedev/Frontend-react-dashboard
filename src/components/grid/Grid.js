@@ -39,8 +39,13 @@ export class Grid extends Component {
         window.removeEventListener('resize', this.updateContainerSize);
     }
 
+    getOuterContainerWidth = () => {
+        return this.outerContainer.current.clientWidth;
+    }
+
     updateContainerSize = () => {
-        this.setState({ outerContainerWidth: this.outerContainer.current.clientWidth });
+        const outerContainerWidth = this.getOuterContainerWidth();
+        this.setState({ outerContainerWidth });
     }
 
     componentDidUpdate(prevProps) {
@@ -54,6 +59,13 @@ export class Grid extends Component {
                 left: pinnedColumns.left || [],
                 right: pinnedColumns.right || [],
             };
+        }
+
+        const outerContainerWidth = this.getOuterContainerWidth();
+        if (this.outerContainerWidth !== outerContainerWidth) {
+            this.outerContainerWidth = outerContainerWidth;
+            newState = newState || {};
+            newState.outerContainerWidth = outerContainerWidth;
         }
 
         if (newState) {
@@ -130,16 +142,15 @@ export class Grid extends Component {
             ? Math.max(DEFAULTS.getDefaultCellHeight() * Math.min(4, rows.length, autoHeightRows + 1), height)
             : height;
 
-        const containerMaxWidth = this.outerContainer && this.outerContainer.current && outerContainerWidth
+        let containerMaxWidth = this.outerContainer && this.outerContainer.current && outerContainerWidth
             ? outerContainerWidth
-            : width ? width : window.innerWidth;
+            : width ? width : window.innerWidth;        
 
         const generatedColumns = this.generateColumns();
         const calculatedWidths = this.calculateWidths(generatedColumns);
         const totalWidth = calculatedWidths.left + calculatedWidths.main + calculatedWidths.right + scrollBarsSize.vertical * 2;
 
-        let containerWidth = width ? Math.min(width, containerMaxWidth, totalWidth) : Math.min(containerMaxWidth, totalWidth);
-        if (scrollBarsSize.vertical) containerWidth -= scrollBarsSize.vertical;
+        const containerWidth = width ? Math.min(width, containerMaxWidth, totalWidth) : Math.min(containerMaxWidth, totalWidth);    
 
         return <div ref={this.outerContainer}>
             <ScrollSync>
