@@ -1,0 +1,75 @@
+@import '../colors';
+
+$page-padding: 15px !default;
+$ui-timeline-panel-width: 200px;
+$ui-timeline-bar-size: 3px;
+$ui-timeline-event-dot-size: 7px;
+$ui-timeline-event-dot-correction: 5px;
+$ui-timeline-event-dot-color: white;
+$ui-timeline-event-dot-border-color: $primary;
+$ui-timeline-event-dot-border-size: 2px;
+
+.ui-timeline__container {
+    position: relative;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: #{($ui-timeline-panel-width - $ui-timeline-bar-size / 2)};
+        bottom: 0;
+        width: $ui-timeline-bar-size;
+        background: $neutral-light;
+      }
+}
+
+.ui-timeline__event {
+    display: flex;
+    position: relative;
+
+    &:before {
+        content: '';
+        position: absolute;
+        width: $ui-timeline-event-dot-size;
+        height: $ui-timeline-event-dot-size;
+        border: $ui-timeline-event-dot-border-size solid $ui-timeline-event-dot-border-color;
+        background-color: $ui-timeline-event-dot-color;
+        border-radius:100%;
+        top: $page-padding;
+        left: #{($ui-timeline-panel-width - $ui-timeline-event-dot-correction)};
+        z-index: 1;
+      }  
+}
+
+.ui-timeline__title__container {
+    display: inline-block;
+    width: $ui-timeline-panel-width;
+    color: $neutral;
+    background-color: $neutral-light-l2;    
+    flex-grow: 1;    
+}
+
+.ui-timeline__title__container--first {
+    border-top-left-radius: $page-padding;
+}
+.ui-timeline__title__container--last {
+    border-bottom-left-radius: $page-padding;
+}
+
+.ui-timeline__title {
+    text-align: right;
+    padding: $page-padding;
+}
+
+.ui-timeline__description {
+    color: $neutral-light-d2;
+    padding: 0 $page-padding $page-padding $page-padding;
+    text-align: right;
+}
+
+.ui-timeline__content {
+    display: inline-block;
+    padding: $page-padding;
+    width: calc(100% - #{($ui-timeline-panel-width + $page-padding)});    
+    flex-grow: 1;
+}
