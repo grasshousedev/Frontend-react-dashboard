@@ -97,7 +97,7 @@ This is the element that contains the entire menu, both header and body
 .dashboard-menu__header__link {
     color: $dashboard-menu-header-color;
     text-decoration: none; 
-    padding: 14px 10px;
+    padding: 16px 10px;
 }
 
 .dashboard-menu__header-item:hover, 
@@ -182,7 +182,7 @@ This is the element that contains the entire menu, both header and body
 }
 
 .dashboard-menu__body-controls__control {
-    margin: 15px;
+    margin: 3px 0 3px 3px;
     cursor: pointer;
     color: $grey-light-d1;
     padding: 8px 11px;

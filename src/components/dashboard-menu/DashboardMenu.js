@@ -96,6 +96,7 @@ export class DashboardMenu extends Component {
                     <DashboardMenuBodyHeader query={query}
                         handleChangeQuery={this.handleChangeQuery}
                         toggleBodyOpen={this.toggleBodyOpen}
+                        showQueryInput={selectedItem.showQueryInput}
                     />
                     {SelectedItemBody &&
                         <div className="dashboard-menu__body-item">
