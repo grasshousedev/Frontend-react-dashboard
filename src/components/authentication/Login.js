@@ -58,20 +58,28 @@ class Login extends Component {
             </div>;
         }
 
-        return <div>
+        return <div className="page-body__container">            
+            <h2>Login</h2>
             {/* eslint-disable-next-line */}
             <form action="javascript:void(0)">
-                <div>
-                    Username
-                    <input type="text" onChange={(e) => this.updateField('username', e.target.value)} value={username} disabled={isLoading} />
-                </div>
-                <div>
-                    Password
-                    <input type="password" onChange={(e) => this.updateField('password', e.target.value)} value={password} disabled={isLoading} />
-                </div>
-                <div>
-                    <button onClick={this.login}>Login</button>
-                    {isLoading && <i className="fas fa-spinner fa-pulse"></i>}
+                <div className="ui-form__container ui-form__container--w100">
+                    <div className="ui-form__field">
+                        <div className="ui-form__label">Username</div>
+                        <div className="ui-form__input">
+                            <input type="text" onChange={(e) => this.updateField('username', e.target.value)} value={username} disabled={isLoading} />
+                        </div>
+                    </div>
+                    <div className="ui-form__field">
+                        <div className="ui-form__label">Password</div>
+                        <div className="ui-form__input">
+                            <input type="password" onChange={(e) => this.updateField('password', e.target.value)} value={password} disabled={isLoading} />
+                        </div>
+                    </div>
+                    <div>
+                        <button className="button button--positive"
+                            onClick={this.login}>Login</button>
+                        {isLoading && <i className="fas fa-spinner fa-pulse"></i>}
+                    </div>
                 </div>
             </form>
             {error && 
