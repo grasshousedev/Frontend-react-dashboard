@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
 import { authenticationService } from 'libs/authentication/authentication';
+import { withAuthentication } from 'libs/authentication/storeConnection';
 
 class Login extends Component {
     constructor(props) {
@@ -96,13 +96,5 @@ Login.propTypes = {
     authentication: PropTypes.object,
 };
 
-function mapStateToProps(state) {
-    const { authentication } = state;
-
-    return {
-        authentication
-    };
-}
-
-const connectedLogin = connect(mapStateToProps)(Login);
+const connectedLogin = withAuthentication(Login);
 export { connectedLogin as Login };
