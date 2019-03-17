@@ -44,11 +44,16 @@ class Login extends Component {
         const { isLoading, username, password, error } = this.state;
 
         if (authentication.loggedIn) { 
-            return <div>
-                <h1>You are logged in!</h1>
-                <div>{JSON.stringify(authentication.user)}</div>
-                <div>
-                    <button onClick={authenticationService.logout}>Logout</button>
+            return <div className="page-body__container">
+                <h2>Hello {authentication.user.first_name}, welcome!</h2>
+                <div className="ui-section">
+                    <div className="ui-section__column">
+                        <div>You are logged in.</div>
+                    </div>
+                    <div className="ui-section__column w200">
+                        <button className="button button--negative"
+                            onClick={authenticationService.logout}>Logout</button>
+                    </div>
                 </div>
             </div>;
         }
