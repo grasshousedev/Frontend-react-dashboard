@@ -1,6 +1,7 @@
 import { get, post, setCommonHeaders, getCommonHeaders } from 'libs/requests/requests';
 import { store } from 'store/store';
 import Exception from 'libs/exceptions/exceptions';
+import * as actions from './actions';
 
 class Authentication {
     constructor() {
@@ -65,7 +66,7 @@ class Authentication {
         return get('dashboard/api/logged-user/').then((data) => {
             console.log('The user data!', data);
             this.user = data;
-            store.dispatch({ type: 'REGISTER_USER', user: data });
+            store.dispatch({ type: actions.REGISTER_USER, user: data });
             this.getStorageLoggedUserToken().then((tokenData) => {
                 console.log('The token data!', tokenData.token);
                 return data;
@@ -76,7 +77,7 @@ class Authentication {
     logout = () => {
         this.user = null;
         this.clearAuthentication();
-        store.dispatch({ type: 'LOGOUT' });
+        store.dispatch({ type: actions.LOGOUT });
     }
 
     clearAuthentication = () => {
