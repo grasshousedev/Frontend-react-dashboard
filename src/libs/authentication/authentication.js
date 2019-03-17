@@ -92,6 +92,15 @@ class Authentication {
     getCurrentUser = () => {
         return { ...this.user };
     }
+
+    storageAutoLogin = () => {
+        this.getStorageLoggedUserToken().then(data => {
+            if (data.token) {
+                this.getLoggedUser();
+            }
+            store.dispatch({ type: actions.STORAGE_LOGIN_ATTEMPT, value: true });
+        });
+    }
 }
 
 export const authenticationService = new Authentication();
