@@ -97,6 +97,7 @@ export class DashboardMenu extends Component {
                         handleChangeQuery={this.handleChangeQuery}
                         toggleBodyOpen={this.toggleBodyOpen}
                         showQueryInput={selectedItem.showQueryInput}
+                        floatingControls={selectedItem.floatingControls}
                     />
                     {SelectedItemBody &&
                         <div className="dashboard-menu__body-item">

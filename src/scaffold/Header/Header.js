@@ -86,7 +86,7 @@ class Header extends Component {
                 ]}
                 center={<Link className="dashboard-menu__header__link" to="/">Dashboard</Link>}
                 right={[
-                    { headerLabel: userLabel, bodyItem: User, name: 'user' }
+                    { headerLabel: userLabel, bodyItem: User, name: 'user', showQueryInput: false, floatingControls: true }
                 ]}
             />
         </header>;
