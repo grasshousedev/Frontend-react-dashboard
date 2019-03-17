@@ -47,3 +47,12 @@ button:not(:first-of-type) {
     color: $neutral-light-l2;
     background-color: $teal-light-d2;
 }
+
+.button--negative {
+    color: $neutral-light-l2;
+    background-color: $red-l1;
+}
+.button--negative:hover {
+    color: $neutral-light-l2;
+    background-color: $red-light-d2;
+}
