@@ -96,11 +96,5 @@ class Authentication {
 
 export const authenticationService = new Authentication();
 
-// Try to auto login based on localStorage
-authenticationService.getStorageLoggedUserToken().then(data => {
-    if (data.token) {
-        authenticationService.getLoggedUser();
-    }
-});
-
 export class AuthenticationError extends Exception {};
+
