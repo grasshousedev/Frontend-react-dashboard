@@ -2,17 +2,16 @@ import React, { Fragment } from 'react';
 
 export function Colors() {
     const shades = ['', 'light'];
-    const full = ['d2', 'd1', '', 'l1', 'l2'];
-    const partial = ['d1', '', 'l1'];    
+    const modifiers = ['d2', 'd1', '', 'l1', 'l2'];
     const colors = [
-        { name: 'primary', type: full },
-        { name: 'neutral', type: full },
-        { name: 'blue', type: full },
-        { name: 'grey', type: full },
-        { name: 'pink', type: partial },
-        { name: 'red', type: partial },
-        { name: 'yellow', type: partial },
-        { name: 'teal', type: full },
+        { name: 'primary' },
+        { name: 'neutral' },
+        { name: 'blue' },
+        { name: 'grey' },
+        { name: 'pink' },
+        { name: 'red' },
+        { name: 'yellow' },
+        { name: 'teal' },
     ];
     return <Fragment>
         <h2>Colors</h2>
@@ -23,7 +22,7 @@ export function Colors() {
                     return <div key={colorName}>
                         <h3>{colorName}</h3>   
                         <div key={colorName} className="flex-container">
-                            {color.type.map(gradient => {
+                            {modifiers.map(gradient => {
                                 const gradientPart = gradient !== '' ? `-${gradient}` : '';
                                 const colorClass = `${colorName}${gradientPart}`;
                                 const colorStyle = { display: 'inline-block', width: '50px', height: '30px', marginRight: '15px', border: '1px solid #343434' };
