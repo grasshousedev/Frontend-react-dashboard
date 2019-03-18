@@ -64,12 +64,20 @@ export default function request(
         });
 }
 
-export function get(url, options = {}) {
+export function getRequest(url, options = {}) {
     return request(url, options);
 }
 
-export function post(url, payload, options = {}) {
+export function postRequest(url, payload, options = {}) {
     return request(url, { payload, method: METHODS.POST, ...options });
+}
+
+export function deleteRequest(url, payload, options = {}) {
+    return request(url, { payload, method: METHODS.DELETE, ...options });
+}
+
+export function putRequest(url, payload, options = {}) {
+    return request(url, { payload, method: METHODS.PUT, ...options });
 }
 
 export class RequestInvalid extends Exception {}
