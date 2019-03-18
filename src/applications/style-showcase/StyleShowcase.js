@@ -33,7 +33,7 @@ export class StyleShowcase extends Component {
 
         return <div>
             <PageHeader controls={controls}>Style Showcase</PageHeader>
-            <div className="page-body__container">
+            <div className="dashboard-ui__page-body__container">
                 {sectionName === SECTIONS.TYPOGRAPHY && <Typography />}
                 {sectionName === SECTIONS.COLORS && <Colors />}
                 {sectionName === SECTIONS.GRID_COMPONENT && <GridComponent />}
