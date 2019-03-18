@@ -8,6 +8,7 @@ import { DashboardItem } from 'components/dashboard-menu/DashboardItem';
 import './header.scss';
 
 import { Login } from 'components/authentication/Login';
+import { withAuthentication } from 'libs/authentication/storeConnection';
 import { generateTags, hasTag } from './headerUtils';
 
 class Applications extends DashboardItem {
@@ -69,9 +70,19 @@ const ApplicationsRouter = withRouter(Applications);
 
 class User extends DashboardItem {
     render() {
-        return <Login />;
+        const { authentication } = this.props;
+
+        return <div className="page-body__container">
+            {authentication.loggedIn && <h2>Hello {authentication.user.first_name}, welcome!</h2>}
+            {!authentication.loggedIn && <h2>Login</h2>}
+            <Login />
+        </div>;
     }
 }
+User.propTypes = {
+    authentication: PropTypes.object,
+};
+const connectedUser = withAuthentication(User);
 
 class Header extends Component {
 
@@ -86,7 +97,7 @@ class Header extends Component {
                 ]}
                 center={<Link className="dashboard-menu__header__link" to="/">Dashboard</Link>}
                 right={[
-                    { headerLabel: userLabel, bodyItem: User, name: 'user', showQueryInput: false, floatingControls: true }
+                    { headerLabel: userLabel, bodyItem: connectedUser, name: 'user', showQueryInput: false, floatingControls: true }
                 ]}
             />
         </header>;
