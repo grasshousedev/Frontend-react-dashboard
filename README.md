@@ -8,9 +8,27 @@ The Dashboard itself is built in React, but each application might be built with
 
 # Install and run
 
+Clone dependency repositories:
+
+```sh
+# Assuming you are in your ~/repositories folder, clone
+
+# dashboard-ui-style
+git clone git@github.com:vittoriozamboni/dashboard-ui-style.git
+cd dashboard-ui-style
+yarn link
+cd ../
+
+```
+
+From main folder of this repository, now install all global dependencies and link local ones:
+
 ```sh
 # Install packages
 yarn
+
+# Local packages
+yarn link "@vzamboni/dashboard-ui-style"
 
 # Start development, by default listening on 3000
 yarn start
