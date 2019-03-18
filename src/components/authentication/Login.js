@@ -42,7 +42,7 @@ class Login extends Component {
     }
 
     render() {
-        const { authentication, baseLoginComponent } = this.props;
+        const { authentication, loginComponent } = this.props;
         const { isLoading, username, password, error } = this.state;
 
         if (authentication.loggedIn) { 
@@ -57,7 +57,7 @@ class Login extends Component {
             </div>;
         }
 
-        const LoginRenderComponent = baseLoginComponent ? baseLoginComponent : BaseLogin;
+        const LoginRenderComponent = loginComponent ? loginComponent : BaseLogin;
 
         return <div>           
             {/* eslint-disable-next-line */}
@@ -76,7 +76,7 @@ class Login extends Component {
 
 Login.propTypes = {
     authentication: PropTypes.object,
-    baseLoginComponent: PropTypes.node,
+    loginComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 };
 
 const connectedLogin = withAuthentication(Login);
