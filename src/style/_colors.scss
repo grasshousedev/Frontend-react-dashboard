@@ -206,6 +206,40 @@ $teal-light-l2: hsl(152, 68%, 96%);
 .background-teal-light-l1 { background-color: $teal-light-l1; }
 .background-teal-light-l2 { background-color: $teal-light-l2; }
 
+$purple-d2: hsl(276, 91%, 23%);
+$purple-d1: hsl(274, 87%, 31%);
+$purple: hsl(274, 87%, 37%);
+$purple-l1: hsl(274, 87%, 43%);
+$purple-l2: hsl(273, 80%, 49%);
+
+.purple-d2 { color: $purple-d2; }
+.purple-d1 { color: $purple-d1; }
+.purple { color: $purple; }
+.purple-l1 { color: $purple-l1; }
+.purple-l2 { color: $purple-l2; }
+.background-purple-d2 { background-color: $purple-d2; }
+.background-purple-d1 { background-color: $purple-d1; }
+.background-purple { background-color: $purple; }
+.background-purple-l1 { background-color: $purple-l1; }
+.background-purple-l2 { background-color: $purple-l2; }
+
+$purple-light-d2: hsl(268, 82%, 60%);
+$purple-light-d1: hsl(264, 96%, 70%);
+$purple-light: hsl(262, 100%, 78%);
+$purple-light-l1: hsl(262, 100%, 88%);
+$purple-light-l2: hsl(262, 90%, 96%);
+
+.purple-light-d2 { color: $purple-light-d2; }
+.purple-light-d1 { color: $purple-light-d1; }
+.purple-light { color: $purple-light; }
+.purple-light-l1 { color: $purple-light-l1; }
+.purple-light-l2 { color: $purple-light-l2; }
+.background-purple-light-d2 { background-color: $purple-light-d2; }
+.background-purple-light-d1 { background-color: $purple-light-d1; }
+.background-purple-light { background-color: $purple-light; }
+.background-purple-light-l1 { background-color: $purple-light-l1; }
+.background-purple-light-l2 { background-color: $purple-light-l2; }
+
 /*********************/
 /* Meaningful colors */
 /*********************/

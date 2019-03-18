@@ -8,6 +8,7 @@ export function Colors() {
         { name: 'neutral' },
         { name: 'blue' },
         { name: 'grey' },
+        { name: 'purple' },
         { name: 'pink' },
         { name: 'red' },
         { name: 'yellow' },
