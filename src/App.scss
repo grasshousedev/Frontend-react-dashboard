@@ -7,13 +7,11 @@ $dashboard-footer-height: 0;
 $dashboard-menu-height: $header-height;
 $page-padding: 15px;
 
-@import 'style/colors';
-@import 'style/fonts';
-@import 'style/shadows';
-@import 'style/buttons';
-@import 'style/helpers';
-@import 'style/titles';
-@import 'style/ui';
+@import '~@vzamboni/dashboard-ui-style/style/colors';
+@import '~@vzamboni/dashboard-ui-style/style/fonts';
+@import '~@vzamboni/dashboard-ui-style/style/shadows';
+@import '~@vzamboni/dashboard-ui-style/style/helpers';
+@import '~@vzamboni/dashboard-ui-style/style/ui';
 
 @import 'style/dashboard/login';
 
