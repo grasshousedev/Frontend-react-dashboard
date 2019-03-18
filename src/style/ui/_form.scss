@@ -2,22 +2,41 @@
 
 $ui-form-field-padding: 7px 0 !default;
 
-.ui-form-container,
-.ui-section.ui-form-container
+.ui-form__container,
+.ui-section.ui-form__container
 {
     display: block;
 }
 
-.ui-form-field {
-    display: flex;
-    padding: $ui-form-field-padding;
+.ui-form__container--w100 {
+    .ui-form__label { width: 100px; }
 }
 
-.ui-form-label {
+.ui-form__container--w200 {
+    .ui-form__label { width: 200px; }
+}
+
+.ui-form__field {
+    display: flex;
+    padding: $ui-form-field-padding;    
+}
+
+.ui-form__label {
     color: $grey-d2;
     display: inline-block;
 }
 
-.ui-form-input {
+.ui-form__input {
     display: inline-block;
+}
+
+.ui-form__field--inline {
+    padding: $ui-form-field-padding;    
+}
+
+.ui-form__label--inline {
+    color: $grey-d2;
+}
+
+.ui-form__input--inline {
 }

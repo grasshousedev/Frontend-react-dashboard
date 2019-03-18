@@ -70,71 +70,107 @@ $grey-light-l2: hsl(216, 33%, 97%);
 .background-grey-light-l1 { background-color: $grey-light-l1; }
 .background-grey-light-l2 { background-color: $grey-light-l2; }
 
+$pink-d2: hsl(320, 100%, 19%);
 $pink-d1: hsl(322, 93%, 33%);
 $pink: hsl(324, 93%, 33%);
 $pink-l1: hsl(326, 90%, 39%);
+$pink-l2: hsl(328, 85%, 46%);
 
+.pink-d2 { color: $pink-d2; }
 .pink-d1 { color: $pink-d1; }
 .pink { color: $pink; }
 .pink-l1 { color: $pink-l1; }
+.pink-l2 { color: $pink-l2; }
+.background-pink-d2 { background-color: $pink-d2; }
 .background-pink-d1 { background-color: $pink-d1; }
 .background-pink { background-color: $pink; }
 .background-pink-l1 { background-color: $pink-l1; }
+.background-pink-l2 { background-color: $pink-l2; }
 
+$pink-light-d2: hsl(330, 79%, 56%);
 $pink-light-d1: hsl(334, 86%, 67%);
 $pink-light: hsl(336, 100%, 77%);
 $pink-light-l1: hsl(338, 100%, 86%);
+$pink-light-l2: hsl(341, 100%, 95%);
 
+.pink-light-d2 { color: $pink-light-d2; }
 .pink-light-d1 { color: $pink-light-d1; }
 .pink-light { color: $pink-light; }
 .pink-light-l1 { color: $pink-light-l1; }
+.pink-light-l2 { color: $pink-light-l2; }
+.background-pink-light-d2 { background-color: $pink-light-d2; }
 .background-pink-light-d1 { background-color: $pink-light-d1; }
 .background-pink-light { background-color: $pink-light; }
 .background-pink-light-l1 { background-color: $pink-light-l1; }
+.background-pink-light-l2 { background-color: $pink-light-l2; }
 
+$red-d2: hsl(348, 94%, 20%);
 $red-d1: hsl(350, 94%, 28%);
 $red: hsl(352, 90%, 35%);
 $red-l1: hsl(354, 85%, 44%);
+$red-l2: hsl(356, 75%, 53%);
 
+.red-d2 { color: $red-d2; }
 .red-d1 { color: $red-d1; }
 .red { color: $red; }
 .red-l1 { color: $red-l1; }
+.red-l2 { color: $red-l2; }
+.background-red-d2 { background-color: $red-d2; }
 .background-red-d1 { background-color: $red-d1; }
 .background-red { background-color: $red; }
 .background-red-l1 { background-color: $red-l1; }
+.background-red-l2 { background-color: $red-l2; }
 
+$red-light-d2: hsl(360, 83%, 62%);
 $red-light-d1: hsl(360, 91%, 69%);
 $red-light: hsl(360, 100%, 80%);
 $red-light-l1: hsl(360, 100%, 87%);
+$red-light-l2: hsl(360, 100%, 95%);
 
+.red-light-d2 { color: $red-light-d2; }
 .red-light-d1 { color: $red-light-d1; }
 .red-light { color: $red-light; }
 .red-light-l1 { color: $red-light-l1; }
+.red-light-l2 { color: $red-light-l2; }
+.background-red-light-d2 { background-color: $red-light-d2; }
 .background-red-light-d1 { background-color: $red-light-d1; }
 .background-red-light { background-color: $red-light; }
 .background-red-light-l1 { background-color: $red-light-l1; }
+.background-red-light-l2 { background-color: $red-light-l2; }
 
+$yellow-d2: hsl(15, 86%, 30%);
 $yellow-d1: hsl(22, 82%, 39%);
 $yellow: hsl(29, 80%, 44%);
 $yellow-l1: hsl(36, 77%, 49%);
+$yellow-l2: hsl(42, 87%, 55%);
 
+.yellow-d2 { color: $yellow-d2; }
 .yellow-d1 { color: $yellow-d1; }
 .yellow { color: $yellow; }
 .yellow-l1 { color: $yellow-l1; }
+.yellow-l2 { color: $yellow-l2; }
+.background-yellow-d2 { background-color: $yellow-d2; }
 .background-yellow-d1 { background-color: $yellow-d1; }
 .background-yellow { background-color: $yellow; }
 .background-yellow-l1 { background-color: $yellow-l1; }
+.background-yellow-l2 { background-color: $yellow-l2; }
 
+$yellow-light-d2: hsl(44, 92%, 63%);
 $yellow-light-d1: hsl(48, 94%, 68%);
 $yellow-light: hsl(48, 95%, 76%);
 $yellow-light-l1: hsl(48, 100%, 88%);
+$yellow-light-l2: hsl(49, 100%, 96%);
 
+.yellow-light-d2 { color: $yellow-light-d2; }
 .yellow-light-d1 { color: $yellow-light-d1; }
 .yellow-light { color: $yellow-light; }
 .yellow-light-l1 { color: $yellow-light-l1; }
+.yellow-light-l2 { color: $yellow-light-l2; }
+.background-yellow-light-d2 { background-color: $yellow-light-d2; }
 .background-yellow-light-d1 { background-color: $yellow-light-d1; }
 .background-yellow-light { background-color: $yellow-light; }
 .background-yellow-light-l1 { background-color: $yellow-light-l1; }
+.background-yellow-light-l2 { background-color: $yellow-light-l2; }
 
 $teal-d2: hsl(170, 97%, 15%);
 $teal-d1: hsl(168, 80%, 23%);
@@ -169,6 +205,40 @@ $teal-light-l2: hsl(152, 68%, 96%);
 .background-teal-light { background-color: $teal-light; }
 .background-teal-light-l1 { background-color: $teal-light-l1; }
 .background-teal-light-l2 { background-color: $teal-light-l2; }
+
+$purple-d2: hsl(276, 91%, 23%);
+$purple-d1: hsl(274, 87%, 31%);
+$purple: hsl(274, 87%, 37%);
+$purple-l1: hsl(274, 87%, 43%);
+$purple-l2: hsl(273, 80%, 49%);
+
+.purple-d2 { color: $purple-d2; }
+.purple-d1 { color: $purple-d1; }
+.purple { color: $purple; }
+.purple-l1 { color: $purple-l1; }
+.purple-l2 { color: $purple-l2; }
+.background-purple-d2 { background-color: $purple-d2; }
+.background-purple-d1 { background-color: $purple-d1; }
+.background-purple { background-color: $purple; }
+.background-purple-l1 { background-color: $purple-l1; }
+.background-purple-l2 { background-color: $purple-l2; }
+
+$purple-light-d2: hsl(268, 82%, 60%);
+$purple-light-d1: hsl(264, 96%, 70%);
+$purple-light: hsl(262, 100%, 78%);
+$purple-light-l1: hsl(262, 100%, 88%);
+$purple-light-l2: hsl(262, 90%, 96%);
+
+.purple-light-d2 { color: $purple-light-d2; }
+.purple-light-d1 { color: $purple-light-d1; }
+.purple-light { color: $purple-light; }
+.purple-light-l1 { color: $purple-light-l1; }
+.purple-light-l2 { color: $purple-light-l2; }
+.background-purple-light-d2 { background-color: $purple-light-d2; }
+.background-purple-light-d1 { background-color: $purple-light-d1; }
+.background-purple-light { background-color: $purple-light; }
+.background-purple-light-l1 { background-color: $purple-light-l1; }
+.background-purple-light-l2 { background-color: $purple-light-l2; }
 
 /*********************/
 /* Meaningful colors */

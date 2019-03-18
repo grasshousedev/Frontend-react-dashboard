@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
 import { authenticationService } from 'libs/authentication/authentication';
+import { withAuthentication } from 'libs/authentication/storeConnection';
+
+import { BaseLogin } from './BaseLogin';
 
 class Login extends Component {
     constructor(props) {
@@ -40,56 +42,42 @@ class Login extends Component {
     }
 
     render() {
-        const { authentication } = this.props;
+        const { authentication, loginComponent } = this.props;
         const { isLoading, username, password, error } = this.state;
 
         if (authentication.loggedIn) { 
-            return <div>
-                <h1>You are logged in!</h1>
-                <div>{JSON.stringify(authentication.user)}</div>
-                <div>
-                    <button onClick={authenticationService.logout}>Logout</button>
+            return  <div className="ui-section">
+                <div className="ui-section__column">
+                    <div>You are logged in.</div>
+                </div>
+                <div className="ui-section__column w200">
+                    <button className="button button--negative"
+                        onClick={authenticationService.logout}>Logout</button>
                 </div>
             </div>;
         }
 
-        return <div>
+        const LoginRenderComponent = loginComponent ? loginComponent : BaseLogin;
+
+        return <div>           
             {/* eslint-disable-next-line */}
             <form action="javascript:void(0)">
-                <div>
-                    Username
-                    <input type="text" onChange={(e) => this.updateField('username', e.target.value)} value={username} disabled={isLoading} />
-                </div>
-                <div>
-                    Password
-                    <input type="password" onChange={(e) => this.updateField('password', e.target.value)} value={password} disabled={isLoading} />
-                </div>
-                <div>
-                    <button onClick={this.login}>Login</button>
-                    {isLoading && <i className="fas fa-spinner fa-pulse"></i>}
-                </div>
+                <LoginRenderComponent
+                    username={username} password={password}
+                    isLoading={isLoading}
+                    login={this.login}
+                    updateField={this.updateField}
+                    error={error}
+                />
             </form>
-            {error && 
-                <div>
-                    <h4>Error</h4>
-                    <div>{error.status}: {error.statusText}</div>
-                </div>
-            }
         </div>;
     }
 };
 
 Login.propTypes = {
     authentication: PropTypes.object,
+    loginComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 };
 
-function mapStateToProps(state) {
-    const { authentication } = state;
-
-    return {
-        authentication
-    };
-}
-
-const connectedLogin = connect(mapStateToProps)(Login);
+const connectedLogin = withAuthentication(Login);
 export { connectedLogin as Login };

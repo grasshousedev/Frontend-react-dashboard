@@ -5,20 +5,13 @@ import { BrowserRouter } from 'react-router-dom';
 
 import './App.scss';
 
-import { Header } from './scaffold/Header/Header';
-import { Routes } from 'routes/Routes';
-
+import { Dashboard } from './Dashboard';
 
 export default function App ({ store }) {
     return (
         <Provider store={store}>
             <BrowserRouter>
-                <div className="App">
-                    <Header />
-                    <div className="dashboard-content">
-                        <Routes />
-                    </div>
-                </div>
+                <Dashboard />
             </BrowserRouter>
         </Provider>
     );
