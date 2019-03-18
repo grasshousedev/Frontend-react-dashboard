@@ -13,7 +13,6 @@ class Authentication {
         return post('api-token-auth/', { username, password })
             .then(response => {
                 this.token = response.token;
-                console.log('Got a token!', this.token);
                 this.processNewToken();
                 return response;
             })
@@ -64,13 +63,9 @@ class Authentication {
 
     getLoggedUser = () => {        
         return get('dashboard/api/logged-user/').then((data) => {
-            console.log('The user data!', data);
             this.user = data;
             store.dispatch({ type: actions.REGISTER_USER, user: data });
-            this.getStorageLoggedUserToken().then((tokenData) => {
-                console.log('The token data!', tokenData.token);
-                return data;
-            });
+            return data;
         });
     }
 
@@ -94,11 +89,20 @@ class Authentication {
     }
 
     storageAutoLogin = () => {
-        this.getStorageLoggedUserToken().then(data => {
-            if (data.token) {
-                this.getLoggedUser();
-            }
+        function completeOperation(resolve, success, userData) {            
             store.dispatch({ type: actions.STORAGE_LOGIN_ATTEMPT, value: true });
+            resolve({ success, userData });
+        }
+        return new Promise((resolve, reject) => {
+            this.getStorageLoggedUserToken().then(data => {
+                if (data.token) {
+                    this.getLoggedUser().then(userData => {
+                        completeOperation(resolve, true, userData);
+                    });
+                } else {
+                    completeOperation(resolve, false);
+                }
+            });
         });
     }
 }
@@ -106,4 +110,3 @@ class Authentication {
 export const authenticationService = new Authentication();
 
 export class AuthenticationError extends Exception {};
-
