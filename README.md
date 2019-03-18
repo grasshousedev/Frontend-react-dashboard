@@ -13,9 +13,15 @@ Clone dependency repositories:
 ```sh
 # Assuming you are in your ~/repositories folder, clone
 
-# dashboard-ui-style
+# dashboard-ui-style (mandatory)
 git clone git@github.com:vittoriozamboni/dashboard-ui-style.git
 cd dashboard-ui-style
+yarn link
+cd ../
+
+# dashboard-finance (optional)
+git clone git@github.com:vittoriozamboni/dashboard-finance.git
+cd dashboard-finance
 yarn link
 cd ../
 
