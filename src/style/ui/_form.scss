@@ -29,3 +29,14 @@ $ui-form-field-padding: 7px 0 !default;
 .ui-form__input {
     display: inline-block;
 }
+
+.ui-form__field--inline {
+    padding: $ui-form-field-padding;    
+}
+
+.ui-form__label--inline {
+    color: $grey-d2;
+}
+
+.ui-form__input--inline {
+}
