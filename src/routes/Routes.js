@@ -11,9 +11,9 @@ export class Routes extends Component {
     render() {
         return <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/apps/finance" component={FinanceLanding} />
-            <Route exact path="/machine-learning" component={MachineLearningLanding} />
-            <Route exact path="/style-showcase" component={StyleShowcase} />
+            <Route path="/apps/finance" component={FinanceLanding} />
+            <Route path="/machine-learning" component={MachineLearningLanding} />
+            <Route path="/style-showcase" component={StyleShowcase} />
         </Switch>;        
     }
 }
