@@ -8,6 +8,7 @@ import { Typography } from './typography/Typography';
 import { GridComponent } from './GridComponent';
 import { TabsComponent } from './TabsComponent';
 import { TimelineComponent } from './TimelineComponent';
+import { Loaders } from './Loaders';
 
 const SECTIONS = {
     COLORS: 'colors',
@@ -15,11 +16,12 @@ const SECTIONS = {
     GRID_COMPONENT: 'grid-component',
     TABS_COMPONENT: 'tabs-component',
     TIMELINE_COMPONENT: 'timeline-component',
+    LOADERS: 'loaders',
 };
 
 export class StyleShowcase extends Component {
     state = {
-        sectionName: SECTIONS.TIMELINE_COMPONENT,
+        sectionName: SECTIONS.LOADERS,
     }
 
     setSection = (sectionName) => {
@@ -39,6 +41,7 @@ export class StyleShowcase extends Component {
                 {sectionName === SECTIONS.GRID_COMPONENT && <GridComponent />}
                 {sectionName === SECTIONS.TABS_COMPONENT && <TabsComponent />}
                 {sectionName === SECTIONS.TIMELINE_COMPONENT && <TimelineComponent />}
+                {sectionName === SECTIONS.LOADERS && <Loaders />}
             </div>
         </div>;
     }
@@ -62,6 +65,9 @@ function Controls({ sectionName, setSection }) {
         <button
             className={`${baseClass} ${sectionName === SECTIONS.TIMELINE_COMPONENT ? 'button--primary' : ''}`}
             onClick={() => setSection(SECTIONS.TIMELINE_COMPONENT)}>Timeline</button>
+        <button
+            className={`${baseClass} ${sectionName === SECTIONS.LOADERS ? 'button--primary' : ''}`}
+            onClick={() => setSection(SECTIONS.LOADERS)}>Loaders</button>
     </Fragment>;
 }
 
