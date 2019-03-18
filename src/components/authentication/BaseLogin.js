@@ -43,7 +43,7 @@ export const baseLoginPropTypes = {
     isLoading: PropTypes.bool.isRequired,
     updateField: PropTypes.func.isRequired,
     login: PropTypes.func.isRequired,
-    error: PropTypes.object
+    error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
 };
 
 BaseLogin.propTypes = baseLoginPropTypes;
