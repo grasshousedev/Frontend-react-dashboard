@@ -13,7 +13,7 @@ const authentication = (currentState, action) => {
         case actions.REGISTER_USER:
             return { ...state, user: action.user, loggedIn: true };
         case actions.LOGOUT:
-            return { ...INITIAL_STATE };
+            return { ...state, user: null, loggedIn: false };
         case actions.STORAGE_LOGIN_ATTEMPT:
             return { ...state, storageLoginAttempt: true };
         default:
