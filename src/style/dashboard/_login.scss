@@ -1,0 +1,62 @@
+.dashboard__full-screen__login__container {
+    height: calc(100vh);
+    overflow: hidden;
+    background-color: $neutral-d2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboard__full-screen__login__form {
+    border-radius: 20px;
+    background-color: hsla(210, 16%, 82%, .4);
+    box-shadow: $shadow-medium-light;
+    min-height: 200px;
+    width: 350px;
+    padding: 20px;
+
+    .ui-form__label--inline {
+        color: $neutral-light-l2;
+        font-size: $text-standard;
+        margin-bottom: 10px;
+    }
+
+}
+
+.dashboard-login__input {
+    background-color: hsla(210, 16%, 82%, .5);
+    border: 0;
+    border-bottom: 2px solid transparent;
+    padding: 10px;
+    width: calc(100% - 20px);
+    color: $primary-d2;
+    font-size: $text-standard;
+    
+    &:focus {    
+        border-bottom: 2px solid $primary;
+    }
+}
+
+.dashboard-login__error-container {
+    margin: 15px 0;
+    background-color: $red-light-d1;
+    padding: 15px;
+    color: $neutral-light-l2;
+    h4 { margin: 0; }
+}
+
+.dashboard-login__button-container {
+    margin: 15px 0;
+    text-align: right;
+}
+
+.dashboard-login__button {
+    color: $neutral-light-l2;
+    background-color: $teal-l1;
+    border-color: $teal-l1;
+}
+.dashboard-login__button:hover {
+    color: $neutral-light-l2;
+    background-color: $teal-l2;
+    border-color: $teal-l2;
+}
