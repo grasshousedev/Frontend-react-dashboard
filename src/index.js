@@ -11,8 +11,10 @@ import App from './App';
 import { store } from './store/store';
 import { authenticationService } from './libs/authentication/authentication';
 import { reducers as authReducers } from './libs/authentication/reducers';
+import { reducers as financeReducers } from './applications/finance/reducers';
 
 store.registerReducer('authentication', authReducers.authentication);
+store.registerReducer('finance', financeReducers.finance);
 
 render(
     <App store={store} />,

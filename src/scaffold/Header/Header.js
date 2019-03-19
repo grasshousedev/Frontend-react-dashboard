@@ -14,6 +14,12 @@ import { generateTags, hasTag } from './headerUtils';
 class Applications extends DashboardItem {
     applications = [
         {
+            name: 'Finance',
+            tags: generateTags('Finance'),
+            icon: <i className="fas fa-file-invoice-dollar"></i>,
+            link: '/apps/finance'
+        },
+        {
             name: 'Machine Learning',
             tags: generateTags('Machine Learning'),
             icon: <i className="fas fa-cogs"></i>,
@@ -72,7 +78,7 @@ class User extends DashboardItem {
     render() {
         const { authentication } = this.props;
 
-        return <div className="page-body__container">
+        return <div className="dashboard-ui__page-body__container">
             {authentication.loggedIn && <h2>Hello {authentication.user.first_name}, welcome!</h2>}
             {!authentication.loggedIn && <h2>Login</h2>}
             <Login />

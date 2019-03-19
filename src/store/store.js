@@ -1,4 +1,5 @@
 import { createStore, combineReducers } from 'redux';
+import { reducers as dashboardReducers } from './reducers';
 
 /**
  * @param {Object} - key/value of reducer functions
@@ -26,6 +27,7 @@ const initializeStore = () => {
 };
 
 export const store = initializeStore();
+store.registerReducer('dashboard', dashboardReducers.dashboard);
 
 if (process.env.NODE_ENV === 'development')
     window.store = store;

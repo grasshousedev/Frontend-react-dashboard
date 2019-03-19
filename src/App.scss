@@ -1,9 +1,10 @@
 /* Local variables */
 $header-height: 46px;
+$footer-height: 46px;
 
 /* Global variables */
 $dashboard-header-height: $header-height;
-$dashboard-footer-height: 0;
+$dashboard-footer-height: $footer-height;
 $dashboard-menu-height: $header-height;
 $page-padding: 15px;
 

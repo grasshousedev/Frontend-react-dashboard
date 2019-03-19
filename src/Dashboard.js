@@ -6,6 +6,7 @@ import { Header } from './scaffold/Header/Header';
 import { Routes } from 'routes/Routes';
 import { Login } from 'components/authentication/Login';
 import { DashboardLogin } from 'components/authentication/DashboardLogin';
+import { Footer } from 'scaffold/Footer/Footer';
 
 
 function Dashboard({ authentication }) {
@@ -26,6 +27,7 @@ function Dashboard({ authentication }) {
         <div className="dashboard-content">
             <Routes />
         </div>
+        <Footer />
     </div>;
 }
 Dashboard.propTypes = {

@@ -1,4 +1,4 @@
-import { get, post, setCommonHeaders, getCommonHeaders } from 'libs/requests/requests';
+import { getRequest, postRequest, setCommonHeaders, getCommonHeaders } from 'libs/requests/requests';
 import { store } from 'store/store';
 import Exception from 'libs/exceptions/exceptions';
 import * as actions from './actions';
@@ -10,7 +10,7 @@ class Authentication {
     }
 
     requestAuthentication = (username, password) => {
-        return post('api-token-auth/', { username, password })
+        return postRequest('api-token-auth/', { username, password })
             .then(response => {
                 this.token = response.token;
                 this.processNewToken();
@@ -62,7 +62,7 @@ class Authentication {
     }
 
     getLoggedUser = () => {        
-        return get('dashboard/api/logged-user/').then((data) => {
+        return getRequest('dashboard/api/logged-user/').then((data) => {
             this.user = data;
             store.dispatch({ type: actions.REGISTER_USER, user: data });
             return data;
