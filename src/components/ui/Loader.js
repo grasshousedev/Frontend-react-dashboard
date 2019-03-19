@@ -5,3 +5,9 @@ export function FullSectionLoader() {
         <div className="ui-loader ui-loader--large" />
     </div>;
 }
+
+export function InlineLoader() {
+    return <div className="ui-loader__inline__container">
+        <div className="ui-loader__inline" />
+    </div>;
+}
