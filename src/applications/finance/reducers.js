@@ -12,7 +12,7 @@ const finance = (currentState, action) => {
         case actions.INITIALIZE:
             return { ...state, initialized: true };
         case actions.SET_CATEGORIES:
-            return { ...state, categories: action.categories };
+            return { ...state, categories: action.data };
         default:
             return state;
     }
