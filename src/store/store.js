@@ -14,7 +14,10 @@ const createReducer = asyncReducers =>
  * Add a method to inject reducers from the tree.
  */
 const initializeStore = () => {
-    const store = createStore(s => s, {});
+    const store = createStore(
+        s => s,
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    );
   
     store.asyncReducers = {};
     store.registerReducer = (key, reducer) => {

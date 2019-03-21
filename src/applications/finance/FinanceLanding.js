@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Route, Link, Switch } from "react-router-dom";
+import { Route, Link, Switch, withRouter } from "react-router-dom";
 
 import { FullSectionLoader } from 'components/ui/Loader';
 import { Categories } from './categories/Categories';
@@ -15,7 +15,9 @@ function Landing() {
             Click here to view all <Link to={'/apps/finance/categories'}>Categories</Link>
         </div>
     </div>;
-}
+};
+
+const RouterLanding = withRouter(Landing);
 
 class FinanceLanding extends Component {
     state = {
@@ -36,6 +38,8 @@ class FinanceLanding extends Component {
     setInitialized = () => { this.setState({ appInitialized: true }); }
 
     render() {
+        const { match } = this.props;
+
         const { appInitialized } = this.state;
 
         if (!appInitialized) {
@@ -43,15 +47,16 @@ class FinanceLanding extends Component {
         }
 
         return <Switch>
-            <Route exact path="/apps/finance" component={Landing} />
-            <Route path="/apps/finance/categories" component={Categories} />
+            <Route exact path={match.url} component={RouterLanding} />
+            <Route path={match.url + '/categories'} component={Categories} />
         </Switch>;
     }
 }
 
 FinanceLanding.propTypes = {
+    match: PropTypes.object,
     finance: PropTypes.object,
 };
 
-const ConnectedFinanceLanding = withFinance(FinanceLanding);
+const ConnectedFinanceLanding = withRouter(withFinance(FinanceLanding));
 export { ConnectedFinanceLanding as FinanceLanding };
