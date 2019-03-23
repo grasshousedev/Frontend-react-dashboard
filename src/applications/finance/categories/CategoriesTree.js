@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
+import { FINANCE_BASE_URL } from '../constants';
 
 export function CategoriesTree({ categoriesTree }) {
     if (categoriesTree.length === 0) return '';
@@ -17,7 +20,7 @@ CategoriesTree.propTypes = {
 
 function CategoryTreeNode({ treeNode }) {
     return <li>
-        {treeNode.category.name}
+        <Link to={`${FINANCE_BASE_URL}/categories/${treeNode.category.id}/edit`}>{treeNode.category.name}</Link>
         {treeNode.children.length > 0 &&
             <ul>
                 {treeNode.children.map(subTreeNode => {
