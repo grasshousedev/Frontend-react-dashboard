@@ -15,6 +15,18 @@ const finance = (currentState, action) => {
             return { ...state, initialized: true };
         case actions.SET_CATEGORIES:
             return { ...state, categories: action.data, categoriesTree: createCategoriesTree(action.data) };
+        case actions.SET_CATEGORY:
+            let updated = false;
+            const category = action.data;
+            const categories = state.categories.map(cat => {
+                if (cat.id === category.id) {
+                    updated = true;
+                    return category;
+                }
+                return cat;
+            });
+            if (!updated) categories.push(category);
+            return { ...state, categories, categoriesTree: createCategoriesTree(categories) };
         default:
             return state;
     }
