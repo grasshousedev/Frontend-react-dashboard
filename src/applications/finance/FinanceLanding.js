@@ -3,9 +3,13 @@ import PropTypes from 'prop-types';
 import { Route, Link, Switch, withRouter } from "react-router-dom";
 
 import { FullSectionLoader } from 'components/ui/Loader';
-import { Categories } from './categories/Categories';
+
+import { FINANCE_BASE_URL } from './constants';
+import { CategoriesLanding } from './categories/CategoriesLanding';
 import { withFinance } from './storeConnection';
 import { preload } from './preload';
+
+export { FINANCE_BASE_URL };
 
 function Landing() {
     return <div className="dashboard-ui__page-body__container">
@@ -38,8 +42,6 @@ class FinanceLanding extends Component {
     setInitialized = () => { this.setState({ appInitialized: true }); }
 
     render() {
-        const { match } = this.props;
-
         const { appInitialized } = this.state;
 
         if (!appInitialized) {
@@ -47,8 +49,8 @@ class FinanceLanding extends Component {
         }
 
         return <Switch>
-            <Route exact path={match.url} component={RouterLanding} />
-            <Route path={match.url + '/categories'} component={Categories} />
+            <Route exact path={FINANCE_BASE_URL} component={RouterLanding} />
+            <Route path={`${FINANCE_BASE_URL}/categories`} component={CategoriesLanding} />
         </Switch>;
     }
 }
