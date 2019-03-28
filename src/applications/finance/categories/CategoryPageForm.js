@@ -44,7 +44,7 @@ function CategoryPageForm({ match, finance }) {
             return <form onSubmit={handleSubmit}>  
                 <PageHeader controls={controls}>
                     <Link to={`${FINANCE_BASE_URL}/categories/`}
-                        className={`page-header ui-page-header__breadcrumb`}
+                        className={`ui-page-header ui-page-header__breadcrumb`}
                     >Categories</Link>
                     {category.id ? `Edit ${category.full_name}` : 'Add Category'}
                 </PageHeader>
