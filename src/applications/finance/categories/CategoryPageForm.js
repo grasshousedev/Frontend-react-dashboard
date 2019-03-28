@@ -48,7 +48,7 @@ function CategoryPageForm({ match, finance }) {
                     >Categories</Link>
                     {category.id ? `Edit ${category.full_name}` : 'Add Category'}
                 </PageHeader>
-                <div className='dashboard-ui__page-body__container ui-section'>
+                <div className='ui-page-body ui-section'>
                     <CategoryForm {...props} category={category} />
                 </div>
                 {loggedUser.is_superuser && <CodeHighlight>

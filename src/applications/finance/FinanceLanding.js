@@ -12,7 +12,7 @@ import { preload } from './preload';
 export { FINANCE_BASE_URL };
 
 function Landing() {
-    return <div className="dashboard-ui__page-body__container">
+    return <div className="ui-page-body">
         <h2>Finance</h2>
         <p>This is the landing page of Finance module.</p>
         <div>

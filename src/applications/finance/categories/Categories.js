@@ -14,7 +14,7 @@ function Categories({ finance }) {
 
     return <div>
         <PageHeader controls={controls}>Categories</PageHeader>
-        <div  className="dashboard-ui__page-body__container">
+        <div  className="ui-page-body">
             (back to <Link to="/apps/finance">Finance home</Link>)
             Categories list ({categoriesTree.length} total main categories)
             <CategoriesTree categoriesTree={categoriesTree} />
