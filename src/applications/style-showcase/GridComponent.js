@@ -57,13 +57,13 @@ export function GridComponent() {
                     <div className="ui-section ui-form__container">
                         <div className="ui-form__field">
                             <div className="ui-form__label w-100">Width</div>
-                            <div className="ui-form__input">
+                            <div className="ui-form__field-input">
                                 <input value={width || ''} onChange={e => setWidth(e.target.value ? +e.target.value : undefined)} />
                             </div>
                         </div>
                         <div className="ui-form__field">
                             <div className="ui-form__label w-100">Height</div>
-                            <div className="ui-form__input"><input value={height || ''} onChange={e => setHeight(e.target.value ? +e.target.value : undefined)} /></div>
+                            <div className="ui-form__field-input"><input value={height || ''} onChange={e => setHeight(e.target.value ? +e.target.value : undefined)} /></div>
                         </div>
                     </div>
                     <h2 className="ui-title">Styles</h2>

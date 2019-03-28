@@ -5,9 +5,9 @@ import { baseLoginPropTypes } from './BaseLogin';
 export function DashboardLogin({ username, password, isLoading, updateField, login, error }) {
     return <Fragment>
         <div className="ui-form__container ui-form__container--w100">
-            <div className="ui-form__field--inline">
-                <div className="ui-form__label--inline">Username</div>
-                <div className="ui-form__input--inline">
+            <div className="ui-form__field--vertical">
+                <div className="ui-form__label--vertical">Username</div>
+                <div className="ui-form__field-input--vertical">
                     <input type="text"
                         className="dashboard-login__input"
                         onChange={(e) => updateField('username', e.target.value)}
@@ -15,9 +15,9 @@ export function DashboardLogin({ username, password, isLoading, updateField, log
                         disabled={isLoading} />
                 </div>
             </div>
-            <div className="ui-form__field--inline">
-                <div className="ui-form__label--inline">Password</div>
-                <div className="ui-form__input--inline">
+            <div className="ui-form__field--vertical">
+                <div className="ui-form__label--vertical">Password</div>
+                <div className="ui-form__field-input--vertical">
                     <input type="password"
                         className="dashboard-login__input"
                         onChange={(e) => updateField('password', e.target.value)}
