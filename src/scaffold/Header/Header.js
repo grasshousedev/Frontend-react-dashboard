@@ -96,7 +96,7 @@ class Header extends Component {
         const { authentication } = this.props;
 
         const userLabel = authentication.user ? `Welcome ${authentication.user.first_name}!` : 'Login';
-        return <header className="dashboard-header">
+        return <header className="ui-dashboard-header">
             <DashboardMenu
                 left={[
                     { headerLabel: 'Applications', bodyItem: ApplicationsRouter, name: 'applications' },

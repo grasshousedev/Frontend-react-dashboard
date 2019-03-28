@@ -3,8 +3,8 @@ $header-height: 46px;
 $footer-height: 46px;
 
 /* Global variables */
-$dashboard-header-height: $header-height;
-$dashboard-footer-height: $footer-height;
+$ui-dashboard-header-height: $header-height;
+$ui-dashboard-footer-height: $footer-height;
 $dashboard-menu-height: $header-height;
 $page-padding: 15px;
 
@@ -33,7 +33,7 @@ p {
 }
 
 .dashboard-content {
-    height: calc(100vh - #{($dashboard-header-height + $dashboard-footer-height + $page-padding)});
+    height: calc(100vh - #{($ui-dashboard-header-height + $ui-dashboard-footer-height + $page-padding)});
     overflow: auto;
     padding-bottom: $page-padding;
 }
