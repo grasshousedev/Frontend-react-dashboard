@@ -67,7 +67,7 @@ const connectedCategoryPageForm = withRouter(withFinance(CategoryPageForm));
 export { connectedCategoryPageForm as CategoryPageForm };
 
 function Controls({ isSubmitting }) {
-    const baseClass = 'button button--small';
+    const baseClass = 'ui-button ui-button--small';
     return <Fragment>
         <Link
             to={`${FINANCE_BASE_URL}/categories`}
@@ -77,7 +77,7 @@ function Controls({ isSubmitting }) {
             disabled={isSubmitting ? true : false}
             type="submit"
             to={`${FINANCE_BASE_URL}/categories/add`}
-            className={`${baseClass} button--positive`}
+            className={`${baseClass} ui-button--positive`}
         >Save</button>
     </Fragment>;
 }

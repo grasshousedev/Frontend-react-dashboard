@@ -12,7 +12,7 @@ function TabContent1() {
                 <h4>Counter sample</h4>
                 <div>Counter value: {counter}</div>
                 <div>
-                    <button className="button button--small"
+                    <button className="ui-button ui-button--small"
                         onClick={() => setCounter(counter + 1)}
                     >Increment</button>
                 </div>

@@ -51,7 +51,7 @@ class Login extends Component {
                     <div>You are logged in.</div>
                 </div>
                 <div className="ui-section__column w200">
-                    <button className="button button--negative"
+                    <button className="ui-button ui-button--negative"
                         onClick={authenticationService.logout}>Logout</button>
                 </div>
             </div>;

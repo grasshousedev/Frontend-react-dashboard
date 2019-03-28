@@ -23,7 +23,7 @@ export function BaseLogin({ username, password, isLoading, updateField, login, e
                 </div>
             </div>
             <div>
-                <button className="button button--positive"
+                <button className="ui-button ui-button--positive"
                     onClick={login}>Login</button>
                 {isLoading && <i className="fas fa-spinner fa-pulse"></i>}
             </div>

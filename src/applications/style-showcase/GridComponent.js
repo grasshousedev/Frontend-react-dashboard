@@ -48,7 +48,7 @@ export function GridComponent() {
 
     return <div>
         <div className="ui-section">
-            <button className={`button button--small`} onClick={() => setShowControls(!showControls) }>Toggle show Controls</button>
+            <button className={`ui-button ui-button--small`} onClick={() => setShowControls(!showControls) }>Toggle show Controls</button>
         </div>
         {showControls && <Fragment>            
             <div className="ui-section"> 
@@ -68,9 +68,9 @@ export function GridComponent() {
                     </div>
                     <h2 className="ui-title">Styles</h2>
                     <div className="ui-section">
-                        <button className={`button button--small ${zebra ? 'button--positive' : ''}`} onClick={() => setZebra(!zebra) }>Zebra</button>
-                        <button className={`button button--small ${rowBorder ? 'button--positive' : ''}`} onClick={() => setRowBorder(!rowBorder) }>Row Border</button>
-                        <button className={`button button--small ${sectionBorder ? 'button--positive' : ''}`} onClick={() => setSectionBorder(!sectionBorder) }>Section Border</button>
+                        <button className={`ui-button ui-button--small ${zebra ? 'ui-button--positive' : ''}`} onClick={() => setZebra(!zebra) }>Zebra</button>
+                        <button className={`ui-button ui-button--small ${rowBorder ? 'ui-button--positive' : ''}`} onClick={() => setRowBorder(!rowBorder) }>Row Border</button>
+                        <button className={`ui-button ui-button--small ${sectionBorder ? 'ui-button--positive' : ''}`} onClick={() => setSectionBorder(!sectionBorder) }>Section Border</button>
                     </div>
                 </div>
                 <div className="ui-section__column w-50pc">

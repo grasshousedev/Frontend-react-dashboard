@@ -30,11 +30,11 @@ const connectedCategories = withRouter(withFinance(Categories));
 export { connectedCategories as Categories };
 
 function Controls({ category }) {
-    const baseClass = 'button button--small';
+    const baseClass = 'ui-button ui-button--small';
     return <Fragment>
         <Link
             to={`${FINANCE_BASE_URL}/categories/add`}
-            className={`${baseClass} button--primary`}
+            className={`${baseClass} ui-button--primary`}
         >Add Category</Link>
     </Fragment>;
 }
