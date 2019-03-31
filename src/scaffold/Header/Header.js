@@ -5,7 +5,6 @@ import { Link, withRouter } from "react-router-dom";
 
 import { DashboardMenu } from 'components/dashboard-menu/DashboardMenu';
 import { DashboardItem } from 'components/dashboard-menu/DashboardItem';
-import './header.scss';
 
 import { Login } from 'components/authentication/Login';
 import { withAuthentication } from 'libs/authentication/storeConnection';
@@ -43,21 +42,21 @@ class Applications extends DashboardItem {
     render() {
         const { query } = this.props;
 
-        return <div className="applications-container">
+        return <div className="ui-tiles__container ui-tiles">
             {this.applications.map(application => {
                 if (hasTag(application.tags, query)) {
-                    return <span                        
-                        className="applications__application"
+                    return <div                        
+                        className="ui-tiles__tile"
                         key={application.name}
                         onClick={() => this.navigate(application.link)}
                     >
-                        <div className="applications__application__icon">
+                        <div className="ui-tiles__tile__icon">
                             {application.icon}
                         </div>
-                        <div className="applications__application__name">
+                        <div className="ui-tiles__tile__label">
                             {application.name}
                         </div>
-                    </span>;
+                    </div>;
                 }
                 return <Fragment key={application.name} />;
             })}
