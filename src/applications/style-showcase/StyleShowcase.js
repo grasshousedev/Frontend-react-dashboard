@@ -9,19 +9,21 @@ import { GridComponent } from './GridComponent';
 import { TabsComponent } from './TabsComponent';
 import { TimelineComponent } from './TimelineComponent';
 import { Loaders } from './Loaders';
+import { Tiles } from './Tiles';
 
 const SECTIONS = {
     COLORS: 'colors',
     TYPOGRAPHY: 'typography',
     GRID_COMPONENT: 'grid-component',
     TABS_COMPONENT: 'tabs-component',
+    TILES: 'tiles',
     TIMELINE_COMPONENT: 'timeline-component',
     LOADERS: 'loaders',
 };
 
 export class StyleShowcase extends Component {
     state = {
-        sectionName: SECTIONS.LOADERS,
+        sectionName: SECTIONS.TILES,
     }
 
     setSection = (sectionName) => {
@@ -40,6 +42,7 @@ export class StyleShowcase extends Component {
                 {sectionName === SECTIONS.COLORS && <Colors />}
                 {sectionName === SECTIONS.GRID_COMPONENT && <GridComponent />}
                 {sectionName === SECTIONS.TABS_COMPONENT && <TabsComponent />}
+                {sectionName === SECTIONS.TILES && <Tiles />}
                 {sectionName === SECTIONS.TIMELINE_COMPONENT && <TimelineComponent />}
                 {sectionName === SECTIONS.LOADERS && <Loaders />}
             </div>
@@ -62,6 +65,9 @@ function Controls({ sectionName, setSection }) {
         <button
             className={`${baseClass} ${sectionName === SECTIONS.TABS_COMPONENT ? 'ui-button--primary' : ''}`}
             onClick={() => setSection(SECTIONS.TABS_COMPONENT)}>Tabs</button>
+        <button
+            className={`${baseClass} ${sectionName === SECTIONS.TILES ? 'ui-button--primary' : ''}`}
+            onClick={() => setSection(SECTIONS.TILES)}>Tiles</button>
         <button
             className={`${baseClass} ${sectionName === SECTIONS.TIMELINE_COMPONENT ? 'ui-button--primary' : ''}`}
             onClick={() => setSection(SECTIONS.TIMELINE_COMPONENT)}>Timeline</button>
