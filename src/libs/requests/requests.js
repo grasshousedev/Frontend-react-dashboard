@@ -55,7 +55,7 @@ export default function request(
                 console.error('Request: Invalid!', response.status, response.statusText);
                 throw new RequestInvalid(response);
             }
-            return response.json();
+            return response.status !== 204 ? response.json() : true;
         })
         .catch(error => {
             if (error instanceof RequestInvalid) throw error;
