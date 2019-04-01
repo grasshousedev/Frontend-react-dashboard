@@ -36,4 +36,8 @@ export class CategoryEntity extends BaseEntity {
     save (entry) {
         return super.save(entry, { autoGet: true, actionSingleSet: SET_CATEGORY });
     }
+
+    delete (id) {
+        return super.delete(id, { deleteAction: DELETE_CATEGORY });
+    }
 }

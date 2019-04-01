@@ -17,7 +17,7 @@ function getCategory(categories, id) {
     return null;
 }
 
-function CategoryPageForm({ match, finance }) {
+function CategoryPageForm({ match, history, finance }) {
     const { categories } = finance;    
     const loggedUser = getCurrentUser();
 
@@ -35,12 +35,23 @@ function CategoryPageForm({ match, finance }) {
             categoryObj.save(values).then(response => {
                 setCategory(response);
                 setSubmitting(false);
+                history.push(`${FINANCE_BASE_URL}/categories`);
             });
         }}
     >
         {props => {
-            const { values, isSubmitting, handleSubmit } = props;
-            const controls = <Controls isSubmitting={isSubmitting} />;
+            const { values, isSubmitting, handleSubmit, setSubmitting } = props;
+
+            const deleteCategory = () => {
+                const categoryObj = new CategoryEntity();
+                setSubmitting(true);
+                categoryObj.delete(category.id).then(() => {
+                    setSubmitting(false);
+                    history.push(`${FINANCE_BASE_URL}/categories`);
+                });
+            };
+
+            const controls = <Controls isSubmitting={isSubmitting} deleteCategory={deleteCategory} />;
             return <form onSubmit={handleSubmit}>  
                 <PageHeader controls={controls}>
                     <Link to={`${FINANCE_BASE_URL}/categories/`}
@@ -66,17 +77,21 @@ CategoryPageForm.propTypes = {
 const connectedCategoryPageForm = withRouter(withFinance(CategoryPageForm));
 export { connectedCategoryPageForm as CategoryPageForm };
 
-function Controls({ isSubmitting }) {
+function Controls({ isSubmitting, deleteCategory }) {
     const baseClass = 'ui-button ui-button--small';
     return <Fragment>
+        <button
+            disabled={isSubmitting ? true : false}
+            onClick={() => deleteCategory()}
+            className={`${baseClass} ui-button--negative`}
+        >Delete</button>
         <Link
             to={`${FINANCE_BASE_URL}/categories`}
             className={`${baseClass}`}
         >Cancel</Link>
         <button
             disabled={isSubmitting ? true : false}
-            type="submit"
-            to={`${FINANCE_BASE_URL}/categories/add`}
+            type="submit"            
             className={`${baseClass} ui-button--positive`}
         >Save</button>
     </Fragment>;
@@ -84,5 +99,6 @@ function Controls({ isSubmitting }) {
 
 Controls.propTypes = {
     isSubmitting: PropTypes.bool,
+    deleteCategory: PropTypes.func,
 };
 

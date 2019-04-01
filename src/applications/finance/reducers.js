@@ -10,6 +10,7 @@ const INITIAL_STATE = {
 const finance = (currentState, action) => {
     const state = currentState ? currentState : INITIAL_STATE;
 
+    let categories;
     switch (action.type) {
         case actions.INITIALIZE:
             return { ...state, initialized: true };
@@ -18,7 +19,7 @@ const finance = (currentState, action) => {
         case actions.SET_CATEGORY:
             let updated = false;
             const category = action.data;
-            const categories = state.categories.map(cat => {
+            categories = state.categories.map(cat => {
                 if (cat.id === category.id) {
                     updated = true;
                     return category;
@@ -26,6 +27,9 @@ const finance = (currentState, action) => {
                 return cat;
             });
             if (!updated) categories.push(category);
+            return { ...state, categories, categoriesTree: createCategoriesTree(categories) };
+        case actions.DELETE_CATEGORY:
+            categories = state.categories.filter(c => c.id !== action.id);
             return { ...state, categories, categoriesTree: createCategoriesTree(categories) };
         default:
             return state;
