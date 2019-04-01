@@ -14,6 +14,15 @@ export function CategoryForm({ values, setFieldValue, handleBlur }) {
             </div>
         </div>
         <div className="ui-form__field">
+            <label className="ui-form__label w-100" htmlFor="category-icon">Icon</label>
+            <div className="ui-form__field-input">
+                <input id="category-icon" value={values.attributes_ui.icon || ''}                    
+                    onChange={e => setFieldValue('attributes_ui.icon', e.target.value)}
+                    onBlur={handleBlur}
+                 />
+            </div>
+        </div>
+        <div className="ui-form__field">
             <label className="ui-form__label w-100" htmlFor="category-color">Color</label>
             <div className="ui-form__field-input">
                 <CompactPicker id="category-color"

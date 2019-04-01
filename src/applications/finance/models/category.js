@@ -1,13 +1,16 @@
 import BaseEntity from "models/common/base";
 
-import { SET_CATEGORIES, SET_CATEGORY } from '../actions';
+import { SET_CATEGORIES, SET_CATEGORY, DELETE_CATEGORY } from '../actions';
 export const BASE_URL = 'finance/api/category/';
 
 export function newCategory() {
     return {
         id: null,
         name: '',
-        attributes_ui: {},
+        attributes_ui: {
+            color: '',
+            icon: '',
+        },
         users: [],
         parent: null,
     };
