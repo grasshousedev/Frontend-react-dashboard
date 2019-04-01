@@ -10,9 +10,11 @@ import { TabsComponent } from './TabsComponent';
 import { TimelineComponent } from './TimelineComponent';
 import { Loaders } from './Loaders';
 import { Tiles } from './Tiles';
+import { CardsComponent } from './CardsComponent';
 
 const SECTIONS = {
     COLORS: 'colors',
+    CARDS: 'cards',
     TYPOGRAPHY: 'typography',
     GRID_COMPONENT: 'grid-component',
     TABS_COMPONENT: 'tabs-component',
@@ -23,7 +25,7 @@ const SECTIONS = {
 
 export class StyleShowcase extends Component {
     state = {
-        sectionName: SECTIONS.TILES,
+        sectionName: SECTIONS.CARDS,
     }
 
     setSection = (sectionName) => {
@@ -39,6 +41,7 @@ export class StyleShowcase extends Component {
             <PageHeader controls={controls}>Style Showcase</PageHeader>
             <div className="ui-page-body">
                 {sectionName === SECTIONS.TYPOGRAPHY && <Typography />}
+                {sectionName === SECTIONS.CARDS && <CardsComponent />}
                 {sectionName === SECTIONS.COLORS && <Colors />}
                 {sectionName === SECTIONS.GRID_COMPONENT && <GridComponent />}
                 {sectionName === SECTIONS.TABS_COMPONENT && <TabsComponent />}
@@ -53,6 +56,9 @@ export class StyleShowcase extends Component {
 function Controls({ sectionName, setSection }) {
     const baseClass = 'ui-button ui-button--small';
     return <Fragment>
+        <button
+            className={`${baseClass} ${sectionName === SECTIONS.CARDS ? 'ui-button--primary' : ''}`}
+            onClick={() => setSection(SECTIONS.CARDS)}>Cards</button>
         <button
             className={`${baseClass} ${sectionName === SECTIONS.COLORS ? 'ui-button--primary' : ''}`}
             onClick={() => setSection(SECTIONS.COLORS)}>Colors</button>
