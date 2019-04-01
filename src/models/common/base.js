@@ -64,11 +64,11 @@ export default class BaseEntity {
         });
     }
 
-    delete (id) {
+    delete (id, options = {}) {
         setApplicationLoading(true);
         return deleteRequest(this.getUrl('delete', id)).then(response => {
             setApplicationLoading(false);
-            return response;
+            options.deleteAction && store.dispatch({ type: options.deleteAction, id });            return response;
         }).catch(response => {
             setApplicationLoading(false);
             throw response.response;
