@@ -54,6 +54,26 @@ http-server build/
 ```
 This will create a local server listening on port 8080.
 
+# 3rd-party libraries
+
+Dashboard is based on `React` v16.8 and `create-react-app`, with ejected configuration. It uses standard `PropTypes` for props validation.
+`Redux` v4 is the store manager, and `scss` the preferred way of using stylesheets.
+
+### Other React related libraries:
+- `react-router` v5;
+- `react-redux` v6;
+- `react-virtualized` v9;
+- `formik` v1.5;
+- `react-color` v2;
+
+### JS libraries:
+- `highlight.js` v9;
+
+### CSS libraries:
+- `flexboxgrid` v6;
+
+For specific versions, see `package.json` file.
+
 # Dashboard blocks
 
 ## DashboardMenu
