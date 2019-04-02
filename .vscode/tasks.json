@@ -8,6 +8,12 @@
         "type": "shell",
         "command": "cd ~/repositories/dashboard; yarn start",
         "problemMatcher": []
+      },
+      {
+        "label": "yarn test - React",
+        "type": "shell",
+        "command": "cd ~/repositories/dashboard; yarn test",
+        "problemMatcher": []
       }
     ]
   }
