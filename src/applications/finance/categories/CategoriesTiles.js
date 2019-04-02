@@ -16,15 +16,15 @@ export function CategoriesTiles({ categoriesTree }) {
                 ? <CategorySubcategories treeNode={treeNode} />
                 : "No subcategories";            
             const controls = <Fragment>
-                <Link to={`${FINANCE_BASE_URL}/categories/${category.id}/edit`} className="ui-card__control">View details</Link>
+                <Link to={`${FINANCE_BASE_URL}/categories/${category.id}`} className="ui-card__control">View details</Link>
                 <Link to={`${FINANCE_BASE_URL}/categories/${category.id}/edit`} className="ui-button ui-button--primary">Edit</Link>
             </Fragment>;
             return <div key={category.id} className="col-xs-12 col-sm-6 col-lg-4" style={{ padding: 0 }}>
                 <Card
                     styles={{ container: { width: "calc(100% - 10px)" } }}
                     colors={color ? { side: color, icon: color } : {}}
-                    title={<Link to={`${FINANCE_BASE_URL}/categories/${category.id}/edit`}>{category.name}</Link>}
-                    icon={<Link to={`${FINANCE_BASE_URL}/categories/${category.id}/edit`}><i className={`fas fa-3x ${category.attributes_ui.icon || 'fa-tree'}`} /></Link>}
+                    title={<Link to={`${FINANCE_BASE_URL}/categories/${category.id}`}>{category.name}</Link>}
+                    icon={<Link to={`${FINANCE_BASE_URL}/categories/${category.id}`}><i className={`fas fa-3x ${category.attributes_ui.icon || 'fa-tree'}`} /></Link>}
                     description={subcategories}
                     controls={controls}
                 />
@@ -57,7 +57,7 @@ CategorySubcategories.propTypes = {
 
 function CategoryTile({ category }) {
     return <Link className="ui-tiles__tile"
-        to={`${FINANCE_BASE_URL}/categories/${category.id}/edit`}        
+        to={`${FINANCE_BASE_URL}/categories/${category.id}`}        
     >
         <div className="ui-tiles__tile__icon">
             <i {...category.attributes_ui.color && { style: { color: `${category.attributes_ui.color}` } }}

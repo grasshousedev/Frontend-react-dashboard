@@ -1,7 +1,7 @@
 import BaseEntity from "models/common/base";
 
 import { SET_MONEY_MOVEMENTS, SET_MONEY_MOVEMENT, DELETE_MONEY_MOVEMENT } from '../actions';
-export const BASE_URL = 'finance/api/category/';
+export const BASE_URL = 'finance/api/money-movement/';
 
 export function newMoneyMovement() {
     return {
@@ -45,5 +45,9 @@ export class MoneyMovementEntity extends BaseEntity {
 
     delete (id) {
         return super.delete(id, { deleteAction: DELETE_MONEY_MOVEMENT });
+    }
+
+    getByCategory(categoryId, moneyMovementsList) {
+        return moneyMovementsList.filter(mm => mm.category === categoryId);
     }
 }
