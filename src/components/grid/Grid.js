@@ -233,7 +233,7 @@ Grid.propTypes = {
         left: PropTypes.array,
         right: PropTypes.array,
     }),
-    columnsLabel: PropTypes.object.isRequired,
+    columnsLabel: PropTypes.object,
     columnsWidth: PropTypes.object,
     sortableColumns: PropTypes.arrayOf(PropTypes.string),
     rows: PropTypes.array.isRequired,
@@ -253,6 +253,7 @@ Grid.propTypes = {
 Grid.defaultProps = {
     height: 500,
     sortableColumns: [],
+    columnsLabel: {},
     columnsWidth: {},
     pinnedColumns: { left: [], right: [] },
     styles: {
