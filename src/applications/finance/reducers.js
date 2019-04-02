@@ -1,3 +1,5 @@
+import { listToObject } from 'utils/data';
+
 import * as actions from './actions';
 import { createCategoriesTree } from './categories/categoriesDataUtils';
 
@@ -15,21 +17,20 @@ const finance = (currentState, action) => {
         case actions.INITIALIZE:
             return { ...state, initialized: true };
         case actions.SET_CATEGORIES:
-            return { ...state, categories: action.data, categoriesTree: createCategoriesTree(action.data) };
+            categories = listToObject(action.data, 'id');
+            return {
+                ...state,
+                categories,
+                categoriesTree: createCategoriesTree(categories)
+            };
         case actions.SET_CATEGORY:
-            let updated = false;
             const category = action.data;
-            categories = state.categories.map(cat => {
-                if (cat.id === category.id) {
-                    updated = true;
-                    return category;
-                }
-                return cat;
-            });
-            if (!updated) categories.push(category);
+            categories = state.categories;
+            categories[category.id] = category;
             return { ...state, categories, categoriesTree: createCategoriesTree(categories) };
         case actions.DELETE_CATEGORY:
-            categories = state.categories.filter(c => c.id !== action.id);
+            categories = state.categories;
+            if (categories.hasOwnProperty(action.id)) delete categories[action.id];
             return { ...state, categories, categoriesTree: createCategoriesTree(categories) };
         default:
             return state;

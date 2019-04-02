@@ -11,18 +11,12 @@ import { CategoryEntity, newCategory } from '../models/category';
 import { getCurrentUser } from 'libs/authentication/utils';
 import { CategoryForm } from './CategoryForm';
 
-function getCategory(categories, id) {
-    const category = categories.filter(c => c.id === id);
-    if (category.length === 1) return category[0];
-    return null;
-}
-
 function CategoryPageForm({ match, history, finance }) {
     const { categories } = finance;    
     const loggedUser = getCurrentUser();
 
     const initialCategory = match.params && match.params.id
-        ? getCategory(categories, +match.params.id) || newCategory()
+        ? categories[+match.params.id] || newCategory()
         : newCategory();
 
     const [category, setCategory] = useState(initialCategory);
