@@ -7,6 +7,7 @@ export function Card({ icon, title, subtitle, description, controls, width, colo
     const containerStyle = { ...styles.container, ...width && { width } };
     const sideStyle = { ...styles.side, ...sideColor && { backgroundColor: sideColor, borderColor: sideColor } };
     const iconStyle = { ...styles.icon, ...iconColor && { color: iconColor } };
+    const controlsStyle = { ...styles.controls };
 
     return <div className="ui-card__container" {...containerStyle && { style: containerStyle }}>
         <div className="ui-card__side__container" {...sideStyle && { style: sideStyle }}>
@@ -19,7 +20,7 @@ export function Card({ icon, title, subtitle, description, controls, width, colo
                 {description && <div className="ui-card__description">{description}</div>}
             </div>
             {controls &&
-                <div className="ui-card__controls">
+                <div className="ui-card__controls" {...controlsStyle && { style: controlsStyle }}>
                     {controls}
                 </div>
             }
@@ -36,10 +37,8 @@ Card.propTypes = {
     styles: PropTypes.shape({
         container: PropTypes.object,
         side: PropTypes.object,
-        icon: PropTypes.shape({
-            backgroundColor: PropTypes.string,
-            color: PropTypes.string,
-        }),
+        icon: PropTypes.object,
+        controls: PropTypes.object,
     }),
     colors: PropTypes.shape({
         side: PropTypes.string,

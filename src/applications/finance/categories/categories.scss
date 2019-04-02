@@ -3,8 +3,19 @@
 .finance__categories__tiles {
     .ui-card__container {
         min-height: 145px;
+
+        &:hover {
+            .ui-card__controls {
+                display: flex;
+            }
+        }
     }
-    a {
+
+    .ui-card__controls {
+        display: none;
+    }
+
+    a:not(.ui-button) {
         text-decoration: none;
         color: inherit;
     }

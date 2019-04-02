@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
@@ -15,7 +15,10 @@ export function CategoriesTiles({ categoriesTree }) {
             const subcategories = treeNode.children.length > 0
                 ? <CategorySubcategories treeNode={treeNode} />
                 : "No subcategories";            
-    
+            const controls = <Fragment>
+                <Link to={`${FINANCE_BASE_URL}/categories/${category.id}/edit`} className="ui-card__control">View details</Link>
+                <Link to={`${FINANCE_BASE_URL}/categories/${category.id}/edit`} className="ui-button ui-button--primary">Edit</Link>
+            </Fragment>;
             return <div key={category.id} className="col-xs-12 col-sm-6 col-lg-4" style={{ padding: 0 }}>
                 <Card
                     styles={{ container: { width: "calc(100% - 10px)" } }}
@@ -23,6 +26,7 @@ export function CategoriesTiles({ categoriesTree }) {
                     title={<Link to={`${FINANCE_BASE_URL}/categories/${category.id}/edit`}>{category.name}</Link>}
                     icon={<Link to={`${FINANCE_BASE_URL}/categories/${category.id}/edit`}><i className={`fas fa-3x ${category.attributes_ui.icon || 'fa-tree'}`} /></Link>}
                     description={subcategories}
+                    controls={controls}
                 />
             </div>;
         })}
@@ -35,16 +39,16 @@ CategoriesTiles.propTypes = {
 
 function CategorySubcategories({ treeNode }) {
     const [viewSubcategories, setViewSubcategories] = useState(false);
-    return !viewSubcategories
-        ? <span onClick={() => setViewSubcategories(true)} className="cursor-pointer">{treeNode.children.length} subcategories (toggle)</span>
-        : <div>
-            <span onClick={() => setViewSubcategories(false)} className="cursor-pointer">{treeNode.children.length} subcategories (toggle)</span>
+    return <div>
+        <span onClick={() => setViewSubcategories(!viewSubcategories)} className="cursor-pointer">{treeNode.children.length} subcategories (toggle)</span>
+        {viewSubcategories &&
             <div className="ui-tiles__container ui-tiles--small">
                 {treeNode.children.map(subTreeNode => {
                     return <CategoryTile key={subTreeNode.category.id} category={subTreeNode.category} />;
                 })}    
             </div>
-        </div>;
+        }
+    </div>;
 }
 
 CategorySubcategories.propTypes = {
