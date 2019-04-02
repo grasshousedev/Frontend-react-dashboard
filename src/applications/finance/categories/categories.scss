@@ -1,0 +1,11 @@
+@import '~@vzamboni/dashboard-ui-style/vars/colors';
+
+.finance__categories__tiles {
+    .ui-card__container {
+        min-height: 145px;
+    }
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+}

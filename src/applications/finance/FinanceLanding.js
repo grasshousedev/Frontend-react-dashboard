@@ -4,6 +4,8 @@ import { Route, Link, Switch, withRouter } from "react-router-dom";
 
 import { FullSectionLoader } from 'components/ui/Loader';
 
+import './categories/categories.scss';
+
 import { FINANCE_BASE_URL } from './constants';
 import { CategoriesLanding } from './categories/CategoriesLanding';
 import { withFinance } from './storeConnection';

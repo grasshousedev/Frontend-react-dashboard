@@ -5,7 +5,7 @@ import { withRouter, Link } from 'react-router-dom';
 import { PageHeader } from 'components/ui/PageHeader';
 import { FINANCE_BASE_URL } from '../constants';
 import { withFinance } from '../storeConnection';
-import { CategoriesTree } from './CategoriesTree';
+import { CategoriesTiles } from './CategoriesTiles';
 
 function Categories({ finance }) {
     const { categoriesTree } = finance;
@@ -14,10 +14,8 @@ function Categories({ finance }) {
 
     return <div>
         <PageHeader controls={controls}>Categories</PageHeader>
-        <div  className="ui-page-body">
-            (back to <Link to="/apps/finance">Finance home</Link>)
-            Categories list ({categoriesTree.length} total main categories)
-            <CategoriesTree categoriesTree={categoriesTree} />
+        <div  className="ui-page-body">                        
+            <CategoriesTiles categoriesTree={categoriesTree} />
         </div>
     </div>;
 }
