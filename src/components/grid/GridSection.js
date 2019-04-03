@@ -58,14 +58,14 @@ export class GridSection extends Component {
     }
 
     getColumnProps = ({ row, rowIndex, column, height }) => {
-        const { expandedRows, renderer } = this.props;
+        const { expandedRows, renderer, customCellClass } = this.props;
 
         const expanded = expandedRows[rowIndex] ? 'grid__cell--expanded' : '';
         const columnHeight = expanded ? height - 10 : height;
 
         const value = getColumnValue(row[column], renderer);
         const title = getColumnTitle(value);
-        const classes = `grid__cell grid__row__cell ${expanded}`;
+        const classes = `grid__cell grid__row__cell ${expanded} ${customCellClass[column] || ''}`;
         const style = renderer === 'string'
             ? `width: ${this.getColumnWidth(column)}px; height: ${columnHeight}px`
             : { width: `${this.getColumnWidth(column)}px`, height: `${columnHeight}px` };
@@ -252,6 +252,7 @@ GridSection.propTypes = {
         sectionBorder: PropTypes.bool,
     }),
     expandableRow: PropTypes.bool,
+    customCellClass: PropTypes.object,
     renderer: PropTypes.oneOf(['string', 'jsx']).isRequired,
 };
 

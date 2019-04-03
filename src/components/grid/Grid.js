@@ -134,12 +134,12 @@ export class Grid extends Component {
         const { columnsLabel, rows, columnsWidth } = this.props;
         const { height, autoHeightRows, width } = this.props;
         const { expandableRow } = this.props;
-        const { styles, renderer } = this.props;
+        const { styles, customCellClass, renderer } = this.props;
 
         const { scrollBarsSize, expandedRows, outerContainerWidth } = this.state;
 
         const gridHeight = autoHeightRows
-            ? Math.max(DEFAULTS.getDefaultCellHeight() * Math.min(4, rows.length, autoHeightRows + 1), height)
+            ? Math.max(DEFAULTS.getDefaultCellHeight() * Math.min(rows.length + 1, autoHeightRows + 1), height)
             : height;
 
         let containerMaxWidth = this.outerContainer && this.outerContainer.current && outerContainerWidth
@@ -167,6 +167,7 @@ export class Grid extends Component {
                         expandableRow,
                         styles,
                         renderer,
+                        customCellClass,
                     };
 
                     const leftProps = {
@@ -247,6 +248,11 @@ Grid.propTypes = {
         sectionBorder: PropTypes.bool,
     }),
     expandableRow: PropTypes.bool,
+    /**
+     * An object that contains column-based class for the cell.
+     * i.e. customCellClass = { id: 'my-id-class' } will be applied to all id cells
+     */
+    customCellClass: PropTypes.object,
     renderer: PropTypes.oneOf(['string', 'jsx']),
 };
 
@@ -263,5 +269,5 @@ Grid.defaultProps = {
         sectionBorder: true,
     },
     expandableRow: true,
-    renderer: 'string',
+    renderer: 'jsx',
 };
