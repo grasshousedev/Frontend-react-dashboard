@@ -37,10 +37,15 @@ function CategoryDetail({ match, finance }) {
         className="ui-button ui-button--primary"
     >Edit</Link>;
 
-    const mmColumns = ['movement', 'amount', 'movement_date', 'description'];
-    const mmColumnsLabel = { movement: '', amount: 'Amount', movement_date: 'Date', description: 'Description' };
-    const mmColumnsWidth = { movement: 20, amount: 50, movement_date: 80, description: 200 };
-    const mmRows = Object.values(moneyMovements).sort((mm1, mm2) => mm1.movement_date > mm2.movement_date ? 1 : -1);
+    const mmColumns = ['movement_icon', 'amount', 'movement_date', 'description', 'tags', 'id'];
+    const mmColumnsLabel = { movement_icon: '', amount: 'Amount', movement_date: 'Date', description: 'Description', tags: 'Tags', id: 'ID' };
+    const mmColumnsWidth = { movement_icon: 20, amount: 70, movement_date: 80, description: 400, tags: 200, id: 20 };
+    const mmRows = Object.values(moneyMovements)
+        .sort((mm1, mm2) => mm1.movement_date > mm2.movement_date ? -1 : 1)
+        .map(mm => ({
+            ...mm,
+            movement_icon: mm.movement === '-' ? <i className="fas fa-arrow-down red" /> : <i className="fas fa-arrow-up teal" />
+        }));
 
     return <div>
         <PageHeader controls={controls}>
@@ -55,6 +60,9 @@ function CategoryDetail({ match, finance }) {
                 columns={mmColumns}
                 columnsWidth={mmColumnsWidth}
                 columnsLabel={mmColumnsLabel}
+                customCellClass={{ amount: 'finance__money-movement__amount-cell' }}
+                autoHeightRows={mmRows.length > 10 ? 10 : mmRows.length + 2}
+                height={null}
             />
         </div>
     </div>;
