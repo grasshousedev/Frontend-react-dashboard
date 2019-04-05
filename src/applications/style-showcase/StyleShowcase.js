@@ -87,7 +87,7 @@ function Controls({ sectionName, setSection }) {
             onClick={() => setSection(SECTIONS.LOADERS)}>Loaders</button>
         <button
             className={`${baseClass} ${sectionName === SECTIONS.MODAL ? 'ui-button--primary' : ''}`}
-            onClick={() => setSection(SECTIONS.MODAL)}>Loaders</button>
+            onClick={() => setSection(SECTIONS.MODAL)}>Modals</button>
     </Fragment>;
 }
 

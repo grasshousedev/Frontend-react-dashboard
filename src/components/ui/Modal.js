@@ -52,6 +52,8 @@ export function ModalWindow({ title, content, footer, maximized, closeModal, set
         ? 'ui-modal__container--maximized'
         : 'ui-modal__container--default';
 
+    const uiModalContentSizeClass = footer ? 'ui-modal__content--header--footer' : 'ui-modal__content--header';
+
     return createPortal(<Fragment>
         <div className={`ui-modal__wrapper ${wrapperClass}`}>
             <div className={`ui-modal__container ${uiModalContainerClasses}`} style={modalState.modalContainerStyle}>
@@ -69,13 +71,13 @@ export function ModalWindow({ title, content, footer, maximized, closeModal, set
                         </Fragment>}
                     </div>
                 </div>
-                <div className="ui-modal__content ui-modal__content--header-footer">
+                <div className={`ui-modal__content ${uiModalContentSizeClass}`}>
                     {modalState.isLoading && <FullSectionLoader />}
                     {!modalState.isLoading && content}
                 </div>
-                <div className="ui-modal__footer">
+                {footer && <div className="ui-modal__footer">
                     {!modalState.isLoading && footer}
-                </div>
+                </div>}
             </div>
         </div>
     </Fragment>, modalContainer);    

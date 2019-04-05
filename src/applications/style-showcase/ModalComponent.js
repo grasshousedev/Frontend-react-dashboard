@@ -9,7 +9,7 @@ export function ModalComponent() {
     return <div>
         <ModalTrigger
             Trigger={({ setViewModalWindow }) =>
-                <button className="ui-button"
+                <button className="ui-button ui-button--small"
                     onClick={() => setViewModalWindow(true)}>Open Modal</button>
             }
             getModalWindowProps={({ setViewModalWindow }) => {
@@ -54,7 +54,7 @@ export function ModalComponent() {
 
         <ModalTrigger
             Trigger={({ setViewModalWindow }) =>
-                <button className="ui-button" style={{ marginLeft: '10px' }}
+                <button className="ui-button ui-button--small" style={{ marginLeft: '10px' }}
                     onClick={() => setViewModalWindow(true)}>Open Small Modal</button>
             }
             getModalWindowProps={({ setViewModalWindow }) => {           
@@ -74,7 +74,7 @@ export function ModalComponent() {
 
         <ModalTrigger
             Trigger={({ setViewModalWindow }) =>
-                <button className="ui-button" style={{ marginLeft: '10px' }}
+                <button className="ui-button ui-button--small" style={{ marginLeft: '10px' }}
                     onClick={() => setViewModalWindow(true)}>Open Custom Class Modal</button>
             }
             getModalWindowProps={({ setViewModalWindow }) => {           
@@ -90,7 +90,20 @@ export function ModalComponent() {
             }}
         />        
 
-        <hr className="ui-divider" />
+        <ModalTrigger
+            Trigger={({ setViewModalWindow }) =>
+                <button className="ui-button ui-button--small" style={{ marginLeft: '10px' }}
+                    onClick={() => setViewModalWindow(true)}>Open Modal without Footer</button>
+            }
+            getModalWindowProps={({ setViewModalWindow }) => {           
+                return {
+                    title: 'Modal without Footer',
+                    content: <div><Lorem /> <Lorem /></div>,
+                };
+            }}
+        />        
+
+        <hr className="ui-divider" style={{ marginTop: '1rem' }} />
 
         <h2>Open Modal (with hooks)</h2>
         <CodeHighlight>{openModalSample}</CodeHighlight>
@@ -104,6 +117,11 @@ export function ModalComponent() {
 
         <h2>Open Custom Class Modal (with a defined class for the wrapper)</h2>
         <CodeHighlight>{openCustomClassModalSample}</CodeHighlight>
+
+        <hr className="ui-divider" />
+
+        <h2>Open Modal without Footer</h2>
+        <CodeHighlight>{openModalWithoutFooterSample}</CodeHighlight>
     </div>;
 }
 
@@ -189,6 +207,21 @@ const openCustomClassModalSample = `// The custom class is passed as wrapperClas
                 <button className="ui-button ui-button--primary" onClick={() => setViewModalWindow(false)}>Close</button>
             </Fragment>,
             wrapperClass: 'style-showcase__modals__custom-wrapper'
+        };
+    }}
+/>        
+`;
+
+const openModalWithoutFooterSample = `// Do not pass footer property
+<ModalTrigger
+    Trigger={({ setViewModalWindow }) =>
+        <button className="ui-button ui-button--small" style={{ marginLeft: '10px' }}
+            onClick={() => setViewModalWindow(true)}>Open Modal without Footer</button>
+    }
+    getModalWindowProps={({ setViewModalWindow }) => {           
+        return {
+            title: 'Modal without Footer',
+            content: <div><Lorem /> <Lorem /></div>,
         };
     }}
 />        
