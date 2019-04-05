@@ -11,21 +11,23 @@ import { TimelineComponent } from './TimelineComponent';
 import { Loaders } from './Loaders';
 import { Tiles } from './Tiles';
 import { CardsComponent } from './CardsComponent';
+import { ModalComponent } from './ModalComponent';
 
 const SECTIONS = {
     COLORS: 'colors',
     CARDS: 'cards',
-    TYPOGRAPHY: 'typography',
     GRID_COMPONENT: 'grid-component',
+    LOADERS: 'loaders',
+    MODAL: 'modal',
     TABS_COMPONENT: 'tabs-component',
     TILES: 'tiles',
     TIMELINE_COMPONENT: 'timeline-component',
-    LOADERS: 'loaders',
+    TYPOGRAPHY: 'typography',
 };
 
 export class StyleShowcase extends Component {
     state = {
-        sectionName: SECTIONS.CARDS,
+        sectionName: SECTIONS.MODAL,
     }
 
     setSection = (sectionName) => {
@@ -40,14 +42,15 @@ export class StyleShowcase extends Component {
         return <div>
             <PageHeader controls={controls}>Style Showcase</PageHeader>
             <div className="ui-page-body">
-                {sectionName === SECTIONS.TYPOGRAPHY && <Typography />}
                 {sectionName === SECTIONS.CARDS && <CardsComponent />}
                 {sectionName === SECTIONS.COLORS && <Colors />}
                 {sectionName === SECTIONS.GRID_COMPONENT && <GridComponent />}
+                {sectionName === SECTIONS.LOADERS && <Loaders />}
+                {sectionName === SECTIONS.MODAL && <ModalComponent />}
                 {sectionName === SECTIONS.TABS_COMPONENT && <TabsComponent />}
                 {sectionName === SECTIONS.TILES && <Tiles />}
                 {sectionName === SECTIONS.TIMELINE_COMPONENT && <TimelineComponent />}
-                {sectionName === SECTIONS.LOADERS && <Loaders />}
+                {sectionName === SECTIONS.TYPOGRAPHY && <Typography />}
             </div>
         </div>;
     }
@@ -80,6 +83,9 @@ function Controls({ sectionName, setSection }) {
         <button
             className={`${baseClass} ${sectionName === SECTIONS.LOADERS ? 'ui-button--primary' : ''}`}
             onClick={() => setSection(SECTIONS.LOADERS)}>Loaders</button>
+        <button
+            className={`${baseClass} ${sectionName === SECTIONS.MODAL ? 'ui-button--primary' : ''}`}
+            onClick={() => setSection(SECTIONS.MODAL)}>Loaders</button>
     </Fragment>;
 }
 
