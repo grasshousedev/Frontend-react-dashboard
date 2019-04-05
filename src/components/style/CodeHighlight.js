@@ -47,7 +47,10 @@ export class CodeHighlight extends Component {
         if (!loaded) return '';
 
         return <pre>
-            <code ref={this.codeNode} className={language}>{children}</code>
+            <code
+                style={{ overflow: 'auto' }}
+                ref={this.codeNode} className={language}
+            >{children}</code>
         </pre>;
     }
 }
