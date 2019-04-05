@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 
-import { withFinance } from '../storeConnection';
-import { FullSectionLoader } from 'components/ui/Loader';
-import { MoneyMovementEntity } from '../models/moneyMovement';
-import { PageHeader } from 'components/ui/PageHeader';
-import { FINANCE_BASE_URL } from '../FinanceLanding';
 import { Grid } from 'components/grid/Grid';
+import { FullSectionLoader } from 'components/ui/Loader';
+import { PageHeader } from 'components/ui/PageHeader';
+
+import { withFinance } from '../storeConnection';
+import { MoneyMovementEntity } from '../models/moneyMovement';
+import { FINANCE_BASE_URL } from '../FinanceLanding';
+import { CategoryLineChart, CategoryMonthlyChart } from './CategoryCharts';
+
 
 function CategoryDetail({ match, finance }) {
     const [moneyMovements, setMoneyMovements] = useState(null);
@@ -55,6 +58,8 @@ function CategoryDetail({ match, finance }) {
             {category.full_name}
         </PageHeader>
         <div className="ui-page-body">
+            <CategoryLineChart category={category} moneyMovements={moneyMovements} chartStyle={{ marginBottom: '1rem' }} />
+            <CategoryMonthlyChart category={category} moneyMovements={moneyMovements} chartStyle={{ marginBottom: '1rem' }} />
             <Grid
                 rows={mmRows}
                 columns={mmColumns}
