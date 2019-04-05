@@ -13,6 +13,8 @@ import { Tiles } from './Tiles';
 import { CardsComponent } from './CardsComponent';
 import { ModalComponent } from './ModalComponent';
 
+import './style-showcase.scss';
+
 const SECTIONS = {
     COLORS: 'colors',
     CARDS: 'cards',

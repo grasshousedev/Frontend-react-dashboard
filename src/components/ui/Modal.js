@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { FullSectionLoader } from './Loader';
 
 
-export function ModalWindow({ title, content, footer, maximized, setViewModalWindow, wrapperClass, startWidth, startHeight, hooks }) {
+export function ModalWindow({ title, content, footer, maximized, closeModal, setViewModalWindow, wrapperClass, startWidth, startHeight, hooks, canMaximize }) {
     const sizedModalContainerStyle = {};
     if (!maximized) {
         sizedModalContainerStyle.width = startWidth;
@@ -27,20 +27,7 @@ export function ModalWindow({ title, content, footer, maximized, setViewModalWin
         });
     };
 
-    const closeModal = () => {
-        const closePromise = new Promise((resolve, reject) => {
-            if (hooks.onClose)
-                return hooks.onClose({ resolve, reject });
-            else resolve();
-        });
-
-        closePromise.then(() => {
-            setViewModalWindow(false);            
-            setTimeout(() => {
-                hooks.onClosed && hooks.onClosed();
-            }, 1);            
-        }).catch(() => {});
-    };
+    const closeModalWindow = closeModal ? closeModal : () => setViewModalWindow(false);
 
     // componentDidMount
     useEffect(() => {      
@@ -74,9 +61,11 @@ export function ModalWindow({ title, content, footer, maximized, setViewModalWin
                     </div>
                     <div className="ui-modal__controls">
                         {!modalState.isLoading && <Fragment>
-                            {!modalState.isMaximized && <i className="fas fa-window-maximize ui-modal__control" onClick={() => setIsMaximized(true)} />}
-                            {modalState.isMaximized && <i className="fas fa-window-minimize ui-modal__control" onClick={() => setIsMaximized(false)} />}
-                            <i className="fas fa-times ui-modal__control" onClick={closeModal} />
+                            {!modalState.isMaximized && canMaximize &&
+                                <i className="fas fa-window-maximize ui-modal__control" onClick={() => setIsMaximized(true)} />}
+                            {modalState.isMaximized && canMaximize &&
+                                <i className="fas fa-window-minimize ui-modal__control" onClick={() => setIsMaximized(false)} />}
+                            <i className="fas fa-times ui-modal__control" onClick={() => closeModalWindow({ source: 'closeIcon' })} />
                         </Fragment>}
                     </div>
                 </div>
@@ -96,19 +85,20 @@ ModalWindow.propTypes = {
     title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     content: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     footer: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+    closeModal: PropTypes.func,
     maximized: PropTypes.bool,
+    canMaximize: PropTypes.bool,
     wrapperClass: PropTypes.string,
     startHeight: PropTypes.string,
     startWidth: PropTypes.string,
     hooks: PropTypes.shape({
         onOpen: PropTypes.func,
-        onClose: PropTypes.func,
-        onClosed: PropTypes.func,
     })
 };
 
 ModalWindow.defaultProps = {
     maximized: false,
+    canMaximize: true,
     wrapperClass: '',
     startHeight: '400px',
     startWidth: '70%',
