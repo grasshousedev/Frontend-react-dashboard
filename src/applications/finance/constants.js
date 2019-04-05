@@ -1,0 +1,1 @@
+export const FINANCE_BASE_URL = '/apps/finance';

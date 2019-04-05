@@ -6,7 +6,7 @@ export function BaseLogin({ username, password, isLoading, updateField, login, e
         <div className="ui-form__container ui-form__container--w100">
             <div className="ui-form__field">
                 <div className="ui-form__label">Username</div>
-                <div className="ui-form__input">
+                <div className="ui-form__field-input">
                     <input type="text"
                         onChange={(e) => updateField('username', e.target.value)}
                         value={username}
@@ -15,7 +15,7 @@ export function BaseLogin({ username, password, isLoading, updateField, login, e
             </div>
             <div className="ui-form__field">
                 <div className="ui-form__label">Password</div>
-                <div className="ui-form__input">
+                <div className="ui-form__field-input">
                     <input type="password"
                         onChange={(e) => updateField('password', e.target.value)}
                         value={password}
@@ -23,7 +23,7 @@ export function BaseLogin({ username, password, isLoading, updateField, login, e
                 </div>
             </div>
             <div>
-                <button className="button button--positive"
+                <button className="ui-button ui-button--positive"
                     onClick={login}>Login</button>
                 {isLoading && <i className="fas fa-spinner fa-pulse"></i>}
             </div>

@@ -9,19 +9,23 @@ import { GridComponent } from './GridComponent';
 import { TabsComponent } from './TabsComponent';
 import { TimelineComponent } from './TimelineComponent';
 import { Loaders } from './Loaders';
+import { Tiles } from './Tiles';
+import { CardsComponent } from './CardsComponent';
 
 const SECTIONS = {
     COLORS: 'colors',
+    CARDS: 'cards',
     TYPOGRAPHY: 'typography',
     GRID_COMPONENT: 'grid-component',
     TABS_COMPONENT: 'tabs-component',
+    TILES: 'tiles',
     TIMELINE_COMPONENT: 'timeline-component',
     LOADERS: 'loaders',
 };
 
 export class StyleShowcase extends Component {
     state = {
-        sectionName: SECTIONS.LOADERS,
+        sectionName: SECTIONS.CARDS,
     }
 
     setSection = (sectionName) => {
@@ -35,11 +39,13 @@ export class StyleShowcase extends Component {
 
         return <div>
             <PageHeader controls={controls}>Style Showcase</PageHeader>
-            <div className="dashboard-ui__page-body__container">
+            <div className="ui-page-body">
                 {sectionName === SECTIONS.TYPOGRAPHY && <Typography />}
+                {sectionName === SECTIONS.CARDS && <CardsComponent />}
                 {sectionName === SECTIONS.COLORS && <Colors />}
                 {sectionName === SECTIONS.GRID_COMPONENT && <GridComponent />}
                 {sectionName === SECTIONS.TABS_COMPONENT && <TabsComponent />}
+                {sectionName === SECTIONS.TILES && <Tiles />}
                 {sectionName === SECTIONS.TIMELINE_COMPONENT && <TimelineComponent />}
                 {sectionName === SECTIONS.LOADERS && <Loaders />}
             </div>
@@ -48,25 +54,31 @@ export class StyleShowcase extends Component {
 };
 
 function Controls({ sectionName, setSection }) {
-    const baseClass = 'button button--small';
+    const baseClass = 'ui-button ui-button--small';
     return <Fragment>
         <button
-            className={`${baseClass} ${sectionName === SECTIONS.COLORS ? 'button--primary' : ''}`}
+            className={`${baseClass} ${sectionName === SECTIONS.CARDS ? 'ui-button--primary' : ''}`}
+            onClick={() => setSection(SECTIONS.CARDS)}>Cards</button>
+        <button
+            className={`${baseClass} ${sectionName === SECTIONS.COLORS ? 'ui-button--primary' : ''}`}
             onClick={() => setSection(SECTIONS.COLORS)}>Colors</button>
         <button
-            className={`${baseClass} ${sectionName === SECTIONS.TYPOGRAPHY ? 'button--primary' : ''}`}
+            className={`${baseClass} ${sectionName === SECTIONS.TYPOGRAPHY ? 'ui-button--primary' : ''}`}
             onClick={() => setSection(SECTIONS.TYPOGRAPHY)}>Typography</button>
         <button
-            className={`${baseClass} ${sectionName === SECTIONS.GRID_COMPONENT ? 'button--primary' : ''}`}
+            className={`${baseClass} ${sectionName === SECTIONS.GRID_COMPONENT ? 'ui-button--primary' : ''}`}
             onClick={() => setSection(SECTIONS.GRID_COMPONENT)}>Grid</button>
         <button
-            className={`${baseClass} ${sectionName === SECTIONS.TABS_COMPONENT ? 'button--primary' : ''}`}
+            className={`${baseClass} ${sectionName === SECTIONS.TABS_COMPONENT ? 'ui-button--primary' : ''}`}
             onClick={() => setSection(SECTIONS.TABS_COMPONENT)}>Tabs</button>
         <button
-            className={`${baseClass} ${sectionName === SECTIONS.TIMELINE_COMPONENT ? 'button--primary' : ''}`}
+            className={`${baseClass} ${sectionName === SECTIONS.TILES ? 'ui-button--primary' : ''}`}
+            onClick={() => setSection(SECTIONS.TILES)}>Tiles</button>
+        <button
+            className={`${baseClass} ${sectionName === SECTIONS.TIMELINE_COMPONENT ? 'ui-button--primary' : ''}`}
             onClick={() => setSection(SECTIONS.TIMELINE_COMPONENT)}>Timeline</button>
         <button
-            className={`${baseClass} ${sectionName === SECTIONS.LOADERS ? 'button--primary' : ''}`}
+            className={`${baseClass} ${sectionName === SECTIONS.LOADERS ? 'ui-button--primary' : ''}`}
             onClick={() => setSection(SECTIONS.LOADERS)}>Loaders</button>
     </Fragment>;
 }

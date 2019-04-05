@@ -48,7 +48,7 @@ export function GridComponent() {
 
     return <div>
         <div className="ui-section">
-            <button className={`button button--small`} onClick={() => setShowControls(!showControls) }>Toggle show Controls</button>
+            <button className={`ui-button ui-button--small`} onClick={() => setShowControls(!showControls) }>Toggle show Controls</button>
         </div>
         {showControls && <Fragment>            
             <div className="ui-section"> 
@@ -57,20 +57,20 @@ export function GridComponent() {
                     <div className="ui-section ui-form__container">
                         <div className="ui-form__field">
                             <div className="ui-form__label w-100">Width</div>
-                            <div className="ui-form__input">
+                            <div className="ui-form__field-input">
                                 <input value={width || ''} onChange={e => setWidth(e.target.value ? +e.target.value : undefined)} />
                             </div>
                         </div>
                         <div className="ui-form__field">
                             <div className="ui-form__label w-100">Height</div>
-                            <div className="ui-form__input"><input value={height || ''} onChange={e => setHeight(e.target.value ? +e.target.value : undefined)} /></div>
+                            <div className="ui-form__field-input"><input value={height || ''} onChange={e => setHeight(e.target.value ? +e.target.value : undefined)} /></div>
                         </div>
                     </div>
                     <h2 className="ui-title">Styles</h2>
                     <div className="ui-section">
-                        <button className={`button button--small ${zebra ? 'button--positive' : ''}`} onClick={() => setZebra(!zebra) }>Zebra</button>
-                        <button className={`button button--small ${rowBorder ? 'button--positive' : ''}`} onClick={() => setRowBorder(!rowBorder) }>Row Border</button>
-                        <button className={`button button--small ${sectionBorder ? 'button--positive' : ''}`} onClick={() => setSectionBorder(!sectionBorder) }>Section Border</button>
+                        <button className={`ui-button ui-button--small ${zebra ? 'ui-button--positive' : ''}`} onClick={() => setZebra(!zebra) }>Zebra</button>
+                        <button className={`ui-button ui-button--small ${rowBorder ? 'ui-button--positive' : ''}`} onClick={() => setRowBorder(!rowBorder) }>Row Border</button>
+                        <button className={`ui-button ui-button--small ${sectionBorder ? 'ui-button--positive' : ''}`} onClick={() => setSectionBorder(!sectionBorder) }>Section Border</button>
                     </div>
                 </div>
                 <div className="ui-section__column w-50pc">

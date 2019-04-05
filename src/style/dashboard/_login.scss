@@ -10,12 +10,12 @@
 .dashboard__full-screen__login__form {
     border-radius: 20px;
     background-color: hsla(210, 16%, 82%, .4);
-    box-shadow: $shadow-medium;
+    box-shadow: $ui-shadow-medium;
     min-height: 200px;
     width: 350px;
     padding: 20px;
 
-    .ui-form__label--inline {
+    .ui-form__label--vertical {
         color: $neutral-light-l2;
         font-size: $text-standard;
         margin-bottom: 10px;

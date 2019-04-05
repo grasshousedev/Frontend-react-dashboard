@@ -1,5 +1,5 @@
 import { store } from 'store/store';
-import { SET_APPLICATION_LOADING } from 'store/actions';
+import { setApplicationLoading } from 'store/utils';
 
 import { getRequest, postRequest, deleteRequest, putRequest } from 'libs/requests/requests';
 
@@ -26,19 +26,19 @@ export default class BaseEntity {
         }
     }
 
-    get(options = {}) {
-        store.dispatch({ type: SET_APPLICATION_LOADING, loading: true });
-        return getRequest(this.getUrl('get'), { timeout: 5000 }).then(response => {
-            store.dispatch({ type: options.actionSet, data: response.data });
+    get(id, options = {}) {
+        setApplicationLoading(true);
+        return getRequest(this.getUrl('detail', id), { timeout: 5000 }).then(response => {
+            options.actionSingleSet && store.dispatch({ type: options.actionSingleSet, data: response });
             if (!options.keepLoading) {
-                store.dispatch({ type: SET_APPLICATION_LOADING, loading: false });
+                setApplicationLoading(false);
             }
             return response;
         }).catch(response => {
             if (response.response === undefined) {
                 // assuming timeout
             }
-            store.dispatch({ type: SET_APPLICATION_LOADING, loading: true, loadingError: response });
+            setApplicationLoading(false);
             console.error('Impossible to load data: ', response);
             throw response.response;
         });
@@ -46,51 +46,58 @@ export default class BaseEntity {
 
     fetch (options) {
         const self = this;
-        store.dispatch({ type: SET_APPLICATION_LOADING, loading: true });
+        setApplicationLoading(true);
         return getRequest(this.getUrl('getAll'), { timeout: 5000 }).then(response => {
             const data = self.hasPagination ? response.results : response;
-            store.dispatch({ type: options.actionSet, data });
+            options.fetchActionSet && store.dispatch({ type: options.fetchActionSet, data });
             if (!options.keepLoading) {
-                store.dispatch({ type: SET_APPLICATION_LOADING, loading: false });
+                setApplicationLoading(false);
             }
             return response;
         }).catch(response => {
             if (response === undefined) {
                 // assuming timeout
             }
-            store.dispatch({ type: SET_APPLICATION_LOADING, loading: true, loadingError: response });
+            setApplicationLoading(false);
             console.error('Impossible to load data: ', response);
             throw response.response;
         });
     }
 
-    delete (id) {
-        store.dispatch({ type: SET_APPLICATION_LOADING, loading: true });
+    delete (id, options = {}) {
+        setApplicationLoading(true);
         return deleteRequest(this.getUrl('delete', id)).then(response => {
-            store.dispatch({ type: SET_APPLICATION_LOADING, loading: false });
-            return response;
+            setApplicationLoading(false);
+            options.deleteAction && store.dispatch({ type: options.deleteAction, id });            return response;
         }).catch(response => {
-            store.dispatch({ type: SET_APPLICATION_LOADING, loading: true, loadingError: response });
+            setApplicationLoading(false);
             throw response.response;
         });
     }
 
-    save (entry) {
-        store.dispatch({ type: SET_APPLICATION_LOADING, loading: true });
+    save (entry, options = {}) {
+        setApplicationLoading(true);
         if (entry.id) {
             // EDIT
             return putRequest(this.getUrl('edit', entry.id), entry).then(response => {
-                store.dispatch({ type: SET_APPLICATION_LOADING, loading: false });
+                setApplicationLoading(false);
+                if (options.autoGet) {
+                    return this.get(entry.id, options);
+                } else {
+                    return response;
+                }
             }).catch(response => {
-                store.dispatch({ type: SET_APPLICATION_LOADING, loading: true, loadingError: response });
+                setApplicationLoading(false);
             throw response.response;
         });
         } else {
             // ADD
             return postRequest(this.getUrl('add'), entry).then(response => {
-                store.dispatch({ type: SET_APPLICATION_LOADING, loading: false });
+                options.actionSingleSet && store.dispatch({ type: options.actionSingleSet, data: response });
+                setApplicationLoading(false);
+                return response;
             }).catch(response => {
-                store.dispatch({ type: SET_APPLICATION_LOADING, loading: true, loadingError: response });
+                setApplicationLoading(false);
                 throw response.response;
             });
         }

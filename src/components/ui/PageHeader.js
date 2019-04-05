@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export function PageHeader({ children, controls }) {
-    return <div className="page-header__container">
-        <div className="page-header__header-container">
-            <h2 className="page-header">{children}</h2>
+    return <div className="ui-page-header__container">
+        <div className="ui-page-header__header-container">
+            <h2 className="ui-page-header">{children}</h2>
         </div>
-        <div className="page-header__controls-container">
+        <div className="ui-page-header__controls-container">
             {controls && controls}
         </div>
     </div>;

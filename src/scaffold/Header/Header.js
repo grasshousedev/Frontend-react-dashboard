@@ -5,7 +5,6 @@ import { Link, withRouter } from "react-router-dom";
 
 import { DashboardMenu } from 'components/dashboard-menu/DashboardMenu';
 import { DashboardItem } from 'components/dashboard-menu/DashboardItem';
-import './header.scss';
 
 import { Login } from 'components/authentication/Login';
 import { withAuthentication } from 'libs/authentication/storeConnection';
@@ -43,21 +42,21 @@ class Applications extends DashboardItem {
     render() {
         const { query } = this.props;
 
-        return <div className="applications-container">
+        return <div className="ui-tiles__container ui-tiles">
             {this.applications.map(application => {
                 if (hasTag(application.tags, query)) {
-                    return <span                        
-                        className="applications__application"
+                    return <div                        
+                        className="ui-tiles__tile"
                         key={application.name}
                         onClick={() => this.navigate(application.link)}
                     >
-                        <div className="applications__application__icon">
+                        <div className="ui-tiles__tile__icon">
                             {application.icon}
                         </div>
-                        <div className="applications__application__name">
+                        <div className="ui-tiles__tile__label">
                             {application.name}
                         </div>
-                    </span>;
+                    </div>;
                 }
                 return <Fragment key={application.name} />;
             })}
@@ -78,7 +77,7 @@ class User extends DashboardItem {
     render() {
         const { authentication } = this.props;
 
-        return <div className="dashboard-ui__page-body__container">
+        return <div className="ui-page-body">
             {authentication.loggedIn && <h2>Hello {authentication.user.first_name}, welcome!</h2>}
             {!authentication.loggedIn && <h2>Login</h2>}
             <Login />
@@ -96,7 +95,7 @@ class Header extends Component {
         const { authentication } = this.props;
 
         const userLabel = authentication.user ? `Welcome ${authentication.user.first_name}!` : 'Login';
-        return <header className="dashboard-header">
+        return <header className="ui-dashboard-header">
             <DashboardMenu
                 left={[
                     { headerLabel: 'Applications', bodyItem: ApplicationsRouter, name: 'applications' },
