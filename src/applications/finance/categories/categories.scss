@@ -11,6 +11,14 @@
         }
     }
 
+    .ui-card__side__icon {
+        cursor: pointer;
+    }
+
+    .ui-card__description {
+        margin-bottom: 0;
+    }
+
     .ui-card__controls {
         display: none;
     }
@@ -21,7 +29,40 @@
     }
 }
 
+.finance__categories__tiles__total__container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.finance__categories__tiles__total {
+    margin-top: 0.5rem;
+    font-size: 1.8rem;
+    width: 100px;
+    text-align: right;
+    border-bottom: 1px dotted;
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+
+.finance__categories__tiles__total--positive {
+    color: $teal;
+    border-color: $teal-light;
+}
+
+.finance__categories__tiles__total--negative {
+    color: $red;
+    border-color: $red-light;
+}
+
+.finance__categories__tiles__total__icon--positive {
+    color: $teal;
+}
+
+.finance__categories__tiles__total__icon--negative {
+    color: $red;
+}
+
 .finance__money-movement__amount-cell {
     text-align: right;
-    padding-right: 10px;
 }

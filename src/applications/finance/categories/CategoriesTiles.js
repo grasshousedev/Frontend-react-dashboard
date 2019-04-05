@@ -14,7 +14,11 @@ export function CategoriesTiles({ categoriesTree }) {
             const color = category.attributes_ui.color || undefined;
             const subcategories = treeNode.children.length > 0
                 ? <CategorySubcategories treeNode={treeNode} />
-                : "No subcategories";            
+                : <div>No subcategories</div>;     
+            const description = <Fragment>
+                {subcategories}
+                <CategoryTotal category={category} />
+            </Fragment>;
             const controls = <Fragment>
                 <Link to={`${FINANCE_BASE_URL}/categories/${category.id}`} className="ui-card__control">View details</Link>
                 <Link to={`${FINANCE_BASE_URL}/categories/${category.id}/edit`} className="ui-button ui-button--primary">Edit</Link>
@@ -25,7 +29,7 @@ export function CategoriesTiles({ categoriesTree }) {
                     colors={color ? { side: color, icon: color } : {}}
                     title={<Link to={`${FINANCE_BASE_URL}/categories/${category.id}`}>{category.name}</Link>}
                     icon={<Link to={`${FINANCE_BASE_URL}/categories/${category.id}`}><i className={`fas fa-3x ${category.attributes_ui.icon || 'fa-tree'}`} /></Link>}
-                    description={subcategories}
+                    description={description}
                     controls={controls}
                 />
             </div>;
@@ -70,3 +74,21 @@ function CategoryTile({ category }) {
 CategoryTile.propTypes = {
     category: PropTypes.object,
 };
+
+function CategoryTotal({ category }) {
+    const total = category.user_data && category.user_data.totals && category.user_data.totals.total;
+    if (!total) return '';
+
+    const posNegClass = `finance__categories__tiles__total--${total > 0 ? 'positive' : 'negative'}`;
+    const posNegIcon = `finance__categories__tiles__total__icon--${total > 0 ? 'positive fa-arrow-up' : 'negative fa-arrow-down'}`;
+
+    return <div className="finance__categories__tiles__total__container">
+        <div className={`finance__categories__tiles__total ${posNegClass}`}>{total}</div>
+        <i className={`fas fa-2x ${posNegIcon}`} />
+    </div>;
+}
+
+CategoryTotal.propTypes = {
+    category: PropTypes.object,
+};
+
