@@ -270,4 +270,5 @@ Grid.defaultProps = {
     },
     expandableRow: true,
     renderer: 'jsx',
+    customCellClass: {},
 };
