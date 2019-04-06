@@ -10,6 +10,15 @@ export const SET_CATEGORY = 'SET_CATEGORY';
 // Remove a single category
 export const DELETE_CATEGORY = 'DELETE_CATEGORY';
 
+// Set a list of contexts
+export const SET_CONTEXTS = 'SET_CONTEXTS';
+
+// Set a single context
+export const SET_CONTEXT = 'SET_CONTEXT';
+
+// Remove a single context
+export const DELETE_CONTEXT = 'DELETE_CONTEXT';
+
 // Set a list of money movements
 export const SET_MONEY_MOVEMENTS = 'SET_MONEY_MOVEMENTS';
 
