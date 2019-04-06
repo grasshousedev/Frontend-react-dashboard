@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import hljs from 'highlight.js/lib/highlight';
 import 'highlight.js/styles/hopscotch.css';
@@ -9,7 +9,10 @@ export class CodeHighlight extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { loaded: false };
+        this.state = {
+            loaded: false,
+            visible: props.toggle && props.toggle.initial === true,
+        };
         this.codeNode = React.createRef();
     }
 
@@ -42,23 +45,38 @@ export class CodeHighlight extends Component {
     }
 
     render() {
-        const { language, children } = this.props;
-        const { loaded } = this.state;
+        const { language, children, toggle } = this.props;
+        const { loaded, visible } = this.state;
         if (!loaded) return '';
 
-        return <pre>
-            <code
-                style={{ overflow: 'auto' }}
-                ref={this.codeNode} className={language}
-            >{children}</code>
-        </pre>;
+        const showCode = !toggle || visible;
+        const toggleStyle = { marginBottom: '0.5rem', cursor: 'pointer' };
+        return <Fragment>
+            {toggle &&
+                <div onClick={() => this.setState({ visible: !visible })} style={toggleStyle}>
+                    {visible ? 'Hide code' : 'View code'}
+                </div>
+            }
+            {showCode &&
+                <pre>
+                    <code
+                        style={{ overflow: 'auto' }}
+                        ref={this.codeNode} className={language}
+                    >{children}</code>
+                </pre>
+            }
+        </Fragment>;
     }
 }
 
 CodeHighlight.propTypes = {
     children: PropTypes.node.isRequired,
     language: PropTypes.string,
+    toggle: PropTypes.shape({
+        initial: PropTypes.bool,
+    }),
 };
+
 CodeHighlight.defaultProps = {
-    language: 'javascript',
+    language: 'javascript',    
 };
