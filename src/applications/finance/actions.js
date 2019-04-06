@@ -19,3 +19,6 @@ export const SET_MONEY_MOVEMENT = 'SET_MONEY_MOVEMENT';
 // Remove a single money movement
 export const DELETE_MONEY_MOVEMENT = 'DELETE_MONEY_MOVEMENT';
 
+// Set a list of users
+export const SET_USERS = 'SET_USERS';
+

@@ -8,6 +8,7 @@ const INITIAL_STATE = {
     categories: {},
     categoriesTree: [],
     moneyMovements: {},
+    users: {},
 };
 
 const finance = (currentState, action) => {
@@ -46,6 +47,9 @@ const finance = (currentState, action) => {
             moneyMovements = { ...state.moneyMovements };
             if (moneyMovements.hasOwnProperty(action.id)) delete moneyMovements[action.id];
             return { ...state, moneyMovements };
+        case actions.SET_USERS:
+            const users = listToObject(action.data, 'id');
+            return { ...state, users };
         default:
             return state;
     }
