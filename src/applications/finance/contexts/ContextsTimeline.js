@@ -39,6 +39,9 @@ function Content({ context, moneyMovements }) {
                     <i className="fas fa-calendar-alt neutral-light-d2" /> {dateToUI(context.start_date)}
                     {context.end_date && context.end_date !== context.start_date ? ` to ${dateToUI(context.end_date)}` : ''}
                 </div>
+                <div className="ui-text">
+                    {context.description}
+                </div>
             </div>
             <div className="col-xs-12 col-sm-6" style={{ textAlign: 'center' }}>
                 <div className="finance__context__timeline__total__container">
@@ -46,11 +49,6 @@ function Content({ context, moneyMovements }) {
                         {context.user_data.totals.total}
                     </div>
                 </div>
-            </div>
-        </div>
-        <div className="row">
-            <div className="col-xs-12">
-                {context.description}
             </div>
         </div>
         <div className="row">
