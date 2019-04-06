@@ -50,6 +50,10 @@ export class MoneyMovementEntity extends BaseEntity {
     getByCategory(categoryId, moneyMovementsList) {
         return moneyMovementsList.filter(mm => mm.category === categoryId);
     }
+
+    getByContext(contextId, moneyMovementsList) {
+        return moneyMovementsList.filter(mm => mm.context === contextId);
+    }
 }
 
 export const moneyMovementsEntity = new MoneyMovementEntity();
