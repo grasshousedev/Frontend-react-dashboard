@@ -13,7 +13,12 @@ function Categories({ finance }) {
     const controls = <Controls />;
 
     return <div>
-        <PageHeader controls={controls}>Categories</PageHeader>
+        <PageHeader controls={controls}>
+            <Link to={`${FINANCE_BASE_URL}`}
+                className={`ui-page-header ui-page-header__breadcrumb`}
+            >Finance</Link>
+            Categories
+        </PageHeader>
         <div  className="ui-page-body">                        
             <CategoriesTiles categoriesTree={categoriesTree} />
         </div>

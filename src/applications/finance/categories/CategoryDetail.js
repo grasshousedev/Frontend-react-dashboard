@@ -52,7 +52,10 @@ function CategoryDetail({ match, finance }) {
 
     return <div>
         <PageHeader controls={controls}>
-            <Link to={`${FINANCE_BASE_URL}/categories/`}
+            <Link to={`${FINANCE_BASE_URL}`}
+                className={`ui-page-header ui-page-header__breadcrumb`}
+            >Finance</Link>
+            <Link to={`${FINANCE_BASE_URL}/categories`}
                 className={`ui-page-header ui-page-header__breadcrumb`}
             >Categories</Link>
             {category.full_name}
