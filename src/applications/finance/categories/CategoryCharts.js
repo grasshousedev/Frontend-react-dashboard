@@ -32,7 +32,12 @@ export function CategoryLineChart({ category, moneyMovements, chartStyle }) {
                         ticks: {
                             autoSkip: false,
                             maxRotation: 90,
-                            minRotation: 0
+                            minRotation: 0,
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
                         }
                     }]
                 },
