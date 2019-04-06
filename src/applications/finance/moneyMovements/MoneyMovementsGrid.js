@@ -2,20 +2,14 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import { Grid } from 'components/grid/Grid';
-import { FullSectionLoader } from 'components/ui/Loader';
 import { ModalTrigger } from 'components/ui/Modal';
 import { MoneyMovementDetail } from './MoneyMovementDetail';
 
 export function MoneyMovementsGrid({ moneyMovements }) {
-
-    if (moneyMovements === null) {
-        return <FullSectionLoader />;
-    }
-
     const mmColumns = ['movement_icon', 'amount', 'movement_date', 'description', 'tags', 'id', 'actions'];
     const mmColumnsLabel = { movement_icon: '', amount: 'Amount', movement_date: 'Date', description: 'Description', tags: 'Tags', id: 'ID', actions: '' };
     const mmColumnsWidth = { movement_icon: 20, amount: 70, movement_date: 80, description: 350, tags: 200, id: 20, actions: 30 };
-    const mmRows = Object.values(moneyMovements)
+    const mmRows = moneyMovements
         .sort((mm1, mm2) => mm1.movement_date > mm2.movement_date ? -1 : 1)
         .map(mm => ({
             ...mm,
