@@ -21,7 +21,7 @@ const finance = (currentState, action) => {
     switch (action.type) {
         case actions.INITIALIZE:
             return { ...state, initialized: true };
-            
+
         case actions.SET_CATEGORIES:
             categories = listToObject(action.data, 'id');
             return {
@@ -45,7 +45,7 @@ const finance = (currentState, action) => {
         case actions.SET_CONTEXT:
             const context = action.data;
             contexts = { ...state.contexts };
-            contexts[context.id] = contexts;
+            contexts[context.id] = context;
             return { ...state, contexts };
         case actions.DELETE_CONTEXT:
             contexts = { ...state.contexts };
