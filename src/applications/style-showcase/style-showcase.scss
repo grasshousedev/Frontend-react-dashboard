@@ -1,0 +1,14 @@
+@import '~@vzamboni/dashboard-ui-style/vars/colors';
+
+.style-showcase__modals__custom-wrapper {
+    
+    background-color: rgba(0, 200, 200, 0.3);  
+
+    .ui-modal__container {
+        border: 5px solid $primary;
+    }
+
+    .ui-modal__title {
+        color: $pink;
+    }
+}

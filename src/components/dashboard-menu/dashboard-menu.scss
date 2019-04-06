@@ -1,4 +1,5 @@
 @import '~@vzamboni/dashboard-ui-style/vars/colors';
+@import '~@vzamboni/dashboard-ui-style/mixins/icons';
 
 /* General variables */
 $dashboard-menu-height: 46px;
@@ -188,18 +189,7 @@ This is the element that contains the entire menu, both header and body
 }
 
 .dashboard-menu__body-controls__control {
-    margin: 3px 0 3px 3px;
-    cursor: pointer;
-    color: $grey-light-d1;
-    padding: 8px 11px;
-    border: 1px solid transparent;
-    border-radius: 18px;
-
-    &:hover {
-        color: $grey-l2;
-        background-color: $grey-light-l1;
-        border: 1px solid $grey-light-l1;
-    }
+    @include icon-control;
 }
 
 .dashboard-menu__body__column {

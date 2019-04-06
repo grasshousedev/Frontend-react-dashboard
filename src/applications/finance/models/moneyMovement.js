@@ -51,3 +51,5 @@ export class MoneyMovementEntity extends BaseEntity {
         return moneyMovementsList.filter(mm => mm.category === categoryId);
     }
 }
+
+export const moneyMovementsEntity = new MoneyMovementEntity();
