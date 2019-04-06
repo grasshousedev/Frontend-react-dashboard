@@ -35,6 +35,9 @@ function FinanceHome() {
             <div>
                 Click here to view all <Link to={'/apps/finance/categories'}>Categories</Link>
             </div>
+            <div>
+                Click here to view all <Link to={'/apps/finance/contexts'}>Contexts</Link>
+            </div>
         </div>
     </Fragment>;
 };

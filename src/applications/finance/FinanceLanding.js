@@ -7,10 +7,11 @@ import { FullSectionLoader } from 'components/ui/Loader';
 import './categories/categories.scss';
 
 import { FINANCE_BASE_URL } from './constants';
-import { CategoriesLanding } from './categories/CategoriesLanding';
 import { withFinance } from './storeConnection';
 import { preload } from './preload';
 import { FinanceHome } from './FinanceHome';
+import { CategoriesLanding } from './categories/CategoriesLanding';
+import { ContextsLanding } from './contexts/ContextsLanding';
 
 export { FINANCE_BASE_URL };
 
@@ -42,6 +43,7 @@ class FinanceLanding extends Component {
         return <Switch>
             <Route exact path={FINANCE_BASE_URL} component={FinanceHome} />
             <Route path={`${FINANCE_BASE_URL}/categories`} component={CategoriesLanding} />
+            <Route path={`${FINANCE_BASE_URL}/contexts`} component={ContextsLanding} />
         </Switch>;
     }
 }
