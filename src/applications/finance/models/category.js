@@ -44,3 +44,5 @@ export class CategoryEntity extends BaseEntity {
         return super.delete(id, { deleteAction: DELETE_CATEGORY });
     }
 }
+
+export const categoriesEntity = new CategoryEntity();
