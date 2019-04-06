@@ -6,9 +6,9 @@ import { ModalTrigger } from 'components/ui/Modal';
 import { MoneyMovementDetail } from './MoneyMovementDetail';
 
 export function MoneyMovementsGrid({ moneyMovements }) {
-    const mmColumns = ['movement_icon', 'amount', 'movement_date', 'description', 'tags', 'id', 'actions'];
-    const mmColumnsLabel = { movement_icon: '', amount: 'Amount', movement_date: 'Date', description: 'Description', tags: 'Tags', id: 'ID', actions: '' };
-    const mmColumnsWidth = { movement_icon: 20, amount: 70, movement_date: 80, description: 350, tags: 200, id: 20, actions: 30 };
+    const mmColumns = ['actions', 'movement_icon', 'amount', 'movement_date', 'description', 'tags', 'id'];
+    const mmColumnsLabel = { actions: '', movement_icon: '', amount: 'Amount', movement_date: 'Date', description: 'Description', tags: 'Tags', id: 'ID' };
+    const mmColumnsWidth = { actions: 30, movement_icon: 20, amount: 60, movement_date: 80, description: 300, tags: 200, id: 20 };
     const mmRows = moneyMovements
         .sort((mm1, mm2) => mm1.movement_date > mm2.movement_date ? -1 : 1)
         .map(mm => ({

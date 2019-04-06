@@ -1,0 +1,16 @@
+@import '~@vzamboni/dashboard-ui-style/vars/colors';
+@import '~@vzamboni/dashboard-ui-style/vars/fonts';
+
+.finance__context__timeline__total__container {
+    border-radius: 64px;
+    color: white;
+    background-color: $primary;
+    display: inline-block;
+    padding: 35px 18px;    
+}
+
+.finance__context__timeline__total {
+    width: 60px;
+    font-size: $text-big;
+    text-align: center;
+}

@@ -5,6 +5,7 @@ import { Route, Switch, withRouter } from "react-router-dom";
 import { FullSectionLoader } from 'components/ui/Loader';
 
 import './categories/categories.scss';
+import './contexts/contexts.scss';
 
 import { FINANCE_BASE_URL } from './constants';
 import { withFinance } from './storeConnection';

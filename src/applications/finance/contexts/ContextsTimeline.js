@@ -35,13 +35,17 @@ function Content({ context, moneyMovements }) {
         <h3 style={titleStyle} className="ui-title--top">{context.name}</h3>
         <div className="row">
             <div className="col-sm-12 col-md-6">
-                <div className="neutral-l1" >
-                    <i className="fas fa-calendar-alt neutral-l2" /> {dateToUI(context.start_date)}
+                <div className="neutral-light-d2" >
+                    <i className="fas fa-calendar-alt neutral-light-d2" /> {dateToUI(context.start_date)}
                     {context.end_date && context.end_date !== context.start_date ? ` to ${dateToUI(context.end_date)}` : ''}
                 </div>
             </div>
-            <div className="col-xs-12 col-sm-6">
-                <h2 className="ui-title--top">{context.user_data.totals.total}</h2>
+            <div className="col-xs-12 col-sm-6" style={{ textAlign: 'center' }}>
+                <div className="finance__context__timeline__total__container">
+                    <div className="finance__context__timeline__total">
+                        {context.user_data.totals.total}
+                    </div>
+                </div>
             </div>
         </div>
         <div className="row">
@@ -51,9 +55,9 @@ function Content({ context, moneyMovements }) {
         </div>
         <div className="row">
             <div className="col-xs-12">
-                {!viewDetails && <h4 onClick={() => setViewDetails(true)}>View details</h4>}
+                {!viewDetails && <h4 onClick={() => setViewDetails(true)} className="cursor-pointer">View movements</h4>}
                 {viewDetails && <Fragment>
-                    <h4 onClick={() => setViewDetails(false)}>Hide details</h4>
+                    <h4 onClick={() => setViewDetails(false)} className="cursor-pointer">Hide movements</h4>
                     <MoneyMovementsGrid moneyMovements={Object.values(moneyMovements)} />
                 </Fragment>}                
             </div>
