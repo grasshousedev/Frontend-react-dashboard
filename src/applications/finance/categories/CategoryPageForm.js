@@ -45,7 +45,10 @@ function CategoryPageForm({ match, history, finance }) {
                 });
             };
 
-            const controls = <Controls isSubmitting={isSubmitting} deleteCategory={deleteCategory} />;
+            const controls = <Controls
+                isSubmitting={isSubmitting}
+                deleteCategory={initialCategory.id ? deleteCategory : null}
+            />;
             return <form onSubmit={handleSubmit}>  
                 <PageHeader controls={controls}>
                     <Link to={`${FINANCE_BASE_URL}/categories/`}
@@ -74,11 +77,13 @@ export { connectedCategoryPageForm as CategoryPageForm };
 function Controls({ isSubmitting, deleteCategory }) {
     const baseClass = 'ui-button ui-button--small';
     return <Fragment>
-        <button
-            disabled={isSubmitting ? true : false}
-            onClick={() => deleteCategory()}
-            className={`${baseClass} ui-button--negative`}
-        >Delete</button>
+        {deleteCategory &&
+            <button
+                disabled={isSubmitting ? true : false}
+                onClick={() => deleteCategory()}
+                className={`${baseClass} ui-button--negative`}
+            >Delete</button>
+        }
         <Link
             to={`${FINANCE_BASE_URL}/categories`}
             className={`${baseClass}`}
