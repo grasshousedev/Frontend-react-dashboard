@@ -32,7 +32,7 @@ Categories.propTypes = {
 const connectedCategories = withRouter(withFinance(Categories));
 export { connectedCategories as Categories };
 
-function Controls({ category }) {
+function Controls() {
     const baseClass = 'ui-button ui-button--small';
     return <Fragment>
         <Link
@@ -41,7 +41,3 @@ function Controls({ category }) {
         >Add Category</Link>
     </Fragment>;
 }
-
-Controls.propTypes = {
-    category: PropTypes.object,
-};
