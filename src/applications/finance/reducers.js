@@ -6,6 +6,7 @@ import { createCategoriesTree } from './categories/categoriesDataUtils';
 const INITIAL_STATE = {
     initialized: false,
     categories: {},
+    contexts: {},
     categoriesTree: [],
     moneyMovements: {},
     users: {},
@@ -20,6 +21,7 @@ const finance = (currentState, action) => {
     switch (action.type) {
         case actions.INITIALIZE:
             return { ...state, initialized: true };
+            
         case actions.SET_CATEGORIES:
             categories = listToObject(action.data, 'id');
             return {
@@ -36,6 +38,7 @@ const finance = (currentState, action) => {
             categories = { ...state.categories };
             if (categories.hasOwnProperty(action.id)) delete categories[action.id];
             return { ...state, categories, categoriesTree: createCategoriesTree(categories) };
+
         case actions.SET_CONTEXTS:
             contexts = listToObject(action.data, 'id');
             return { ...state, contexts };
@@ -48,6 +51,7 @@ const finance = (currentState, action) => {
             contexts = { ...state.contexts };
             if (contexts.hasOwnProperty(action.id)) delete contexts[action.id];
             return { ...state, contexts };
+
         case actions.SET_MONEY_MOVEMENTS:
             moneyMovements = listToObject(action.data, 'id');
             return { ...state, moneyMovements };
@@ -60,6 +64,7 @@ const finance = (currentState, action) => {
             moneyMovements = { ...state.moneyMovements };
             if (moneyMovements.hasOwnProperty(action.id)) delete moneyMovements[action.id];
             return { ...state, moneyMovements };
+
         case actions.SET_USERS:
             const users = listToObject(action.data, 'id');
             return { ...state, users };
