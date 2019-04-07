@@ -4,6 +4,7 @@ import { categoriesEntity } from './models/category';
 import { contextsEntity } from './models/context';
 import { moneyMovementsEntity } from './models/moneyMovement';
 import { usersEntity } from './models/user';
+import { INITIALIZE } from './actions';
 
 export function preload() {
     return new Promise(resolve => {
@@ -18,6 +19,7 @@ export function preload() {
 
         Promise.all(preloadPromises).then(() => {
             store.dispatch({ type: SET_APPLICATION_LOADING, loading: false });
+            store.dispatch({ type: INITIALIZE });
             resolve();
         });
     });
