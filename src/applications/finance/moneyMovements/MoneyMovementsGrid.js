@@ -1,10 +1,12 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import { Grid } from 'components/grid/Grid';
 import { ModalTrigger } from 'components/ui/Modal';
 import { MoneyMovementDetail } from './MoneyMovementDetail';
 import { withFinance } from '../storeConnection';
+import { FINANCE_BASE_URL } from '../constants';
 
 function MoneyMovementsGrid({ moneyMovements, finance }) {
     const mmColumns = ['actions', 'movement_icon', 'amount', 'movement_date', 'category', 'description', 'tags', 'id'];
@@ -14,7 +16,7 @@ function MoneyMovementsGrid({ moneyMovements, finance }) {
         .sort((mm1, mm2) => mm1.movement_date > mm2.movement_date ? -1 : 1)
         .map(mm => ({
             ...mm,
-            category: finance.categories[mm.category].full_name,
+            category: <Link to={`${FINANCE_BASE_URL}/categories/${mm.category}`}>{finance.categories[mm.category].full_name}</Link>,
             movement_icon: mm.movement === '-' ? <i className="fas fa-arrow-down red" /> : <i className="fas fa-arrow-up teal" />,
             actions: <Fragment>
                 <ModalTrigger 
