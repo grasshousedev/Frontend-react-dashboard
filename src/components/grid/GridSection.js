@@ -40,7 +40,9 @@ export class GridSection extends Component {
 
         const cols = columns.map(column => {
             const width = this.getColumnWidth(column);
-            return `<div class="grid__cell" style="width: ${width}px">${columnsLabel && columnsLabel.hasOwnProperty(column) ? columnsLabel[column] : column}</div>`;
+            const name = columnsLabel && columnsLabel.hasOwnProperty(column)
+                ? columnsLabel[column] : getColumnName(column);
+            return `<div class="grid__cell" style="width: ${width}px">${name}</div>`;
         }).join('');
 
         if (section === 'main') return `${this.getRowSpacer('left')}${cols}${this.getRowSpacer('right')}`;
@@ -261,6 +263,10 @@ GridSection.defaultProps = {
     columnsWidth: {},
     height: 500,
 };
+
+function getColumnName(column) {
+    return column.toLowerCase().replace(/\b[a-z]/g, letter => letter.toUpperCase());
+}
 
 function getColumnValue(rawValue, renderer) {
     if (renderer === 'jsx') return rawValue;

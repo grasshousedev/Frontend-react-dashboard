@@ -10,7 +10,7 @@ import { FINANCE_BASE_URL } from '../constants';
 
 function MoneyMovementsGrid({ moneyMovements, finance }) {
     const mmColumns = ['actions', 'movement_icon', 'amount', 'movement_date', 'category', 'description', 'tags', 'id'];
-    const mmColumnsLabel = { actions: '', movement_icon: '', amount: 'Amount', movement_date: 'Date', category: 'Category', description: 'Description', tags: 'Tags', id: 'ID' };
+    const mmColumnsLabel = { actions: '', movement_icon: '', movement_date: 'Date' };
     const mmColumnsWidth = { actions: 30, movement_icon: 20, amount: 60, movement_date: 80, category: 180, description: 300, tags: 200, id: 20 };
     const mmRows = moneyMovements
         .sort((mm1, mm2) => mm1.movement_date > mm2.movement_date ? -1 : 1)
