@@ -19,9 +19,7 @@ function FinanceHome() {
     });
 
     useEffect(() => {
-        setTimeout(() => {
-            setHomeState({ ...homeState, loading: false });
-        }, 500);
+        setHomeState({ ...homeState, loading: false });
     }, []);
 
     const { loading } = homeState;
@@ -37,6 +35,9 @@ function FinanceHome() {
             </div>
             <div>
                 Click here to view all <Link to={'/apps/finance/contexts'}>Contexts</Link>
+            </div>
+            <div>
+                Click here to view all <Link to={'/apps/finance/money-movements'}>Money Movements</Link>
             </div>
         </div>
     </Fragment>;
