@@ -36,6 +36,10 @@ export class CategoryEntity extends BaseEntity {
         });
     }    
 
+    get (id) {
+        return super.get(id, { autoGet: true, actionSingleSet: SET_CATEGORY });
+    }
+
     save (entry) {
         return super.save(entry, { autoGet: true, actionSingleSet: SET_CATEGORY });
     }
