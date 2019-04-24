@@ -9,6 +9,7 @@ const INITIAL_STATE = {
     contexts: {},
     categoriesTree: [],
     moneyMovements: {},
+    tags: {},
     users: {},
 };
 
@@ -18,6 +19,7 @@ const finance = (currentState, action) => {
     let categories;
     let contexts;
     let moneyMovements;
+    let tags;
     switch (action.type) {
         case actions.INITIALIZE:
             return { ...state, initialized: true };
@@ -64,6 +66,18 @@ const finance = (currentState, action) => {
             moneyMovements = { ...state.moneyMovements };
             if (moneyMovements.hasOwnProperty(action.id)) delete moneyMovements[action.id];
             return { ...state, moneyMovements };
+
+        case actions.SET_TAGS:
+            return { ...state, tags: listToObject(action.data, 'id') };
+        case actions.SET_TAG:
+            const tag = action.data;
+            tags = { ...state.tags };
+            tags[tag.id] = tag;
+            return { ...state, tags };
+        case actions.DELETE_TAG:
+            tags = { ...state.tags };
+            if (tags.hasOwnProperty(action.id)) delete tags[action.id];
+            return { ...state, tags };
 
         case actions.SET_USERS:
             const users = listToObject(action.data, 'id');

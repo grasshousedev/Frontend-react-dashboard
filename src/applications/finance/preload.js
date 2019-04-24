@@ -3,6 +3,7 @@ import { SET_APPLICATION_LOADING } from 'store/actions';
 import { categoriesEntity } from './models/category';
 import { contextsEntity } from './models/context';
 import { moneyMovementsEntity } from './models/moneyMovement';
+import { tagsEntity } from './models/tag';
 import { usersEntity } from './models/user';
 import { INITIALIZE } from './actions';
 
@@ -14,6 +15,7 @@ export function preload() {
             categoriesEntity.fetch(),
             contextsEntity.fetch(),
             moneyMovementsEntity.fetch(),
+            tagsEntity.fetch(),
             usersEntity.fetch(),
         ];
 
