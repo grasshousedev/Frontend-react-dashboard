@@ -11,7 +11,7 @@ import { FINANCE_BASE_URL } from '../constants';
 function MoneyMovementsGrid({ moneyMovements, finance }) {
     const mmColumns = ['actions', 'movement_icon', 'amount', 'movement_date', 'category', 'description', 'tags', 'id'];
     const mmColumnsLabel = { actions: '', movement_icon: '', movement_date: 'Date' };
-    const mmColumnsWidth = { actions: 30, movement_icon: 20, amount: 60, movement_date: 80, category: 180, description: 300, tags: 200, id: 20 };
+    const mmColumnsWidth = { actions: 30, movement_icon: 30, amount: 70, movement_date: 90, category: 180, description: 300, tags: 200, id: 30 };
     const mmRows = moneyMovements
         .sort((mm1, mm2) => mm1.movement_date > mm2.movement_date ? -1 : 1)
         .map(mm => ({
@@ -51,8 +51,9 @@ function MoneyMovementsGrid({ moneyMovements, finance }) {
         columnsWidth={mmColumnsWidth}
         columnsLabel={mmColumnsLabel}
         customCellClass={{ amount: 'finance__money-movement__amount-cell' }}
-        autoHeightRows={mmRows.length > 10 ? 10 : mmRows.length + 2}
+        autoHeightRows={mmRows.length > 10 ? null : mmRows.length + 2}
         height={null}
+        pinnedColumns={{ left: ['id'] }}
     />;
 }
 
