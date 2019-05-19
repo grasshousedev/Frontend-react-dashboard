@@ -19,7 +19,7 @@ export class GridSection extends Component {
         return calculateColumnWidth(column, { columnsWidth, sortableColumns });
     }
 
-    getRowSpacer(position) {
+    getRowSpacer(position, source = 'row') {
         const { calculatedWidths, scrollBarsSize, renderer } = this.props;
 
         if (!calculatedWidths[position]) return '';
@@ -27,7 +27,7 @@ export class GridSection extends Component {
         if (position === 'right') {
             width += scrollBarsSize.vertical;
         }
-        if (renderer === 'string') {
+        if (renderer === 'string' || source === 'header') {
             return `<div class="grid__cell" style="width: ${width}px"></div>`;
         }
         if (renderer === 'jsx') {
@@ -45,7 +45,7 @@ export class GridSection extends Component {
             return `<div class="grid__cell" style="width: ${width}px">${name}</div>`;
         }).join('');
 
-        if (section === 'main') return `${this.getRowSpacer('left')}${cols}${this.getRowSpacer('right')}`;
+        if (section === 'main') return `${this.getRowSpacer('left', 'header')}${cols}${this.getRowSpacer('right', 'header')}`;
         return `${cols}`;
     }
 
@@ -54,9 +54,14 @@ export class GridSection extends Component {
 
         const key = `table-${section}-header-col-${columnIndex}`;
         if (columnIndex > 0) {
-            return <div key={key} className="grid__cell_container" style={{ width: `${scrollBarsSize.vertical}px` }} />;
+            return <div key={key}
+                className="grid__cell_container"
+                style={{ width: `${scrollBarsSize.vertical}px` }}
+            />;
         }
-        return <div key={key} style={{ width: sectionFullWidth }} dangerouslySetInnerHTML={{ __html: this.generateHeaderString() }} className="grid__cell_container" />;
+        return <div key={key} style={{ width: sectionFullWidth }}
+            dangerouslySetInnerHTML={{ __html: this.generateHeaderString() }}
+            className="grid__cell_container" />;
     }
 
     getColumnProps = ({ row, rowIndex, column, height }) => {
@@ -93,7 +98,11 @@ export class GridSection extends Component {
 
         const cols = columns.map(column => {
             const columnProps = this.getColumnProps({ row, rowIndex, column, height });
-            return <div key={`row-${rowIndex}-col-${column}`} className={columnProps.classes} style={columnProps.style} title={columnProps.title}>{columnProps.value}</div>;
+            return <div key={`row-${rowIndex}-col-${column}`}
+                className={columnProps.classes}
+                style={columnProps.style}
+                title={columnProps.title}
+            >{columnProps.value}</div>;
         });
 
         if (section === 'main')

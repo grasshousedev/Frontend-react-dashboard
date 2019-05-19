@@ -25,6 +25,7 @@ $cell-padding: 8px 5px 5px 5px;
   overflow: hidden;
   white-space: nowrap;
   position: relative;
+  box-sizing: border-box;
 }
 
 .grid__section {
@@ -32,6 +33,7 @@ $cell-padding: 8px 5px 5px 5px;
   vertical-align: top;
   position: absolute;
   top: 0;
+  box-sizing: border-box;
 }
 .grid__section__left, .grid__section__main {
   left: 0;
@@ -45,6 +47,7 @@ $cell-padding: 8px 5px 5px 5px;
   background-color: $header-background-color;
   overflow: hidden !important; /* this has to override react-virtualized Grid */
   white-space: nowrap;
+  box-sizing: border-box;
 
   &:focus {
     outline: none;
@@ -55,6 +58,7 @@ $cell-padding: 8px 5px 5px 5px;
   overflow: auto;
   display: block;
   white-space: nowrap;
+  box-sizing: border-box;
 
   &:focus {
     outline: none;
@@ -78,6 +82,7 @@ $cell-padding: 8px 5px 5px 5px;
   color: $row-color;
   background-color: $row-background-color;
   border-bottom: 1px solid $row-background-color; /* Used to keep same height */
+  box-sizing: border-box;
 }
 
 .grid__row.grid__row--border {
@@ -98,6 +103,7 @@ $cell-padding: 8px 5px 5px 5px;
   /* spacing and size */
   font-size: $cell-font-size;
   padding: $cell-padding;
+  box-sizing: border-box;
   /* ellipsis */
   overflow: hidden;
   white-space: nowrap;

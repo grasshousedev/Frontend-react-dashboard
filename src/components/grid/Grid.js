@@ -22,6 +22,7 @@ export class Grid extends Component {
             expandedRows: {},
             scrollBarsSize: { horizontal: 0, vertical: 0 },
             outerContainerWidth: null,
+            outerContainerHeight: null,
         };
 
         this.outerContainer = React.createRef();
@@ -39,13 +40,10 @@ export class Grid extends Component {
         window.removeEventListener('resize', this.updateContainerSize);
     }
 
-    getOuterContainerWidth = () => {
-        return this.outerContainer.current.clientWidth;
-    }
-
     updateContainerSize = () => {
-        const outerContainerWidth = this.getOuterContainerWidth();
-        this.setState({ outerContainerWidth });
+        const outerContainerWidth = this.outerContainer.current.clientWidth;
+        const outerContainerHeight = this.outerContainer.current.clientHeight;
+        this.setState({ outerContainerWidth, outerContainerHeight });
     }
 
     componentDidUpdate(prevProps) {
@@ -61,11 +59,18 @@ export class Grid extends Component {
             };
         }
 
-        const outerContainerWidth = this.getOuterContainerWidth();
+        const outerContainerWidth = this.outerContainer.current.clientWidth;
         if (this.outerContainerWidth !== outerContainerWidth) {
             this.outerContainerWidth = outerContainerWidth;
             newState = newState || {};
             newState.outerContainerWidth = outerContainerWidth;
+        }
+
+        const outerContainerHeight = this.outerContainer.current.clientHeight;
+        if (this.outerContainerHeight !== outerContainerHeight) {
+            this.outerContainerHeight = outerContainerHeight;
+            newState = newState || {};
+            newState.outerContainerHeight = outerContainerHeight;
         }
 
         if (newState) {
@@ -136,11 +141,15 @@ export class Grid extends Component {
         const { expandableRow } = this.props;
         const { styles, customCellClass, renderer } = this.props;
 
-        const { scrollBarsSize, expandedRows, outerContainerWidth } = this.state;
+        const { scrollBarsSize, expandedRows, outerContainerWidth, outerContainerHeight } = this.state;
+
+        let containerMaxHeight = this.outerContainer && this.outerContainer.current && outerContainerHeight
+            ? outerContainerHeight
+            : height ? height : 100;        
 
         const gridHeight = autoHeightRows
             ? Math.max(DEFAULTS.getDefaultCellHeight() * Math.min(rows.length + 1, autoHeightRows + 1), height)
-            : height;
+            : height ? height : containerMaxHeight;
 
         let containerMaxWidth = this.outerContainer && this.outerContainer.current && outerContainerWidth
             ? outerContainerWidth
@@ -148,11 +157,11 @@ export class Grid extends Component {
 
         const generatedColumns = this.generateColumns();
         const calculatedWidths = this.calculateWidths(generatedColumns);
-        const totalWidth = calculatedWidths.left + calculatedWidths.main + calculatedWidths.right + scrollBarsSize.vertical * 2;
+        const totalWidth = calculatedWidths.left + calculatedWidths.main + calculatedWidths.right + scrollBarsSize.vertical;
 
         const containerWidth = width ? Math.min(width, containerMaxWidth, totalWidth) : Math.min(containerMaxWidth, totalWidth);    
 
-        return <div ref={this.outerContainer}>
+        return <div ref={this.outerContainer} style={{ height: '100%' }}>
             <ScrollSync>
                 {({ onScroll, scrollTop }) => {
                     const theme = styles.theme ? `grid__${styles.theme}` : '';
