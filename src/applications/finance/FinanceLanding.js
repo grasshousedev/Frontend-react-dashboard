@@ -13,6 +13,7 @@ import { preload } from './preload';
 import { FinanceHome } from './FinanceHome';
 import { CategoriesLanding } from './categories/CategoriesLanding';
 import { ContextsLanding } from './contexts/ContextsLanding';
+import { MoneyMovementsLanding } from './moneyMovements/MoneyMovementsLanding';
 
 export { FINANCE_BASE_URL };
 
@@ -45,6 +46,7 @@ class FinanceLanding extends Component {
             <Route exact path={FINANCE_BASE_URL} component={FinanceHome} />
             <Route path={`${FINANCE_BASE_URL}/categories`} component={CategoriesLanding} />
             <Route path={`${FINANCE_BASE_URL}/contexts`} component={ContextsLanding} />
+            <Route path={`${FINANCE_BASE_URL}/money-movements`} component={MoneyMovementsLanding} />
         </Switch>;
     }
 }

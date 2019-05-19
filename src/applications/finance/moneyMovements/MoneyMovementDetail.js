@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
 import { CodeHighlight } from 'components/style/CodeHighlight';
 
 import { withFinance } from '../storeConnection';
+import { FINANCE_BASE_URL } from '../constants';
 
 function MoneyMovementDetail({ moneyMovement, finance }) {
     const category = finance.categories[moneyMovement.category];
@@ -10,7 +13,7 @@ function MoneyMovementDetail({ moneyMovement, finance }) {
 
     const categoryStyle = category.attributes_ui.color
         ? { border: `2px solid ${category.attributes_ui.color}`, borderRadius: 0 } : {};
-    const contextStyle = context.attributes_ui.color
+    const contextStyle = context && context.attributes_ui.color
         ? { border: `2px solid ${context.attributes_ui.color}`, borderRadius: 0 } : {};
 
     return <div>
@@ -33,7 +36,9 @@ function MoneyMovementDetail({ moneyMovement, finance }) {
                 <div className="ui-form__field">
                     <label className="ui-form__label w-100">Category</label>
                     <div className="ui-form__field-input">
-                        <label className="ui-tag" style={categoryStyle}>{category.name}</label>
+                        <Link to={`${FINANCE_BASE_URL}/categories/${category.id}`}>
+                            <label className="ui-tag" style={categoryStyle}>{category.name}</label>
+                        </Link>
                     </div>                        
                 </div>
             </div>
@@ -91,3 +96,4 @@ MoneyMovementDetail.propTypes = {
 
 const connectedMoneyMovementDetail = withFinance(MoneyMovementDetail);
 export { connectedMoneyMovementDetail as MoneyMovementDetail };
+

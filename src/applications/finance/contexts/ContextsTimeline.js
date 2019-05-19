@@ -1,10 +1,11 @@
-import React, { Fragment, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import { dateToUI } from 'utils/dates';
 import { Timeline } from 'components/ui/Timeline';
 import { CodeHighlight } from 'components/style/CodeHighlight';
-import { MoneyMovementsGrid } from '../moneyMovements/MoneyMovementsGrid';
+import { FINANCE_BASE_URL } from '../constants';
 
 export function ContextsTimeline({ contexts, moneyMovements }) {
     const contextsList = Object.values(contexts)
@@ -27,12 +28,12 @@ ContextsTimeline.propTypes = {
 
 
 function Content({ context, moneyMovements }) {
-    const [viewDetails, setViewDetails] = useState(false);
-
     const titleStyle = context.attributes_ui.color ? { color: context.attributes_ui.color } : {};    
 
     return <div className="ui-text__padded">
-        <h3 style={titleStyle} className="ui-title--top">{context.name}</h3>
+        <Link to={`${FINANCE_BASE_URL}/contexts/${context.id}`}> 
+            <h3 style={titleStyle} className="ui-title--top">{context.name}</h3>
+        </Link>
         <div className="row">
             <div className="col-sm-12 col-md-6">
                 <div className="neutral-light-d2" >
@@ -49,15 +50,6 @@ function Content({ context, moneyMovements }) {
                         {context.user_data.totals.total}
                     </div>
                 </div>
-            </div>
-        </div>
-        <div className="row">
-            <div className="col-xs-12">
-                {!viewDetails && <h4 onClick={() => setViewDetails(true)} className="cursor-pointer">View movements</h4>}
-                {viewDetails && <Fragment>
-                    <h4 onClick={() => setViewDetails(false)} className="cursor-pointer">Hide movements</h4>
-                    <MoneyMovementsGrid moneyMovements={Object.values(moneyMovements)} />
-                </Fragment>}                
             </div>
         </div>
         <CodeHighlight toggle={{ initial: false }}>{JSON.stringify(context, null, 4)}</CodeHighlight>

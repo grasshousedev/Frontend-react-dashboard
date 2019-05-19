@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 
 import { FullSectionLoader } from './Loader';
 
+// these should match the CSS ones
+const HEADER_HEIGHT = 55;
+const FOOTER_HEIGHT = 65; 
 
 export function ModalWindow({ title, content, footer, maximized, closeModal, setViewModalWindow, wrapperClass, startWidth, startHeight, hooks, canMaximize }) {
     const sizedModalContainerStyle = {};
@@ -53,6 +56,11 @@ export function ModalWindow({ title, content, footer, maximized, closeModal, set
         : 'ui-modal__container--default';
 
     const uiModalContentSizeClass = footer ? 'ui-modal__content--header--footer' : 'ui-modal__content--header';
+    const uiModalContentStyle = {};
+    if (startHeight && !modalState.isMaximized) {
+        // TODO: refactor startHeight to be a number as well
+        uiModalContentStyle.height = `${+startHeight.replace('px', '') - HEADER_HEIGHT - FOOTER_HEIGHT}px`;
+    }
 
     return createPortal(<Fragment>
         <div className={`ui-modal__wrapper ${wrapperClass}`}>
@@ -71,7 +79,7 @@ export function ModalWindow({ title, content, footer, maximized, closeModal, set
                         </Fragment>}
                     </div>
                 </div>
-                <div className={`ui-modal__content ${uiModalContentSizeClass}`}>
+                <div className={`ui-modal__content ${uiModalContentSizeClass}`} style={uiModalContentStyle}>
                     {modalState.isLoading && <FullSectionLoader />}
                     {!modalState.isLoading && content}
                 </div>

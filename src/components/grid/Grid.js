@@ -5,7 +5,7 @@ import { ScrollSync } from 'react-virtualized';
 import { DEFAULTS } from './constants';
 import { calculateColumnWidth, getScrollSize } from './utils';
 
-import { GridSection} from './GridSection';
+import { GridSection } from './GridSection';
 import './grid.scss';
 
 export class Grid extends Component {
