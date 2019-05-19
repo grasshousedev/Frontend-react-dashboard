@@ -11,7 +11,7 @@ function MoneyMovementForm({ values, setFieldValue, handleBlur, finance }) {
 
     const categories = Object.values(finance.categories).sort((c1, c2) => c1.full_name > c2.full_name ? 1 : -1);
     const contexts = Object.values(finance.contexts).sort((c1, c2) => c1.start_date > c2.start_date ? -1 : 1);
-    const tags = Object.values(finance.tags).map(t => t.name).sort().concat('test1', 'test2');
+    const tags = Object.values(finance.tags).map(t => t.name).sort();
     const users = Object.values(finance.users).sort((u1, u2) => u1.full_name > u2.full_name ? 1 : -1);
 
     const addNewUserRel = () => {
@@ -78,6 +78,7 @@ function MoneyMovementForm({ values, setFieldValue, handleBlur, finance }) {
                             className="ui-form-v__select"
                             onChange={e => setFieldValue('category', +e.target.value)}
                         >
+                            <option value=""></option>
                             {categories.map(category => {
                                 return <option value={category.id} key={category.id}>{category.full_name}</option>;
                             })}
@@ -164,7 +165,7 @@ function MoneyMovementForm({ values, setFieldValue, handleBlur, finance }) {
                                         />
                                     </td>
                                     <td>
-                                        <i className="fas fa-plus" onClick={addNewUserRel} />
+                                        <i className="fas fa-plus cursor-pointer" onClick={addNewUserRel} />
                                     </td>
                                 </tr>
                                 {values.users_relation.map((ur, index) => {
@@ -179,7 +180,7 @@ function MoneyMovementForm({ values, setFieldValue, handleBlur, finance }) {
                                             />
                                         </td>
                                         <td>
-                                            <i className="fas fa-plus" onClick={() => removeUserRel(index)} />
+                                            <i className="fas fa-minus cursor-pointer" onClick={() => removeUserRel(index)} />
                                         </td>                                
                                     </tr>;
                                 })}

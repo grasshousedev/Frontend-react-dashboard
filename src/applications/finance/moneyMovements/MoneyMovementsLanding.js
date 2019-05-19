@@ -11,6 +11,7 @@ function MoneyMovementsLanding() {
         <Route exact path={`${FINANCE_BASE_URL}/money-movements`} component={MoneyMovements} />
         <Route exact path={`${FINANCE_BASE_URL}/money-movements/add`} component={MoneyMovementFormPage} />
         <Route exact path={`${FINANCE_BASE_URL}/money-movements/:id`} component={MoneyMovementDetailPage} />
+        <Route exact path={`${FINANCE_BASE_URL}/money-movements/:id/edit`} component={MoneyMovementFormPage} />
     </Switch>;
 }
 

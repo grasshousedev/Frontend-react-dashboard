@@ -21,10 +21,24 @@ function MoneyMovementsGrid({ moneyMovements, finance }) {
             actions: <Fragment>
                 <ModalTrigger 
                     Trigger={({ setViewModalWindow }) => <i className="far fa-file-alt cursor-pointer" onClick={() => setViewModalWindow(true)} />}
-                    getModalWindowProps={() => {
+                    getModalWindowProps={({ setViewModalWindow }) => {
                         return {
                             title: 'Money Movement Detail',
-                            content: <MoneyMovementDetail moneyMovement={mm} />
+                            content: <MoneyMovementDetail moneyMovement={mm} />,
+                            footer: <Fragment>
+                                <div></div>
+                                <div> 
+                                    <Link
+                                        to={`${FINANCE_BASE_URL}/money-movements/${mm.id}/edit`}
+                                        className="ui-button ui-button--small"
+                                    >Edit</Link>
+                                    <button
+                                        className="ui-button ui-button--primary ui-button--small"
+                                        style={{ marginLeft: '1rem' }}
+                                        onClick={() => setViewModalWindow(false)}
+                                    >Close</button>
+                                </div>
+                            </Fragment>
                         };
                     }}
                 />

@@ -35,6 +35,8 @@ function MoneyMovementFormPage({ match, history, finance }) {
                         history.push(`${FINANCE_BASE_URL}/money-movements`);
                     });
                 });
+            }).catch(() => {
+                setSubmitting(false);
             });
         }}
     >
@@ -58,7 +60,7 @@ function MoneyMovementFormPage({ match, history, finance }) {
                     <Link to={`${FINANCE_BASE_URL}/money-movements`}
                         className={`ui-page-header ui-page-header__breadcrumb`}
                     >Contexts</Link>
-                    {moneyMovement.id ? `Edit ${moneyMovement.name}` : 'Add Money Movement'}
+                    {moneyMovement.id ? `Edit Money Movement` : 'Add Money Movement'}
                 </PageHeader>
                 <div className='ui-page-body ui-section'>
                     <MoneyMovementForm {...props} moneyMovement={moneyMovement} />
