@@ -160,11 +160,11 @@ This is the element that contains the entire menu, both header and body
     margin-bottom: 1px;
     margin-right: 10px;
     order: 2;
-    box-shadow: none;
 
     &:focus {
       outline: none;
       border-bottom: 2px solid $dashboard-menu-query-focus-border-color;
+      box-shadow: none;
 
       & ~ i.dashboard-menu__body-header__icon-search {
         color: $dashboard-menu-query-focus-border-color;
