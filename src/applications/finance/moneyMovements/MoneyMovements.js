@@ -40,6 +40,10 @@ function Controls() {
         <Link
             to={`${FINANCE_BASE_URL}/money-movements/add`}
             className={`${baseClass} ui-button--primary`}
-        >Add Money Movement</Link>
+        >Add Movement</Link>
+        <Link
+            to={`${FINANCE_BASE_URL}/money-movements/add/batch`}
+            className={`${baseClass} ui-button--primary`}
+        >Add Batch</Link>
     </Fragment>;
 }

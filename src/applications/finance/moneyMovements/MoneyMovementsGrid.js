@@ -52,8 +52,7 @@ function MoneyMovementsGrid({ moneyMovements, finance }) {
         columnsLabel={mmColumnsLabel}
         customCellClass={{ amount: 'finance__money-movement__amount-cell' }}
         autoHeightRows={mmRows.length > 10 ? null : mmRows.length + 2}
-        height={null}
-        pinnedColumns={{ left: ['id'] }}
+        height={null}        
     />;
 }
 
