@@ -6,14 +6,14 @@ import { Formik } from 'formik';
 import { PageHeader } from 'components/ui/PageHeader';
 import { CodeHighlight } from 'components/style/CodeHighlight';
 import { FINANCE_BASE_URL } from '../constants';
-import { withFinance } from '../storeConnection';
 import { moneyMovementsEntity, newMoneyMovement } from '../models/moneyMovement';
 import { getCurrentUser } from 'libs/authentication/utils';
 import { MoneyMovementAddBatchForm } from './MoneyMovementAddBatchForm';
 import { postRequest } from 'libs/requests/requests';
+import { notify } from 'libs/notifications/notifications';
 import { categoriesEntity } from '../models/category';
 
-function MoneyMovementAddBatchFormPage({ match, history, finance }) {
+function MoneyMovementAddBatchFormPage({ match, history }) {
     const loggedUser = getCurrentUser();
 
     const initialState = {
@@ -25,34 +25,34 @@ function MoneyMovementAddBatchFormPage({ match, history, finance }) {
     return <Formik
         enableReinitialize={true}
         onSubmit={(values, { setSubmitting }) => {
-            console.log('Submitting!');
             const promises = [];
             formState.values.forEach(values => {
                 if (values.movement_date) {
                     promises.push(moneyMovementsEntity.save(values));
                 }
-            });
-            promises.push(new Promise(resolve => { setTimeout(() => resolve({}), 2000); }));
+            });            
             if (promises.lenght === 0) {
-                console.log('Early return');
                 setSubmitting(false);
                 return;
             }
             return Promise.all(promises).then(responses => {
+                const totalMM = formState.values.length;
                 const values = [...formState.values.map((v, index) => !!(responses[index] && responses[index].id) ? null : v)].filter(v => v); 
-                setFormState({
-                    ...formState,
-                    values,
-                });
+                setFormState({ ...formState, values });
                 setSubmitting(false);
                 postRequest(`finance/api/category/calculate-totals/`, {}).then(resp => {
-                    categoriesEntity.fetch().then(() => {
-                        if (values.length === 0)
-                            history.push(`${FINANCE_BASE_URL}/money-movements`);
+                    categoriesEntity.fetch().then(() => {                        
+                        if (values.length === 0) {
+                            notify.success('All money movements added successfully.');
+                            history.push(`${FINANCE_BASE_URL}/money-movements`);                            
+                        } else if (totalMM > values.length) {
+                            notify.success(`${totalMM - values.length} money movements added successfully.`);
+                        }
                     });
                 });
             }).catch(() => {
                 console.log('Done with error :(');
+                notify.error('Something went wrong, check the console.');
                 setSubmitting(false);
             });
         }}
@@ -74,10 +74,7 @@ function MoneyMovementAddBatchFormPage({ match, history, finance }) {
                     values.push(v);
                     if (index === batchIndex) values.push(JSON.parse(JSON.stringify(v)));
                 });
-                setFormState({
-                    ...formState,
-                    values
-                });
+                setFormState({ ...formState, values });
             };
 
             const addMoneyMovement = () => {
@@ -101,9 +98,12 @@ function MoneyMovementAddBatchFormPage({ match, history, finance }) {
             />;
             return <form onSubmit={handleSubmit}>  
                 <PageHeader controls={controls}>
+                    <Link to={`${FINANCE_BASE_URL}`}
+                        className={`ui-page-header ui-page-header__breadcrumb`}
+                    >Finance</Link>
                     <Link to={`${FINANCE_BASE_URL}/money-movements`}
                         className={`ui-page-header ui-page-header__breadcrumb`}
-                    >Contexts</Link>
+                    >Money Movements</Link>
                     Add Batch
                 </PageHeader>
                 <div className='ui-page-body ui-section'>
@@ -124,22 +124,14 @@ function MoneyMovementAddBatchFormPage({ match, history, finance }) {
 }
 
 MoneyMovementAddBatchFormPage.propTypes = {
-    finance: PropTypes.object,
 };
 
-const connectedMoneyMovementAddBatchFormPage = withRouter(withFinance(MoneyMovementAddBatchFormPage));
+const connectedMoneyMovementAddBatchFormPage = withRouter(MoneyMovementAddBatchFormPage);
 export { connectedMoneyMovementAddBatchFormPage as MoneyMovementAddBatchFormPage };
 
-function Controls({ isSubmitting, deleteMoneyMovement }) {
+function Controls({ isSubmitting }) {
     const baseClass = 'ui-button ui-button--small';
     return <Fragment>
-        {deleteMoneyMovement &&
-            <button
-                disabled={isSubmitting ? true : false}
-                onClick={() => deleteMoneyMovement()}
-                className={`${baseClass} ui-button--negative`}
-            >Delete</button>
-        }
         <Link
             to={`${FINANCE_BASE_URL}/money-movements`}
             className={`${baseClass}`}
@@ -154,6 +146,5 @@ function Controls({ isSubmitting, deleteMoneyMovement }) {
 
 Controls.propTypes = {
     isSubmitting: PropTypes.bool,
-    deleteMoneyMovement: PropTypes.func,
 };
 

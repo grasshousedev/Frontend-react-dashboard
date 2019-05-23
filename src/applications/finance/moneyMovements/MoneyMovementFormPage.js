@@ -57,9 +57,12 @@ function MoneyMovementFormPage({ match, history, finance }) {
             />;
             return <form onSubmit={handleSubmit}>  
                 <PageHeader controls={controls}>
+                    <Link to={`${FINANCE_BASE_URL}`}
+                        className={`ui-page-header ui-page-header__breadcrumb`}
+                    >Finance</Link>
                     <Link to={`${FINANCE_BASE_URL}/money-movements`}
                         className={`ui-page-header ui-page-header__breadcrumb`}
-                    >Contexts</Link>
+                    >Money Movements</Link>
                     {moneyMovement.id ? `Edit Money Movement` : 'Add Money Movement'}
                 </PageHeader>
                 <div className='ui-page-body ui-section'>

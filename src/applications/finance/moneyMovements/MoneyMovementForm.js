@@ -148,7 +148,7 @@ function MoneyMovementForm({ values, setFieldValue, handleBlur, finance }) {
                             <tbody>
                                 <tr>
                                     <td>
-                                        <select id="money-movement-user-relation" value={formState.newUserRel.user || ''}
+                                        <select value={formState.newUserRel.user || ''}
                                             className="ui-form-v__select"
                                             onChange={e => setFormState({ ...formState, newUserRel: { ...formState.newUserRel, user: e.target.value ? +e.target.value : null }})}
                                         >
@@ -159,7 +159,7 @@ function MoneyMovementForm({ values, setFieldValue, handleBlur, finance }) {
                                         </select>
                                     </td>
                                     <td>
-                                        <input id="money-movement-user-relation" value={formState.newUserRel.percentage || ''}                
+                                        <input value={formState.newUserRel.percentage || ''}                
                                             className="ui-form-v__input"    
                                             onChange={e => setFormState({ ...formState, newUserRel: { ...formState.newUserRel, percentage: e.target.value ? parseFloat(e.target.value) : null }})}
                                         />
@@ -174,7 +174,7 @@ function MoneyMovementForm({ values, setFieldValue, handleBlur, finance }) {
                                             {finance.users[ur.user].full_name}
                                         </td>
                                         <td>
-                                            <input id="money-movement-user-relation" value={ur.percentage || ''}  
+                                            <input value={ur.percentage || ''}  
                                                 className="ui-form-v__input"                  
                                                 onChange={e => setUserPercentage(e.target.value ? parseFloat(e.target.value) : null, index)}
                                             />

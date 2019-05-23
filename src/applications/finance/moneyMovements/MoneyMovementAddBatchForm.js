@@ -5,10 +5,11 @@ import CreatableSelect from 'react-select/lib/Creatable';
 
 import { getFormReactSelectStyles } from 'components/style/formReactSelect';
 import { withFinance } from '../storeConnection';
+import { UserAssignment } from './forms/UserAssignment';
+
 
 function MoneyMovementAddBatchForm({ values, setFieldValue, handleBlur, finance, addMoneyMovement, cloneMoneyMovement, deleteMoneyMovement, isSubmitting }) {
     const [formState, setFormState] = useState({
-        newUserRel: {},
         viewAdvancedOptions: {},
     });
 
@@ -17,21 +18,15 @@ function MoneyMovementAddBatchForm({ values, setFieldValue, handleBlur, finance,
     const tags = Object.values(finance.tags).map(t => t.name).sort();
     const users = Object.values(finance.users).sort((u1, u2) => u1.full_name > u2.full_name ? 1 : -1);
 
-    const addNewUserRel = (batchIndex) => {
-        const newUserRel = formState.newUserRel[batchIndex];
+    const addNewUserRel = (batchIndex, newUserRel) => {
         if (newUserRel.user && newUserRel.percentage) {
-            setFieldValue('users_relation', batchIndex, [...values[batchIndex].users_relation, { ...newUserRel[batchIndex] }]);
-            setFormState({ ...formState, newUserRel: { ...formState.newUserRel, [batchIndex]: {}} });
+            setFieldValue('users_relation', batchIndex, [...values[batchIndex].users_relation, { ...newUserRel }]);
         }
     };
 
     const setUserPercentage = (batchIndex, percentage, index) => {
         setFieldValue('users_relation', batchIndex, values[batchIndex].users_relation.map((ur, urIndex) => {
-            if (urIndex === index) {
-                return { ...ur, percentage };
-            } else {
-                return ur;
-            }
+            return urIndex === index ? { ...ur, percentage } : ur;
         }));
     };
 
@@ -61,7 +56,7 @@ function MoneyMovementAddBatchForm({ values, setFieldValue, handleBlur, finance,
             const disableEntry = isSubmitting;      
             return <Fragment key={batchIndex}> 
             <div className="row ui-form p-t-10">
-                <div className="col-xs-12 col-lg-9">{/* Basic */}
+                <div className="col-xs-12 col-sm-6" style={{ maxWidth: '315px' }}>{/* Basic */}
                     <div className="ui-form-v__field-group">
                         <div className="ui-form-v__field" style={{ maxWidth: '50px' }}>{/* Movement */}
                             <div className="ui-form-v__field-input">
@@ -77,9 +72,10 @@ function MoneyMovementAddBatchForm({ values, setFieldValue, handleBlur, finance,
                         </div>
                         <div className="ui-form-v__field" style={{ maxWidth: '120px' }}>{/* Amount */}
                             <div className="ui-form-v__field-input">
-                                <input id="money-movement-amount" value={mmValues.amount}   
+                                <input value={mmValues.amount}   
                                     className="ui-form-v__input"             
-                                    disabled={disableEntry}   
+                                    disabled={disableEntry}  
+                                    placeholder="Amount" 
                                     onChange={e => setFieldValue('amount', batchIndex, e.target.value)}
                                     onBlur={handleBlur}
                                 />
@@ -87,20 +83,27 @@ function MoneyMovementAddBatchForm({ values, setFieldValue, handleBlur, finance,
                         </div>
                         <div className="ui-form-v__field" style={{ maxWidth: '110px' }}>{/* Date */}
                             <div className="ui-form-v__field-input">
-                                <input id="money-movement-movement-date" value={mmValues.movement_date || ''}               
+                                <input value={mmValues.movement_date || ''}               
                                     className="ui-form-v__input" 
-                                    disabled={disableEntry}    
+                                    disabled={disableEntry}  
+                                    placeholder="dd-mm-yyyy"  
                                     onChange={e => setFieldValue('movement_date', batchIndex, e.target.value)}
                                     onBlur={handleBlur}
                                 />
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div className="col-xs-12 col-sm-6">
+                    <div className="ui-form-v__field-group">
                         <div className="ui-form-v__field" style={{ maxWidth: '250px' }}>{/* Category */}
                             <div className="ui-form-v__field-input">
                                 <Select
                                     classNamePrefix="react-select"
                                     className="ui-form__react-select"
                                     disabled={disableEntry}
+                                    placeholder="Category"
+                                    value={mmValues.category ? { value: mmValues.category, label: finance.categories[mmValues.category].full_name } : null}
                                     onChange={entry => setFieldValue('category', batchIndex, entry.value)}
                                     options={categories.map(c => ({ value: c.id, label: c.full_name}))}
                                 />
@@ -108,7 +111,7 @@ function MoneyMovementAddBatchForm({ values, setFieldValue, handleBlur, finance,
                         </div>
                         <div className="ui-form-v__field" style={{ maxWidth: '300px' }}>{/* Tags */}
                             <div className="ui-form-v__field-input">
-                                <CreatableSelect id="money-movement-tags"
+                                <CreatableSelect
                                     className="ui-form__react-select"
                                     classNamePrefix="react-select"
                                     styles={formReactSelectStyles}
@@ -117,45 +120,45 @@ function MoneyMovementAddBatchForm({ values, setFieldValue, handleBlur, finance,
                                     options={tags.map(tag => ({ value: tag, label: tag }))}
                                     onChange={(options, action) => onMultiSelectChange(options, action, batchIndex, 'tags')}
                                     value={mmValues.tags ? mmValues.tags.map(t => ({ value: t, label: t})) : []}
-                                    placeholder="Select tags..."
+                                    placeholder="Select tags"
                                 />
                             </div>
                         </div>
-                        <div className="ui-form-v__field" style={{ maxWidth: '100px' }}>{/* Actions */}
-                            
-                            <div className="ui-form-v__field-input p-t-5">
-                                <i className="fas fa-cog cursor-pointer" onClick={() => toggleAdvancedOptions(batchIndex)} />
-                                <i className="far fa-copy cursor-pointer m-l-10" onClick={() => cloneMoneyMovement(batchIndex)} />
-                                <i className="fas fa-trash cursor-pointer m-l-10" onClick={() => deleteMoneyMovement(batchIndex)} />
+                        <div className="ui-form-v__field" style={{ maxWidth: '140px' }}>{/* Actions */}                            
+                            <div className="ui-form-v__field-input">
+                                <i className="fas fa-cog icon-control" tabIndex="0" onClick={() => toggleAdvancedOptions(batchIndex)} />
+                                <i className="far fa-copy icon-control" tabIndex="0" onClick={() => cloneMoneyMovement(batchIndex)} />
+                                {values.length > 1 &&
+                                    <i className="fas fa-trash icon-control" tabIndex="0" onClick={() => deleteMoneyMovement(batchIndex)} />}
                                 {batchIndex === values.length - 1 &&
-                                    <i className="fas fa-plus cursor-pointer m-l-10" onClick={() => addMoneyMovement()} />  
+                                    <i className="fas fa-plus icon-control" tabIndex="0" onClick={() => addMoneyMovement()} />  
                                 }
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="col-xs-12 col-lg-3">{/* Advanced */}
-                    {viewAdvancedOptions[batchIndex] && <div>
-                        <div className="col-xs-12 col-lg-6" style={{ paddingLeft: 0, paddingRight: 0 }}>
+                <div className="col-xs-12">{/* Advanced */}
+                    {viewAdvancedOptions[batchIndex] && <div className="row">
+                        <div className="col-xs-12 col-md-6" style={{ paddingLeft: 0, paddingRight: 0 }}>
                             <div className="ui-form-v__field">{/* Context */}
                                 <label className="ui-form-v__label" htmlFor="money-movement-context">Context</label>
                                 <div className="ui-form-v__field-input">
-                                    <select id="money-movement-context" value={mmValues.context || ''}
-                                        className="ui-form-v__select"
+                                    <Select
+                                        classNamePrefix="react-select"
+                                        className="ui-form__react-select"
                                         disabled={disableEntry}
-                                        onChange={e => setFieldValue('context', batchIndex, e.target.value ? +e.target.value : null)}
-                                    >
-                                        <option value={null}>No context</option>
-                                        {contexts.map(context => {
-                                            return <option value={context.id} key={context.id}>{context.name}</option>;
-                                        })}
-                                    </select>
+                                        placeholder="Context"
+                                        value={mmValues.context ? { value: mmValues.context, label: finance.contexts[mmValues.context].name } : null}
+                                        onChange={entry => setFieldValue('context', batchIndex, entry.value)}
+                                        options={contexts.map(c => ({ value: c.id, label: c.name}))}
+                                    />
                                 </div>
                             </div>
                             <div className="ui-form-v__field">{/* Description */}
                                 <label className="ui-form-v__label" htmlFor="money-movement-description">Description</label>
                                 <div className="ui-form-v__field-input">
-                                    <textarea id="money-movement-description" value={mmValues.description || ''}  
+                                    <textarea
+                                        value={mmValues.description || ''}  
                                         className="ui-form-v__textarea"  
                                         disabled={disableEntry}                
                                         onChange={e => setFieldValue('description', batchIndex, e.target.value)}
@@ -164,62 +167,18 @@ function MoneyMovementAddBatchForm({ values, setFieldValue, handleBlur, finance,
                                 </div>
                             </div>
                         </div>
-                        <div className="col-xs-12 col-lg-6">
+                        <div className="col-xs-12 col-md-6">
                             <div className="ui-form-v__field">{/* Users */}
-                                <label className="ui-form-v__label" htmlFor="money-movement-user-relation">User</label>
                                 <div className="ui-form-v__field-input">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>User</th>
-                                                <th>Percentage</th>
-                                                <th width="30"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <select id="money-movement-user-relation" value={formState.newUserRel.user || ''}
-                                                        className="ui-form-v__select"
-                                                        disabled={disableEntry}
-                                                        onChange={e => setFormState({ ...formState, newUserRel: { ...formState.newUserRel, user: e.target.value ? +e.target.value : null }})}
-                                                    >
-                                                        <option value={null}>No split</option>
-                                                        {users.map(user => {
-                                                            return <option value={user.id} key={user.id}>{user.full_name}</option>;
-                                                        })}
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <input id="money-movement-user-relation" value={formState.newUserRel.percentage || ''}                
-                                                        className="ui-form-v__input" 
-                                                        disabled={disableEntry}   
-                                                        onChange={e => setFormState({ ...formState, newUserRel: { ...formState.newUserRel, percentage: e.target.value ? parseFloat(e.target.value) : null }})}
-                                                    />
-                                                </td>
-                                                <td>
-                                                    {!disableEntry && <i className="fas fa-plus cursor-pointer" onClick={() => addNewUserRel(batchIndex)} />}
-                                                </td>
-                                            </tr>
-                                            {mmValues.users_relation.map((ur, index) => {
-                                                return <tr key={`user-relation-${index}`}>
-                                                    <td>
-                                                        {finance.users[ur.user].full_name}
-                                                    </td>
-                                                    <td>
-                                                        <input id="money-movement-user-relation" value={ur.percentage || ''}  
-                                                            className="ui-form-v__input" 
-                                                            disabled={disableEntry}                 
-                                                            onChange={e => setUserPercentage(e.target.value ? parseFloat(e.target.value) : null, batchIndex, index)}
-                                                        />
-                                                    </td>
-                                                    <td>
-                                                        {!disableEntry && <i className="fas fa-minus cursor-pointer" onClick={() => removeUserRel(batchIndex, index)} />}
-                                                    </td>                                
-                                                </tr>;
-                                            })}
-                                        </tbody>
-                                    </table>
+                                    <UserAssignment
+                                        users={users}
+                                        usersRef={finance.users}
+                                        values={mmValues}
+                                        addNewUserRel={(newUserRel) => addNewUserRel(batchIndex, newUserRel)}
+                                        removeUserRel={(index) => removeUserRel(batchIndex, index)}
+                                        setUserPercentage={(index, percentage) => setUserPercentage(batchIndex, index, percentage)}
+                                        disabled={disableEntry}
+                                    />
                                 </div>
                             </div>
                         </div>
