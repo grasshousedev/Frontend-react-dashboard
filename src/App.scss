@@ -11,6 +11,7 @@ $dashboard-menu-height: $header-height;
 
 @import '~@vzamboni/dashboard-ui-style/style/ui';
 @import '../node_modules/flexboxgrid/dist/flexboxgrid.min.css';
+@import '../node_modules/react-toastify/dist/ReactToastify.min.css';
 
 @import 'style/3rd-party-overrides';
 @import 'style/dashboard/login';

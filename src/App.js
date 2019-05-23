@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import { ToastContainer, Slide } from 'react-toastify';
 
 import './App.scss';
 
@@ -18,6 +19,7 @@ export default function App ({ store }) {
             <BrowserRouter>
                 <Dashboard />
             </BrowserRouter>
+            <ToastContainer className='toast-container' toastClassName="ui-toast" transition={Slide} />
         </Provider>
     );
 };
