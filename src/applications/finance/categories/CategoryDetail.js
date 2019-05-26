@@ -22,12 +22,13 @@ function CategoryDetail({ match, finance }) {
 
     useEffect(() => {
         const mmEntity = new MoneyMovementEntity();
+        const categoriesId = [categoryId, ...finance.subCategoriesTree[categoryId] || []];
         if (Object.keys(initialMovements).length === 0) {
             mmEntity.fetch().then(loadedMoneyMovements => {
-                setMoneyMovements(mmEntity.getByCategory(categoryId, loadedMoneyMovements));
+                setMoneyMovements(mmEntity.getByCategories(categoriesId, loadedMoneyMovements));
             });
         } else {
-            setMoneyMovements(mmEntity.getByCategory(categoryId, Object.values(initialMovements)));
+            setMoneyMovements(mmEntity.getByCategories(categoriesId, Object.values(initialMovements)));
         }
     }, []);
 

@@ -54,7 +54,13 @@ function CategoryPageForm({ match, history, finance }) {
                     <Link to={`${FINANCE_BASE_URL}/categories/`}
                         className={`ui-page-header ui-page-header__breadcrumb`}
                     >Categories</Link>
-                    {category.id ? `Edit ${category.full_name}` : 'Add Category'}
+                    {category.id && <Fragment>
+                        <Link to={`${FINANCE_BASE_URL}/categories/${category.id}`}
+                            className={`ui-page-header ui-page-header__breadcrumb`}
+                        >{category.full_name}</Link>
+                        Edit
+                    </Fragment>}
+                    {!category.id && 'Add Category'}
                 </PageHeader>
                 <div className='ui-page-body ui-section'>
                     <CategoryForm {...props} category={category} />

@@ -21,3 +21,16 @@ function createSubCategories(category, categories) {
 
     return subCategoriesList;
 }
+
+export function createSubCategoriesTree(categoriesTree, subCategoriesTree) {
+    categoriesTree.forEach(catNode => {
+        const { category, children } = catNode;
+        if (category.parent) {
+            if (!subCategoriesTree[category.parent])
+                subCategoriesTree[category.parent] = [];
+            subCategoriesTree[category.parent].push(category.id);
+        }
+        if (children.length > 0)
+            createSubCategoriesTree(children, subCategoriesTree);
+    });    
+}

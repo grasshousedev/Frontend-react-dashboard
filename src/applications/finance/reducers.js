@@ -1,16 +1,24 @@
 import { listToObject } from 'utils/data';
 
 import * as actions from './actions';
-import { createCategoriesTree } from './categories/categoriesDataUtils';
+import { createCategoriesTree, createSubCategoriesTree } from './categories/categoriesDataUtils';
 
 const INITIAL_STATE = {
     initialized: false,
     categories: {},
     contexts: {},
     categoriesTree: [],
+    subCategoriesTree: {},
     moneyMovements: {},
     tags: {},
     users: {},
+};
+
+const updateCategories = (state, categories) => {
+    const subCategoriesTree = {};
+    const categoriesTree = createCategoriesTree(categories);
+    createSubCategoriesTree(categoriesTree, subCategoriesTree);
+    return { ...state, categories, categoriesTree, subCategoriesTree, };
 };
 
 const finance = (currentState, action) => {
@@ -26,20 +34,16 @@ const finance = (currentState, action) => {
 
         case actions.SET_CATEGORIES:
             categories = listToObject(action.data, 'id');
-            return {
-                ...state,
-                categories,
-                categoriesTree: createCategoriesTree(categories)
-            };
+            return updateCategories(state, categories);
         case actions.SET_CATEGORY:
             const category = action.data;
             categories = { ...state.categories };
             categories[category.id] = category;
-            return { ...state, categories, categoriesTree: createCategoriesTree(categories) };
+            return updateCategories(state, categories);
         case actions.DELETE_CATEGORY:
             categories = { ...state.categories };
             if (categories.hasOwnProperty(action.id)) delete categories[action.id];
-            return { ...state, categories, categoriesTree: createCategoriesTree(categories) };
+            return updateCategories(state, categories);
 
         case actions.SET_CONTEXTS:
             contexts = listToObject(action.data, 'id');

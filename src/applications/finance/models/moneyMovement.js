@@ -51,6 +51,10 @@ export class MoneyMovementEntity extends BaseEntity {
         return moneyMovementsList.filter(mm => mm.category === categoryId);
     }
 
+    getByCategories(categoriesId, moneyMovementsList) {
+        return moneyMovementsList.filter(mm => categoriesId.includes(mm.category));
+    }
+
     getByContext(contextId, moneyMovementsList) {
         return moneyMovementsList.filter(mm => mm.context === contextId);
     }
