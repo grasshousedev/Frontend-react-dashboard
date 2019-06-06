@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { PageHeader } from 'components/ui/PageHeader';
 
+import { Buttons } from './Buttons';
 import { Colors } from './Colors';
 import { Typography } from './typography/Typography';
 import { GridComponent } from './GridComponent';
@@ -16,6 +17,7 @@ import { ModalComponent } from './ModalComponent';
 import './style-showcase.scss';
 
 const SECTIONS = {
+    BUTTINS: 'buttons',
     COLORS: 'colors',
     CARDS: 'cards',
     GRID_COMPONENT: 'grid-component',
@@ -29,7 +31,7 @@ const SECTIONS = {
 
 export class StyleShowcase extends Component {
     state = {
-        sectionName: SECTIONS.MODAL,
+        sectionName: SECTIONS.BUTTONS,
     }
 
     setSection = (sectionName) => {
@@ -44,6 +46,7 @@ export class StyleShowcase extends Component {
         return <div>
             <PageHeader controls={controls}>Style Showcase</PageHeader>
             <div className="ui-page-body">
+                {sectionName === SECTIONS.BUTTONS && <Buttons />}
                 {sectionName === SECTIONS.CARDS && <CardsComponent />}
                 {sectionName === SECTIONS.COLORS && <Colors />}
                 {sectionName === SECTIONS.GRID_COMPONENT && <GridComponent />}
@@ -61,6 +64,9 @@ export class StyleShowcase extends Component {
 function Controls({ sectionName, setSection }) {
     const baseClass = 'ui-button ui-button--small';
     return <Fragment>
+        <button
+            className={`${baseClass} ${sectionName === SECTIONS.BUTTONS ? 'ui-button--primary' : ''}`}
+            onClick={() => setSection(SECTIONS.BUTTONS)}>Buttons</button>
         <button
             className={`${baseClass} ${sectionName === SECTIONS.CARDS ? 'ui-button--primary' : ''}`}
             onClick={() => setSection(SECTIONS.CARDS)}>Cards</button>
