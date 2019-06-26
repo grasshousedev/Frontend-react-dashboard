@@ -9,6 +9,9 @@ export const METHODS = {
     DELETE: 'DELETE'
 };
 
+export class RequestInvalid extends Exception {}
+export class RequestError extends Exception {}
+
 let commonHeaders = {};
 
 export function setCommonHeaders(common) {
@@ -21,7 +24,7 @@ export function getCommonHeaders() {
 
 export default function request(
     url,
-    { payload, method = METHODS.GET, headers = {}, body, extraOptions = {} }
+    { payload, method = METHODS.GET, headers = {}, body, extraOptions = {} } = {}
 ) {
     const params = {
         method,
@@ -79,6 +82,3 @@ export function deleteRequest(url, payload, options = {}) {
 export function putRequest(url, payload, options = {}) {
     return request(url, { payload, method: METHODS.PUT, ...options });
 }
-
-export class RequestInvalid extends Exception {}
-export class RequestError extends Exception {}
