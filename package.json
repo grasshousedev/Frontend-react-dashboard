@@ -9,7 +9,7 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "@vzamboni/react-scripts": "file:/home/vittorio/repositories/create-react-app/packages/react-scripts",
+    "@vzamboni/react-scripts": "^3.0.1",
     "chart.js": "^2.8.0",
     "css-loader": "1.0.0",
     "flexboxgrid": "^6.3.1",
