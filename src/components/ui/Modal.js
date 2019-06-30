@@ -8,7 +8,19 @@ import { FullSectionLoader } from './Loader';
 const HEADER_HEIGHT = 55;
 const FOOTER_HEIGHT = 65; 
 
-export function ModalWindow({ title, content, footer, maximized, closeModal, setViewModalWindow, wrapperClass, startWidth, startHeight, hooks, canMaximize }) {
+export function ModalWindow({
+        title,
+        content,
+        footer,
+        maximized,
+        closeModal,
+        setViewModalWindow,
+        wrapperClass,
+        startWidth,
+        startHeight,
+        hooks,
+        canMaximize
+}) {
     const sizedModalContainerStyle = {};
     if (!maximized) {
         sizedModalContainerStyle.width = startWidth;
@@ -49,7 +61,7 @@ export function ModalWindow({ title, content, footer, maximized, closeModal, set
         return function cleanup() {
             modalRoot.removeChild(modalContainer);
         };
-    }, []);
+    }, []); // eslint-disable-line
   
     const uiModalContainerClasses = modalState.isMaximized
         ? 'ui-modal__container--maximized'
@@ -123,3 +135,11 @@ export function ModalTrigger({ Trigger, getModalWindowProps }) {
         {viewModalWindow && <ModalWindow {...getModalWindowProps({ setViewModalWindow })} setViewModalWindow={setViewModalWindow} />}
     </Fragment>;
 }
+
+ModalTrigger.propTypes = {
+    Trigger: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ]).isRequired,
+    getModalWindowProps: PropTypes.func.isRequired,
+};

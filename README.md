@@ -218,6 +218,52 @@ For example, to override `BACKEND_URL` in Dev mode, you can use the following `s
     "BACKEND_URL": "http://localhost:8091/"
 }
 ```
+# Custom react-script and Webpack configuration
+
+Following the tutorial of this [video](https://www.youtube.com/watch?v=I22TW-33dDE), I have [forked]() `create-react-app`. 
+Instead of ejecting and maintaining all the configurations, I changed the `create-react-app` / `react-scripts` to parse a file called `dashboardWebpack.config.js` and apply the `modify` function in a similar way of [razzle's createConfig.js](https://github.com/jaredpalmer/razzle/blob/master/packages/razzle/config/createConfig.js).
+
+In this way, it's easy to change the Webpack configuration without ejecting!
+
+## Keeping the forked repository up-to-date
+
+When changes are pushed to the official `create-react-app` they should be merged into the forked repository.
+
+After cloning the fork locally, I've launched the following command:
+
+```bash
+git remote add upstream https://github.com/facebook/create-react-app.git
+```
+
+Now, to keep it updated:
+
+```bash
+git fetch upstream
+git rebase upstream/master
+```
+
+## Test changes
+
+Uninstall the custom package and then install using 'file' prefix:
+
+```bash
+yarn remove @vzamboni/react-scripts
+```
+
+Copy this to `package.json` into dependencies section:
+
+```json
+"@vzamboni/react-scripts": "file:~/repositories/create-react-app/packages/react-scripts",
+```
+
+Then, reinstall:
+
+```bash
+yarn install
+
+# After installation, run
+yarn start
+```
 
 # Credits
 

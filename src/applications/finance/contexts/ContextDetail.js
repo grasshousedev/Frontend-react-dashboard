@@ -20,7 +20,7 @@ function ContextDetail({ match, finance }) {
 
     useEffect(() => {
         setMoneyMovements(moneyMovementsEntity.getByContext(contextId, Object.values(finance.moneyMovements)));
-    }, []);
+    }, []); // eslint-disable-line
 
     if (moneyMovements === null) {
         return <FullSectionLoader />;

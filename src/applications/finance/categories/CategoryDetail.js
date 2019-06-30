@@ -30,7 +30,7 @@ function CategoryDetail({ match, finance }) {
         } else {
             setMoneyMovements(mmEntity.getByCategories(categoriesId, Object.values(initialMovements)));
         }
-    }, []);
+    }, []); // eslint-disable-line
 
     if (moneyMovements === null) {
         return <FullSectionLoader />;
