@@ -12,7 +12,7 @@ import * as serviceWorker from './serviceWorker';
 import { store } from './store/store';
 import { authenticationService } from './libs/authentication/authentication';
 import { reducers as authReducers } from './libs/authentication/reducers';
-import { reducers as financeReducers } from './applications/finance/reducers';
+import { reducers as financeReducers } from './apps/finance/reducers';
 
 store.registerReducer('authentication', authReducers.authentication);
 store.registerReducer('finance', financeReducers.finance);
