@@ -12,7 +12,7 @@ import { Dashboard } from './Dashboard';
 export default function App ({ store }) {
     useEffect(() => {
         store.dispatch({ type: SET_APPLICATION_INITIALIZED, initialized: true });
-    }, []);
+    }, []); // eslint-disable-line
 
     return (
         <Provider store={store}>

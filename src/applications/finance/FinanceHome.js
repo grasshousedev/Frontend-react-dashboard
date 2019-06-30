@@ -20,7 +20,7 @@ function FinanceHome() {
 
     useEffect(() => {
         setHomeState({ ...homeState, loading: false });
-    }, []);
+    }, []); // eslint-disable-line
 
     const { loading } = homeState;
 
