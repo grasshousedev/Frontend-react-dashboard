@@ -5,11 +5,9 @@ import { withRouter } from "react-router-dom";
 import { hasTag } from '../headerUtils';
 import { APPLICATIONS } from './applicationsList';
 
-function Applications ({ query }) {
+function Applications ({ query, history, resetDashboardMenu }) {
     
-    const navigate = (path) => {
-        const { history, resetDashboardMenu } = this.props;
-        
+    const navigate = (path) => {        
         history.push(path);
         resetDashboardMenu();
     };
