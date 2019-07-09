@@ -10,6 +10,7 @@ $ui-page-padding: 15px;
 $dashboard-menu-height: $header-height;
 
 @import '~@vzamboni/dashboard-ui-style/style/ui';
+@import '~@vzamboni/dashboard-ui-style/vars/colors';
 @import '../node_modules/flexboxgrid/dist/flexboxgrid.min.css';
 @import '../node_modules/react-toastify/dist/ReactToastify.min.css';
 
@@ -36,4 +37,5 @@ p {
     height: calc(100vh - #{($ui-dashboard-header-height + $ui-dashboard-footer-height + $ui-page-padding)});
     overflow: auto;
     padding-bottom: $ui-page-padding;
+    background-color: $grey-light-l2;
 }
