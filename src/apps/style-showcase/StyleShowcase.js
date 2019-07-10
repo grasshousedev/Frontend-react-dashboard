@@ -15,14 +15,16 @@ import { CardsComponent } from './CardsComponent';
 import { ModalComponent } from './ModalComponent';
 
 import './style-showcase.scss';
+import { Panels } from './Panels';
 
 const SECTIONS = {
-    BUTTINS: 'buttons',
+    BUTTONS: 'buttons',
     COLORS: 'colors',
     CARDS: 'cards',
     GRID_COMPONENT: 'grid-component',
     LOADERS: 'loaders',
     MODAL: 'modal',
+    PANELS: 'panels',
     TABS_COMPONENT: 'tabs-component',
     TILES: 'tiles',
     TIMELINE_COMPONENT: 'timeline-component',
@@ -52,6 +54,7 @@ export class StyleShowcase extends Component {
                 {sectionName === SECTIONS.GRID_COMPONENT && <GridComponent />}
                 {sectionName === SECTIONS.LOADERS && <Loaders />}
                 {sectionName === SECTIONS.MODAL && <ModalComponent />}
+                {sectionName === SECTIONS.PANELS && <Panels />}
                 {sectionName === SECTIONS.TABS_COMPONENT && <TabsComponent />}
                 {sectionName === SECTIONS.TILES && <Tiles />}
                 {sectionName === SECTIONS.TIMELINE_COMPONENT && <TimelineComponent />}
@@ -79,6 +82,9 @@ function Controls({ sectionName, setSection }) {
         <button
             className={`${baseClass} ${sectionName === SECTIONS.GRID_COMPONENT ? 'ui-button--primary' : ''}`}
             onClick={() => setSection(SECTIONS.GRID_COMPONENT)}>Grid</button>
+        <button
+            className={`${baseClass} ${sectionName === SECTIONS.PANELS ? 'ui-button--primary' : ''}`}
+            onClick={() => setSection(SECTIONS.PANELS)}>Panels</button>
         <button
             className={`${baseClass} ${sectionName === SECTIONS.TABS_COMPONENT ? 'ui-button--primary' : ''}`}
             onClick={() => setSection(SECTIONS.TABS_COMPONENT)}>Tabs</button>

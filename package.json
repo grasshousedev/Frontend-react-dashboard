@@ -30,7 +30,8 @@
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.8.1",
     "lato-font": "^3.0.0",
-    "node-sass": "^4.12.0"
+    "node-sass": "^4.12.0",
+    "serve": "^11.0.2"
   },
   "eslintConfig": {
     "extends": "react-app"
