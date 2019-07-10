@@ -4,7 +4,7 @@ import { Route, Switch, withRouter } from "react-router-dom";
 import { Home } from 'pages/Home';
 import { Landing as MachineLearningLanding } from 'apps/machine-learning/Landing';
 import { StyleShowcase } from 'apps/style-showcase/StyleShowcase';
-import { FinanceLanding, FINANCE_BASE_URL } from 'apps/finance/FinanceLanding';
+import { FinanceLanding, FINANCE_BASE_URL } from 'apps/dashboard-finance/app/FinanceLanding';
 
 function Routes() {
     return <Switch>

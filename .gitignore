@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Apps
+src/apps/*
+!src/apps/style-showcase/
+!src/apps/finance/
