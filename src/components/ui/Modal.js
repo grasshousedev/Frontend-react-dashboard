@@ -139,7 +139,8 @@ export function ModalTrigger({ Trigger, getModalWindowProps }) {
 ModalTrigger.propTypes = {
     Trigger: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
-        PropTypes.node
+        PropTypes.node,
+        PropTypes.func,
     ]).isRequired,
     getModalWindowProps: PropTypes.func.isRequired,
 };

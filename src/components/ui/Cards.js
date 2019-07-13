@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export function Card({ icon, title, subtitle, description, controls, width, colors, styles }) {
+export function Card({ icon, title, subtitle, description, controls, width, colors, styles, onClick }) {
     const sideColor = colors.side;
     const iconColor = colors.icon;
     const containerStyle = { ...styles.container, ...width && { width } };
@@ -9,7 +9,7 @@ export function Card({ icon, title, subtitle, description, controls, width, colo
     const iconStyle = { ...styles.icon, ...iconColor && { color: iconColor } };
     const controlsStyle = { ...styles.controls };
 
-    return <div className="ui-card__container" {...containerStyle && { style: containerStyle }}>
+    return <div className="ui-card__container" {...containerStyle && { style: containerStyle }} onClick={onClick}>
         <div className="ui-card__side__container" {...sideStyle && { style: sideStyle }}>
             {icon && <div className="ui-card__side__icon" {...iconStyle && { style: iconStyle }}>{icon}</div>}
         </div>
@@ -45,6 +45,7 @@ Card.propTypes = {
         icon: PropTypes.string,
     }),
     width: PropTypes.string,
+    onClick: PropTypes.func,
 };
 
 Card.defaultProps = {
