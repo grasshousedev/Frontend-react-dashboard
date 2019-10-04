@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import hljs from 'highlight.js/lib/highlight';
-import 'highlight.js/styles/hopscotch.css';
+//import hljs from 'highlight.js';
+import 'highlight.js/styles/hybrid.css';
 
 const registeredLanguages = {};
 
@@ -20,13 +21,22 @@ export class CodeHighlight extends Component {
         const { language } = this.props;
         if (language && !registeredLanguages[language]) {
             try {
-                const newLanguage = require(`highlight.js/lib/languages/${language}`);
-                hljs.registerLanguage(language, newLanguage);
-                registeredLanguages[language] = true;
+                const languages = [];
+                if (language === 'jsx') {
+                    languages.push('javascript');
+                    languages.push('xml');
+                } else {
+                    languages.push([language]);
+                }
+                languages.forEach(languageToAdd => {
+                    const newLanguage = require(`highlight.js/lib/languages/${languageToAdd}`);
+                    hljs.registerLanguage(languageToAdd, newLanguage);
+                    registeredLanguages[languageToAdd] = true;
+                });
                 this.setState(
                     () => { return { loaded: true }; },
                     () => { this.highlight(); }
-                );                
+                );
             } catch (e) {
                 console.error(e);
                 throw Error(`Cannot register and higlight language ${language}`);
@@ -78,5 +88,5 @@ CodeHighlight.propTypes = {
 };
 
 CodeHighlight.defaultProps = {
-    language: 'javascript',    
+    language: 'javascript',
 };

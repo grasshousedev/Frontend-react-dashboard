@@ -5,6 +5,7 @@ import { PageHeader } from 'components/ui/PageHeader';
 
 import { Buttons } from './Buttons';
 import { Colors } from './Colors';
+import { DropDownComponent } from './DropDownComponent';
 import { Typography } from './typography/Typography';
 import { GridComponent } from './GridComponent';
 import { TabsComponent } from './TabsComponent';
@@ -16,16 +17,19 @@ import { ModalComponent } from './ModalComponent';
 
 import './style-showcase.scss';
 import { Panels } from './Panels';
+import { TableComponent } from './TableComponent';
 
 const SECTIONS = {
     BUTTONS: 'buttons',
     COLORS: 'colors',
     CARDS: 'cards',
+    DROP_DOWN_COMPONENT: 'drop-down-component',
     GRID_COMPONENT: 'grid-component',
     LOADERS: 'loaders',
     MODAL: 'modal',
     PANELS: 'panels',
     TABS_COMPONENT: 'tabs-component',
+    TABLE_COMPONENT: 'table-component',
     TILES: 'tiles',
     TIMELINE_COMPONENT: 'timeline-component',
     TYPOGRAPHY: 'typography',
@@ -33,7 +37,7 @@ const SECTIONS = {
 
 export class StyleShowcase extends Component {
     state = {
-        sectionName: SECTIONS.BUTTONS,
+        sectionName: SECTIONS.DROP_DOWN_COMPONENT,
     }
 
     setSection = (sectionName) => {
@@ -51,10 +55,12 @@ export class StyleShowcase extends Component {
                 {sectionName === SECTIONS.BUTTONS && <Buttons />}
                 {sectionName === SECTIONS.CARDS && <CardsComponent />}
                 {sectionName === SECTIONS.COLORS && <Colors />}
+                {sectionName === SECTIONS.DROP_DOWN_COMPONENT && <DropDownComponent />}
                 {sectionName === SECTIONS.GRID_COMPONENT && <GridComponent />}
                 {sectionName === SECTIONS.LOADERS && <Loaders />}
                 {sectionName === SECTIONS.MODAL && <ModalComponent />}
                 {sectionName === SECTIONS.PANELS && <Panels />}
+                {sectionName === SECTIONS.TABLE_COMPONENT && <TableComponent />}
                 {sectionName === SECTIONS.TABS_COMPONENT && <TabsComponent />}
                 {sectionName === SECTIONS.TILES && <Tiles />}
                 {sectionName === SECTIONS.TIMELINE_COMPONENT && <TimelineComponent />}
@@ -77,6 +83,9 @@ function Controls({ sectionName, setSection }) {
             className={`${baseClass} ${sectionName === SECTIONS.COLORS ? 'ui-button--primary' : ''}`}
             onClick={() => setSection(SECTIONS.COLORS)}>Colors</button>
         <button
+            className={`${baseClass} ${sectionName === SECTIONS.DROP_DOWN_COMPONENT ? 'ui-button--primary' : ''}`}
+            onClick={() => setSection(SECTIONS.DROP_DOWN_COMPONENT)}>DropDowns</button>
+        <button
             className={`${baseClass} ${sectionName === SECTIONS.TYPOGRAPHY ? 'ui-button--primary' : ''}`}
             onClick={() => setSection(SECTIONS.TYPOGRAPHY)}>Typography</button>
         <button
@@ -88,6 +97,9 @@ function Controls({ sectionName, setSection }) {
         <button
             className={`${baseClass} ${sectionName === SECTIONS.TABS_COMPONENT ? 'ui-button--primary' : ''}`}
             onClick={() => setSection(SECTIONS.TABS_COMPONENT)}>Tabs</button>
+        <button
+            className={`${baseClass} ${sectionName === SECTIONS.TABLE_COMPONENT ? 'ui-button--primary' : ''}`}
+            onClick={() => setSection(SECTIONS.TABLE_COMPONENT)}>Table</button>
         <button
             className={`${baseClass} ${sectionName === SECTIONS.TILES ? 'ui-button--primary' : ''}`}
             onClick={() => setSection(SECTIONS.TILES)}>Tiles</button>
