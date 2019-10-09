@@ -42,6 +42,7 @@ export default function TableHeader({ columns, config, pinnedLeft=[], stylesAndC
                             sortedFields={sortedFields}
                             tableStyleState={tableStyleState}
                             setTableStyleState={setTableStyleState}
+                            config={config}
                         />;
                     })}
                 </tr>

@@ -10,16 +10,17 @@ const COL_CLASS = `${BODY_CLASS}__col`;
 const CELL_CLASS = `${BODY_CLASS}__cell`;
 
 
-export default function TableBody({ columns, entries, config, pagination, stylesAndClasses, tableBodyContainerRef, pinnedLeft=[] }) {
-    const firstElement = (pagination.page - 1) * pagination.pageSize;
-    const lastElement = firstElement + pagination.pageSize;
+export default function TableBody({ columns, entries, config, pageState, stylesAndClasses, tableBodyContainerRef, pinnedLeft=[] }) {
+    const firstElement = (pageState.page - 1) * pageState.pageSize;
+    const lastElement = firstElement + pageState.pageSize;
+    const entriesPage = config.pagination ? entries.slice(firstElement, lastElement) : entries;
 
     const bodyContainerStyle = getBodyContainerStyle(config);
 
     return <div className={stylesAndClasses.body__container.classes} ref={tableBodyContainerRef} style={bodyContainerStyle}>
         <table className={BODY_CLASS} style={stylesAndClasses.body.style}>
             <tbody>
-                {entries.slice(firstElement, lastElement).map((entry, eIndex) => {
+                {entriesPage.map((entry, eIndex) => {
                     const evenOrOdd = eIndex % 2 === 0 ? 'even' : 'odd';
                     const colClass = getBodyColClass(COL_CLASS, { config, evenOrOdd });
                     const cellClass = getBodyCellClass(CELL_CLASS, { config });
@@ -53,7 +54,7 @@ TableBody.propTypes = {
     columns: PropTypes.array.isRequired,
     entries: PropTypes.array.isRequired,
     config: PropTypes.object.isRequired,
-    pagination: PropTypes.object.isRequired,
+    pageState: PropTypes.object.isRequired,
     stylesAndClasses: PropTypes.object.isRequired,
     tableBodyContainerRef: PropTypes.object.isRequired,
     pinnedLeft: PropTypes.array,

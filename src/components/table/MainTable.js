@@ -6,7 +6,7 @@ import TableBody from './TableBody';
 import { getMainTableStylesAndClasses } from './stylesAndClasses/mainTable';
 
 
-export function MainTable({ columns, config, entries, refs, commonStyles, tableStyleState, setTableStyleState, setScrollMaster, pagination, pinnedLeft}) {
+export function MainTable({ columns, config, entries, refs, commonStyles, tableStyleState, setTableStyleState, setScrollMaster, pageState, pinnedLeft }) {
     const mainTableStylesAndClasses = getMainTableStylesAndClasses({ tableStyleState });
 
     const commonConfig = {
@@ -26,7 +26,7 @@ export function MainTable({ columns, config, entries, refs, commonStyles, tableS
         />
         <TableBody
             entries={entries}
-            pagination={pagination}
+            pageState={pageState}
             stylesAndClasses={{ ...commonStyles, ...mainTableStylesAndClasses }}
             tableBodyContainerRef={refs.tableBodyContainerRef}
             { ...commonConfig }
@@ -43,7 +43,7 @@ MainTable.propTypes = {
     tableStyleState: PropTypes.object.isRequired,
     setTableStyleState: PropTypes.func.isRequired,
     setScrollMaster: PropTypes.func.isRequired,
-    pagination: PropTypes.object.isRequired,
+    pageState: PropTypes.object.isRequired,
 
     pinnedLeft: PropTypes.array,
 };
