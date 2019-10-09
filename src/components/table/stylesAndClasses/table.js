@@ -1,7 +1,7 @@
 import { SCROLLBAR_SIZE } from '../constants';
 
 
-export function getColumnsStyle(columns, tableStyleState, config) {
+export function getColumnsStyle(columns, tableStyleState) {
     const columnsStyle = {};
     columns.forEach(col => {
         columnsStyle[col.prop] = {};
