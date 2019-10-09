@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { Table } from 'components/table/Table';
 import { CodeHighlight } from 'components/style/CodeHighlight';
+import { PropsTable } from './common/PropsTable';
 
 const entries = [];
 const test2 = ['aaa aaa', 'bbbb bb', 'cc cccc', 'dd d dd'];
@@ -33,8 +34,8 @@ export function TableComponent() {
     const [pinnedLeft, setPinnedLeft] = useState(['id', 'test1']);
     const [zebra, setZebra] = useState(true);
     const [pageController, setPageController] = useState({ visible: true, style: 'collapsed' });
-
-    const [width, setWidth] = useState();
+    const [headerController, setHeaderController] = useState(true);
+    const [verticalAlignment, setVerticalAlignment] = useState('top');
 
 
     const columns = [
@@ -54,7 +55,9 @@ export function TableComponent() {
         height,
         pinnedLeft,
         zebra,
-        pageController
+        headerController,
+        pageController,
+        verticalAlignment
     };
 
     return <div>
@@ -64,20 +67,7 @@ export function TableComponent() {
         {showControls && <Fragment>
             <div className="ui-section">
                 <div className="ui-section__column w-50pc">
-                    <h2 className="ui-title">Sizes</h2>
-                    <div className="ui-section ui-form__container">
-                        <div className="ui-form__field">
-                            <div className="ui-form__label w-100">Width</div>
-                            <div className="ui-form__field-input">
-                                <input value={width || ''} onChange={e => setWidth(e.target.value ? +e.target.value : undefined)} />
-                            </div>
-                        </div>
-                        <div className="ui-form__field">
-                            <div className="ui-form__label w-100">Height</div>
-                            <div className="ui-form__field-input"><input value={height || ''} onChange={e => setHeight(e.target.value ? +e.target.value : undefined)} /></div>
-                        </div>
-                    </div>
-                    <h2 className="ui-title">Spacing</h2>
+                    <h2 className="ui-title">Spacing and Size</h2>
                     <div className="ui-section ui-form__container">
                         <div className="ui-form__field">
                             <div className="ui-form__label w-100">Padding</div>
@@ -85,27 +75,92 @@ export function TableComponent() {
                                 <input value={padding || ''} onChange={e => setPadding(e.target.value ? +e.target.value : undefined)} />
                             </div>
                         </div>
+                        <div className="ui-form__field">
+                            <div className="ui-form__label w-100">Height</div>
+                            <div className="ui-form__field-input"><input value={height || ''} onChange={e => setHeight(e.target.value ? +e.target.value : undefined)} /></div>
+                        </div>
                     </div>
-                    <h2 className="ui-title">Styles</h2>
-                    <div className="ui-section">
-                        <button className={`ui-button ui-button--small ${zebra ? 'ui-button--positive' : ''}`} onClick={() => setZebra(!zebra) }>Zebra</button>
-                        <span>
-                            <button className={`ui-button ui-button--small ${pageController.visible ? 'ui-button--positive' : ''}`} onClick={() => setPageController({ ...pageController, visible: !pageController.visible }) }>Show Page Controller</button>
-                            Style
-                            <select value={pageController.style} onChange={e => setPageController({ ...pageController, style: e.target.value })}>
-                                <option value='collapsed'>Collapsed</option>
-                                <option value='expanded'>Expanded</option>
-                            </select>
-                        </span>
-                        <button className={`ui-button ui-button--small ${singleLine ? 'ui-button--positive' : ''}`} onClick={() => setSingleLine(!singleLine) }>Single Line</button>
-                        <span>
-                            Border Type
-                            <select value={borderType} onChange={e => setBorderType(e.target.value ? e.target.value : undefined)}>
-                                <option value=''>None</option>
-                                <option value='row'>Row</option>
-                                <option value='cell'>Cell</option>
-                            </select>
-                        </span>
+                    <h2 className="ui-title">Header</h2>
+                    <div className="ui-section ui-form__container">
+                        <div className="ui-form__field">
+                            <div className="ui-form__label w-100">Flags</div>
+                            <div className="ui-form__field-input">
+                                <button className={`ui-button ui-button--small ${headerController ? 'ui-button--positive' : ''}`} onClick={() => setHeaderController(!headerController) }>Header Controller</button>
+                            </div>
+                        </div>
+                        <div className="ui-form__field">
+                            <div className="ui-form__label w-100">Border Type</div>
+                            <div className="ui-form__field-input">
+                                <select value={borderType} onChange={e => setBorderType(e.target.value ? e.target.value : undefined)}>
+                                    <option value=''>None</option>
+                                    <option value='row'>Row</option>
+                                    <option value='cell'>Cell</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 className="ui-title">Body</h2>
+                    <div className="ui-section ui-form__container">
+                        <div className="ui-form__field">
+                            <div className="ui-form__label w-100">Flags</div>
+                            <div className="ui-form__field-input">
+                                <button className={`ui-button ui-button--small ${zebra ? 'ui-button--positive' : ''}`} onClick={() => setZebra(!zebra) }>Zebra</button>
+                            </div>
+                        </div>
+                        <div className="ui-form__field">
+                            <div className="ui-form__label w-100">Border Type</div>
+                            <div className="ui-form__field-input">
+                                <select value={borderType} onChange={e => setBorderType(e.target.value ? e.target.value : undefined)}>
+                                    <option value=''>None</option>
+                                    <option value='row'>Row</option>
+                                    <option value='cell'>Cell</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div className="ui-form__field">
+                            <div className="ui-form__label w-100">Vertical Alignment</div>
+                            <div className="ui-form__field-input">
+                                <select value={verticalAlignment} onChange={e => setVerticalAlignment(e.target.value ? e.target.value : undefined)}>
+                                    <option value=''>None</option>
+                                    <option value='top'>Top</option>
+                                    <option value='middle'>Middle</option>
+                                    <option value='bottom'>Bottom</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 className="ui-title">Pagination</h2>
+                    <div className="ui-section ui-form__container">
+                        <div className="ui-form__field">
+                        <div className="ui-form__label w-100">Flags</div>
+                            <div className="ui-form__field-input">
+                                <button className={`ui-button ui-button--small ${zebra ? 'ui-button--positive' : ''}`} onClick={() => setZebra(!zebra) }>Zebra</button>
+                            </div>
+                        </div>
+                        <div className="ui-form__field">
+                            <div className="ui-form__label w-100">Page Controller</div>
+                            <div className="ui-form__field-input">
+                                <div>
+                                    <button className={`ui-button ui-button--small ${pageController.visible ? 'ui-button--positive' : ''}`} onClick={() => setPageController({ ...pageController, visible: !pageController.visible }) }>Visible</button>
+                                </div>
+                                <div>
+                                    <span className="m-l-10 m-r-10">Style</span>
+                                    <select value={pageController.style} onChange={e => setPageController({ ...pageController, style: e.target.value })}>
+                                        <option value='collapsed'>Collapsed</option>
+                                        <option value='expanded'>Expanded</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 className="ui-title">Other</h2>
+                    <div className="ui-section ui-form__container">
+                        <div className="ui-form__field">
+                        <div className="ui-form__label w-100">Flags</div>
+                            <div className="ui-form__field-input">
+                            <button className={`ui-button ui-button--small ${singleLine ? 'ui-button--positive' : ''}`} onClick={() => setSingleLine(!singleLine) }>Single Line</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className="ui-section__column w-50pc">
@@ -159,7 +214,104 @@ export function TableComponent() {
                 </ul>
             </div>
         </div>
+
+        <Props />
+        <PropsConfig />
     </div>;
 }
 
 function randomNumber (min, max) { return Math.floor(Math.random() * (max - min + 1) + min); }
+
+function Props() {
+    return <PropsTable propsList={[
+        {
+            propName: 'columns',
+            propType: 'array',
+            isRequired: true,
+            description: 'A list of columns defintion. Each defintion is an object with the following properties: prop, title and width.'
+        },
+        {
+            propName: 'entries',
+            propType: 'array',
+            isRequired: true,
+            description: 'A list of objects that will be used to generate the rows.'
+        },
+        {
+            propName: 'config',
+            propType: 'array',
+            isRequired: false,
+            description: 'An object with the properties described in the table below.'
+        },
+    ]} />;
+}
+
+function PropsConfig() {
+    return <PropsTable title='config' propsList={[
+        {
+            propName: 'padding',
+            propType: 'number',
+            default: 9,
+            description: 'Table cell padding, both for header and body.'
+        },
+        {
+            propName: 'singleLine',
+            propType: 'boolean',
+            default: 'false',
+            description: 'If true, will not go on a new line and will use ellipses to truncate the value instead.' +
+                'This has to be set to true if using pinned columns.'
+        },
+        {
+            propName: 'borderType',
+            propType: 'string',
+            default: 'row',
+            description: <div>
+                Set the border type. Following values are accepted:
+                <ul>
+                    <li><pre className="ui-text__monospace">undefined</pre></li>
+                    <li><pre className="ui-text__monospace">row</pre></li>
+                    <li><pre className="ui-text__monospace">cell</pre></li>
+                </ul>
+            </div>},
+        {
+            propName: 'height',
+            propType: 'number',
+            description: 'Set the height of the table container.'
+        },
+        {
+            propName: 'headerController',
+            propType: 'boolean',
+            default: 'true',
+            description: 'Enable the header controller, which allows to sort or pin columns.'
+        },
+        {
+            propName: 'verticalAligment',
+            propType: 'string',
+            default: 'middle',
+            description: <div>
+                Set the vertical alignment of Body cells. Accepted values are:
+                <ul>
+                    <li><pre className="ui-text__monospace">top</pre></li>
+                    <li><pre className="ui-text__monospace">middle</pre></li>
+                    <li><pre className="ui-text__monospace">bottom</pre></li>
+                </ul>
+            </div>
+        },
+        {
+            propName: 'pagination',
+            propType: 'boolean',
+            default: 'false',
+            description: 'Enable pagination.'
+        },
+        {
+            propName: 'pageController',
+            propType: 'object',
+            description: <div>
+                An object with the following properties:
+                <ul>
+                    <li><pre className="ui-text__monospace">visible</pre>: shows page controller (under the table)</li>
+                    <li><pre className="ui-text__monospace">style</pre>: can be `collapsed` (all aligned to the right) or `expanded` (spread over all the width)</li>
+                </ul>
+            </div>
+        },
+    ]} />;
+}
