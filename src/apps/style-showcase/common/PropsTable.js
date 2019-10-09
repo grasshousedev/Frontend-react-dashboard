@@ -25,7 +25,7 @@ export function PropsTable({ propsList, title='Props', widths }) {
         headerController: false,
     };
 
-    return <div>
+    return <div className="ui-text__block">
         <h2>{title}</h2>
         <Table columns={columns} entries={entries} config={config} />
     </div>;
