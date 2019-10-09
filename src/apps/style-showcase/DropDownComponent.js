@@ -25,13 +25,7 @@ const sampleDropDownHover = `const Trigger = <i className="fas fa-cog" style={{ 
 
 export function DropDownComponent() {
     return <Fragment>
-        <h2>Buttons</h2>
-        <h3>Showcase</h3>
-        <p className="display-flex">
-            <button className="ui-button">Button</button>
-            <button className="ui-button ui-button--small">Button</button>
-            <button className="ui-button ui-button--small" disabled>Button</button>
-        </p>
+        <h2>DropDowns</h2>
 
         <h3>Component usage</h3>
         <div>
