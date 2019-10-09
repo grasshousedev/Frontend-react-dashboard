@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import hljs from 'highlight.js/lib/highlight';
-//import hljs from 'highlight.js';
-import 'highlight.js/styles/hybrid.css';
+
+import 'highlight.js/styles/atom-one-dark-reasonable.css';
 
 const registeredLanguages = {};
 
@@ -88,5 +88,5 @@ CodeHighlight.propTypes = {
 };
 
 CodeHighlight.defaultProps = {
-    language: 'javascript',
+    language: 'jsx',
 };
