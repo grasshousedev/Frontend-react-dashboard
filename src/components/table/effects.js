@@ -34,8 +34,7 @@ export function useScrollSync(master, elementsToSync, scrollMaster, sync, onChan
 }
 
 
-export function useTableElements(tableContainerRef, tableHeaderContainerRef, tableBodyContainerRef, columns, config, setTableStyleState) {
-    const containerSize = tableContainerRef.current ? tableContainerRef.current.clientWidth : 0;
+export function useTableElements(tableHeaderContainerRef, tableBodyContainerRef, columns, config, setTableStyleState, windowWidth) {
 
     useEffect(() => {
         if (tableHeaderContainerRef.current && tableBodyContainerRef.current) {
@@ -59,7 +58,7 @@ export function useTableElements(tableContainerRef, tableHeaderContainerRef, tab
 
             setTableStyleState(tableStyleState => ({ ...tableStyleState, ...newTableStyleState }));
         }
-    }, [columns, config, containerSize]); // eslint-disable-line
+    }, [columns, config, windowWidth]); // eslint-disable-line
 };
 
 export function useHover(ref) {
@@ -83,4 +82,27 @@ export function useHover(ref) {
     }, [ref.current]); // eslint-disable-line
 
     return isHovered;
+}
+
+export function useWindowSize() {
+    const isClient = typeof window === 'object';
+
+    function getWindowSize() {
+        if (!isClient) return { width: undefined, height: undefined };
+
+        return { width: window.innerWidth, height: window.innerHeight };
+    };
+    const [size, setSize] = useState(getWindowSize());
+
+    useEffect(() => {
+        if (!isClient) return;
+
+        const updateSize = () => setSize(getWindowSize);
+        window.addEventListener('resize', updateSize);
+        return () => {
+            window.removeEventListener('resize', updateSize);
+        };
+    }, []); // eslint-disable-line
+
+    return size;
 }

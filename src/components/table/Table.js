@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { MainTable } from './MainTable';
 import { PageController } from './PageController';
 import { PinnedLeftTable } from './PinnedLeftTable';
-import { useScrollSync, useTableElements } from './effects';
+import { useScrollSync, useTableElements, useWindowSize } from './effects';
 import { getComponentContainerStyleAndClasses, getColumnsStyle, getCellsStyle } from './stylesAndClasses/table';
 import { sortHandler } from './utils/sorting';
 
@@ -47,7 +47,9 @@ export function Table({ columns, entries, config }) {
     useScrollSync(tableBodyContainerRef, [pinnedLeftTableBodyContainerRef], scrollMaster, { scrollTop: true });
     useScrollSync(pinnedLeftTableBodyContainerRef, [tableBodyContainerRef], scrollMaster, { scrollTop: true });
 
-    useTableElements(tableContainerRef, tableHeaderContainerRef, tableBodyContainerRef, columns, config, setTableStyleState);
+    const { width: windowWidth } = useWindowSize();
+
+    useTableElements(tableHeaderContainerRef, tableBodyContainerRef, columns, config, setTableStyleState, windowWidth);
 
     const pinnedLeft = tableStyleState.pinnedLeft
         ? columns.filter(col => tableStyleState.pinnedLeft.includes(col.prop))
