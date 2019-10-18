@@ -48,11 +48,11 @@ const tabsSample = [
 `;
 
 
-export function TabsComponent () {    
+export function TabsComponent () {
     return <Fragment>
         <h2>Tabs</h2>
         <Tabs tabs={tabsSample} />
-        <CodeHighlight>
+        <CodeHighlight language="javascript">
             {sample}
         </CodeHighlight>
     </Fragment>;
