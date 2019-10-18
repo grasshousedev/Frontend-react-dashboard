@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Table } from 'components/table/Table';
+import { Block } from 'components/ui/Blocks';
+import { Monospace } from 'components/ui/Text';
 
-export function PropsTable({ propsList, title='Props', widths }) {
+export function PropsTable({ propsList, title='', widths }) {
     const columns = [
         { prop: 'propName', title: 'Name', width: widths && widths.propName ? widths.propName : 200, },
         { prop: 'propType', title: 'Type', width: widths && widths.propType ? widths.propType : 100, },
@@ -15,7 +17,11 @@ export function PropsTable({ propsList, title='Props', widths }) {
     const entries = propsList.map(prop => {
         return {
             ...prop,
-            default: typeof prop.default !== 'object' ? <pre className="ui-text__monospace">{prop.default}</pre> : prop.default,
+            default: typeof prop.default === 'string'
+                ? <Monospace>{prop.default}</Monospace>
+                : prop.default && prop.default.map
+                    ? prop.default.map(p => <Monospace key={p}>{p}</Monospace>)
+                    : prop.default,
             isRequired: prop.isRequired ? <i className="fa fa-check" /> : '',
         };
     });
@@ -25,10 +31,9 @@ export function PropsTable({ propsList, title='Props', widths }) {
         headerController: false,
     };
 
-    return <div className="ui-text__block">
-        <h2>{title}</h2>
+    return <Block title={title}>
         <Table columns={columns} entries={entries} config={config} />
-    </div>;
+    </Block>;
 }
 
 PropsTable.propTypes = {
