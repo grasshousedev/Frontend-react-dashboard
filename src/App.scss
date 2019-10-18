@@ -1,11 +1,12 @@
 /* Local variables */
 $header-height: 46px;
 $footer-height: 46px;
+$background-color: #f8fafb;
 
 /* Global variables */
+$ui-page-padding: 15px;
 $ui-dashboard-header-height: $header-height;
 $ui-dashboard-footer-height: $footer-height;
-$ui-page-padding: 15px;
 
 $dashboard-menu-height: $header-height;
 
@@ -21,7 +22,7 @@ body {
     font-family: Lato;
     font-weight: 400;
     font-size: $text-small;
-    background-color: white;
+    background-color: $background-color;
     color: $grey-d1;
 }
 
@@ -34,8 +35,7 @@ p {
 }
 
 .dashboard-content {
-    height: calc(100vh - #{($ui-dashboard-header-height + $ui-dashboard-footer-height + $ui-page-padding)});
+    height: calc(100vh - #{($ui-dashboard-header-height + $ui-dashboard-footer-height)});
     overflow: auto;
-    padding-bottom: $ui-page-padding;
-    background-color: $grey-light-l2;
+    background-color: $background-color;
 }
