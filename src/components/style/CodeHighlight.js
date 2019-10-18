@@ -22,11 +22,12 @@ export class CodeHighlight extends Component {
         if (language && !registeredLanguages[language]) {
             try {
                 const languages = [];
-                if (language === 'jsx') {
+
+                if (language === 'javascript') {
                     languages.push('javascript');
                     languages.push('xml');
                 } else {
-                    languages.push([language]);
+                    languages.push(language);
                 }
                 languages.forEach(languageToAdd => {
                     const newLanguage = require(`highlight.js/lib/languages/${languageToAdd}`);
@@ -88,5 +89,5 @@ CodeHighlight.propTypes = {
 };
 
 CodeHighlight.defaultProps = {
-    language: 'jsx',
+    language: 'javascript',
 };
