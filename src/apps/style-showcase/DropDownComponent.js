@@ -41,7 +41,7 @@ export function DropDownComponent() {
                 </DropDown>
             </div>
 
-            <CodeHighlight language="jsx">{sampleDropDown}</CodeHighlight>
+            <CodeHighlight>{sampleDropDown}</CodeHighlight>
         </div>
         <h4>Props</h4>
         <div className="m-b-10">
@@ -62,7 +62,7 @@ export function DropDownComponent() {
                     <DropDown.Entry>Third row</DropDown.Entry>
                 </DropDown>
             </div>
-            <CodeHighlight language="javascript">{sampleDropDownHover}</CodeHighlight>
+            <CodeHighlight>{sampleDropDownHover}</CodeHighlight>
         </div>
         <div className="m-b-20">
             <pre style={{ display: 'inline' }}>position</pre> prop can be used to set the position. By default the value is `auto`: it will be on bottom left by default, or bottom right if the viewport is over.
