@@ -1,9 +1,10 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
+import { PageBody } from 'components/ui/PageBody';
 import { PageHeader } from 'components/ui/PageHeader';
 
-import { Buttons } from './Buttons';
+import { ButtonComponent } from './ButtonComponent';
 import { Colors } from './Colors';
 import { DropDownComponent } from './DropDownComponent';
 import { Typography } from './typography/Typography';
@@ -20,7 +21,7 @@ import { Panels } from './Panels';
 import { TableComponent } from './TableComponent';
 
 const SECTIONS = {
-    BUTTONS: 'buttons',
+    BUTTON_COMPONENT: 'button-component',
     COLORS: 'colors',
     CARDS: 'cards',
     DROP_DOWN_COMPONENT: 'drop-down-component',
@@ -35,87 +36,78 @@ const SECTIONS = {
     TYPOGRAPHY: 'typography',
 };
 
-export class StyleShowcase extends Component {
-    state = {
-        sectionName: SECTIONS.DROP_DOWN_COMPONENT,
-    }
+export function StyleShowcase() {
+    const pageBodyRef = useRef(null);
+    const [sectionName, setSectionName] = useState(SECTIONS.BUTTON_COMPONENT);
 
-    setSection = (sectionName) => {
-        this.setState({ sectionName });
-    }
+    const controls = <Controls setSectionName={setSectionName} sectionName={sectionName} />;
 
-    render() {
-        const { sectionName } = this.state;
-
-        const controls = <Controls setSection={this.setSection} sectionName={sectionName} />;
-
-        return <div>
-            <PageHeader controls={controls}>Style Showcase</PageHeader>
-            <div className="ui-page-body">
-                {sectionName === SECTIONS.BUTTONS && <Buttons />}
-                {sectionName === SECTIONS.CARDS && <CardsComponent />}
-                {sectionName === SECTIONS.COLORS && <Colors />}
-                {sectionName === SECTIONS.DROP_DOWN_COMPONENT && <DropDownComponent />}
-                {sectionName === SECTIONS.GRID_COMPONENT && <GridComponent />}
-                {sectionName === SECTIONS.LOADERS && <Loaders />}
-                {sectionName === SECTIONS.MODAL && <ModalComponent />}
-                {sectionName === SECTIONS.PANELS && <Panels />}
-                {sectionName === SECTIONS.TABLE_COMPONENT && <TableComponent />}
-                {sectionName === SECTIONS.TABS_COMPONENT && <TabsComponent />}
-                {sectionName === SECTIONS.TILES && <Tiles />}
-                {sectionName === SECTIONS.TIMELINE_COMPONENT && <TimelineComponent />}
-                {sectionName === SECTIONS.TYPOGRAPHY && <Typography />}
-            </div>
-        </div>;
-    }
+    return <Fragment>
+        <PageHeader controls={controls} scrollRef={pageBodyRef}>Style Showcase</PageHeader>
+        <PageBody fullHeight={true} withPageHeader={true} pageBodyRef={pageBodyRef}>
+            {sectionName === SECTIONS.BUTTON_COMPONENT && <ButtonComponent />}
+            {sectionName === SECTIONS.CARDS && <CardsComponent />}
+            {sectionName === SECTIONS.COLORS && <Colors />}
+            {sectionName === SECTIONS.DROP_DOWN_COMPONENT && <DropDownComponent />}
+            {sectionName === SECTIONS.GRID_COMPONENT && <GridComponent />}
+            {sectionName === SECTIONS.LOADERS && <Loaders />}
+            {sectionName === SECTIONS.MODAL && <ModalComponent />}
+            {sectionName === SECTIONS.PANELS && <Panels />}
+            {sectionName === SECTIONS.TABLE_COMPONENT && <TableComponent />}
+            {sectionName === SECTIONS.TABS_COMPONENT && <TabsComponent />}
+            {sectionName === SECTIONS.TILES && <Tiles />}
+            {sectionName === SECTIONS.TIMELINE_COMPONENT && <TimelineComponent />}
+            {sectionName === SECTIONS.TYPOGRAPHY && <Typography />}
+        </PageBody>
+    </Fragment>;
 };
 
-function Controls({ sectionName, setSection }) {
+function Controls({ sectionName, setSectionName }) {
     const baseClass = 'ui-button ui-button--small';
     return <Fragment>
         <button
-            className={`${baseClass} ${sectionName === SECTIONS.BUTTONS ? 'ui-button--primary' : ''}`}
-            onClick={() => setSection(SECTIONS.BUTTONS)}>Buttons</button>
+            className={`${baseClass} ${sectionName === SECTIONS.BUTTON_COMPONENT ? 'ui-button--primary' : ''}`}
+            onClick={() => setSectionName(SECTIONS.BUTTON_COMPONENT)}>Buttons</button>
         <button
             className={`${baseClass} ${sectionName === SECTIONS.CARDS ? 'ui-button--primary' : ''}`}
-            onClick={() => setSection(SECTIONS.CARDS)}>Cards</button>
+            onClick={() => setSectionName(SECTIONS.CARDS)}>Cards</button>
         <button
             className={`${baseClass} ${sectionName === SECTIONS.COLORS ? 'ui-button--primary' : ''}`}
-            onClick={() => setSection(SECTIONS.COLORS)}>Colors</button>
+            onClick={() => setSectionName(SECTIONS.COLORS)}>Colors</button>
         <button
             className={`${baseClass} ${sectionName === SECTIONS.DROP_DOWN_COMPONENT ? 'ui-button--primary' : ''}`}
-            onClick={() => setSection(SECTIONS.DROP_DOWN_COMPONENT)}>DropDowns</button>
+            onClick={() => setSectionName(SECTIONS.DROP_DOWN_COMPONENT)}>DropDowns</button>
         <button
             className={`${baseClass} ${sectionName === SECTIONS.TYPOGRAPHY ? 'ui-button--primary' : ''}`}
-            onClick={() => setSection(SECTIONS.TYPOGRAPHY)}>Typography</button>
+            onClick={() => setSectionName(SECTIONS.TYPOGRAPHY)}>Typography</button>
         <button
             className={`${baseClass} ${sectionName === SECTIONS.GRID_COMPONENT ? 'ui-button--primary' : ''}`}
-            onClick={() => setSection(SECTIONS.GRID_COMPONENT)}>Grid</button>
+            onClick={() => setSectionName(SECTIONS.GRID_COMPONENT)}>Grid</button>
         <button
             className={`${baseClass} ${sectionName === SECTIONS.PANELS ? 'ui-button--primary' : ''}`}
-            onClick={() => setSection(SECTIONS.PANELS)}>Panels</button>
+            onClick={() => setSectionName(SECTIONS.PANELS)}>Panels</button>
         <button
             className={`${baseClass} ${sectionName === SECTIONS.TABS_COMPONENT ? 'ui-button--primary' : ''}`}
-            onClick={() => setSection(SECTIONS.TABS_COMPONENT)}>Tabs</button>
+            onClick={() => setSectionName(SECTIONS.TABS_COMPONENT)}>Tabs</button>
         <button
             className={`${baseClass} ${sectionName === SECTIONS.TABLE_COMPONENT ? 'ui-button--primary' : ''}`}
-            onClick={() => setSection(SECTIONS.TABLE_COMPONENT)}>Table</button>
+            onClick={() => setSectionName(SECTIONS.TABLE_COMPONENT)}>Table</button>
         <button
             className={`${baseClass} ${sectionName === SECTIONS.TILES ? 'ui-button--primary' : ''}`}
-            onClick={() => setSection(SECTIONS.TILES)}>Tiles</button>
+            onClick={() => setSectionName(SECTIONS.TILES)}>Tiles</button>
         <button
             className={`${baseClass} ${sectionName === SECTIONS.TIMELINE_COMPONENT ? 'ui-button--primary' : ''}`}
-            onClick={() => setSection(SECTIONS.TIMELINE_COMPONENT)}>Timeline</button>
+            onClick={() => setSectionName(SECTIONS.TIMELINE_COMPONENT)}>Timeline</button>
         <button
             className={`${baseClass} ${sectionName === SECTIONS.LOADERS ? 'ui-button--primary' : ''}`}
-            onClick={() => setSection(SECTIONS.LOADERS)}>Loaders</button>
+            onClick={() => setSectionName(SECTIONS.LOADERS)}>Loaders</button>
         <button
             className={`${baseClass} ${sectionName === SECTIONS.MODAL ? 'ui-button--primary' : ''}`}
-            onClick={() => setSection(SECTIONS.MODAL)}>Modals</button>
+            onClick={() => setSectionName(SECTIONS.MODAL)}>Modals</button>
     </Fragment>;
 }
 
 Controls.propTypes = {
     sectionName: PropTypes.string,
-    setSection: PropTypes.func,
+    setSectionName: PropTypes.func,
 };
