@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export function Button ({ children, onClick, disabled, classes }) {
-    const props = { disabled };
-    if (onClick) props.onClick = onClick;
+export function Button ({ children, onClick, disabled, classes, ...rest }) {
+    const buttonProps = { disabled };
+    if (onClick) buttonProps.onClick = onClick;
 
     const extraClasses = classes
         ? Array.isArray(classes)
@@ -11,10 +11,9 @@ export function Button ({ children, onClick, disabled, classes }) {
             : `ui-button--${classes}`
         : '';
 
-    return <button
-        className={`ui-button ${extraClasses}`}
-        {...props}
-    >
+    const buttonClass = `ui-button ${extraClasses}`;
+
+    return <button className={buttonClass} {...buttonProps} {...rest}>
         {children}
     </button>;
 }
@@ -27,6 +26,7 @@ Button.propTypes = {
     onClick: PropTypes.func,
     disabled: PropTypes.bool,
     classes: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
+    className: PropTypes.string,
 };
 
 Button.defaultProps = {

@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 
-export function Section({ children, title, isLast=false }) {
+export function Section({ children, title, isLast=false, ...rest }) {
     const className = `ui-section ${isLast ? 'ui-section--last' : ''}`;
 
-    return <div className={className}>
+    return <div className={className} {...rest}>
         {title && typeof title === 'string' && <h1 className="ui-title">{title}</h1>}
         {title && typeof title !== 'string' && {title}}
         {children}
