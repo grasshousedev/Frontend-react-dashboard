@@ -4,8 +4,9 @@ import { CodeHighlight } from 'components/style/CodeHighlight';
 import { Button } from 'components/ui/Button';
 import { Block, RowBlock, ColumnBlock } from 'components/ui/Blocks';
 import { Monospace } from 'components/ui/Text';
-import { PropsTable } from './common/PropsTable';
 import { Section } from 'components/ui/Section';
+
+import { PropsTable } from '../common/PropsTable';
 
 const sampleButton = `<button className="ui-button">Button label</button>`;
 const smallButton = `<button className="ui-button ui-button--small">Small button</button>`;
