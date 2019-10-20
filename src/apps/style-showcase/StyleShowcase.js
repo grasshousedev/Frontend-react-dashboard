@@ -1,5 +1,4 @@
 import React, { Fragment, useState, useRef } from 'react';
-import PropTypes from 'prop-types';
 
 import { PageBody } from 'components/ui/PageBody';
 import { PageHeader } from 'components/ui/PageHeader';
@@ -19,6 +18,8 @@ import { ModalComponent } from './ModalComponent';
 import './style-showcase.scss';
 import { Panels } from './Panels';
 import { TableComponent } from './TableComponent';
+import { RowBlock, ColumnBlock } from 'components/ui/Blocks';
+import { Navigator } from 'components/ui/Navigator';
 
 const SECTIONS = {
     BUTTON_COMPONENT: { component: ButtonComponent, label: 'Buttons' },
@@ -40,29 +41,61 @@ export function StyleShowcase() {
     const pageBodyRef = useRef(null);
     const [sectionName, setSectionName] = useState('BUTTON_COMPONENT');
 
-    const controls = <Controls setSectionName={setSectionName} sectionName={sectionName} />;
     const SelectedComponent = SECTIONS[sectionName].component;
 
+    const getItem = (section) => {
+        return {
+            ...SECTIONS[section],
+            key: section,
+            onClick: () => setSectionName(section),
+        };
+    };
+
+    const sections = [
+        {
+            title: 'Typography & Style',
+            items: [
+                getItem('TYPOGRAPHY'),
+                getItem('PANELS'),
+                getItem('COLORS'),
+            ]
+        },
+        {
+            title: 'Components',
+            items: [
+                getItem('BUTTON_COMPONENT'),
+                getItem('DROP_DOWN_COMPONENT'),
+                getItem('CARDS'),
+                getItem('TILES'),
+                getItem('LOADERS'),
+                getItem('TABS_COMPONENT'),
+                getItem('MODAL'),
+            ]
+        },
+        {
+            title: 'Data Visualization',
+            items: [
+                getItem('TABLE_COMPONENT'),
+                getItem('TIMELINE_COMPONENT'),
+            ]
+        },
+    ];
+
     return <Fragment>
-        <PageHeader controls={controls} scrollRef={pageBodyRef}>Style Showcase</PageHeader>
+        <PageHeader scrollRef={pageBodyRef}>Style Showcase</PageHeader>
         <PageBody fullHeight={true} withPageHeader={true} pageBodyRef={pageBodyRef}>
-            <SelectedComponent />
+            <RowBlock>
+                <ColumnBlock className="col-sm-12 col-md-10">
+                    <SelectedComponent />
+                </ColumnBlock>
+                <ColumnBlock className="col-sm-12 col-md-2 first-sm first-xs last-md">
+                    <Navigator
+                        selectedKey={sectionName}
+                        style={{ marginBottom: 15 }}
+                        sections={sections}
+                    />
+                </ColumnBlock>
+            </RowBlock>
         </PageBody>
     </Fragment>;
-};
-
-function Controls({ sectionName, setSectionName }) {
-    const baseClass = 'ui-button ui-button--small';
-    return <Fragment>
-        {Object.keys(SECTIONS).map(section => {
-        return <button key={section}
-            className={`${baseClass} ${sectionName === section ? 'ui-button--primary' : ''}`}
-            onClick={() => setSectionName(section)}>{SECTIONS[section].label}</button>;
-    })}
-    </Fragment>;
-}
-
-Controls.propTypes = {
-    sectionName: PropTypes.string,
-    setSectionName: PropTypes.func,
 };

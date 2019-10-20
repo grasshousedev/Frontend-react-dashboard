@@ -26,7 +26,7 @@ export function ButtonComponent() {
         <Section title="Buttons">
             <Block title="Showcase" isOutstanding={true}>
                 <RowBlock>
-                    <ColumnBlock className="col-xs-12 col-sm-4">
+                    <ColumnBlock>
                         <p className="display-flex">
                             <button className="ui-button">Button</button>
                             <button className="ui-button ui-button--small">Button</button>
@@ -48,11 +48,9 @@ export function ButtonComponent() {
                             <button className="ui-button ui-button--negative ui-button--small" disabled>Button</button>
                         </p>
                     </ColumnBlock>
-                    <ColumnBlock className="col-xs-12 col-sm-4">
+                    <ColumnBlock>
                         <h3 className="ui-title">Class</h3>
                         <CodeHighlight language="xml">{sampleButton}</CodeHighlight>
-                    </ColumnBlock>
-                    <ColumnBlock className="col-xs-12 col-sm-4">
                         <h3 className="ui-title">Component</h3>
                         <CodeHighlight language="javascript">{sampleComponentButton}</CodeHighlight>
                     </ColumnBlock>
