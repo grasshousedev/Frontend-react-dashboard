@@ -3,9 +3,9 @@ import React, { Fragment, useState, useRef } from 'react';
 import { PageBody } from 'components/ui/PageBody';
 import { PageHeader } from 'components/ui/PageHeader';
 
-import { ButtonComponent } from './components/Button';
+import { ShowCaseButton } from './components/ShowCaseButton';
+import { ShowCaseDropDown } from './components/ShowCaseDropDown';
 import { Colors } from './Colors';
-import { DropDownComponent } from './DropDownComponent';
 import { Typography } from './typography/Typography';
 import { GridComponent } from './GridComponent';
 import { TabsComponent } from './TabsComponent';
@@ -22,10 +22,10 @@ import { RowBlock, ColumnBlock } from 'components/ui/Blocks';
 import { Navigator } from 'components/ui/Navigator';
 
 const SECTIONS = {
-    BUTTON_COMPONENT: { component: ButtonComponent, label: 'Buttons' },
+    BUTTON_COMPONENT: { component: ShowCaseButton, label: 'Buttons' },
     CARDS: { component: CardsComponent, label: 'Cards' },
     COLORS: { component: Colors, label: 'Colors' },
-    DROP_DOWN_COMPONENT: { component: DropDownComponent, label: 'Drop Downs' },
+    DROP_DOWN_COMPONENT: { component: ShowCaseDropDown, label: 'Drop Downs' },
     GRID_COMPONENT: { component: GridComponent, label: 'Grids' },
     LOADERS: { component: Loaders, label: 'Loaders' },
     MODAL: { component: ModalComponent, label: 'Modals' },
@@ -39,7 +39,7 @@ const SECTIONS = {
 
 export function StyleShowcase() {
     const pageBodyRef = useRef(null);
-    const [sectionName, setSectionName] = useState('BUTTON_COMPONENT');
+    const [sectionName, setSectionName] = useState('DROP_DOWN_COMPONENT');
 
     const SelectedComponent = SECTIONS[sectionName].component;
 
@@ -85,10 +85,10 @@ export function StyleShowcase() {
         <PageHeader scrollRef={pageBodyRef}>Style Showcase</PageHeader>
         <PageBody fullHeight={true} withPageHeader={true} pageBodyRef={pageBodyRef}>
             <RowBlock>
-                <ColumnBlock className="col-sm-12 col-md-10">
+                <ColumnBlock className="col-sm-12 col-md-9 col-lg-10">
                     <SelectedComponent />
                 </ColumnBlock>
-                <ColumnBlock className="col-sm-12 col-md-2 first-sm first-xs last-md">
+                <ColumnBlock className="col-sm-12 col-md-3 col-lg-2 first-sm first-xs last-md">
                     <Navigator
                         selectedKey={sectionName}
                         style={{ marginBottom: 15 }}

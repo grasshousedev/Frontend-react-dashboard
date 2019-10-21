@@ -1,14 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-const DROPDOWN_CLASS = 'ui-drop-down';
+const DROPDOWN_CLASS = 'ui-dropdown';
 const OUTER_CONTAINER_CLASS = `${DROPDOWN_CLASS}__outer-container`;
 const CONTAINER_CLASS = `${DROPDOWN_CLASS}__container`;
 const TRIGGER_CLASS = `${DROPDOWN_CLASS}__trigger`;
 const ENTRY_CLASS = `${DROPDOWN_CLASS}__entry`;
 const DIVIDER_CLASS = `${DROPDOWN_CLASS}__divider`;
 
-const POSITIONS = {
+export const DROPDOWN_POSITIONS = {
     AUTO: 'auto',
     TOP_LEFT: 'top-left',
     TOP_RIGHT: 'top-right',
@@ -17,10 +17,11 @@ const POSITIONS = {
 };
 
 
-export function DropDown({ children, trigger, triggerOn='click', position='auto' }) {
+export function DropDown({ children, trigger, triggerOn='click', position='auto', persist=false }) {
     const containerRef = useRef(null);
+    const triggerRef = useRef(null);
 
-    const initialState = { visible: false, top: 0, left: undefined, controllerWidth: 0 };
+    const initialState = { visible: false, top: 0, left: undefined, controllerWidth: 0, triggerRef, persist };
     const [state, setState] = useState(initialState);
 
     useAmendedPosition(state, setState, containerRef, position);
@@ -33,11 +34,15 @@ export function DropDown({ children, trigger, triggerOn='click', position='auto'
         triggerProps.onClick = e => toggleMenuVisibility(e, state, setState);
     if (triggerOn === 'hover') {
         triggerProps.onMouseEnter = e => toggleMenuVisibility(e, state, setState);
-        triggerProps.onMouseLeave = e => setState(st => ({ ...st, visible: false }));
+        if (!persist) {
+            triggerProps.onMouseLeave = e => setState(st => ({ ...st, visible: false }));
+        } else {
+            triggerProps.onClick = e => toggleMenuVisibility(e, state, setState);
+        }
     }
 
     return <div className={OUTER_CONTAINER_CLASS}>
-        <div className={TRIGGER_CLASS} {...triggerProps}>
+        <div className={TRIGGER_CLASS} {...triggerProps} ref={triggerRef}>
             {trigger}
             <div ref={containerRef} className={containerClass} style={containerStyle}>
                 {children}
@@ -50,17 +55,18 @@ DropDown.propTypes = {
     trigger: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node
-    ]),
+    ]).isRequired,
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node
     ]),
     triggerOn: PropTypes.oneOf(['click', 'hover']),
     position: PropTypes.oneOf([
-        POSITIONS.AUTO,
-        POSITIONS.TOP_LEFT, POSITIONS.TOP_RIGHT,
-        POSITIONS.BOTTOM_LEFT, POSITIONS.BOTTOM_RIGHT,
+        DROPDOWN_POSITIONS.AUTO,
+        DROPDOWN_POSITIONS.TOP_LEFT, DROPDOWN_POSITIONS.TOP_RIGHT,
+        DROPDOWN_POSITIONS.BOTTOM_LEFT, DROPDOWN_POSITIONS.BOTTOM_RIGHT,
     ]),
+    persist: PropTypes.bool,
 };
 
 
@@ -99,14 +105,14 @@ function useAmendedPosition(state, setState, containerRef, position) {
 
             const amendedState = {};
 
-            const mustBePlacedLeft = (lastCoord > leftBound && position === POSITIONS.AUTO) ||
-                [POSITIONS.TOP_LEFT, POSITIONS.BOTTOM_LEFT].includes(position);
+            const mustBePlacedLeft = (lastCoord > leftBound && position === DROPDOWN_POSITIONS.AUTO) ||
+                [DROPDOWN_POSITIONS.TOP_LEFT, DROPDOWN_POSITIONS.BOTTOM_LEFT].includes(position);
             if (mustBePlacedLeft) {
                 const leftPos = state.targetLeft - dropDownRect.width + state.controllerWidth;
                 if (state.left !== leftPos) amendedState.left = leftPos;
             }
 
-            const mustBePlacedTop = [POSITIONS.TOP_LEFT, POSITIONS.TOP_RIGHT].includes(position);
+            const mustBePlacedTop = [DROPDOWN_POSITIONS.TOP_LEFT, DROPDOWN_POSITIONS.TOP_RIGHT].includes(position);
             if (mustBePlacedTop) {
                 const topPos = state.targetTop - dropDownRect.height;
                 if (state.top !== topPos) amendedState.top = topPos;
@@ -116,7 +122,10 @@ function useAmendedPosition(state, setState, containerRef, position) {
                 setState({ ...state, ...amendedState });
             }
 
-            const closeMenu = () => setState({ ...state, visible: false });
+            const closeMenu = e => {
+                if (!state.persist || e.target === state.triggerRef)
+                setState({ ...state, visible: false });
+            };
             document.addEventListener('click', closeMenu);
 
             return () => {

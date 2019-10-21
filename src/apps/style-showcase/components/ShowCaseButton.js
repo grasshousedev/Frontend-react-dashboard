@@ -21,7 +21,7 @@ const classesComponentButton = `<Button classes={["small", "primary"]}>Small but
 const classesStringComponentButton = `<Button classes="small">Small button</Button>`;
 const disabledComponentButton = `<Button classes="small" disabled>Disabled button</Button>`;
 
-export function ButtonComponent() {
+export function ShowCaseButton() {
     return <Fragment>
         <Section title="Buttons">
             <Block title="Showcase" isOutstanding={true}>
