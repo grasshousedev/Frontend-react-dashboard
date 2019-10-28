@@ -227,7 +227,7 @@ export function ShowCaseTable() {
 }
 
 function Props() {
-    return <PropsTable propsList={[
+    return <PropsTable title="Props" propsList={[
         {
             propName: 'columns',
             propType: 'array',
@@ -250,7 +250,7 @@ function Props() {
 }
 
 function PropsConfig() {
-    return <PropsTable title='config' propsList={[
+    return <PropsTable title="config" propsList={[
         {
             propName: 'padding',
             propType: 'number',
