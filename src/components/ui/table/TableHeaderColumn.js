@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import { DropDown } from '../ui/DropDown';
+import { DropDown } from '../DropDown';
 
 import { UI_TABLE_BASE_CLASS } from './constants';
 import { useHover } from './effects';

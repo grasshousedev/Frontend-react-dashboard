@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Table } from 'components/table/Table';
+import { Table } from 'components/ui/table/Table';
 import { Block } from 'components/ui/Blocks';
 import { Monospace } from 'components/ui/Text';
 

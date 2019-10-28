@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Table } from 'components/table/Table';
+import { Table } from 'components/ui/table/Table';
 import { CodeHighlight } from 'components/style/CodeHighlight';
 import { PropsTable } from '../common/PropsTable';
 import { Section } from 'components/ui/Section';
