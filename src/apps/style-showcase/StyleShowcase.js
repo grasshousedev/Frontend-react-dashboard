@@ -7,11 +7,11 @@ import { ShowCaseButton } from './components/ShowCaseButton';
 import { ShowCaseCard } from './components/ShowCaseCard';
 import { ShowCaseDropDown } from './components/ShowCaseDropDown';
 import { ShowCaseLoaders } from './components/ShowCaseLoaders';
+import { ShowCaseTabs } from './components/ShowCaseTabs';
 import { ShowCaseTiles } from './components/ShowCaseTiles';
 import { Colors } from './Colors';
 import { Typography } from './typography/Typography';
 import { GridComponent } from './GridComponent';
-import { TabsComponent } from './TabsComponent';
 import { TimelineComponent } from './TimelineComponent';
 import { ModalComponent } from './ModalComponent';
 
@@ -30,7 +30,7 @@ const SECTIONS = {
     LOADERS: { component: ShowCaseLoaders, label: 'Loaders' },
     MODAL: { component: ModalComponent, label: 'Modals' },
     PANELS: { component: Panels, label: 'Panels' },
-    TABS_COMPONENT: { component: TabsComponent, label: 'Tabs' },
+    TABS: { component: ShowCaseTabs, label: 'Tabs' },
     TABLE_COMPONENT: { component: TableComponent, label: 'Tables' },
     TILES: { component: ShowCaseTiles, label: 'Tiles' },
     TIMELINE_COMPONENT: { component: TimelineComponent, label: 'Timeline' },
@@ -39,7 +39,7 @@ const SECTIONS = {
 
 export function StyleShowcase() {
     const pageBodyRef = useRef(null);
-    const [sectionName, setSectionName] = useState('LOADERS');
+    const [sectionName, setSectionName] = useState('TABS');
 
     const SelectedComponent = SECTIONS[sectionName].component;
 
@@ -68,7 +68,7 @@ export function StyleShowcase() {
                 getItem('CARDS'),
                 getItem('TILES'),
                 getItem('LOADERS'),
-                getItem('TABS_COMPONENT'),
+                getItem('TABS'),
                 getItem('MODAL'),
             ]
         },

@@ -24,12 +24,16 @@ TabHeader.propTypes = {
     setSelectedTab: PropTypes.func.isRequired,
 };
 
-export function TabContent({ tabs, selectedTab }) {
+export function TabContent({ tabs, selectedTab, compact }) {
+    const compactClassName = compact ? 'ui-tabs__content--compact' : '';
+
     return <div className="ui-tabs__content-container">
         {tabs.map((tab, index) => {
-            const classSelected = index + 1 === selectedTab ? ' ui-tabs__content--selected' : '';
+            const selectedClassName = index + 1 === selectedTab ? 'ui-tabs__content--selected' : '';
+            const contentClassName = `ui-tabs__content ${selectedClassName} ${compactClassName}`;
+
             return <div key={`ui-tabs-content-${index}`}
-                className={`ui-tabs__content${classSelected}`}
+                className={contentClassName}
             >{tab.content}</div>;
         })}
     </div>;
@@ -42,18 +46,19 @@ TabContent.propTypes = {
         })
     ).isRequired,
     selectedTab: PropTypes.number.isRequired,
+    compact: PropTypes.bool,
 };
 
-export function Tabs({ tabs, firstOpen = 1 }) {
+export function Tabs({ tabs, firstOpen=1, compact=false, ...rest }) {
     if (firstOpen > tabs.length) {
         throw new Exception(`firstOpen (${firstOpen}) should be less or equal to the total number of tabs (${tabs.length})`);
     }
 
     const [selected, setSelected] = useState(firstOpen);
 
-    return <div className="ui-tabs__container">
+    return <div className="ui-tabs__container" {...rest}>
         <TabHeader tabs={tabs} selectedTab={selected} setSelectedTab={setSelected} />
-        <TabContent tabs={tabs} selectedTab={selected} />
+        <TabContent tabs={tabs} selectedTab={selected} compact={compact} />
     </div>;
 }
 
@@ -61,8 +66,9 @@ Tabs.propTypes = {
     tabs: PropTypes.arrayOf(
         PropTypes.shape({
             label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
-            content: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,            
+            content: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
         })
     ).isRequired,
     firstOpen: PropTypes.number,
+    compact: PropTypes.bool,
 };
