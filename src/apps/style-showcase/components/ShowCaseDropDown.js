@@ -133,7 +133,7 @@ export function ShowCaseDropDown() {
                 <RowBlock>
                     <ColumnBlock>
                         <p>
-                            The easies way to create a Dropdown is by using the <Monospace>Dropdown</Monospace> component
+                            The easies way to create a Dropdown is by using the <Monospace>Dropdown</Monospace> component.
                         </p>
                         <p>
                             The only required property is <Monospace>trigger</Monospace>, which expects a Node (a string or a component for example).

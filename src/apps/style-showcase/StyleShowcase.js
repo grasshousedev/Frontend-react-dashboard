@@ -4,6 +4,7 @@ import { PageBody } from 'components/ui/PageBody';
 import { PageHeader } from 'components/ui/PageHeader';
 
 import { ShowCaseButton } from './components/ShowCaseButton';
+import { ShowCaseCard } from './components/ShowCaseCard';
 import { ShowCaseDropDown } from './components/ShowCaseDropDown';
 import { Colors } from './Colors';
 import { Typography } from './typography/Typography';
@@ -12,7 +13,6 @@ import { TabsComponent } from './TabsComponent';
 import { TimelineComponent } from './TimelineComponent';
 import { Loaders } from './Loaders';
 import { Tiles } from './Tiles';
-import { CardsComponent } from './CardsComponent';
 import { ModalComponent } from './ModalComponent';
 
 import './style-showcase.scss';
@@ -23,7 +23,7 @@ import { Navigator } from 'components/ui/Navigator';
 
 const SECTIONS = {
     BUTTON_COMPONENT: { component: ShowCaseButton, label: 'Buttons' },
-    CARDS: { component: CardsComponent, label: 'Cards' },
+    CARDS: { component: ShowCaseCard, label: 'Cards' },
     COLORS: { component: Colors, label: 'Colors' },
     DROP_DOWN_COMPONENT: { component: ShowCaseDropDown, label: 'Drop Downs' },
     GRID_COMPONENT: { component: GridComponent, label: 'Grids' },
@@ -39,7 +39,7 @@ const SECTIONS = {
 
 export function StyleShowcase() {
     const pageBodyRef = useRef(null);
-    const [sectionName, setSectionName] = useState('DROP_DOWN_COMPONENT');
+    const [sectionName, setSectionName] = useState('CARDS');
 
     const SelectedComponent = SECTIONS[sectionName].component;
 
