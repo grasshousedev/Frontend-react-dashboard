@@ -10,7 +10,7 @@ export function PropsTable({ propsList, title='', widths }) {
         { prop: 'propName', title: 'Name', width: widths && widths.propName ? widths.propName : 200, },
         { prop: 'propType', title: 'Type', width: widths && widths.propType ? widths.propType : 100, },
         { prop: 'isRequired', title: 'Req.', width: widths && widths.isRequired ? widths.isRequired : 40, },
-        { prop: 'default', title: 'Default', width: widths && widths.isRequired ? widths.isRequired : 150, },
+        { prop: 'default', title: 'Default', width: widths && widths.default ? widths.default : 150, },
         { prop: 'description', title: 'Description', },
     ];
 

@@ -46,10 +46,11 @@ export function useTableElements(tableHeaderContainerRef, tableBodyContainerRef,
 
             if (columns.some(col => !col.width)) {
                 const columnsWidth = columns.reduce((tot, col) => tot += col.width || 0, 0);
-                newTableStyleState.expandableColumnWidth = headerEl.clientWidth
+                const expandableColumnWidth = headerEl.clientWidth
                     - columnsWidth
                     - (SCROLLBAR_SIZE * bodyHasVericalScrollBar)
                 ;
+                newTableStyleState.expandableColumnWidth = Math.max(expandableColumnWidth, 100);
                 newTableStyleState.bodyHasHorizontalScrollBar = false;
             }
             newTableStyleState.totalWidth = columns.reduce((tot, col) => {
