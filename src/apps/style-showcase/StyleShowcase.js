@@ -6,13 +6,13 @@ import { PageHeader } from 'components/ui/PageHeader';
 import { ShowCaseButton } from './components/ShowCaseButton';
 import { ShowCaseCard } from './components/ShowCaseCard';
 import { ShowCaseDropDown } from './components/ShowCaseDropDown';
+import { ShowCaseLoaders } from './components/ShowCaseLoaders';
 import { ShowCaseTiles } from './components/ShowCaseTiles';
 import { Colors } from './Colors';
 import { Typography } from './typography/Typography';
 import { GridComponent } from './GridComponent';
 import { TabsComponent } from './TabsComponent';
 import { TimelineComponent } from './TimelineComponent';
-import { Loaders } from './Loaders';
 import { ModalComponent } from './ModalComponent';
 
 import './style-showcase.scss';
@@ -27,7 +27,7 @@ const SECTIONS = {
     COLORS: { component: Colors, label: 'Colors' },
     DROP_DOWN_COMPONENT: { component: ShowCaseDropDown, label: 'Drop Downs' },
     GRID_COMPONENT: { component: GridComponent, label: 'Grids' },
-    LOADERS: { component: Loaders, label: 'Loaders' },
+    LOADERS: { component: ShowCaseLoaders, label: 'Loaders' },
     MODAL: { component: ModalComponent, label: 'Modals' },
     PANELS: { component: Panels, label: 'Panels' },
     TABS_COMPONENT: { component: TabsComponent, label: 'Tabs' },
@@ -39,7 +39,7 @@ const SECTIONS = {
 
 export function StyleShowcase() {
     const pageBodyRef = useRef(null);
-    const [sectionName, setSectionName] = useState('TILES');
+    const [sectionName, setSectionName] = useState('LOADERS');
 
     const SelectedComponent = SECTIONS[sectionName].component;
 
