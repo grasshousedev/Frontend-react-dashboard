@@ -8,6 +8,7 @@ import { ShowCaseCard } from './components/ShowCaseCard';
 import { ShowCaseDropDown } from './components/ShowCaseDropDown';
 import { ShowCaseLoaders } from './components/ShowCaseLoaders';
 import { ShowCaseModal } from './components/ShowCaseModal';
+import { ShowCaseTable } from './components/ShowCaseTable';
 import { ShowCaseTabs } from './components/ShowCaseTabs';
 import { ShowCaseTiles } from './components/ShowCaseTiles';
 import { Colors } from './Colors';
@@ -17,7 +18,6 @@ import { TimelineComponent } from './TimelineComponent';
 
 import './style-showcase.scss';
 import { Panels } from './Panels';
-import { TableComponent } from './TableComponent';
 import { RowBlock, ColumnBlock } from 'components/ui/Blocks';
 import { Navigator } from 'components/ui/Navigator';
 
@@ -31,7 +31,7 @@ const SECTIONS = {
     MODAL: { component: ShowCaseModal, label: 'Modals' },
     PANELS: { component: Panels, label: 'Panels' },
     TABS: { component: ShowCaseTabs, label: 'Tabs' },
-    TABLE: { component: TableComponent, label: 'Tables' },
+    TABLE: { component: ShowCaseTable, label: 'Tables' },
     TILES: { component: ShowCaseTiles, label: 'Tiles' },
     TIMELINE: { component: TimelineComponent, label: 'Timeline' },
     TYPOGRAPHY: { component: Typography, label: 'Typography' },
@@ -39,7 +39,7 @@ const SECTIONS = {
 
 export function StyleShowcase() {
     const pageBodyRef = useRef(null);
-    const [sectionName, setSectionName] = useState('MODAL');
+    const [sectionName, setSectionName] = useState('TABLE');
 
     const SelectedComponent = SECTIONS[sectionName].component;
 
