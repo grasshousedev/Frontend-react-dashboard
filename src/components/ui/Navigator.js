@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 
 import { propTypeChildren } from 'components/utils';
 
-export function Navigator ({ children, sections, selectedKey, position='right', ...rest }) {
+export function Navigator ({ children, sections, selectedKey, position='right', sticky=true, ...rest }) {
 
-    const navigatorClass = `ui-navigator ui-navigator--${position}`;
+    const stickyClass = sticky ? 'ui-navigator--sticky' : '';
+    const navigatorClass = `ui-navigator ui-navigator--${position} ${stickyClass}`;
 
     const content = sections
         ? buildSections(sections, selectedKey)
@@ -33,6 +34,7 @@ Navigator.propTypes = {
     ),
     selectedKey: PropTypes.string,
     position: PropTypes.oneOf(['left', 'right']),
+    sticky: PropTypes.bool,
 };
 
 
