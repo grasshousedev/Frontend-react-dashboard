@@ -7,13 +7,13 @@ import { ShowCaseButton } from './components/ShowCaseButton';
 import { ShowCaseCard } from './components/ShowCaseCard';
 import { ShowCaseDropDown } from './components/ShowCaseDropDown';
 import { ShowCaseLoaders } from './components/ShowCaseLoaders';
+import { ShowCaseModal } from './components/ShowCaseModal';
 import { ShowCaseTabs } from './components/ShowCaseTabs';
 import { ShowCaseTiles } from './components/ShowCaseTiles';
 import { Colors } from './Colors';
 import { Typography } from './typography/Typography';
 import { GridComponent } from './GridComponent';
 import { TimelineComponent } from './TimelineComponent';
-import { ModalComponent } from './ModalComponent';
 
 import './style-showcase.scss';
 import { Panels } from './Panels';
@@ -22,24 +22,24 @@ import { RowBlock, ColumnBlock } from 'components/ui/Blocks';
 import { Navigator } from 'components/ui/Navigator';
 
 const SECTIONS = {
-    BUTTON_COMPONENT: { component: ShowCaseButton, label: 'Buttons' },
+    BUTTON: { component: ShowCaseButton, label: 'Buttons' },
     CARDS: { component: ShowCaseCard, label: 'Cards' },
     COLORS: { component: Colors, label: 'Colors' },
-    DROP_DOWN_COMPONENT: { component: ShowCaseDropDown, label: 'Drop Downs' },
+    DROP_DOWN: { component: ShowCaseDropDown, label: 'Drop Downs' },
     GRID_COMPONENT: { component: GridComponent, label: 'Grids' },
     LOADERS: { component: ShowCaseLoaders, label: 'Loaders' },
-    MODAL: { component: ModalComponent, label: 'Modals' },
+    MODAL: { component: ShowCaseModal, label: 'Modals' },
     PANELS: { component: Panels, label: 'Panels' },
     TABS: { component: ShowCaseTabs, label: 'Tabs' },
-    TABLE_COMPONENT: { component: TableComponent, label: 'Tables' },
+    TABLE: { component: TableComponent, label: 'Tables' },
     TILES: { component: ShowCaseTiles, label: 'Tiles' },
-    TIMELINE_COMPONENT: { component: TimelineComponent, label: 'Timeline' },
+    TIMELINE: { component: TimelineComponent, label: 'Timeline' },
     TYPOGRAPHY: { component: Typography, label: 'Typography' },
 };
 
 export function StyleShowcase() {
     const pageBodyRef = useRef(null);
-    const [sectionName, setSectionName] = useState('TABS');
+    const [sectionName, setSectionName] = useState('MODAL');
 
     const SelectedComponent = SECTIONS[sectionName].component;
 
@@ -63,8 +63,8 @@ export function StyleShowcase() {
         {
             title: 'Components',
             items: [
-                getItem('BUTTON_COMPONENT'),
-                getItem('DROP_DOWN_COMPONENT'),
+                getItem('BUTTON'),
+                getItem('DROP_DOWN'),
                 getItem('CARDS'),
                 getItem('TILES'),
                 getItem('LOADERS'),
@@ -75,8 +75,8 @@ export function StyleShowcase() {
         {
             title: 'Data Visualization',
             items: [
-                getItem('TABLE_COMPONENT'),
-                getItem('TIMELINE_COMPONENT'),
+                getItem('TABLE'),
+                getItem('TIMELINE'),
             ]
         },
     ];
