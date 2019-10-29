@@ -1,9 +1,14 @@
 import React, { Fragment, useState } from 'react';
-import { Table } from 'components/ui/table/Table';
 import { CodeHighlight } from 'components/style/CodeHighlight';
-import { PropsTable } from '../common/PropsTable';
-import { Section } from 'components/ui/Section';
 import { Block, RowBlock, ColumnBlock } from 'components/ui/Blocks';
+import { Section } from 'components/ui/Section';
+import { Table } from 'components/ui/table/Table';
+import { Form, Field } from 'components/ui/form/Form';
+
+import { PropsTable } from '../common/PropsTable';
+import { Button } from 'components/ui/Button';
+import { Input } from 'components/ui/form/Input';
+import { Select } from 'components/ui/form/Select';
 
 const SAMPLE_ENTRIES = getEntries();
 
@@ -16,6 +21,25 @@ const SAMPLE_COLUMNS = [
     { prop: 'test5', title: 'Test 5', width: 100 },
     { prop: 'test6', title: 'Test 6', width: 100 },
 ];
+
+const BORDER_TYPES = [
+    { value: '', label: 'None' },
+    { value: 'row', label: 'Row' },
+    { value: 'cell', label: 'Cell' },
+];
+
+const VERTICAL_ALIGNMENTS = [
+    { value: '', label: 'None' },
+    { value: 'top', label: 'Top' },
+    { value: 'middle', label: 'Middle' },
+    { value: 'bottom', label: 'Bottom' },
+];
+
+const PAGE_CONTROLLER_STYLES = [
+    { value: 'collapsed', label: 'Collapsed' },
+    { value: 'expanded', label: 'Expanded' },
+];
+
 
 export function ShowCaseTable() {
     const [singleLine, setSingleLine] = useState(true);
@@ -63,115 +87,93 @@ export function ShowCaseTable() {
                     <ColumnBlock className="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                         <RowBlock>
                             <ColumnBlock className="col-xs-12 col-sm-6 col-md-6">
-                                <h3>Spacing and size</h3>
+                                <h4>Spacing and size</h4>
                                 <Block>
-                                    <div className="ui-form__container">
-                                        <div className="ui-form__field">
-                                            <div className="ui-form__label w-100">Padding</div>
-                                            <div className="ui-form__field-input">
-                                                <input value={padding || ''} onChange={e => setPadding(e.target.value ? +e.target.value : undefined)} />
-                                            </div>
-                                        </div>
-                                        <div className="ui-form__field">
-                                            <div className="ui-form__label w-100">Height</div>
-                                            <div className="ui-form__field-input"><input value={height || ''} onChange={e => setHeight(e.target.value ? +e.target.value : undefined)} /></div>
-                                        </div>
-                                    </div>
+                                    <Form>
+                                        <Field label="Padding">
+                                            <Input value={padding || ''} onChange={e => setPadding(e.target.value ? +e.target.value : undefined)} />
+                                        </Field>
+                                        <Field label="Height">
+                                            <Input value={height || ''} onChange={e => setHeight(e.target.value ? +e.target.value : undefined)} />
+                                        </Field>
+                                    </Form>
                                 </Block>
                             </ColumnBlock>
                             <ColumnBlock className="col-xs-12 col-sm-6 col-md-6">
-                                <h3>Header</h3>
-                                <div className="ui-form__container">
-                                    <div className="ui-form__field">
-                                        <div className="ui-form__label w-100">Flags</div>
-                                        <div className="ui-form__field-input">
-                                            <button className={`ui-button ui-button--small ${headerController ? 'ui-button--positive' : ''}`} onClick={() => setHeaderController(!headerController) }>Header Controller</button>
-                                        </div>
-                                    </div>
-                                    <div className="ui-form__field">
-                                        <div className="ui-form__label w-100">Border Type</div>
-                                        <div className="ui-form__field-input">
-                                            <select value={borderType} onChange={e => setBorderType(e.target.value ? e.target.value : undefined)}>
-                                                <option value=''>None</option>
-                                                <option value='row'>Row</option>
-                                                <option value='cell'>Cell</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <h3>Body</h3>
-                                <div className="ui-form__container">
-                                    <div className="ui-form__field">
-                                        <div className="ui-form__label w-100">Flags</div>
-                                        <div className="ui-form__field-input">
-                                            <button className={`ui-button ui-button--small ${zebra ? 'ui-button--positive' : ''}`} onClick={() => setZebra(!zebra) }>Zebra</button>
-                                        </div>
-                                    </div>
-                                    <div className="ui-form__field">
-                                        <div className="ui-form__label w-100">Border Type</div>
-                                        <div className="ui-form__field-input">
-                                            <select value={borderType} onChange={e => setBorderType(e.target.value ? e.target.value : undefined)}>
-                                                <option value=''>None</option>
-                                                <option value='row'>Row</option>
-                                                <option value='cell'>Cell</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div className="ui-form__field">
-                                        <div className="ui-form__label w-100">Vertical Alignment</div>
-                                        <div className="ui-form__field-input">
-                                            <select value={verticalAlignment} onChange={e => setVerticalAlignment(e.target.value ? e.target.value : undefined)}>
-                                                <option value=''>None</option>
-                                                <option value='top'>Top</option>
-                                                <option value='middle'>Middle</option>
-                                                <option value='bottom'>Bottom</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
+                                <h4>Header</h4>
+                                <Form>
+                                    <Field label="Flags">
+                                        <Button
+                                            classes={['small', headerController ? 'positive' : '']}
+                                            onClick={() => setHeaderController(!headerController)}
+                                        >Header Controller</Button>
+                                    </Field>
+                                </Form>
+
+                                <h4>Body</h4>
+                                <Form>
+                                    <Field label="Flags">
+                                        <Button
+                                            classes={['small', zebra ? 'positive' : '']}
+                                            onClick={() => setZebra(!zebra)}
+                                        >Zebra</Button>
+                                    </Field>
+                                    <Field label="Border Type">
+                                        <Select
+                                            value={borderType}
+                                            onChange={bt => setBorderType(bt.value || undefined)}
+                                            options={BORDER_TYPES}
+                                        />
+                                    </Field>
+                                    <Field label="Vertical Alignment">
+                                        <Select
+                                            value={verticalAlignment}
+                                            onChange={va => setVerticalAlignment(va.value || undefined)}
+                                            options={VERTICAL_ALIGNMENTS}
+                                        />
+                                    </Field>
+                                </Form>
                             </ColumnBlock>
                         </RowBlock>
                     </ColumnBlock>
                     <ColumnBlock className="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                         <RowBlock>
                             <ColumnBlock className="col-xs-12 col-sm-6 col-md-6">
-                                <h3>Pagination</h3>
-                                <div className="ui-form__container">
-                                    <div className="ui-form__field">
-                                    <div className="ui-form__label w-100">Flags</div>
-                                        <div className="ui-form__field-input">
-                                            <button className={`ui-button ui-button--small ${zebra ? 'ui-button--positive' : ''}`} onClick={() => setPagination(!pagination) }>Pagination</button>
-                                        </div>
-                                    </div>
-                                    <div className="ui-form__field">
-                                        <div className="ui-form__label w-100">Page Controller</div>
-                                        <div className="ui-form__field-input">
-                                            <div>
-                                                <button className={`ui-button ui-button--small ${pageController.visible ? 'ui-button--positive' : ''}`} onClick={() => setPageController({ ...pageController, visible: !pageController.visible }) }>Visible</button>
-                                            </div>
-                                            <div>
-                                                <span className="m-l-10 m-r-10">Style</span>
-                                                <select value={pageController.style} onChange={e => setPageController({ ...pageController, style: e.target.value })}>
-                                                    <option value='collapsed'>Collapsed</option>
-                                                    <option value='expanded'>Expanded</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <h3>Other</h3>
-                                <div className="ui-form__container">
-                                    <div className="ui-form__field">
-                                    <div className="ui-form__label w-100">Flags</div>
-                                        <div className="ui-form__field-input">
-                                        <button className={`ui-button ui-button--small ${singleLine ? 'ui-button--positive' : ''}`} onClick={() => setSingleLine(!singleLine) }>Single Line</button>
-                                        </div>
-                                    </div>
-                                </div>
-
+                                <h4>Pagination</h4>
+                                <Form>
+                                    <Field label="Flags">
+                                        <Button
+                                            classes={['small', pagination ? 'positive' : '']}
+                                            onClick={() => setPagination(!pagination)}
+                                        >Use Pagination</Button>
+                                    </Field>
+                                    <h4>Page controller</h4>
+                                    <Field label="Visible">
+                                        <Button
+                                            classes={['small', pageController.visible ? 'positive' : '']}
+                                            onClick={() => setPageController({ ...pageController, visible: !pageController.visible })}
+                                        >Visible</Button>
+                                    </Field>
+                                    <Field label="Style">
+                                        <Select
+                                            value={pageController.style}
+                                            onChange={pcs => setPageController({ ...pageController, style: pcs.value })}
+                                            options={PAGE_CONTROLLER_STYLES}
+                                        />
+                                    </Field>
+                                </Form>
+                                <h4>Other</h4>
+                                <Form>
+                                    <Field label="Flags">
+                                        <Button
+                                            classes={['small', singleLine ? 'positive' : '']}
+                                            onClick={() => setSingleLine(!singleLine)}
+                                        >Single Line</Button>
+                                    </Field>
+                                </Form>
                             </ColumnBlock>
                             <ColumnBlock className="col-xs-12 col-sm-6 col-md-6">
-                                <h3>Pinned Columns</h3>
+                                <h4>Pinned Columns</h4>
                                 <p>
                                     Note: this is the initial list, changes made directly in the table will
                                     be overridden if parameters are changed.
@@ -189,7 +191,7 @@ export function ShowCaseTable() {
                                         })}
                                     </ColumnBlock>
                                     <ColumnBlock>
-                                        <h4>Left</h4>
+                                        <h4>Right</h4>
                                         <p>To be done</p>
                                     </ColumnBlock>
                                 </RowBlock>
@@ -205,7 +207,7 @@ export function ShowCaseTable() {
                         <CodeHighlight>{JSON.stringify(config, null, 4)}</CodeHighlight>
                     </ColumnBlock>
                     <ColumnBlock>
-                        <h3>Todo</h3>
+                        <h4>Todo</h4>
                         <ul>
                             <li><s>Header and Body components</s></li>
                             <li><s>Pinned Left</s></li>
