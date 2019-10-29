@@ -26,8 +26,14 @@ body {
     color: $grey-d1;
 }
 
-h1, h2, h3, h4, h5 {
+h1, h2 {
     font-family: 'Lato Light';
+}
+h3, h4, h5 {
+    font-family: 'Lato';
+    font-weight: 500;
+    color: $neutral-light-d2;
+    text-transform: uppercase;
 }
 
 p {
