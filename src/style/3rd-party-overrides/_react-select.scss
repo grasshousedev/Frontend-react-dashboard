@@ -1,4 +1,6 @@
-.ui-form {    
+@import '~@vzamboni/dashboard-ui-style/vars/colors';
+
+.ui-form {
     .react-select__value-container {
         padding: 0 8px;
     }
@@ -9,13 +11,23 @@
     }
     .react-select__control {
         min-height: 20px;
+        border: 0;
+        border-bottom: 1px solid $neutral-light;
+        border-radius: 0;
+        background-color: transparent;
+
+        &:hover {
+            border: 0;
+            border-bottom: 1px solid $neutral-light;
+        }
     }
     .react-select__indicators {
         padding: 0;
-    }    
+    }
     .react-select__indicator-separator {
         margin-top: 4px;
         margin-bottom: 4px;
+        background-color: transparent;
     }
     .react-select__clear-indicator {
         padding: 3px;
