@@ -104,20 +104,14 @@ export function ShowCaseTable() {
                                 <h4>Header</h4>
                                 <Form>
                                     <Field label="Header Controller">
-                                        <Toggle
-                                            checked={headerController}
-                                            onClick={() => setHeaderController(!headerController)}
-                                        />
+                                        <Toggle checked={headerController} onClick={setHeaderController} />
                                     </Field>
                                 </Form>
 
                                 <h4>Body</h4>
                                 <Form>
                                     <Field label="Zebra">
-                                        <Toggle
-                                            checked={zebra}
-                                            onClick={() => setZebra(!zebra)}
-                                        />
+                                        <Toggle checked={zebra} onClick={setZebra} />
                                     </Field>
                                     <Field label="Border Type">
                                         <Select
@@ -143,16 +137,13 @@ export function ShowCaseTable() {
                                 <h4>Pagination</h4>
                                 <Form>
                                     <Field label="Use Pagination">
-                                        <Toggle
-                                            checked={pagination}
-                                            onClick={() => setPagination(!pagination)}
-                                        />
+                                        <Toggle checked={pagination} onClick={setPagination} />
                                     </Field>
                                     <h4>Page controller</h4>
                                     <Field label="Visible">
                                         <Toggle
                                             checked={pageController.visible}
-                                            onClick={() => setPageController({ ...pageController, visible: !pageController.visible })}
+                                            onClick={checked => setPageController({ ...pageController, visible: checked })}
                                         />
                                     </Field>
                                     <Field label="Style">
@@ -166,10 +157,7 @@ export function ShowCaseTable() {
                                 <h4>Other</h4>
                                 <Form>
                                     <Field label="Single Line">
-                                        <Toggle
-                                            checked={singleLine}
-                                            onClick={() => setSingleLine(!singleLine)}
-                                        />
+                                        <Toggle checked={singleLine} onClick={setSingleLine} />
                                     </Field>
                                 </Form>
                             </ColumnBlock>

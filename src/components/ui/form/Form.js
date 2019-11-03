@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import { propTypeChildren } from 'components/utils';
 
+export const SPACEBAR_CODE = 32;
+
 export const UI_FORM_BASE_CLASS = 'ui-form';
 const CONTAINER_CLASS = `${UI_FORM_BASE_CLASS}__container`;
 const FIELD_CLASS = `${UI_FORM_BASE_CLASS}__field`;
