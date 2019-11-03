@@ -10,9 +10,11 @@ const UI_FORM_TOGGLE_SWITCH_CLASS = `${UI_FORM_TOGGLE_CLASS}__switch`;
 
 export function Toggle({ checked, onClick, disabled, ...rest }) {
     const checkedToggleClass = checked ? 'ui-form__field__toggle--checked' : '';
-    const toggleClass = `${UI_FORM_TOGGLE_CLASS} ${checkedToggleClass}`;
+    const disabledToggleClass = disabled ? 'ui-form__field__toggle--disabled' : '';
+    const toggleClass = `${UI_FORM_TOGGLE_CLASS} ${checkedToggleClass} ${disabledToggleClass}`;
     const checkedSwitchClass = checked ? 'ui-form__field__toggle__switch--checked' : '';
-    const switchClass = `${UI_FORM_TOGGLE_SWITCH_CLASS} ${checkedSwitchClass}`;
+    const disabledSwitchClass = disabled ? 'ui-form__field__toggle__switch--disabled' : '';
+    const switchClass = `${UI_FORM_TOGGLE_SWITCH_CLASS} ${checkedSwitchClass} ${disabledSwitchClass}`;
 
     const onToggleClick = () => !disabled && onClick(!checked);
     const onKeyDown = e => {

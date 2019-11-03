@@ -174,7 +174,6 @@ export function ShowCaseTable() {
                                             return <div key={`pinned-left-${column.prop}`}>
                                                 <Checkbox id={`pin-column-left-${column.prop}`}
                                                     label={column.title}
-                                                    disabled={column.prop === 'test4'}
                                                     onClick={checked => setPinnedLeft(pinColumn(column.prop, checked, pinnedLeft))}
                                                     checked={pinnedLeft.includes(column.prop)}
                                                 />
