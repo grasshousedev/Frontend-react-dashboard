@@ -45,10 +45,10 @@ const PAGE_CONTROLLER_STYLES = [
 export function ShowCaseTable() {
     const [singleLine, setSingleLine] = useState(true);
     const [padding, setPadding] = useState(9);
-    const [borderType, setBorderType] = useState('cell');
+    const [borderType, setBorderType] = useState('row');
     const [height, setHeight] = useState(200);
     const [pinnedLeft, setPinnedLeft] = useState(['id', 'test1']);
-    const [zebra, setZebra] = useState(true);
+    const [zebra, setZebra] = useState(false);
     const [pagination, setPagination] = useState(true);
     const [pageController, setPageController] = useState({ visible: true, style: 'collapsed' });
     const [headerController, setHeaderController] = useState(true);
