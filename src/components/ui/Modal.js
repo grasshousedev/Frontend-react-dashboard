@@ -2,11 +2,12 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 
+import { Icon } from './Icon';
 import { FullSectionLoader } from './Loader';
 
 // these should match the CSS ones
 const HEADER_HEIGHT = 55;
-const FOOTER_HEIGHT = 65; 
+const FOOTER_HEIGHT = 65;
 
 export function ModalWindow({
         title,
@@ -32,7 +33,7 @@ export function ModalWindow({
         isMaximized: maximized,
         modalContainerStyle: maximized ? {} : sizedModalContainerStyle,
         isLoading: hooks.onOpen ? true : false,
-    });    
+    });
 
     const setIsMaximized = (isMax) => {
         setModalState({
@@ -45,8 +46,8 @@ export function ModalWindow({
     const closeModalWindow = closeModal ? closeModal : () => setViewModalWindow(false);
 
     // componentDidMount
-    useEffect(() => {      
-        const modalRoot = document.getElementById('modal-root');         
+    useEffect(() => {
+        const modalRoot = document.getElementById('modal-root');
         modalRoot.appendChild(modalContainer);
 
         const openPromise = new Promise((resolve, reject) => {
@@ -62,7 +63,7 @@ export function ModalWindow({
             modalRoot.removeChild(modalContainer);
         };
     }, []); // eslint-disable-line
-  
+
     const uiModalContainerClasses = modalState.isMaximized
         ? 'ui-modal__container--maximized'
         : 'ui-modal__container--default';
@@ -84,10 +85,10 @@ export function ModalWindow({
                     <div className="ui-modal__controls">
                         {!modalState.isLoading && <Fragment>
                             {!modalState.isMaximized && canMaximize &&
-                                <i className="fas fa-window-maximize ui-modal__control" onClick={() => setIsMaximized(true)} />}
+                                <Icon name="window-maximize" extraClasses="ui-modal__control" onClick={() => setIsMaximized(true)} />}
                             {modalState.isMaximized && canMaximize &&
-                                <i className="fas fa-window-minimize ui-modal__control" onClick={() => setIsMaximized(false)} />}
-                            <i className="fas fa-times ui-modal__control" onClick={() => closeModalWindow({ source: 'closeIcon' })} />
+                                <Icon name="window-maximize" extraClasses="ui-modal__control" onClick={() => setIsMaximized(false)} />}
+                            <Icon name="time" extraClasses="ui-modal__control" onClick={() => closeModalWindow({ source: 'closeIcon' })} />
                         </Fragment>}
                     </div>
                 </div>
@@ -100,7 +101,7 @@ export function ModalWindow({
                 </div>}
             </div>
         </div>
-    </Fragment>, modalContainer);    
+    </Fragment>, modalContainer);
 }
 
 ModalWindow.propTypes = {

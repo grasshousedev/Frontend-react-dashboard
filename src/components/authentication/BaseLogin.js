@@ -1,6 +1,9 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
+import { Icon } from 'components/ui/Icon';
+
+
 export function BaseLogin({ username, password, isLoading, updateField, login, error }) {
     return <Fragment>
         <div className="ui-form__container ui-form__container--w100">
@@ -25,10 +28,10 @@ export function BaseLogin({ username, password, isLoading, updateField, login, e
             <div>
                 <button className="ui-button ui-button--positive"
                     onClick={login}>Login</button>
-                {isLoading && <i className="fas fa-spinner fa-pulse"></i>}
+                {isLoading && <Icon name="spinner" modifiers="fa-pulse" />}
             </div>
         </div>
-        {error && 
+        {error &&
             <div>
                 <h4>Error</h4>
                 <div>{error.status}: {error.statusText}</div>

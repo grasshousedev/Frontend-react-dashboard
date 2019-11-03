@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { Icon } from '../Icon';
+
+
 export function PageController({ pageState, setPageState, totEntries, config }) {
     // optional: if totEntries is not defined, show a spinner
 
@@ -19,12 +22,12 @@ export function PageController({ pageState, setPageState, totEntries, config }) 
             <span className="ui-table__page-controller__page ui-table__page-controller__page--navigator"
                 onClick={() => { if (pageState.page > 1) setPageState({ ...pageState, page: 1 }); }}
             >
-                <i className="fas fa-backward" />
+                <Icon name="backward" />
             </span>
             <span className="ui-table__page-controller__page ui-table__page-controller__page--navigator"
                 onClick={() => { if (pageState.page > 1) setPageState({ ...pageState, page: pageState.page - 1 }); }}
             >
-                <i className="fas fa-step-backward" />
+                <Icon name="step-backward" />
             </span>
         </div>
         <div className="ui-table__page-controller">
@@ -44,12 +47,12 @@ export function PageController({ pageState, setPageState, totEntries, config }) 
             <span className="ui-table__page-controller__page ui-table__page-controller__page--navigator"
                 onClick={() => { if (pageState.page < totPages) setPageState({ ...pageState, page: pageState.page + 1 }); }}
             >
-                <i className="fas fa-step-forward" />
+                <Icon name="step-forward" />
             </span>
             <span className="ui-table__page-controller__page ui-table__page-controller__page--navigator"
                 onClick={() => { if (pageState.page < totPages) setPageState({ ...pageState, page: totPages }); }}
             >
-                <i className="fas fa-forward" />
+                <Icon name="forward" />
             </span>
         </div>
     </div>;

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Table } from 'components/ui/table/Table';
 import { Block } from 'components/ui/Blocks';
+import { Icon } from 'components/ui/Icon';
 import { Monospace } from 'components/ui/Text';
 
 export function PropsTable({ propsList, title='', widths }) {
@@ -22,7 +23,7 @@ export function PropsTable({ propsList, title='', widths }) {
                 : prop.default && prop.default.map
                     ? prop.default.map(p => <Monospace key={p}>{p}</Monospace>)
                     : prop.default,
-            isRequired: prop.isRequired ? <i className="fa fa-check" /> : '',
+            isRequired: prop.isRequired ? <Icon category="fa" name="check" /> : '',
         };
     });
 

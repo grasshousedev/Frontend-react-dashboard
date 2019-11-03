@@ -1,20 +1,24 @@
 import React, { Fragment } from 'react';
+
 import { CodeHighlight } from 'components/style/CodeHighlight';
 import { Block, RowBlock, ColumnBlock } from 'components/ui/Blocks';
+import { Icon } from 'components/ui/Icon';
 import { Section } from 'components/ui/Section';
 import { Tiles } from 'components/ui/Tiles';
 import { Monospace } from 'components/ui/Text';
+
 import { PropsTable } from '../common/PropsTable';
+
 
 const showcaseTiles = `<Tiles.Container>
     <Tiles.Tile
         onClick={() => window.alert('User clicked')}
-        icon={<i className="fas fa-user" />}
+        icon={<Icon name="user" />}
         label="Users"
     />
     <Tiles.Tile
         onClick={() => window.alert('Address book clicked')}
-        icon={<i className="fas fa-address-book" />}
+        icon={<Icon name="address-book" />}
         label="Address Book"
     />
 </Tiles.Container>`;
@@ -22,12 +26,12 @@ const showcaseTiles = `<Tiles.Container>
 const showcaseTilesSmall = `<Tiles.Container small={true}>
     <Tiles.Tile
         onClick={() => window.alert('User clicked')}
-        icon={<i className="fas fa-user" />}
+        icon={<Icon name="user" />}
         label="Users"
     />
     <Tiles.Tile
         onClick={() => window.alert('Address book clicked')}
-        icon={<i className="fas fa-address-book" />}
+        icon={<Icon name="address-book" />}
         label="Address Book"
     />
 </Tiles.Container>`;
@@ -57,17 +61,17 @@ const tileComponent = `import { Tiles } from 'components/ui/Tiles';
 <Tiles.Container small={true}>
     <Tiles.Tile
         onClick={() => window.alert('User 1')}
-        icon={<i className="fas fa-user" />}
+        icon={<Icon name="user" />}
         label="User 1"
     />
     <Tiles.Tile
         onClick={() => window.alert('User 2')}
-        icon={<i className="fas fa-user" />}
+        icon={<Icon name="user" />}
         label="User 2"
     />
     <Tiles.Tile
         onClick={() => window.alert('User 3')}
-        icon={<i className="fas fa-user" />}
+        icon={<Icon name="user" />}
         label="User 3"
     />
 </Tiles.Container>`;
@@ -84,12 +88,12 @@ export function ShowCaseTiles () {
                         <Tiles.Container>
                             <Tiles.Tile
                                 onClick={() => window.alert('User clicked')}
-                                icon={<i className="fas fa-user" />}
+                                icon={<Icon name="user" />}
                                 label="Users"
                             />
                             <Tiles.Tile
                                 onClick={() => window.alert('Address book clicked')}
-                                icon={<i className="fas fa-address-book" />}
+                                icon={<Icon name="user" />}
                                 label="Address Book"
                             />
                         </Tiles.Container>
@@ -107,12 +111,12 @@ export function ShowCaseTiles () {
                         <Tiles.Container small={true}>
                             <Tiles.Tile
                                 onClick={() => window.alert('User clicked')}
-                                icon={<i className="fas fa-user" />}
+                                icon={<Icon name="user" />}
                                 label="Users"
                             />
                             <Tiles.Tile
                                 onClick={() => window.alert('Address book clicked')}
-                                icon={<i className="fas fa-address-book" />}
+                                icon={<Icon name="address-book" />}
                                 label="Address Book"
                             />
                         </Tiles.Container>
@@ -159,17 +163,17 @@ export function ShowCaseTiles () {
                             <Tiles.Container small={true}>
                                 <Tiles.Tile
                                     onClick={() => window.alert('User 1')}
-                                    icon={<i className="fas fa-user" />}
+                                    icon={<Icon name="user" />}
                                     label="User 1"
                                 />
                                 <Tiles.Tile
                                     onClick={() => window.alert('User 2')}
-                                    icon={<i className="fas fa-user" />}
+                                    icon={<Icon name="user" />}
                                     label="User 2"
                                 />
                                 <Tiles.Tile
                                     onClick={() => window.alert('User 3')}
-                                    icon={<i className="fas fa-user" />}
+                                    icon={<Icon name="user" />}
                                     label="User 3"
                                 />
                             </Tiles.Container>

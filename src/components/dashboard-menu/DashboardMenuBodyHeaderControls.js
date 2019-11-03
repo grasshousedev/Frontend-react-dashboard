@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { Icon } from 'components/ui/Icon';
+
+
 export function DashboardMenuBodyHeaderControls({ toggleBodyOpen, floating = false }) {
     const extraClassName = floating ? 'dashboard-menu__body-controls--floating' : '';
     return <div className={`dashboard-menu__body-controls ${extraClassName}`}>
-        <i className="fas fa-times dashboard-menu__body-controls__control" onClick={() => toggleBodyOpen(false)}></i>
+        <Icon name="times" extraClasses="dashboard-menu__body-controls__control" onClick={() => toggleBodyOpen(false)} />
     </div>;
 }
 

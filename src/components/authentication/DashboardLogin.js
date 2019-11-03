@@ -1,6 +1,9 @@
 import React, { Fragment } from 'react';
 
+import { Icon } from 'components/ui/Icon';
+
 import { baseLoginPropTypes } from './BaseLogin';
+
 
 export function DashboardLogin({ username, password, isLoading, updateField, login, error }) {
     return <Fragment>
@@ -25,7 +28,7 @@ export function DashboardLogin({ username, password, isLoading, updateField, log
                         disabled={isLoading} />
                 </div>
             </div>
-            {error && 
+            {error &&
                 <div className="dashboard-login__error-container">
                     {error.status === 400 &&
                         <h4>Wrong username or password.</h4>
@@ -36,9 +39,9 @@ export function DashboardLogin({ username, password, isLoading, updateField, log
                 </div>
             }
             <div className="dashboard-login__button-container">
-                {isLoading && <i className="fas fa-spinner fa-pulse"></i>}
+                {isLoading && <Icon name="spinner" modifiers="fa-pulse" />}
                 <button className="ui-button dashboard-login__button"
-                    onClick={login}>Login</button>                
+                    onClick={login}>Login</button>
             </div>
         </div>
     </Fragment>;
