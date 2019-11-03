@@ -6,7 +6,7 @@ import TableBody from './TableBody';
 import { getPinnedLeftTableStylesAndClasses } from './stylesAndClasses/pinnedLeft';
 
 
-export function PinnedLeftTable({ columns, config, entries, refs, commonStyles, tableStyleState, setTableStyleState, setScrollMaster, pagination, shadowedPinnedLeft }) {
+export function PinnedLeftTable({ columns, config, entries, refs, commonStyles, tableStyleState, setTableStyleState, setScrollMaster, pageState, shadowedPinnedLeft }) {
     const pltStylesAndClasses = getPinnedLeftTableStylesAndClasses({ columns, tableStyleState, shadowedPinnedLeft });
 
     return  <div className={pltStylesAndClasses.container.classes}
@@ -26,7 +26,7 @@ export function PinnedLeftTable({ columns, config, entries, refs, commonStyles, 
                 columns={columns}
                 entries={entries}
                 config={config}
-                pagination={pagination}
+                pageState={pageState}
                 stylesAndClasses={{ ...commonStyles, ...pltStylesAndClasses }}
                 tableBodyContainerRef={refs.pinnedLeftTableBodyContainerRef}
             />
@@ -44,7 +44,7 @@ PinnedLeftTable.propTypes = {
     tableStyleState: PropTypes.object.isRequired,
     setTableStyleState: PropTypes.func.isRequired,
     setScrollMaster: PropTypes.func.isRequired,
-    pagination: PropTypes.object.isRequired,
+    pageState: PropTypes.object.isRequired,
 
     shadowedPinnedLeft: PropTypes.bool,
 };

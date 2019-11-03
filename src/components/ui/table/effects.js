@@ -1,6 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { SCROLLBAR_SIZE } from './constants';
 
+function usePrevious(value) {
+    const ref = useRef();
+    useEffect(() => {
+        ref.current = value;
+    }, [value]);
+    return ref.current;
+}
 
 export function useScrollSync(master, elementsToSync, scrollMaster, sync, onChange) {
     useEffect(() => {
@@ -34,11 +41,12 @@ export function useScrollSync(master, elementsToSync, scrollMaster, sync, onChan
 }
 
 
-export function useTableElements(tableContainerRef, tableHeaderContainerRef, tableBodyContainerRef, columns, config, setTableStyleState) {
-    const containerSize = tableContainerRef.current ? tableContainerRef.current.clientWidth : 0;
+export function useTableElements(tableHeaderContainerRef, tableBodyContainerRef, columns, config, setTableStyleState, tableStyleState, windowWidth) {
+    const prevTableStyleState = usePrevious(tableStyleState);
 
     useEffect(() => {
-        if (tableHeaderContainerRef.current && tableBodyContainerRef.current) {
+        const stateChanged = JSON.stringify(tableStyleState) !== JSON.stringify(prevTableStyleState);
+        if (tableHeaderContainerRef.current && tableBodyContainerRef.current && stateChanged) {
             const headerEl = tableHeaderContainerRef.current;
             const bodyEl = tableBodyContainerRef.current;
             const bodyHasVericalScrollBar = bodyEl.offsetHeight !== bodyEl.scrollHeight;
@@ -47,19 +55,20 @@ export function useTableElements(tableContainerRef, tableHeaderContainerRef, tab
 
             if (columns.some(col => !col.width)) {
                 const columnsWidth = columns.reduce((tot, col) => tot += col.width || 0, 0);
-                newTableStyleState.expandableColumnWidth = headerEl.clientWidth
+                const expandableColumnWidth = headerEl.clientWidth
                     - columnsWidth
                     - (SCROLLBAR_SIZE * bodyHasVericalScrollBar)
                 ;
+                newTableStyleState.expandableColumnWidth = Math.max(expandableColumnWidth, 100);
                 newTableStyleState.bodyHasHorizontalScrollBar = false;
             }
             newTableStyleState.totalWidth = columns.reduce((tot, col) => {
                 return tot + (col.width ? col.width : newTableStyleState.expandableColumnWidth);
             }, 0);
 
-            setTableStyleState(tableStyleState => ({ ...tableStyleState, ...newTableStyleState }));
+            setTableStyleState({ ...tableStyleState, ...newTableStyleState });
         }
-    }, [columns, config, containerSize]); // eslint-disable-line
+    }, [columns, config, windowWidth, tableStyleState]); // eslint-disable-line
 };
 
 export function useHover(ref) {
@@ -83,4 +92,27 @@ export function useHover(ref) {
     }, [ref.current]); // eslint-disable-line
 
     return isHovered;
+}
+
+export function useWindowSize() {
+    const isClient = typeof window === 'object';
+
+    function getWindowSize() {
+        if (!isClient) return { width: undefined, height: undefined };
+
+        return { width: window.innerWidth, height: window.innerHeight };
+    };
+    const [size, setSize] = useState(getWindowSize());
+
+    useEffect(() => {
+        if (!isClient) return;
+
+        const updateSize = () => setSize(getWindowSize);
+        window.addEventListener('resize', updateSize);
+        return () => {
+            window.removeEventListener('resize', updateSize);
+        };
+    }, []); // eslint-disable-line
+
+    return size;
 }

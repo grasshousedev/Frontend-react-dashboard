@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import { DropDown } from '../ui/DropDown';
+import { DropDown } from '../DropDown';
 
 import { UI_TABLE_BASE_CLASS } from './constants';
 import { useHover } from './effects';
@@ -17,7 +17,7 @@ const ARROW_UP_CLASS = 'fas fa-angle-up';
 const COG_CLASS = 'fas fa-cog';
 
 
-export function TableHeaderColumn({ col, stylesAndClasses, tableStyleState, setTableStyleState, sortedFields, isPinned }) {
+export function TableHeaderColumn({ col, stylesAndClasses, tableStyleState, setTableStyleState, sortedFields, isPinned, config }) {
     const colRef = useRef(null);
     const isHovered = useHover(colRef);
 
@@ -27,7 +27,7 @@ export function TableHeaderColumn({ col, stylesAndClasses, tableStyleState, setT
     const cellStyle = stylesAndClasses.cell.style;
 
     const sortClass = sortedFields[col.prop] === 'desc' ? ARROW_DOWN_CLASS : ARROW_UP_CLASS;
-    const controlsStyle = { display: isHovered ? 'inline-flex' : 'inline-flex' /*'none'*/ };
+    const controlsStyle = { display: isHovered ? 'inline-flex' : 'none' };
 
     // isPinned means that the column is pinned in the current table
     // isPinnedColumn means that the column is pinned globally, used to show unpin/pin options
@@ -43,9 +43,9 @@ export function TableHeaderColumn({ col, stylesAndClasses, tableStyleState, setT
                     <i className={sortClass} />
                 </span>
             }
-            <span className={`${COL_CLASS}__controls`} style={controlsStyle}>
+            {config.headerController && <span className={`${COL_CLASS}__controls`} style={controlsStyle}>
                 <span className={`${COL_CLASS}__controls__control`}>
-                    <DropDown trigger={<i className={COG_CLASS} />} triggerOn={isPinnedColumn ? 'hover' : 'click'}>
+                    <DropDown trigger={<i className={COG_CLASS} />}>
                         <DropDown.Entry onClick={() => setSortDirection(setTableStyleState, col.prop, 'asc')}>
                             Sort Ascending
                         </DropDown.Entry>
@@ -58,7 +58,7 @@ export function TableHeaderColumn({ col, stylesAndClasses, tableStyleState, setT
                         </DropDown.Entry>
                     </DropDown>
                 </span>
-            </span>
+            </span>}
         </span>
     </th>;
 }
@@ -69,6 +69,7 @@ TableHeaderColumn.propTypes = {
     tableStyleState: PropTypes.object.isRequired,
     setTableStyleState: PropTypes.func.isRequired,
     sortedFields: PropTypes.object.isRequired,
+    config: PropTypes.object.isRequired,
 
     isPinned: PropTypes.bool,
 };

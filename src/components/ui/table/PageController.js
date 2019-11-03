@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export function PageController({ pagination, setPagination, totEntries, config }) {
+import { Icon } from '../Icon';
+
+
+export function PageController({ pageState, setPageState, totEntries, config }) {
     // optional: if totEntries is not defined, show a spinner
 
-    const currentPage = pagination.page;
-    const pageSize = pagination.pageSize;
+    const currentPage = pageState.page;
+    const pageSize = pageState.pageSize;
     const pageController = config.pageController || {};
 
     const totPages = Math.floor(totEntries / pageSize) + 1 * (totEntries % pageSize !== 0);
@@ -17,14 +20,14 @@ export function PageController({ pagination, setPagination, totEntries, config }
     return <div className={`ui-table__page-controller__container ui-table__page-controller__container--${pageController.style}`}>
         <div className="ui-table__page-controller__navigation-container">
             <span className="ui-table__page-controller__page ui-table__page-controller__page--navigator"
-                onClick={() => { if (pagination.page > 1) setPagination({ ...pagination, page: 1 }); }}
+                onClick={() => { if (pageState.page > 1) setPageState({ ...pageState, page: 1 }); }}
             >
-                <i className="fas fa-backward" />
+                <Icon name="backward" />
             </span>
             <span className="ui-table__page-controller__page ui-table__page-controller__page--navigator"
-                onClick={() => { if (pagination.page > 1) setPagination({ ...pagination, page: pagination.page - 1 }); }}
+                onClick={() => { if (pageState.page > 1) setPageState({ ...pageState, page: pageState.page - 1 }); }}
             >
-                <i className="fas fa-step-backward" />
+                <Icon name="step-backward" />
             </span>
         </div>
         <div className="ui-table__page-controller">
@@ -34,7 +37,7 @@ export function PageController({ pagination, setPagination, totEntries, config }
 
                 return <span key={page}
                     className={className}
-                    onClick={() => setPagination({ ...pagination, page })}
+                    onClick={() => setPageState({ ...pageState, page })}
                 >
                     {page}
                 </span>;
@@ -42,22 +45,22 @@ export function PageController({ pagination, setPagination, totEntries, config }
         </div>
         <div className="ui-table__page-controller__navigation-container">
             <span className="ui-table__page-controller__page ui-table__page-controller__page--navigator"
-                onClick={() => { if (pagination.page < totPages) setPagination({ ...pagination, page: pagination.page + 1 }); }}
+                onClick={() => { if (pageState.page < totPages) setPageState({ ...pageState, page: pageState.page + 1 }); }}
             >
-                <i className="fas fa-step-forward" />
+                <Icon name="step-forward" />
             </span>
             <span className="ui-table__page-controller__page ui-table__page-controller__page--navigator"
-                onClick={() => { if (pagination.page < totPages) setPagination({ ...pagination, page: totPages }); }}
+                onClick={() => { if (pageState.page < totPages) setPageState({ ...pageState, page: totPages }); }}
             >
-                <i className="fas fa-forward" />
+                <Icon name="forward" />
             </span>
         </div>
     </div>;
 }
 
 PageController.propTypes = {
-    pagination: PropTypes.object.isRequired,
-    setPagination: PropTypes.func.isRequired,
+    pageState: PropTypes.object.isRequired,
+    setPageState: PropTypes.func.isRequired,
     totEntries: PropTypes.number,
     config: PropTypes.object.isRequired,
 };

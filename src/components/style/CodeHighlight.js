@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import hljs from 'highlight.js/lib/highlight';
-//import hljs from 'highlight.js';
-import 'highlight.js/styles/hybrid.css';
+
+import 'highlight.js/styles/atom-one-dark-reasonable.css';
 
 const registeredLanguages = {};
 
@@ -22,11 +22,12 @@ export class CodeHighlight extends Component {
         if (language && !registeredLanguages[language]) {
             try {
                 const languages = [];
-                if (language === 'jsx') {
+
+                if (language === 'javascript') {
                     languages.push('javascript');
                     languages.push('xml');
                 } else {
-                    languages.push([language]);
+                    languages.push(language);
                 }
                 languages.forEach(languageToAdd => {
                     const newLanguage = require(`highlight.js/lib/languages/${languageToAdd}`);
