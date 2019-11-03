@@ -6,9 +6,10 @@ import { Table } from 'components/ui/table/Table';
 import { Form, Field } from 'components/ui/form/Form';
 
 import { PropsTable } from '../common/PropsTable';
-import { Button } from 'components/ui/Button';
 import { Input } from 'components/ui/form/Input';
 import { Select } from 'components/ui/form/Select';
+import { Toggle } from 'components/ui/form/Toggle';
+import { Checkbox } from 'components/ui/form/Checkbox';
 
 const SAMPLE_ENTRIES = getEntries();
 
@@ -102,21 +103,21 @@ export function ShowCaseTable() {
                             <ColumnBlock className="col-xs-12 col-sm-6 col-md-6">
                                 <h4>Header</h4>
                                 <Form>
-                                    <Field label="Flags">
-                                        <Button
-                                            classes={['small', headerController ? 'positive' : '']}
+                                    <Field label="Header Controller">
+                                        <Toggle
+                                            checked={headerController}
                                             onClick={() => setHeaderController(!headerController)}
-                                        >Header Controller</Button>
+                                        />
                                     </Field>
                                 </Form>
 
                                 <h4>Body</h4>
                                 <Form>
-                                    <Field label="Flags">
-                                        <Button
-                                            classes={['small', zebra ? 'positive' : '']}
+                                    <Field label="Zebra">
+                                        <Toggle
+                                            checked={zebra}
                                             onClick={() => setZebra(!zebra)}
-                                        >Zebra</Button>
+                                        />
                                     </Field>
                                     <Field label="Border Type">
                                         <Select
@@ -141,18 +142,18 @@ export function ShowCaseTable() {
                             <ColumnBlock className="col-xs-12 col-sm-6 col-md-6">
                                 <h4>Pagination</h4>
                                 <Form>
-                                    <Field label="Flags">
-                                        <Button
-                                            classes={['small', pagination ? 'positive' : '']}
+                                    <Field label="Use Pagination">
+                                        <Toggle
+                                            checked={pagination}
                                             onClick={() => setPagination(!pagination)}
-                                        >Use Pagination</Button>
+                                        />
                                     </Field>
                                     <h4>Page controller</h4>
                                     <Field label="Visible">
-                                        <Button
-                                            classes={['small', pageController.visible ? 'positive' : '']}
+                                        <Toggle
+                                            checked={pageController.visible}
                                             onClick={() => setPageController({ ...pageController, visible: !pageController.visible })}
-                                        >Visible</Button>
+                                        />
                                     </Field>
                                     <Field label="Style">
                                         <Select
@@ -164,11 +165,11 @@ export function ShowCaseTable() {
                                 </Form>
                                 <h4>Other</h4>
                                 <Form>
-                                    <Field label="Flags">
-                                        <Button
-                                            classes={['small', singleLine ? 'positive' : '']}
+                                    <Field label="Single Line">
+                                        <Toggle
+                                            checked={singleLine}
                                             onClick={() => setSingleLine(!singleLine)}
-                                        >Single Line</Button>
+                                        />
                                     </Field>
                                 </Form>
                             </ColumnBlock>
@@ -183,10 +184,12 @@ export function ShowCaseTable() {
                                         <h4>Left</h4>
                                         {SAMPLE_COLUMNS.map(column => {
                                             return <div key={`pinned-left-${column.prop}`}>
-                                                <input
-                                                    type="checkbox" id={`pin-column-left-${column.prop}`}
-                                                    onChange={e => setPinnedLeft(pinColumn(column.prop, e.target.checked, pinnedLeft))} checked={pinnedLeft.includes(column.prop)} />
-                                                <label htmlFor={`pin-column-left-${column.prop}`}>{column.title}</label>
+                                                <Checkbox id={`pin-column-left-${column.prop}`}
+                                                    label={column.title}
+                                                    disabled={column.prop === 'test4'}
+                                                    onClick={checked => setPinnedLeft(pinColumn(column.prop, checked, pinnedLeft))}
+                                                    checked={pinnedLeft.includes(column.prop)}
+                                                />
                                             </div>;
                                         })}
                                     </ColumnBlock>

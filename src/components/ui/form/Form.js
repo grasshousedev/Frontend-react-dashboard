@@ -28,7 +28,7 @@ export function Field({ label, children, fieldProps, labelProps, inputProps }) {
     const lProps = labelProps || {};
     const iProps = inputProps || {};
 
-    const labelWidth = lProps.width || 100;
+    const labelWidth = lProps.width || 175;
 
     return <div className={FIELD_CLASS} {...fProps.rest}>
         <div className={LABEL_CLASS} style={{ width: labelWidth }} {...lProps.rest}>
