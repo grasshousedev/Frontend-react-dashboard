@@ -49,7 +49,7 @@ export function Table({ columns, entries, config }) {
 
     const { width: windowWidth } = useWindowSize();
 
-    useTableElements(tableHeaderContainerRef, tableBodyContainerRef, columns, config, setTableStyleState, windowWidth);
+    useTableElements(tableHeaderContainerRef, tableBodyContainerRef, columns, config, setTableStyleState, tableStyleState, windowWidth);
 
     const pinnedLeft = tableStyleState.pinnedLeft
         ? columns.filter(col => tableStyleState.pinnedLeft.includes(col.prop))
