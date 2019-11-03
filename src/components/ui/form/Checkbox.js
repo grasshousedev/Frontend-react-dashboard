@@ -46,11 +46,8 @@ export function Checkbox({ checked, onClick, label, disabled, ...rest }) {
             {...rest}
         />
         <div className={indicatorClass} />
-        {label && typeof label === 'string' &&
-            <label className={labelClass}>{label}</label>
-        }
-        {label && typeof label !== 'string' &&
-            {label}
+        {label &&
+            <div className={labelClass}>{label}</div>
         }
     </div>;
 }
