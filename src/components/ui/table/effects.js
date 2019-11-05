@@ -58,6 +58,7 @@ export function useTableElements(tableHeaderContainerRef, tableBodyContainerRef,
                 const expandableColumnWidth = headerEl.clientWidth
                     - columnsWidth
                     - (SCROLLBAR_SIZE * bodyHasVericalScrollBar)
+                    - (SCROLLBAR_SIZE * bodyHasHorizontalScrollBar)
                 ;
                 newTableStyleState.expandableColumnWidth = Math.max(expandableColumnWidth, 100);
                 newTableStyleState.bodyHasHorizontalScrollBar = false;
