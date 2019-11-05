@@ -28,7 +28,7 @@ export function BaseLogin({ username, password, isLoading, updateField, login, e
             <div>
                 <button className="ui-button ui-button--positive"
                     onClick={login}>Login</button>
-                {isLoading && <Icon name="spinner" modifiers="fa-pulse" />}
+                {isLoading && <Icon name="refresh" modifiers="spin" />}
             </div>
         </div>
         {error &&

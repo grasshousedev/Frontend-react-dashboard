@@ -13,7 +13,7 @@ import { PropsTable } from '../common/PropsTable';
 const showcaseSampleCard = `<Card
     colors={{ side: "#1280bf", icon: "#1280bf" }}
     width='450px'
-    icon={<Icon name="user" modifiers="fa-3x" />}
+    icon={<Icon name="person" size="big" />}
     title="This is a Component Card"
     subtitle="Created by using a component"
     description={
@@ -39,7 +39,7 @@ const showcaseSampleCard = `<Card
 const componentNoControlsCard = `<Card
     colors={{ side: "#690cb0" }}
     width='450px'
-    icon={<Icon name="user" modifiers="fa-3x" />}
+    icon={<Icon name="person" size="big" />}
     title="This is a Component Card"
     subtitle="Without controls"
     description={<div>
@@ -51,7 +51,7 @@ const componentNoControlsCard = `<Card
 const cssCard = `<div className="ui-card__container">
     <div className="ui-card__side__container">
         <div className="ui-card__side__icon">
-            <Icon name="user" modifiers="fa-3x" />
+            <Icon name="person" size="big" />
         </div>
     </div>
     <div className="ui-card__main__container">
@@ -88,7 +88,7 @@ export function ShowCaseCard () {
                         <Card
                             colors={{ side: "#1280bf", icon: "#1280bf" }}
                             width='450px'
-                            icon={<Icon name="user" modifiers="fa-3x" />}
+                            icon={<Icon name="person" size="big" />}
                             title="This is a Component Card"
                             subtitle="Created by using a component"
                             description={<div>You can create cards by using <Monospace>Card</Monospace> component!</div>}
@@ -127,7 +127,7 @@ export function ShowCaseCard () {
                             <div className="ui-card__container">
                                 <div className="ui-card__side__container">
                                     <div className="ui-card__side__icon">
-                                        <Icon name="user" modifiers="fa-3x" />
+                                        <Icon name="person" size="big" />
                                     </div>
                                 </div>
                                 <div className="ui-card__main__container">
@@ -194,7 +194,7 @@ export function ShowCaseCard () {
                         <Card
                             colors={{ side: "#690cb0" }}
                             width='450px'
-                            icon={<Icon name="user" modifiers="fa-3x" />}
+                            icon={<Icon name="person" size="big" />}
                             title="This is a Component Card"
                             subtitle="Without controls"
                             description={<div>This card has no controls, so you can add more text and a longer description</div>}

@@ -23,7 +23,7 @@ export function PropsTable({ propsList, title='', widths }) {
                 : prop.default && prop.default.map
                     ? prop.default.map(p => <Monospace key={p}>{p}</Monospace>)
                     : prop.default,
-            isRequired: prop.isRequired ? <Icon category="fa" name="check" /> : '',
+            isRequired: prop.isRequired ? <Icon name="check" /> : '',
         };
     });
 

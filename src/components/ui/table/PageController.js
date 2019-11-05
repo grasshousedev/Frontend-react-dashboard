@@ -22,12 +22,12 @@ export function PageController({ pageState, setPageState, totEntries, config }) 
             <span className="ui-table__page-controller__page ui-table__page-controller__page--navigator"
                 onClick={() => { if (pageState.page > 1) setPageState({ ...pageState, page: 1 }); }}
             >
-                <Icon name="backward" />
+                <Icon name="skip_previous" />
             </span>
             <span className="ui-table__page-controller__page ui-table__page-controller__page--navigator"
                 onClick={() => { if (pageState.page > 1) setPageState({ ...pageState, page: pageState.page - 1 }); }}
             >
-                <Icon name="step-backward" />
+                <Icon name="keyboard_arrow_left" />
             </span>
         </div>
         <div className="ui-table__page-controller">
@@ -47,12 +47,12 @@ export function PageController({ pageState, setPageState, totEntries, config }) 
             <span className="ui-table__page-controller__page ui-table__page-controller__page--navigator"
                 onClick={() => { if (pageState.page < totPages) setPageState({ ...pageState, page: pageState.page + 1 }); }}
             >
-                <Icon name="step-forward" />
+                <Icon name="keyboard_arrow_right" />
             </span>
             <span className="ui-table__page-controller__page ui-table__page-controller__page--navigator"
                 onClick={() => { if (pageState.page < totPages) setPageState({ ...pageState, page: totPages }); }}
             >
-                <Icon name="forward" />
+                <Icon name="skip_next" />
             </span>
         </div>
     </div>;

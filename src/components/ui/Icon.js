@@ -1,22 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import '@fortawesome/fontawesome-free/css/all.css';
+// import '@fortawesome/fontawesome-free/css/all.css';
+// import 'font-awesome/css/font-awesome.min.css';
+import 'material-design-icons-iconfont/dist/material-design-icons.css';
 
 
-export function Icon({ name, category, modifiers, extraClasses, ...rest }) {
-    return <i className={`${category} fa-${name} ${modifiers} ${extraClasses}`} {...rest} />;
+const UI_ICON_CLASS = 'ui-icon';
+
+
+export function Icon({ name, size, modifiers, className, ...rest }) {
+    const sizeClass = `${UI_ICON_CLASS}--${size}`;
+    const modifiersClasses = Array.isArray(modifiers)
+        ? modifiers.map(m => `${UI_ICON_CLASS}--${m}`).join(' ')
+        : typeof modifiers === 'string' ? `${UI_ICON_CLASS}--${modifiers}` : '';
+    return <i className={`${UI_ICON_CLASS} material-icons ${name} ${modifiersClasses} ${sizeClass} ${className}`} {...rest} />;
 }
 
 Icon.propTypes = {
     name: PropTypes.string.isRequired,
-    category: PropTypes.string,
     modifiers: PropTypes.string,
-    extraClasses: PropTypes.string,
+    className: PropTypes.string,
+    size: PropTypes.oneOf(['small', 'normal', 'big', 'bigger']),
 };
 
 Icon.defaultProps = {
-    category: 'fas',
     modifiers: '',
-    extraClasses: '',
+    className: '',
+    size: 'normal',
 };
