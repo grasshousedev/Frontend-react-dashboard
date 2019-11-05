@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 
 export function Monospace({ children }) {
-    return <pre className="ui-text__monospace">{children}</pre>;
+    return <span className="ui-text__monospace">{children}</span>;
 }
 
 Monospace.propTypes = {
