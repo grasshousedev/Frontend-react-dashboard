@@ -38,7 +38,7 @@ const cssDropDown = `<div className="ui-dropdown__outer-container">
 
 const sampleDropDown = `import { DropDown } from 'components/ui/DropDown';
 
-const Trigger = <Icon name="cog" modifiers="cursor-pointer" />;
+const Trigger = <Icon name="settings" modifiers="clickable" />;
 
 <DropDown trigger={Trigger}>
     <DropDown.Entry onClick={() => window.alert('first row clicked')}>First row</DropDown.Entry>
@@ -47,7 +47,7 @@ const Trigger = <Icon name="cog" modifiers="cursor-pointer" />;
     <DropDown.Entry>Third row</DropDown.Entry>
 </DropDown>`;
 
-const sampleDropDownHover = `const Trigger = <Icon name="cog" modifiers="cursor-pointer" />;
+const sampleDropDownHover = `const Trigger = <Icon name="settings" modifiers="clickable" />;
 
 <DropDown trigger={Trigger} triggerOn="hover">
     <DropDown.Entry onClick={() => window.alert('first row clicked')}>First row</DropDown.Entry>
@@ -143,7 +143,7 @@ export function ShowCaseDropDown() {
                             Dropdown entries are then defined manually via two components: <Monospace>DropDown.Entry</Monospace> and <Monospace>DropDown.Divider</Monospace>.
                         </p>
                         <Block>
-                            <DropDown trigger={<Icon name="cog" modifiers="cursor-pointer" />}>
+                            <DropDown trigger={<Icon name="settings" modifiers="clickable" />}>
                                 <DropDown.Entry onClick={() => window.alert('first row clicked')}>First row</DropDown.Entry>
                                 <DropDown.Entry onClick={() => window.alert('second row clicked')}>Second row</DropDown.Entry>
                                 <DropDown.Divider />
@@ -234,7 +234,7 @@ function Props() {
                 keeps the Dropdown open when the mouse is moved out and requires a click to be hidden.
                 <Block>
                     <DropDown
-                        trigger={<Icon name="cog" modifiers="cursor-pointer" />}
+                        trigger={<Icon name="settings" modifiers="clickable" />}
                         triggerOn="hover"
                         persist={true}
                     >
@@ -254,7 +254,7 @@ function getDropDownWithPosition(position) {
         <div>
             <pre style={{ display: 'inline' }}>{position}</pre>
         </div>
-        <DropDown trigger={<Icon name="cog" modifiers="cursor-pointer" />} position={position}>
+        <DropDown trigger={<Icon name="settings" modifiers="clickable" />} position={position}>
             <DropDown.Entry onClick={() => window.alert('first row clicked')}>First row</DropDown.Entry>
             <DropDown.Entry onClick={() => window.alert('second row clicked')}>Second row</DropDown.Entry>
             <DropDown.Divider />

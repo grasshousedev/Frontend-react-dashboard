@@ -39,7 +39,7 @@ export function DashboardLogin({ username, password, isLoading, updateField, log
                 </div>
             }
             <div className="dashboard-login__button-container">
-                {isLoading && <Icon name="spinner" modifiers="fa-pulse" />}
+                {isLoading && <Icon name="refresh" modifiers="spin" />}
                 <button className="ui-button dashboard-login__button"
                     onClick={login}>Login</button>
             </div>

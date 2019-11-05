@@ -85,10 +85,10 @@ export function ModalWindow({
                     <div className="ui-modal__controls">
                         {!modalState.isLoading && <Fragment>
                             {!modalState.isMaximized && canMaximize &&
-                                <Icon name="window-maximize" extraClasses="ui-modal__control" onClick={() => setIsMaximized(true)} />}
+                                <Icon name="fullscreen" className="ui-modal__control" onClick={() => setIsMaximized(true)} />}
                             {modalState.isMaximized && canMaximize &&
-                                <Icon name="window-maximize" extraClasses="ui-modal__control" onClick={() => setIsMaximized(false)} />}
-                            <Icon name="time" extraClasses="ui-modal__control" onClick={() => closeModalWindow({ source: 'closeIcon' })} />
+                                <Icon name="fullscreen_exit" className="ui-modal__control" onClick={() => setIsMaximized(false)} />}
+                            <Icon name="close" className="ui-modal__control" onClick={() => closeModalWindow({ source: 'closeIcon' })} />
                         </Fragment>}
                     </div>
                 </div>
