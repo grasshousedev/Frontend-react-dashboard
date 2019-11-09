@@ -85,25 +85,27 @@ export function ShowCaseCard () {
             <Block title="Showcase" isOutstanding={true}>
                 <RowBlock>
                     <ColumnBlock>
-                        <Card
-                            colors={{ side: "#1280bf", icon: "#1280bf" }}
-                            width='450px'
-                            icon={<Icon name="person" size="big" />}
-                            title="This is a Component Card"
-                            subtitle="Created by using a component"
-                            description={<div>You can create cards by using <Monospace>Card</Monospace> component!</div>}
-                            controls={
-                                <Fragment>
-                                    <div>
-                                        Tertiary action
-                                    </div>
-                                    <div>
-                                        <Button classes="small">Secondary</Button>
-                                        <Button classes={["small", "positive"]} onClick={() => window.alert('Clicked')}>Click me</Button>
-                                    </div>
-                                </Fragment>
-                            }
-                        />
+                        <Block isContentCentered={true}>
+                            <Card
+                                colors={{ side: "#1280bf", icon: "#1280bf" }}
+                                width='450px'
+                                icon={<Icon name="person" size="big" />}
+                                title="This is a Component Card"
+                                subtitle="Created by using a component"
+                                description={<div>You can create cards by using <Monospace>Card</Monospace> component!</div>}
+                                controls={
+                                    <Fragment>
+                                        <div>
+                                            Tertiary action
+                                        </div>
+                                        <div>
+                                            <Button classes="small">Secondary</Button>
+                                            <Button classes={["small", "positive"]} onClick={() => window.alert('Clicked')}>Click me</Button>
+                                        </div>
+                                    </Fragment>
+                                }
+                            />
+                        </Block>
                     </ColumnBlock>
                     <ColumnBlock>
                         <CodeHighlight language="xml">{showcaseSampleCard}</CodeHighlight>
@@ -115,15 +117,15 @@ export function ShowCaseCard () {
 
         <Section title="Class">
             <Block title="Class usage" isOutstanding={true}>
+                <p>
+                    To create a Card with plain HTML and CSS, we need to create a container
+                    for the whole card, one for the side (where the image or color is) and one
+                    for the main section.
+                    Each of them includes different parts.
+                </p>
                 <RowBlock>
                     <ColumnBlock>
-                        <p>
-                            To create a Card with plain HTML and CSS, we need to create a container
-                            for the whole card, one for the side (where the image or color is) and one
-                            for the main section.
-                            Each of them includes different parts.
-                        </p>
-                        <Block>
+                        <Block isContentCentered={true}>
                             <div className="ui-card__container">
                                 <div className="ui-card__side__container">
                                     <div className="ui-card__side__icon">
@@ -186,20 +188,21 @@ export function ShowCaseCard () {
         <Section title="Component">
 
             <Block title="Component usage" isOutstanding={true}>
+                <p>
+                    The easies way to create a Card is by using the <Monospace>Dropdown</Monospace> component.
+                </p>
                 <RowBlock>
                     <ColumnBlock>
-                        <p>
-                            The easies way to create a Card is by using the <Monospace>Dropdown</Monospace> component.
-                        </p>
-                        <Card
-                            colors={{ side: "#690cb0" }}
-                            width='450px'
-                            icon={<Icon name="person" size="big" />}
-                            title="This is a Component Card"
-                            subtitle="Without controls"
-                            description={<div>This card has no controls, so you can add more text and a longer description</div>}
-                        />
-
+                        <Block isContentCentered={true}>
+                            <Card
+                                colors={{ side: "#690cb0" }}
+                                width='450px'
+                                icon={<Icon name="person" size="big" />}
+                                title="This is a Component Card"
+                                subtitle="Without controls"
+                                description={<div>This card has no controls, so you can add more text and a longer description</div>}
+                            />
+                        </Block>
                     </ColumnBlock>
                     <ColumnBlock>
                         <CodeHighlight language="xml">{componentNoControlsCard}</CodeHighlight>
