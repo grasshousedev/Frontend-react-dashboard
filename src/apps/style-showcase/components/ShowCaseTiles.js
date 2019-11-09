@@ -13,12 +13,12 @@ import { PropsTable } from '../common/PropsTable';
 const showcaseTiles = `<Tiles.Container>
     <Tiles.Tile
         onClick={() => window.alert('User clicked')}
-        icon={<Icon name="person" />}
+        icon={<Icon name="person" size="huge" />}
         label="Users"
     />
     <Tiles.Tile
         onClick={() => window.alert('Address book clicked')}
-        icon={<Icon name="menu_book" />}
+        icon={<Icon name="menu_book" size="huge" />}
         label="Address Book"
     />
 </Tiles.Container>`;
@@ -39,7 +39,8 @@ const showcaseTilesSmall = `<Tiles.Container small={true}>
 const tileCss = `<div className="ui-tiles__container">
     <div className="ui-tiles__tile">
         <div className="ui-tiles__tile__icon">
-            <i className="fas fa-user" />
+            <!-- See icons -->
+            <Icon name="person" size="huge" />
         </div>
         <div className="ui-tiles__tile__label">
             Users
@@ -47,7 +48,7 @@ const tileCss = `<div className="ui-tiles__container">
     </div>
     <div className="ui-tiles__tile">
         <div className="ui-tiles__tile__icon">
-            <i className="fas fa-menu_book" />
+            <Icon name="menu_book" size="huge" />
         </div>
         <div className="ui-tiles__tile__label">
             Address Book
@@ -88,12 +89,12 @@ export function ShowCaseTiles () {
                         <Tiles.Container>
                             <Tiles.Tile
                                 onClick={() => window.alert('User clicked')}
-                                icon={<Icon name="person" size="bigger" />}
+                                icon={<Icon name="person" size="huge" />}
                                 label="Users"
                             />
                             <Tiles.Tile
                                 onClick={() => window.alert('Address book clicked')}
-                                icon={<Icon name="menu_book" size="bigger" />}
+                                icon={<Icon name="menu_book" size="huge" />}
                                 label="Address Book"
                             />
                         </Tiles.Container>
