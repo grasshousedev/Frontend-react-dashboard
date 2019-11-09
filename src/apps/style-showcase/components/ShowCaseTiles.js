@@ -88,12 +88,12 @@ export function ShowCaseTiles () {
                         <Tiles.Container>
                             <Tiles.Tile
                                 onClick={() => window.alert('User clicked')}
-                                icon={<Icon name="person" />}
+                                icon={<Icon name="person" size="bigger" />}
                                 label="Users"
                             />
                             <Tiles.Tile
                                 onClick={() => window.alert('Address book clicked')}
-                                icon={<Icon name="person" />}
+                                icon={<Icon name="menu_book" size="bigger" />}
                                 label="Address Book"
                             />
                         </Tiles.Container>
