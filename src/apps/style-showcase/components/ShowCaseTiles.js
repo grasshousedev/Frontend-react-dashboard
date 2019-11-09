@@ -15,11 +15,13 @@ const showcaseTiles = `<Tiles.Container>
         onClick={() => window.alert('User clicked')}
         icon={<Icon name="person" size="huge" />}
         label="Users"
+        withBackground={true}
     />
     <Tiles.Tile
         onClick={() => window.alert('Address book clicked')}
         icon={<Icon name="menu_book" size="huge" />}
         label="Address Book"
+        withBackground={true}
     />
 </Tiles.Container>`;
 
@@ -91,11 +93,13 @@ export function ShowCaseTiles () {
                                 onClick={() => window.alert('User clicked')}
                                 icon={<Icon name="person" size="huge" />}
                                 label="Users"
+                                withBackground={true}
                             />
                             <Tiles.Tile
                                 onClick={() => window.alert('Address book clicked')}
                                 icon={<Icon name="menu_book" size="huge" />}
                                 label="Address Book"
+                                withBackground={true}
                             />
                         </Tiles.Container>
                     </ColumnBlock>
@@ -239,6 +243,13 @@ function TileProps() {
                 isRequired: true,
                 description: <div>
                     Tile&#39;s label.
+                </div>
+            },
+            {
+                propName: 'withBackground',
+                propType: 'bool',
+                description: <div>
+                    Adds a light background around the tile, to make it separated from the background.
                 </div>
             },
             {
