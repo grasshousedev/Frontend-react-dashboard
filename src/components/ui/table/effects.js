@@ -41,12 +41,15 @@ export function useScrollSync(master, elementsToSync, scrollMaster, sync, onChan
 }
 
 
-export function useTableElements(tableHeaderContainerRef, tableBodyContainerRef, columns, config, setTableStyleState, tableStyleState, windowWidth) {
+export function useTableElements(tableHeaderContainerRef, tableBodyContainerRef, columns, config, setTableStyleState, tableStyleState, windowWidth, container) {
     const prevTableStyleState = usePrevious(tableStyleState);
+    const prevContainerWidth = usePrevious(container && container.current && container.current.clientWidth);
 
     useEffect(() => {
         const stateChanged = JSON.stringify(tableStyleState) !== JSON.stringify(prevTableStyleState);
-        if (tableHeaderContainerRef.current && tableBodyContainerRef.current && stateChanged) {
+        const currentContainerWidth = container && container.current && container.current.clientWidth;
+        const containerWidthChanged = prevContainerWidth !== currentContainerWidth;
+        if (tableHeaderContainerRef.current && tableBodyContainerRef.current && (stateChanged || containerWidthChanged)) {
             const headerEl = tableHeaderContainerRef.current;
             const bodyEl = tableBodyContainerRef.current;
             const bodyHasVericalScrollBar = bodyEl.offsetHeight !== bodyEl.scrollHeight;
@@ -69,7 +72,7 @@ export function useTableElements(tableHeaderContainerRef, tableBodyContainerRef,
 
             setTableStyleState({ ...tableStyleState, ...newTableStyleState });
         }
-    }, [columns, config, windowWidth, tableStyleState]); // eslint-disable-line
+    }, [columns, config, windowWidth, tableStyleState, prevContainerWidth]); // eslint-disable-line
 };
 
 export function useHover(ref) {

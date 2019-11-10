@@ -14,7 +14,7 @@ const DEFAULT_CONFIG = {
     headerController: true,
 };
 
-export function Table({ columns, entries, config }) {
+export function Table({ columns, entries, config, container }) {
     const tableConfig = { ...DEFAULT_CONFIG, ...config };
 
     const [pageState, setPageState] = useState({ page: 1, pageSize: 20 });
@@ -49,7 +49,7 @@ export function Table({ columns, entries, config }) {
 
     const { width: windowWidth } = useWindowSize();
 
-    useTableElements(tableHeaderContainerRef, tableBodyContainerRef, columns, config, setTableStyleState, tableStyleState, windowWidth);
+    useTableElements(tableHeaderContainerRef, tableBodyContainerRef, columns, config, setTableStyleState, tableStyleState, windowWidth, container);
 
     const pinnedLeft = tableStyleState.pinnedLeft
         ? columns.filter(col => tableStyleState.pinnedLeft.includes(col.prop))
@@ -119,4 +119,5 @@ Table.propTypes = {
             style: PropTypes.oneOf(['collapsed', 'expanded'])
         }),
     }),
+    container: PropTypes.object,
 };
