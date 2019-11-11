@@ -20,11 +20,8 @@ export function PropsTable({ propsList, title='', widths }) {
     const entries = propsList.map(prop => {
         return {
             ...prop,
-            default: typeof prop.default === 'string'
-                ? <Monospace>{prop.default}</Monospace>
-                : prop.default && prop.default.map
-                    ? prop.default.map(p => <Monospace key={p}>{p}</Monospace>)
-                    : prop.default,
+            propType: renderAttribute(prop, 'propType'),
+            default: renderAttribute(prop, 'default'),
             isRequired: prop.isRequired ? <Icon name="check" /> : '',
         };
     });
@@ -44,3 +41,12 @@ PropsTable.propTypes = {
     title: PropTypes.string,
     widths: PropTypes.object,
 };
+
+function renderAttribute(prop, attribute) {
+    return typeof prop[attribute] === 'string'
+    ? <Monospace>{prop[attribute]}</Monospace>
+    : prop[attribute] && prop[attribute].map
+        ? prop[attribute].map(p => <Monospace key={p}>{p}</Monospace>)
+        : prop[attribute]
+    ;
+}
