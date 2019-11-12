@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
+import { Block } from 'components/ui/Blocks';
 import { PageBody } from 'components/ui/PageBody';
 import { PageHeader } from 'components/ui/PageHeader';
 import { Sidebar } from 'components/ui/Sidebar';
@@ -22,8 +23,16 @@ import { TimelineComponent } from './TimelineComponent';
 
 import './style-showcase.scss';
 import { Panels } from './Panels';
+import { Badge } from 'components/ui/Badge';
+
+function ComingSoon() {
+    return <Block isOutstanding={true} isContentCentered={true} style={{ height: '400px' }}>
+        <h1>This component description is coming soon!</h1>
+    </Block>;
+}
 
 const SECTIONS = {
+    BADGE: { component: ComingSoon, label: 'Badges', comingSoon: true },
     BUTTON: { component: ShowCaseButton, label: 'Buttons' },
     CARDS: { component: ShowCaseCard, label: 'Cards' },
     COLORS: { component: Colors, label: 'Colors' },
@@ -38,6 +47,7 @@ const SECTIONS = {
     TIMELINE: { component: TimelineComponent, label: 'Timeline' },
     TYPOGRAPHY: { component: Typography, label: 'Typography' },
     SIDEBAR: { component: ShowCaseSidebar, label: 'Sidebar' },
+    SIDEBAR_MENU: { component: ComingSoon, label: 'Sidebar Menu', comingSoon: true }
 };
 
 function getNavigatorSections(setSectionName) {
@@ -61,6 +71,7 @@ function getNavigatorSections(setSectionName) {
         {
             title: 'Components',
             items: [
+                getItem('BADGE'),
                 getItem('BUTTON'),
                 getItem('DROP_DOWN'),
                 getItem('CARDS'),
@@ -69,6 +80,7 @@ function getNavigatorSections(setSectionName) {
                 getItem('TABS'),
                 getItem('MODAL'),
                 getItem('SIDEBAR'),
+                getItem('SIDEBAR_MENU'),
             ]
         },
         {
@@ -119,6 +131,7 @@ function ShowCaseSidebarNavigator({ sectionName, sections }) {
                         onClick={item.onClick}
                     >
                         {item.label}
+                        {item.comingSoon && <Badge backgroundColor="blue" color="neutral-light-l2">Coming Soon</Badge> }
                     </SidebarMenu.Entry>;
                 })}
             </Fragment>;
