@@ -1,31 +1,40 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from "react-router-dom";
+
+import { Icon } from 'components/ui/Icon';
+import { SidebarContext } from 'components/ui/Sidebar';
 
 import { DashboardMenu } from 'components/dashboard-menu/DashboardMenu';
 
 import { ConnectedApplications } from './HeaderComponents/Applications';
 import { ConnectedUser } from './HeaderComponents/User';
 
-class Header extends Component {
+function Header ({ authentication }) {
+    const [sidebarState, setSidebarState] = useContext(SidebarContext);
 
-    render() {
-        const { authentication } = this.props;
+    const userLabel = authentication.user ? `Welcome ${authentication.user.first_name}!` : 'Login';
 
-        const userLabel = authentication.user ? `Welcome ${authentication.user.first_name}!` : 'Login';
-        return <header className="ui-dashboard-header">
-            <DashboardMenu
-                left={[
-                    { headerLabel: 'Applications', bodyItem: ConnectedApplications, name: 'applications' },
-                ]}
-                center={<Link className="dashboard-menu__header__link" to="/">Dashboard</Link>}
-                right={[
-                    { headerLabel: userLabel, bodyItem: ConnectedUser, name: 'user', showQueryInput: false, floatingControls: true }
-                ]}
-            />
-        </header>;
-    }
+    const SidebarTrigger = <span style={{ padding: '0 11px' }}
+        className="dashboard-menu__header-item dashboard-menu__header-dashboard-item"
+        onClick={() => {
+            setSidebarState({ ...sidebarState, status: sidebarState.status === 'open' ? 'closed' : 'open' });
+        }}
+    >
+        {sidebarState.status === 'open' ? <Icon name="close" /> : <Icon name="menu" />}
+    </span>;
+
+    return <header className="ui-dashboard-header">
+        <DashboardMenu
+            left={[
+                SidebarTrigger,
+                { headerLabel: 'Applications', bodyItem: ConnectedApplications, name: 'applications' },
+            ]}
+            right={[
+                { headerLabel: userLabel, bodyItem: ConnectedUser, name: 'user', showQueryInput: false, floatingControls: true }
+            ]}
+        />
+    </header>;
 }
 
 Header.propTypes = {

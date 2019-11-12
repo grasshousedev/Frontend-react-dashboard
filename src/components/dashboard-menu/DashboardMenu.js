@@ -63,8 +63,8 @@ export class DashboardMenu extends Component {
 
         return <div className="dashboard-menu__container">
             <div className="dashboard-menu__header">
-                {this.elementsProps.map(elementProp => {
-                    if (!this.props[elementProp]) return <Fragment></Fragment>;
+                {this.elementsProps.map((elementProp, index) => {
+                    if (!this.props[elementProp]) return <Fragment key={index}></Fragment>;
                     const items = Array.isArray(this.props[elementProp]) ? this.props[elementProp] : [this.props[elementProp]];
 
                     return <div

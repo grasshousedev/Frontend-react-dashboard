@@ -9,15 +9,18 @@ const UI_SIDEBAR_MENU_ENTRY_CLASS = `${UI_SIDEBAR_MENU_CLASS}__entry`;
 const UI_SIDEBAR_MENU_SEPARATOR_CLASS = `${UI_SIDEBAR_MENU_CLASS}__separator`;
 
 
-export function SidebarMenu({ children }) {
+export function SidebarMenu({ children, isPadded=true }) {
+    const paddedClass = isPadded ? `${UI_SIDEBAR_MENU_CLASS}--padded` : '';
+    const sidebarMenuClass = `${UI_SIDEBAR_MENU_CLASS} ${paddedClass}`;
 
-    return <div className={UI_SIDEBAR_MENU_CLASS}>
+    return <div className={sidebarMenuClass}>
         {children}
     </div>;
 }
 
 SidebarMenu.propTypes = {
     children: propTypeChildren,
+    isPadded: PropTypes.bool,
 };
 
 SidebarMenu.Title = SidebarMenuTitle;
