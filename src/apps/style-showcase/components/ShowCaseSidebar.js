@@ -2,7 +2,7 @@ import React, { Fragment, createContext, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import { CodeHighlight } from 'components/style/CodeHighlight';
-import { Block, RowBlock, ColumnBlock } from 'components/ui/Blocks';
+import { Block, RowBlock } from 'components/ui/Blocks';
 import { Section } from 'components/ui/Section';
 import { Sidebar } from 'components/ui/Sidebar';
 import { Lorem } from 'components/ui/Lorem';
@@ -11,6 +11,7 @@ import { Monospace } from 'components/ui/Text';
 import { propTypeChildren } from 'components/utils';
 import { Button } from 'components/ui/Button';
 import { PropsTable } from '../common/PropsTable';
+import { ColumnBlockCodeSplit } from '../common/ColumnBlockCodeSplit';
 
 const SidebarContextSample = createContext([{}, () => { console.log('NOOP'); return {}; }]);
 
@@ -32,7 +33,7 @@ export function ShowCaseSidebar() {
         <Section title="Sidebar">
             <Block title="Showcase" isOutstanding={true}>
                 <RowBlock>
-                    <ColumnBlock>
+                    <ColumnBlockCodeSplit>
                         <div style={{ height: 400, display: 'flex', border: '1px solid #ddd' }}>
                             <Sidebar
                                 height={400}
@@ -52,10 +53,10 @@ export function ShowCaseSidebar() {
                                 <Lorem paragraphs={3} />
                             </Block>
                         </div>
-                    </ColumnBlock>
-                    <ColumnBlock>
+                    </ColumnBlockCodeSplit>
+                    <ColumnBlockCodeSplit>
                         <CodeHighlight language="javascript">{sidebarSample}</CodeHighlight>
-                    </ColumnBlock>
+                    </ColumnBlockCodeSplit>
                 </RowBlock>
             </Block>
         </Section>
@@ -83,14 +84,14 @@ export function ShowCaseSidebar() {
                     If you need to use a different trigger than the default one, it can be hidden and a context can be passed.
                 </p>
                 <RowBlock>
-                    <ColumnBlock>
+                    <ColumnBlockCodeSplit>
                         <SidebarProviderSample>
                             <SidebarContextSampleComponent />
                         </SidebarProviderSample>
-                    </ColumnBlock>
-                    <ColumnBlock>
+                    </ColumnBlockCodeSplit>
+                    <ColumnBlockCodeSplit>
                         <CodeHighlight language="javascript">{sidebarWithContextSample}</CodeHighlight>
-                    </ColumnBlock>
+                    </ColumnBlockCodeSplit>
                 </RowBlock>
             </Block>
 
@@ -120,7 +121,7 @@ export function ShowCaseSidebar() {
                     All other attributes are set via the <Monospace>rest</Monospace> spread.
                 </p>
                 <RowBlock>
-                    <ColumnBlock>
+                    <ColumnBlockCodeSplit>
                         <div style={{ height: 600, display: 'flex', border: '1px solid #ddd' }}>
                             <Sidebar
                                 height={600}
@@ -167,14 +168,15 @@ export function ShowCaseSidebar() {
                                 <Lorem paragraphs={3} />
                             </Block>
                         </div>
-                    </ColumnBlock>
-                    <ColumnBlock>
+                    </ColumnBlockCodeSplit>
+                    <ColumnBlockCodeSplit>
                         <CodeHighlight language="javascript">{sidebarEntriesSample}</CodeHighlight>
-                    </ColumnBlock>
+                    </ColumnBlockCodeSplit>
                 </RowBlock>
             </Block>
 
             <Props />
+            <EntriesProps />
         </Section>
 
     </Fragment>;
@@ -214,7 +216,7 @@ function SidebarContextSampleComponent() {
 }
 
 function Props() {
-    return <PropsTable title="Props" propsList={[
+    return <PropsTable title="Sidebar Props" propsList={[
         {
             propName: 'top',
             propType: 'function',
@@ -268,6 +270,84 @@ function Props() {
             description: <div>
                 Children will be rendered in the top part of the sidebar after the oputput
                 of the <Monospace>top</Monospace> function.
+            </div>
+        },
+        {
+            propName: 'rest',
+            propType: 'spread',
+            description: <div>
+                All other properties will be added to the main sidebar container.
+            </div>
+        },
+    ]} />;
+}
+
+function EntriesProps() {
+    return <PropsTable title="Entry Props" propsList={[
+        {
+            propName: 'sidebarState',
+            propType: 'object',
+            isRequired: true,
+            description: <div>
+                Sidebar state object, used to determine if the entry is active (given an ID) or if it is open.
+            </div>
+        },
+        {
+            propName: 'iconName',
+            propType: 'string',
+            description: <div>
+                Name of the icon to show on the left, or when the Sidebar is closed.
+            </div>
+        },
+        {
+            propName: 'shortcut',
+            propType: 'string',
+            description: <div>
+                Alternative to icon: if <Monospace>null</Monospace> is passed, an empty space is shown.
+            </div>
+        },
+        {
+            propName: 'link',
+            propType: 'string',
+            default: '',
+            description: <div>
+                Optional, to make the entry a link (using react-router).
+                If set, the entry will be active if the current location starts with the link value.
+                <br />
+                For example, if the link is <Monospace>{"'/style-showcase'"}</Monospace>,
+                it will be considered active if
+                the location is <Monospace>{"'/style-showcase'"}</Monospace> or
+                <Monospace>{"'/style-showcase/*'"}</Monospace>.
+            </div>
+        },
+        {
+            propName: 'id',
+            propType: 'string',
+            description: <div>
+                ID of the entry. If passed, another <Monospace>div</Monospace> is created with the ID
+                <Monospace>{"{ID}"}__details</Monospace>.
+            </div>
+        },
+        {
+            propName: 'details',
+            propType: 'node',
+            description: <div>
+                Content to render below the entry. This will be visible only if the entry is active.
+            </div>
+        },
+        {
+            propName: 'children',
+            propType: 'node',
+            description: <div>
+                Children will be rendered in the top part of the sidebar after the oputput
+                of the <Monospace>top</Monospace> function.
+            </div>
+        },
+        {
+            propName: 'rest',
+            propType: 'spread',
+            description: <div>
+                All other properties will be added to the main entry element.
             </div>
         },
     ]} />;
