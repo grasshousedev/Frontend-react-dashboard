@@ -33,11 +33,13 @@ function ComingSoon() {
 
 const SECTIONS = {
     BADGE: { component: ComingSoon, label: 'Badges', comingSoon: true },
+    BLOCKS: { component: ComingSoon, label: 'Blocks', comingSoon: true },
     BUTTON: { component: ShowCaseButton, label: 'Buttons' },
     CARDS: { component: ShowCaseCard, label: 'Cards' },
     COLORS: { component: Colors, label: 'Colors' },
     DROP_DOWN: { component: ShowCaseDropDown, label: 'Drop Downs' },
     GRID_COMPONENT: { component: GridComponent, label: 'Grids' },
+    GRID_SYSTEM: { component: ComingSoon, label: 'Grid System', comingSoon: true },
     LOADERS: { component: ShowCaseLoaders, label: 'Loaders' },
     MODAL: { component: ShowCaseModal, label: 'Modals' },
     PANELS: { component: Panels, label: 'Panels' },
@@ -64,8 +66,10 @@ function getNavigatorSections(setSectionName) {
             title: 'Typography & Style',
             items: [
                 getItem('TYPOGRAPHY'),
+                getItem('BLOCKS'),
                 getItem('PANELS'),
                 getItem('COLORS'),
+                getItem('GRID_SYSTEM'),
             ]
         },
         {
