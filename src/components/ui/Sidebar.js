@@ -18,7 +18,7 @@ const UI_SIDEBAR_ENTRY_LABEL_CLASS = `${UI_SIDEBAR_ENTRY_CLASS}__label`;
 const UI_SIDEBAR_ENTRY_LABEL_SHORTCUT_CLASS = `${UI_SIDEBAR_ENTRY_LABEL_CLASS}__shortcut`;
 const UI_SIDEBAR_ENTRY_DETAILS_CLASS = `${UI_SIDEBAR_ENTRY_CLASS}__details`;
 
-export const SidebarContext = createContext([{}, () => {}]);
+export const SidebarContext = createContext([{}, () => ({})]);
 
 export const SidebarProvider = ({ children, initialStatus }) => {
     const [state, setState] = useState({ status: initialStatus });
@@ -38,8 +38,14 @@ SidebarProvider.defaultProps = {
 };
 
 
-export function Sidebar({ children, bottom, disableTrigger, ...rest }) {
-    const [state, setState] = useContext(SidebarContext);
+export function Sidebar({ children, top, bottom, initialStatus, disableTrigger, height, sidebarContext, ...rest }) {
+    const emptyContext = React.createContext([{}, () => ({})]);
+    const [contextState, setContextState] = useContext(sidebarContext || emptyContext);
+    const [componentState, setComponentState] = useState({ status: initialStatus });
+
+    const [state, setState] = sidebarContext
+        ? [contextState, setContextState]
+        : [componentState, setComponentState];
 
     const statusClass = `${UI_SIDEBAR_CONTAINER_CLASS}--${state.status}`;
     const sidebarContainerClass = `${UI_SIDEBAR_CONTAINER_CLASS} ${statusClass}`;
@@ -49,11 +55,12 @@ export function Sidebar({ children, bottom, disableTrigger, ...rest }) {
     const sidebarTopStatusClass =  `${UI_SIDEBAR_TOP_CLASS}--${state.status}`;
     const sidebarTopClass = `${UI_SIDEBAR_TOP_CLASS} ${sidebarTopStatusClass}`;
 
-    return <div className={sidebarContainerClass}>
+    const style = { height };
+
+    return <div className={sidebarContainerClass} style={style} {...rest}>
         <div className={UI_SIDEBAR_CLASS}>
             {!disableTrigger && <div className={UI_SIDEBAR_TRIGGER_CLASS}
                 onClick={() => {
-                    console.log('Clicked 2:', state.status);
                     setState({ ...state, status: state.status === 'open' ? 'closed' : 'open' });
                 }}
             >
@@ -62,9 +69,12 @@ export function Sidebar({ children, bottom, disableTrigger, ...rest }) {
             }
             <div className={elementsContainerClass}>
                 <div className={sidebarTopClass}>
+                    {top && top(state, setState)}
                     {children}
                 </div>
-                {bottom && <div className={UI_SIDEBAR_BOTTOM_CLASS}>{bottom}</div>}
+                <div className={UI_SIDEBAR_BOTTOM_CLASS}>
+                    {bottom && bottom(state, setState)}
+                </div>
             </div>
         </div>
     </div>;
@@ -72,8 +82,12 @@ export function Sidebar({ children, bottom, disableTrigger, ...rest }) {
 
 Sidebar.propTypes = {
     children: propTypeChildren,
-    bottom: propTypeChildren,
+    top: PropTypes.func,
+    bottom: PropTypes.func,
+    initialStatus: PropTypes.oneOf(['open', 'closed']),
     disableTrigger: PropTypes.bool,
+    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    sidebarContext: PropTypes.object,
 };
 
 Sidebar.defaultProps = {
@@ -101,38 +115,39 @@ SidebarIcon.propTypes = {
 };
 
 
-function SidebarEntry({ iconName, shortcut='', link='', id='', children, details, ...rest }) {
-    const sidebarStatus = useContext(SidebarContext)[0];
+function SidebarEntry({ sidebarState, iconName, shortcut, link='', id='', children, details, ...rest }) {
+    // const sidebarState = useContext(SidebarContext)[0];
     const location = useLocation();
 
     const Tag = link ? Link : 'div';
-    const isActive = link && isEntryActive(link, location);
-    const isOpen = sidebarStatus.status === 'open';
+    const isActive = isEntryActive(sidebarState, id, link, location);
+    const isOpen = sidebarState.status === 'open';
 
     const activeClass = isActive ? `${UI_SIDEBAR_ENTRY_CLASS}--active` : '';
     const activeOpenClass = isActive && isOpen ? `${UI_SIDEBAR_ENTRY_CLASS}--active-open` : '';
     const entryClass = `${UI_SIDEBAR_ENTRY_CLASS} ${activeClass} ${activeOpenClass}`;
     const entryLabelActiveClass = isActive ? `${UI_SIDEBAR_ENTRY_LABEL_CLASS}--active` : '';
     const entryLabelClass = `${UI_SIDEBAR_ENTRY_LABEL_CLASS} ${entryLabelActiveClass}`;
-    const entryDetailsStatusClass = `${UI_SIDEBAR_ENTRY_DETAILS_CLASS}--${sidebarStatus.status}`;
+    const entryDetailsStatusClass = `${UI_SIDEBAR_ENTRY_DETAILS_CLASS}--${sidebarState.status}`;
     const entryDetailsActiveClass = isActive ? `${UI_SIDEBAR_ENTRY_DETAILS_CLASS}--active` : '';
     const entryDetailsClass = `${UI_SIDEBAR_ENTRY_DETAILS_CLASS} ${entryDetailsStatusClass} ${entryDetailsActiveClass}`;
 
     return <Fragment>
-        <Tag className={entryClass} to={link} {...rest}>
+        <Tag className={entryClass} to={link} id={id} {...rest}>
             {iconName && <SidebarIcon name={iconName} isActive={isActive} isOpen={isOpen} />}
-            {!iconName && shortcut && <SidebarEntryLabelShortcut label={shortcut} />}
+            {!iconName && shortcut !== undefined && <SidebarEntryLabelShortcut label={shortcut} />}
             <div className={entryLabelClass}>
                 {children}
             </div>
         </Tag>
-        {id && <div className={entryDetailsClass} id={`${id}__details`}>
+        {(id || details) && <div className={entryDetailsClass} id={id ? `${id}__details` : undefined}>
             {details && details}
         </div>}
     </Fragment>;
 }
 
 SidebarEntry.propTypes = {
+    sidebarState: PropTypes.object.isRequired,
     iconName: PropTypes.string,
     shortcut: PropTypes.string,
     link: PropTypes.string,
@@ -142,29 +157,34 @@ SidebarEntry.propTypes = {
 };
 
 function SidebarEntryLabelShortcut({ label }) {
-    const shortcut = label.length <= 2 ? label : getShortcut(label);
+    const shortcut = label && label.length <= 2 ? label : getShortcut(label);
 
     return <div className={UI_SIDEBAR_ENTRY_LABEL_SHORTCUT_CLASS}>{shortcut}</div>;
 }
 
 SidebarEntryLabelShortcut.propTypes = {
-    label: PropTypes.string.isRequired,
+    label: PropTypes.string,
 };
 
 
 function getShortcut(label) {
+    if (typeof label !== 'string') return label;
+
     const chars = label.indexOf(' ') >= 0
         ? label.split(' ')[0].substr(0, 1) + label.split(' ')[1].substr(0, 1)
         : label.substr(0, 2);
     return chars.toUpperCase();
 }
 
-function isEntryActive(link, location) {
+function isEntryActive(sidebarState, id, link, location) {
+    if (sidebarState.activeId)
+        return !!(id && sidebarState.activeId === id);
+
     const locationCheck = location ? location.pathname
         : typeof window !== undefined ? window.location.pathname : '';
 
-    if ((link === "/" && locationCheck === "/") || locationCheck === "")
+    if (link === "/" && (locationCheck === "/" || locationCheck === ""))
         return true;
-    else if (link !== "/")
+    else if (link && link !== "/")
         return locationCheck.indexOf(link) === 0;
 }
