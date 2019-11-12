@@ -2,89 +2,22 @@ import React, { Fragment } from 'react';
 
 import { CodeHighlight } from 'components/style/CodeHighlight';
 import { Card } from 'components/ui/Cards';
-import { Block, RowBlock, ColumnBlock } from 'components/ui/Blocks';
+import { Block, RowBlock } from 'components/ui/Blocks';
 import { Section } from 'components/ui/Section';
 import { Button } from 'components/ui/Button';
 import { Icon } from 'components/ui/Icon';
 import { Monospace } from 'components/ui/Text';
 
 import { PropsTable } from '../common/PropsTable';
+import { ColumnBlockCodeSplit } from '../common/ColumnBlockCodeSplit';
 
-const showcaseSampleCard = `<Card
-    colors={{ side: "#1280bf", icon: "#1280bf" }}
-    width='450px'
-    icon={<Icon name="person" size="big" />}
-    title="This is a Component Card"
-    subtitle="Created by using a component"
-    description={
-        <div>You can create cards by using a card component!</div>
-    }
-    controls={
-        <Fragment>
-            <div>
-                Tertiary action
-            </div>
-            <div>
-                <Button classes="small">Secondary</Button>
-                <Button
-                    classes={["small", "positive"]}
-                    onClick={() => window.alert('Clicked')}
-                >Click me</Button>
-            </div>
-        </Fragment>
-    }
-/>`;
-
-
-const componentNoControlsCard = `<Card
-    colors={{ side: "#690cb0" }}
-    width='450px'
-    icon={<Icon name="person" size="big" />}
-    title="This is a Component Card"
-    subtitle="Without controls"
-    description={<div>
-        This card has no controls, so you can add
-        more text and a longer description
-    </div>}
-/>`;
-
-const cssCard = `<div className="ui-card__container">
-    <div className="ui-card__side__container">
-        <div className="ui-card__side__icon">
-            <Icon name="person" size="big" />
-        </div>
-    </div>
-    <div className="ui-card__main__container">
-        <div className="ui-card__main">
-            <div className="ui-card__title">
-                This is the card title
-            </div>
-            <div className="ui-card__subtitle">
-                Subtitle
-            </div>
-            <div className="ui-card__description">
-                Description of the card, ideally a not-so-long text, but with some information!
-            </div>
-        </div>
-        <div className="ui-card__controls">
-            <div>
-                Tertiary action
-            </div>
-            <div>
-                <button className="ui-button ui-button--small">Secondary</button>
-                <button className="ui-button ui-button--small ui-button--positive">Click me</button>
-            </div>
-        </div>
-    </div>
-</div>
-`;
 
 export function ShowCaseCard () {
     return <Fragment>
         <Section title="Cards">
             <Block title="Showcase" isOutstanding={true}>
                 <RowBlock>
-                    <ColumnBlock>
+                    <ColumnBlockCodeSplit>
                         <Block isContentCentered={true}>
                             <Card
                                 colors={{ side: "#1280bf", icon: "#1280bf" }}
@@ -106,10 +39,10 @@ export function ShowCaseCard () {
                                 }
                             />
                         </Block>
-                    </ColumnBlock>
-                    <ColumnBlock>
+                    </ColumnBlockCodeSplit>
+                    <ColumnBlockCodeSplit>
                         <CodeHighlight language="xml">{showcaseSampleCard}</CodeHighlight>
-                    </ColumnBlock>
+                    </ColumnBlockCodeSplit>
                 </RowBlock>
 
             </Block>
@@ -124,7 +57,7 @@ export function ShowCaseCard () {
                     Each of them includes different parts.
                 </p>
                 <RowBlock>
-                    <ColumnBlock>
+                    <ColumnBlockCodeSplit>
                         <Block isContentCentered={true}>
                             <div className="ui-card__container">
                                 <div className="ui-card__side__container">
@@ -156,10 +89,10 @@ export function ShowCaseCard () {
                                 </div>
                             </div>
                         </Block>
-                    </ColumnBlock>
-                    <ColumnBlock>
+                    </ColumnBlockCodeSplit>
+                    <ColumnBlockCodeSplit>
                         <CodeHighlight language="xml">{cssCard}</CodeHighlight>
-                    </ColumnBlock>
+                    </ColumnBlockCodeSplit>
                 </RowBlock>
             </Block>
             <Block>
@@ -192,7 +125,7 @@ export function ShowCaseCard () {
                     The easies way to create a Card is by using the <Monospace>Dropdown</Monospace> component.
                 </p>
                 <RowBlock>
-                    <ColumnBlock>
+                    <ColumnBlockCodeSplit>
                         <Block isContentCentered={true}>
                             <Card
                                 colors={{ side: "#690cb0" }}
@@ -203,10 +136,10 @@ export function ShowCaseCard () {
                                 description={<div>This card has no controls, so you can add more text and a longer description</div>}
                             />
                         </Block>
-                    </ColumnBlock>
-                    <ColumnBlock>
+                    </ColumnBlockCodeSplit>
+                    <ColumnBlockCodeSplit>
                         <CodeHighlight language="xml">{componentNoControlsCard}</CodeHighlight>
-                    </ColumnBlock>
+                    </ColumnBlockCodeSplit>
                 </RowBlock>
             </Block>
 
@@ -294,3 +227,73 @@ function Props() {
         },
     ]} />;
 }
+
+
+const showcaseSampleCard = `<Card
+    colors={{ side: "#1280bf", icon: "#1280bf" }}
+    width='450px'
+    icon={<Icon name="person" size="big" />}
+    title="This is a Component Card"
+    subtitle="Created by using a component"
+    description={
+        <div>You can create cards by using a card component!</div>
+    }
+    controls={
+        <Fragment>
+            <div>
+                Tertiary action
+            </div>
+            <div>
+                <Button classes="small">Secondary</Button>
+                <Button
+                    classes={["small", "positive"]}
+                    onClick={() => window.alert('Clicked')}
+                >Click me</Button>
+            </div>
+        </Fragment>
+    }
+/>`;
+
+
+const componentNoControlsCard = `<Card
+    colors={{ side: "#690cb0" }}
+    width='450px'
+    icon={<Icon name="person" size="big" />}
+    title="This is a Component Card"
+    subtitle="Without controls"
+    description={<div>
+        This card has no controls, so you can add
+        more text and a longer description
+    </div>}
+/>`;
+
+const cssCard = `<div className="ui-card__container">
+    <div className="ui-card__side__container">
+        <div className="ui-card__side__icon">
+            <Icon name="person" size="big" />
+        </div>
+    </div>
+    <div className="ui-card__main__container">
+        <div className="ui-card__main">
+            <div className="ui-card__title">
+                This is the card title
+            </div>
+            <div className="ui-card__subtitle">
+                Subtitle
+            </div>
+            <div className="ui-card__description">
+                Description of the card, ideally a not-so-long text, but with some information!
+            </div>
+        </div>
+        <div className="ui-card__controls">
+            <div>
+                Tertiary action
+            </div>
+            <div>
+                <button className="ui-button ui-button--small">Secondary</button>
+                <button className="ui-button ui-button--small ui-button--positive">Click me</button>
+            </div>
+        </div>
+    </div>
+</div>
+`;

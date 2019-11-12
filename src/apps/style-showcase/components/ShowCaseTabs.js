@@ -3,38 +3,11 @@ import { Tabs } from 'components/ui/Tabs';
 import { Lorem } from 'components/ui/Lorem';
 import { CodeHighlight } from 'components/style/CodeHighlight';
 import { Section } from 'components/ui/Section';
-import { Block, RowBlock, ColumnBlock } from 'components/ui/Blocks';
+import { Block, RowBlock } from 'components/ui/Blocks';
 import { Monospace } from 'components/ui/Text';
 import { Button } from 'components/ui/Button';
 import { PropsTable } from '../common/PropsTable';
-
-
-const showcaseTabsSample = `<Tabs
-    tabs={[
-        {
-            label: 'First',
-            content: <div style={{ height: 200 }}>First tab content</div>
-        },
-        {
-            label: 'Second',
-            content: <div style={{ height: 200 }}>Second tab content</div>
-        },
-    ]}
-/>
-`;
-
-const tabsStateSample = `// declare a list of objects
-const tabsSample = [
-    { label: 'Tab 1', content: <TabContent1 /> },
-    { label: 'Tab 2', content: <Lorem paragraphs={3} /> },
-    { label: 'Tab 3', content: <Lorem /> },
-];
-
-// then
-<Tabs tabs={tabsSample} />
-`;
-
-const tabsStateCompactSample = `<Tabs tabs={tabsSample} compact={true} />`;
+import { ColumnBlockCodeSplit } from '../common/ColumnBlockCodeSplit';
 
 
 export function ShowCaseTabs () {
@@ -49,7 +22,7 @@ export function ShowCaseTabs () {
         <Section title="Tabs">
             <Block title="Showcase" isOutstanding={true}>
                 <RowBlock>
-                    <ColumnBlock>
+                    <ColumnBlockCodeSplit>
                         <Tabs
                             tabs={[
                                 {
@@ -62,10 +35,10 @@ export function ShowCaseTabs () {
                                 },
                             ]}
                         />
-                    </ColumnBlock>
-                    <ColumnBlock>
+                    </ColumnBlockCodeSplit>
+                    <ColumnBlockCodeSplit>
                         <CodeHighlight>{showcaseTabsSample}</CodeHighlight>
-                    </ColumnBlock>
+                    </ColumnBlockCodeSplit>
                 </RowBlock>
             </Block>
         </Section>
@@ -89,12 +62,12 @@ export function ShowCaseTabs () {
                     always exists in the DOM and the state is kept.
                 </p>
                 <RowBlock>
-                    <ColumnBlock>
+                    <ColumnBlockCodeSplit>
                         <Tabs tabs={tabsState} />
-                    </ColumnBlock>
-                    <ColumnBlock>
+                    </ColumnBlockCodeSplit>
+                    <ColumnBlockCodeSplit>
                         <CodeHighlight language="xml">{tabsStateSample}</CodeHighlight>
-                    </ColumnBlock>
+                    </ColumnBlockCodeSplit>
                 </RowBlock>
             </Block>
             <Block title="Compact tabs">
@@ -104,12 +77,12 @@ export function ShowCaseTabs () {
                     property can be set.
                 </p>
                 <RowBlock>
-                    <ColumnBlock>
+                    <ColumnBlockCodeSplit>
                         <Tabs tabs={tabsState} compact={true} />
-                    </ColumnBlock>
-                    <ColumnBlock>
+                    </ColumnBlockCodeSplit>
+                    <ColumnBlockCodeSplit>
                         <CodeHighlight language="xml">{tabsStateCompactSample}</CodeHighlight>
-                    </ColumnBlock>
+                    </ColumnBlockCodeSplit>
                 </RowBlock>
             </Block>
 
@@ -121,20 +94,16 @@ export function ShowCaseTabs () {
 function TabContent1() {
     const [counter, setCounter] = useState(0);
 
-    return <RowBlock>
-        <ColumnBlock>
-            <div>
-                Counter value: {counter}
-                <br />
-                <Button classes={'small'} onClick={() => setCounter(counter + 1)}>
-                    Increment
-                </Button>
-            </div>
-        </ColumnBlock>
-        <ColumnBlock>
-            <Lorem />
-        </ColumnBlock>
-    </RowBlock>;
+    return <Fragment>
+        <div>
+            Counter value: {counter}
+            <br />
+            <Button classes={'small'} onClick={() => setCounter(counter + 1)}>
+                Increment
+            </Button>
+        </div>
+        <Lorem />
+    </Fragment>;
 }
 
 function Props() {
@@ -185,5 +154,48 @@ function Props() {
                 Extra props are supported and applied to container element.
             </div>
         },
-]} />;
+    ]} />;
 }
+
+const showcaseTabsSample = `<Tabs
+    tabs={[
+        {
+            label: 'First',
+            content: <div style={{ height: 200 }}>First tab content</div>
+        },
+        {
+            label: 'Second',
+            content: <div style={{ height: 200 }}>Second tab content</div>
+        },
+    ]}
+/>
+`;
+
+const tabsStateSample = `// Optionally, declare a component
+function TabContent1() {
+    const [counter, setCounter] = useState(0);
+
+    return <Fragment>
+        <div>
+            Counter value: {counter}
+            <br />
+            <Button classes={'small'} onClick={() => setCounter(counter + 1)}>
+                Increment
+            </Button>
+        </div>
+        <Lorem />
+    </Fragment>;
+}
+
+// declare a list of objects
+const tabsSample = [
+    { label: 'Tab 1', content: <TabContent1 /> },
+    { label: 'Tab 2', content: <Lorem paragraphs={3} /> },
+    { label: 'Tab 3', content: <Lorem /> },
+];
+
+// then
+<Tabs tabs={tabsSample} />
+`;
+
+const tabsStateCompactSample = `<Tabs tabs={tabsSample} compact={true} />`;

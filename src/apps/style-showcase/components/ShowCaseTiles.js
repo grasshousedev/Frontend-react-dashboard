@@ -1,83 +1,15 @@
 import React, { Fragment } from 'react';
 
 import { CodeHighlight } from 'components/style/CodeHighlight';
-import { Block, RowBlock, ColumnBlock } from 'components/ui/Blocks';
+import { Block, RowBlock } from 'components/ui/Blocks';
 import { Icon } from 'components/ui/Icon';
 import { Section } from 'components/ui/Section';
 import { Tiles } from 'components/ui/Tiles';
 import { Monospace } from 'components/ui/Text';
 
 import { PropsTable } from '../common/PropsTable';
+import { ColumnBlockCodeSplit } from '../common/ColumnBlockCodeSplit';
 
-
-const showcaseTiles = `<Tiles.Container>
-    <Tiles.Tile
-        onClick={() => window.alert('User clicked')}
-        icon={<Icon name="person" size="huge" />}
-        label="Users"
-        withBackground={true}
-    />
-    <Tiles.Tile
-        onClick={() => window.alert('Address book clicked')}
-        icon={<Icon name="menu_book" size="huge" />}
-        label="Address Book"
-        withBackground={true}
-    />
-</Tiles.Container>`;
-
-const showcaseTilesSmall = `<Tiles.Container small={true}>
-    <Tiles.Tile
-        onClick={() => window.alert('User clicked')}
-        icon={<Icon name="person" />}
-        label="Users"
-    />
-    <Tiles.Tile
-        onClick={() => window.alert('Address book clicked')}
-        icon={<Icon name="menu_book" />}
-        label="Address Book"
-    />
-</Tiles.Container>`;
-
-const tileCss = `<div className="ui-tiles__container">
-    <div className="ui-tiles__tile">
-        <div className="ui-tiles__tile__icon">
-            <!-- See icons -->
-            <Icon name="person" size="huge" />
-        </div>
-        <div className="ui-tiles__tile__label">
-            Users
-        </div>
-    </div>
-    <div className="ui-tiles__tile">
-        <div className="ui-tiles__tile__icon">
-            <Icon name="menu_book" size="huge" />
-        </div>
-        <div className="ui-tiles__tile__label">
-            Address Book
-        </div>
-    </div>
-</div>
-`;
-
-const tileComponent = `import { Tiles } from 'components/ui/Tiles';
-
-<Tiles.Container small={true}>
-    <Tiles.Tile
-        onClick={() => window.alert('User 1')}
-        icon={<Icon name="person" />}
-        label="User 1"
-    />
-    <Tiles.Tile
-        onClick={() => window.alert('User 2')}
-        icon={<Icon name="person" />}
-        label="User 2"
-    />
-    <Tiles.Tile
-        onClick={() => window.alert('User 3')}
-        icon={<Icon name="person" />}
-        label="User 3"
-    />
-</Tiles.Container>`;
 
 export function ShowCaseTiles () {
     return <Fragment>
@@ -87,7 +19,7 @@ export function ShowCaseTiles () {
                     <h3>Standard Tiles</h3>
                 </div>
                 <RowBlock>
-                    <ColumnBlock>
+                    <ColumnBlockCodeSplit>
                         <Tiles.Container>
                             <Tiles.Tile
                                 onClick={() => window.alert('User clicked')}
@@ -102,16 +34,16 @@ export function ShowCaseTiles () {
                                 withBackground={true}
                             />
                         </Tiles.Container>
-                    </ColumnBlock>
-                    <ColumnBlock>
+                    </ColumnBlockCodeSplit>
+                    <ColumnBlockCodeSplit>
                         <CodeHighlight language="xml">{showcaseTiles}</CodeHighlight>
-                    </ColumnBlock>
+                    </ColumnBlockCodeSplit>
                 </RowBlock>
                 <div>
                     <h3>Small Tiles</h3>
                 </div>
                 <RowBlock>
-                    <ColumnBlock>
+                    <ColumnBlockCodeSplit>
 
                         <Tiles.Container small={true}>
                             <Tiles.Tile
@@ -125,10 +57,10 @@ export function ShowCaseTiles () {
                                 label="Address Book"
                             />
                         </Tiles.Container>
-                    </ColumnBlock>
-                    <ColumnBlock>
+                    </ColumnBlockCodeSplit>
+                    <ColumnBlockCodeSplit>
                         <CodeHighlight language="xml">{showcaseTilesSmall}</CodeHighlight>
-                    </ColumnBlock>
+                    </ColumnBlockCodeSplit>
                 </RowBlock>
             </Block>
         </Section>
@@ -136,7 +68,7 @@ export function ShowCaseTiles () {
         <Section title="Class">
             <Block title="Class usage" isOutstanding={true}>
                 <RowBlock>
-                    <ColumnBlock>
+                    <ColumnBlockCodeSplit>
                         <p>
                             Tiles are a set of icon/label pairs grouped inside a flexible container.
                         </p>
@@ -146,10 +78,10 @@ export function ShowCaseTiles () {
                             <Monospace>ui-tiles--small</Monospace>
                             (note: this class is not BEM compliant as it overrides tile and icon).
                         </p>
-                    </ColumnBlock>
-                    <ColumnBlock>
+                    </ColumnBlockCodeSplit>
+                    <ColumnBlockCodeSplit>
                         <CodeHighlight language="xml">{tileCss}</CodeHighlight>
-                    </ColumnBlock>
+                    </ColumnBlockCodeSplit>
                 </RowBlock>
             </Block>
         </Section>
@@ -157,7 +89,7 @@ export function ShowCaseTiles () {
         <Section title="Component">
             <Block title="Component usage" isOutstanding={true}>
                 <RowBlock>
-                    <ColumnBlock>
+                    <ColumnBlockCodeSplit>
                         <p>
                             Like with CSS, a container must be created before using tiles.
                             <Monospace>Tiles</Monospace> object can be imported, which has
@@ -183,10 +115,10 @@ export function ShowCaseTiles () {
                                 />
                             </Tiles.Container>
                         </Block>
-                    </ColumnBlock>
-                    <ColumnBlock>
+                    </ColumnBlockCodeSplit>
+                    <ColumnBlockCodeSplit>
                         <CodeHighlight language="javascript">{tileComponent}</CodeHighlight>
-                    </ColumnBlock>
+                    </ColumnBlockCodeSplit>
                 </RowBlock>
             </Block>
         </Section>
@@ -262,3 +194,72 @@ function TileProps() {
         ]}
     />;
 }
+
+const showcaseTiles = `<Tiles.Container>
+    <Tiles.Tile
+        onClick={() => window.alert('User clicked')}
+        icon={<Icon name="person" size="huge" />}
+        label="Users"
+        withBackground={true}
+    />
+    <Tiles.Tile
+        onClick={() => window.alert('Address book clicked')}
+        icon={<Icon name="menu_book" size="huge" />}
+        label="Address Book"
+        withBackground={true}
+    />
+</Tiles.Container>`;
+
+const showcaseTilesSmall = `<Tiles.Container small={true}>
+    <Tiles.Tile
+        onClick={() => window.alert('User clicked')}
+        icon={<Icon name="person" />}
+        label="Users"
+    />
+    <Tiles.Tile
+        onClick={() => window.alert('Address book clicked')}
+        icon={<Icon name="menu_book" />}
+        label="Address Book"
+    />
+</Tiles.Container>`;
+
+const tileCss = `<div className="ui-tiles__container">
+    <div className="ui-tiles__tile">
+        <div className="ui-tiles__tile__icon">
+            <!-- See icons -->
+            <Icon name="person" size="huge" />
+        </div>
+        <div className="ui-tiles__tile__label">
+            Users
+        </div>
+    </div>
+    <div className="ui-tiles__tile">
+        <div className="ui-tiles__tile__icon">
+            <Icon name="menu_book" size="huge" />
+        </div>
+        <div className="ui-tiles__tile__label">
+            Address Book
+        </div>
+    </div>
+</div>
+`;
+
+const tileComponent = `import { Tiles } from 'components/ui/Tiles';
+
+<Tiles.Container small={true}>
+    <Tiles.Tile
+        onClick={() => window.alert('User 1')}
+        icon={<Icon name="person" />}
+        label="User 1"
+    />
+    <Tiles.Tile
+        onClick={() => window.alert('User 2')}
+        icon={<Icon name="person" />}
+        label="User 2"
+    />
+    <Tiles.Tile
+        onClick={() => window.alert('User 3')}
+        icon={<Icon name="person" />}
+        label="User 3"
+    />
+</Tiles.Container>`;

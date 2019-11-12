@@ -7,26 +7,15 @@ import { Monospace } from 'components/ui/Text';
 import { Section } from 'components/ui/Section';
 
 import { PropsTable } from '../common/PropsTable';
+import { ColumnBlockCodeSplit } from '../common/ColumnBlockCodeSplit';
 
-const sampleButton = `<button className="ui-button">Button label</button>`;
-const smallButton = `<button className="ui-button ui-button--small">Small button</button>`;
-const primaryButton = `<button className="ui-button ui-button--primary">Primary button</button>`;
-const positiveNegativeButton = `<button className="ui-button ui-button--positive">Positive button</button>
-<button className="ui-button ui-button--negative">Negative button</button>`;
-
-const sampleComponentButton = `import { Button } from 'components/ui/Button';
-<Button>Button label</Button>`;
-const onClickComponentButton = `<Button onClick={() => window.alert('test')}>Button label</Button>`;
-const classesComponentButton = `<Button classes={["small", "primary"]}>Small button</Button>`;
-const classesStringComponentButton = `<Button classes="small">Small button</Button>`;
-const disabledComponentButton = `<Button classes="small" disabled>Disabled button</Button>`;
 
 export function ShowCaseButton() {
     return <Fragment>
         <Section title="Buttons">
             <Block title="Showcase" isOutstanding={true}>
                 <RowBlock>
-                    <ColumnBlock>
+                    <ColumnBlockCodeSplit>
                         <p className="display-flex">
                             <button className="ui-button">Button</button>
                             <button className="ui-button ui-button--small">Button</button>
@@ -47,13 +36,17 @@ export function ShowCaseButton() {
                             <button className="ui-button ui-button--negative ui-button--small">Button</button>
                             <button className="ui-button ui-button--negative ui-button--small" disabled>Button</button>
                         </p>
-                    </ColumnBlock>
-                    <ColumnBlock>
+                    </ColumnBlockCodeSplit>
+                    <ColumnBlockCodeSplit>
                         <h3 className="ui-title">Class</h3>
-                        <CodeHighlight language="xml">{sampleButton}</CodeHighlight>
+                        <Block>
+                            <CodeHighlight language="xml">{sampleButton}</CodeHighlight>
+                        </Block>
                         <h3 className="ui-title">Component</h3>
-                        <CodeHighlight language="javascript">{sampleComponentButton}</CodeHighlight>
-                    </ColumnBlock>
+                        <Block>
+                            <CodeHighlight language="javascript">{sampleComponentButton}</CodeHighlight>
+                        </Block>
+                    </ColumnBlockCodeSplit>
                 </RowBlock>
             </Block>
         </Section>
@@ -61,54 +54,54 @@ export function ShowCaseButton() {
         <Section title="Class">
             <Block title="Class usage" isOutstanding={true}>
                 <RowBlock>
-                    <ColumnBlock>
+                    <ColumnBlockCodeSplit>
                         The basic way to create buttons is through classes.<br />
                         This is a simple button:
                         <div className="ui-text--boxed">
                             <button className="ui-button">Button label</button>
                         </div>
-                    </ColumnBlock>
-                    <ColumnBlock>
+                    </ColumnBlockCodeSplit>
+                    <ColumnBlockCodeSplit>
                         <CodeHighlight language="xml">{sampleButton}</CodeHighlight>
-                    </ColumnBlock>
+                    </ColumnBlockCodeSplit>
                 </RowBlock>
             </Block>
             <Block>
                 <RowBlock>
-                    <ColumnBlock>
+                    <ColumnBlockCodeSplit>
                         Small buttons requires an extra <Monospace>ui-button--small</Monospace> class:
                         <div className="ui-text--boxed">
                             <button className="ui-button ui-button--small">Small button</button>
                         </div>
-                    </ColumnBlock>
-                    <ColumnBlock>
+                    </ColumnBlockCodeSplit>
+                    <ColumnBlockCodeSplit>
                         <CodeHighlight language="xml">{smallButton}</CodeHighlight>
-                    </ColumnBlock>
+                    </ColumnBlockCodeSplit>
                 </RowBlock>
 
                 <RowBlock>
-                    <ColumnBlock>
+                    <ColumnBlockCodeSplit>
                         Primary buttons (with primary color) are done with class <Monospace>ui-button--primary</Monospace>:
                         <div className="ui-text--boxed">
                             <button className="ui-button ui-button--primary">Primary button</button>
                         </div>
-                    </ColumnBlock>
-                    <ColumnBlock>
+                    </ColumnBlockCodeSplit>
+                    <ColumnBlockCodeSplit>
                         <CodeHighlight language="xml">{primaryButton}</CodeHighlight>
-                    </ColumnBlock>
+                    </ColumnBlockCodeSplit>
                 </RowBlock>
 
                 <RowBlock>
-                    <ColumnBlock>
+                    <ColumnBlockCodeSplit>
                         Two other special classes are available, <Monospace>ui-button--positive</Monospace> and <Monospace>ui-button--negative</Monospace>:
                         <div className="ui-text--boxed">
                             <button className="ui-button ui-button--positive">Positive button</button>
                             <button className="ui-button ui-button--negative">Negative button</button>
                         </div>
-                    </ColumnBlock>
-                    <ColumnBlock>
+                    </ColumnBlockCodeSplit>
+                    <ColumnBlockCodeSplit>
                         <CodeHighlight language="xml">{positiveNegativeButton}</CodeHighlight>
-                    </ColumnBlock>
+                    </ColumnBlockCodeSplit>
                 </RowBlock>
             </Block>
         </Section>
@@ -116,16 +109,16 @@ export function ShowCaseButton() {
         <Section title="Component">
             <Block title="Components usage" isOutstanding={true}>
                 <RowBlock>
-                    <ColumnBlock>
+                    <ColumnBlockCodeSplit>
                         A component is also available.<br />
                         It takes few properties, and a label as child.<br />
                         <div className="ui-text--boxed">
                             <Button>Button label</Button>
                         </div>
-                    </ColumnBlock>
-                    <ColumnBlock>
+                    </ColumnBlockCodeSplit>
+                    <ColumnBlockCodeSplit>
                         <CodeHighlight language="javascript">{sampleComponentButton}</CodeHighlight>
-                    </ColumnBlock>
+                    </ColumnBlockCodeSplit>
                 </RowBlock>
             </Block>
 
@@ -202,3 +195,17 @@ function Props() {
         }
     ]} />;
 }
+
+const sampleButton = `<button className="ui-button">Button label</button>`;
+const smallButton = `<button className="ui-button ui-button--small">Small button</button>`;
+const primaryButton = `<button className="ui-button ui-button--primary">Primary button</button>`;
+const positiveNegativeButton = `<button className="ui-button ui-button--positive">Positive button</button>
+<button className="ui-button ui-button--negative">Negative button</button>`;
+
+const sampleComponentButton = `import { Button } from 'components/ui/Button';
+<Button>Button label</Button>`;
+const onClickComponentButton = `<Button onClick={() => window.alert('test')}>Button label</Button>`;
+const classesComponentButton = `<Button classes={["small", "primary"]}>Small button</Button>`;
+const classesStringComponentButton = `<Button classes="small">Small button</Button>`;
+const disabledComponentButton = `<Button classes="small" disabled>Disabled button</Button>`;
+
