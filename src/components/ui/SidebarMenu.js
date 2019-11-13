@@ -40,19 +40,20 @@ SidebarMenuTitle.propTypes = {
 };
 
 
-function SidebarMenuEntry({ isActive, onClick, children }) {
+function SidebarMenuEntry({ isActive, onClick, children, tag: Tag = 'div', ...rest }) {
     const activeClass = isActive ? `${UI_SIDEBAR_MENU_ENTRY_CLASS}--active` : '';
     const clickableClass = onClick ? `${UI_SIDEBAR_MENU_ENTRY_CLASS}--clickable` : '';
     const entryClass = `${UI_SIDEBAR_MENU_ENTRY_CLASS} ${activeClass} ${clickableClass}`;
 
-    return <div className={entryClass} onClick={onClick}>
+    return <Tag className={entryClass} onClick={onClick} {...rest}>
         {children}
-    </div>;
+    </Tag>;
 }
 
 SidebarMenuEntry.propTypes = {
     isActive: PropTypes.bool,
     onClick: PropTypes.func,
+    tag: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     children: propTypeChildren,
 };
 
