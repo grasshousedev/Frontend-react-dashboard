@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { Table } from 'components/ui/table/Table';
@@ -7,6 +7,8 @@ import { Icon } from 'components/ui/Icon';
 import { Monospace } from 'components/ui/Text';
 
 export function PropsTable({ propsList, title='', widths }) {
+    const blockRef = useRef(null);
+
     const columns = [
         { prop: 'propName', title: 'Name', width: widths && widths.propName ? widths.propName : 200, },
         { prop: 'propType', title: 'Type', width: widths && widths.propType ? widths.propType : 100, },
@@ -18,11 +20,8 @@ export function PropsTable({ propsList, title='', widths }) {
     const entries = propsList.map(prop => {
         return {
             ...prop,
-            default: typeof prop.default === 'string'
-                ? <Monospace>{prop.default}</Monospace>
-                : prop.default && prop.default.map
-                    ? prop.default.map(p => <Monospace key={p}>{p}</Monospace>)
-                    : prop.default,
+            propType: renderAttribute(prop, 'propType'),
+            default: renderAttribute(prop, 'default'),
             isRequired: prop.isRequired ? <Icon name="check" /> : '',
         };
     });
@@ -32,8 +31,8 @@ export function PropsTable({ propsList, title='', widths }) {
         headerController: false,
     };
 
-    return <Block title={title}>
-        <Table columns={columns} entries={entries} config={config} />
+    return <Block title={title} blockRef={blockRef}>
+        <Table columns={columns} entries={entries} config={config} container={blockRef} />
     </Block>;
 }
 
@@ -42,3 +41,12 @@ PropsTable.propTypes = {
     title: PropTypes.string,
     widths: PropTypes.object,
 };
+
+function renderAttribute(prop, attribute) {
+    return typeof prop[attribute] === 'string'
+    ? <Monospace>{prop[attribute]}</Monospace>
+    : prop[attribute] && prop[attribute].map
+        ? prop[attribute].map(p => <Monospace key={p}>{p}</Monospace>)
+        : prop[attribute]
+    ;
+}

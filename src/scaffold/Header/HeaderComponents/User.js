@@ -6,7 +6,7 @@ import { withAuthentication } from 'libs/authentication/storeConnection';
 
 function User ({ authentication }) {
 
-    return <div className="ui-page-body">
+    return <div className="ui-page__body">
         {authentication.loggedIn && <h2>Hello {authentication.user.first_name}, welcome!</h2>}
         {!authentication.loggedIn && <h2>Login</h2>}
         <Login />

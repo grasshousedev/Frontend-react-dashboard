@@ -7,10 +7,11 @@ $dashboard-menu-padding: 15px;
 $dashboard-menu-padding-small: 7px;
 
 /* Header */
-$dashboard-menu-header-bg-color-light: #5b666bb8;
-$dashboard-menu-header-bg-color: #292929;
-$dashboard-menu-header-color-light: #f1f6f9;
-$dashboard-menu-header-color: #c8ccd4;
+$dashboard-menu-header-bg-color-light: $grey-light-l1;
+$dashboard-menu-header-bg-color: $grey-light-l2;
+$dashboard-menu-header-color-light: $grey-light-d2;
+$dashboard-menu-header-color: $grey-light-d1;
+$dashboard-menu-header-border: $grey-light-l1;
 
 /* Body */
 $dashboard-menu-body-header-bg-color: #ececec;
@@ -28,20 +29,20 @@ $dashboard-menu-body-column-border-color: $dashboard-menu-query-color;
         @content;
     }
 }
-  
+
 @mixin placeholder {
     @include optional-at-root('::-webkit-input-placeholder') {
         @content;
     }
-  
+
     @include optional-at-root(':-moz-placeholder') {
         @content;
     }
-  
+
     @include optional-at-root('::-moz-placeholder') {
         @content;
     }
-  
+
     @include optional-at-root(':-ms-input-placeholder') {
         @content;
     }
@@ -57,7 +58,7 @@ This is the element that contains the entire menu, both header and body
     /* Position and dimension */
     position: absolute;
     top: 0;
-    width: 100%;      
+    width: 100%;
     height: $dashboard-menu-height;
     /* Colors */
     background-color: $dashboard-menu-header-bg-color;
@@ -65,11 +66,15 @@ This is the element that contains the entire menu, both header and body
     /* Flex configuration and Children spacing */
     display: flex;
     justify-content: space-between;
-    align-items: center;    
+    align-items: center;
+    /* Border */
+    border-bottom: 1px solid $dashboard-menu-header-border;
 }
 
 /* Block is an element within the header, that can contains many items */
-.dashboard-menu__header-block {}
+.dashboard-menu__header-block {
+    display: flex;
+}
 
 .dashboard-menu__header-block--left {
     text-align: left;
@@ -91,21 +96,22 @@ This is the element that contains the entire menu, both header and body
     padding: 0 $dashboard-menu-padding;
 
     &:not(:last-child) {
-      border-right: 1px solid $dashboard-menu-header-color;
+      border-right: 1px solid $dashboard-menu-header-border;
     }
 }
 
 .dashboard-menu__header__link {
     color: $dashboard-menu-header-color;
-    text-decoration: none; 
-    padding: 16px 10px;
+    text-decoration: none;
+    padding: 0 10px;
+    line-height: $dashboard-menu-height;
 }
 
-.dashboard-menu__header-item:hover, 
+.dashboard-menu__header-item:hover,
 .dashboard-menu__header__link:hover {
     color: $dashboard-menu-header-color-light;
     background-color: $dashboard-menu-header-bg-color-light;
-    background: linear-gradient(to bottom, lighten($dashboard-menu-header-bg-color-light, 5%) 0%,$dashboard-menu-header-bg-color-light 100%);    
+    background: linear-gradient(to bottom, lighten($dashboard-menu-header-bg-color-light, 5%) 0%,$dashboard-menu-header-bg-color-light 100%);
 }
 
 .dashboard-menu__header-dashboard-item {
@@ -128,7 +134,7 @@ This is the element that contains the entire menu, both header and body
     /* Flex configuration and Children spacing */
     display: flex;
     justify-content: space-between;
-    align-items: center;  
+    align-items: center;
 }
 
 .dashboard-menu__body-header__icon {
@@ -142,7 +148,7 @@ This is the element that contains the entire menu, both header and body
 
 .dashboard-menu__body-query {
     width: calc(100%);
-    text-align: left; 
+    text-align: left;
     display: flex;
 }
 
@@ -180,7 +186,7 @@ This is the element that contains the entire menu, both header and body
 .dashboard-menu__body-controls {
     /* width: $dashboard-menu-body-controls-width; */
     text-align: right;
-    padding-right: $dashboard-menu-padding-small; 
+    padding-right: $dashboard-menu-padding-small;
 }
 
 .dashboard-menu__body-controls--floating {

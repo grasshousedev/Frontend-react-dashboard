@@ -1,13 +1,21 @@
 import React, { Fragment, useState, useRef } from 'react';
+import PropTypes from 'prop-types';
 
+import { Badge } from 'components/ui/Badge';
+import { Block } from 'components/ui/Blocks';
+import { Breadcrumbs } from 'components/ui/Breadcrumbs';
+import { Page } from 'components/ui/Page';
 import { PageBody } from 'components/ui/PageBody';
 import { PageHeader } from 'components/ui/PageHeader';
+import { Sidebar } from 'components/ui/Sidebar';
+import { SidebarMenu } from 'components/ui/SidebarMenu';
 
 import { ShowCaseButton } from './components/ShowCaseButton';
 import { ShowCaseCard } from './components/ShowCaseCard';
 import { ShowCaseDropDown } from './components/ShowCaseDropDown';
 import { ShowCaseLoaders } from './components/ShowCaseLoaders';
 import { ShowCaseModal } from './components/ShowCaseModal';
+import { ShowCaseSidebar } from './components/ShowCaseSidebar';
 import { ShowCaseTable } from './components/ShowCaseTable';
 import { ShowCaseTabs } from './components/ShowCaseTabs';
 import { ShowCaseTiles } from './components/ShowCaseTiles';
@@ -18,31 +26,38 @@ import { TimelineComponent } from './TimelineComponent';
 
 import './style-showcase.scss';
 import { Panels } from './Panels';
-import { RowBlock, ColumnBlock } from 'components/ui/Blocks';
-import { Navigator } from 'components/ui/Navigator';
+
+
+function ComingSoon() {
+    return <Block isOutstanding={true} isContentCentered={true} style={{ height: '400px' }}>
+        <h1>This component documentation is coming soon!</h1>
+    </Block>;
+}
 
 const SECTIONS = {
+    BADGE: { component: ComingSoon, label: 'Badges', comingSoon: true },
+    BLOCKS: { component: ComingSoon, label: 'Blocks', comingSoon: true },
+    BREADCRUMBS: { component: ComingSoon, label: 'Breadcrumbs', comingSoon: true },
     BUTTON: { component: ShowCaseButton, label: 'Buttons' },
     CARDS: { component: ShowCaseCard, label: 'Cards' },
     COLORS: { component: Colors, label: 'Colors' },
     DROP_DOWN: { component: ShowCaseDropDown, label: 'Drop Downs' },
     GRID_COMPONENT: { component: GridComponent, label: 'Grids' },
+    GRID_SYSTEM: { component: ComingSoon, label: 'Grid System', comingSoon: true },
     LOADERS: { component: ShowCaseLoaders, label: 'Loaders' },
     MODAL: { component: ShowCaseModal, label: 'Modals' },
+    PAGE: { component: ComingSoon, label: 'Page', comingSoon: true },
     PANELS: { component: Panels, label: 'Panels' },
     TABS: { component: ShowCaseTabs, label: 'Tabs' },
     TABLE: { component: ShowCaseTable, label: 'Tables' },
     TILES: { component: ShowCaseTiles, label: 'Tiles' },
     TIMELINE: { component: TimelineComponent, label: 'Timeline' },
     TYPOGRAPHY: { component: Typography, label: 'Typography' },
+    SIDEBAR: { component: ShowCaseSidebar, label: 'Sidebar' },
+    SIDEBAR_MENU: { component: ComingSoon, label: 'Sidebar Menu', comingSoon: true },
 };
 
-export function StyleShowcase() {
-    const pageBodyRef = useRef(null);
-    const [sectionName, setSectionName] = useState('TABLE');
-
-    const SelectedComponent = SECTIONS[sectionName].component;
-
+function getNavigatorSections(setSectionName) {
     const getItem = (section) => {
         return {
             ...SECTIONS[section],
@@ -51,18 +66,23 @@ export function StyleShowcase() {
         };
     };
 
-    const sections = [
+    return [
         {
             title: 'Typography & Style',
             items: [
                 getItem('TYPOGRAPHY'),
+                getItem('PAGE'),
+                getItem('BLOCKS'),
                 getItem('PANELS'),
                 getItem('COLORS'),
+                getItem('GRID_SYSTEM'),
             ]
         },
         {
             title: 'Components',
             items: [
+                getItem('BADGE'),
+                getItem('BREADCRUMBS'),
                 getItem('BUTTON'),
                 getItem('DROP_DOWN'),
                 getItem('CARDS'),
@@ -70,6 +90,8 @@ export function StyleShowcase() {
                 getItem('LOADERS'),
                 getItem('TABS'),
                 getItem('MODAL'),
+                getItem('SIDEBAR'),
+                getItem('SIDEBAR_MENU'),
             ]
         },
         {
@@ -80,22 +102,61 @@ export function StyleShowcase() {
             ]
         },
     ];
+}
+
+export function StyleShowcase() {
+    const pageBodyRef = useRef(null);
+    const [sectionName, setSectionName] = useState('SIDEBAR');
+    const sections = getNavigatorSections(setSectionName);
+
+
+    const SelectedComponent = SECTIONS[sectionName].component;
 
     return <Fragment>
-        <PageHeader scrollRef={pageBodyRef}>Style Showcase</PageHeader>
-        <PageBody fullHeight={true} withPageHeader={true} pageBodyRef={pageBodyRef}>
-            <RowBlock>
-                <ColumnBlock className="col-sm-12 col-md-9 col-lg-10">
+        <div style={{ display: 'flex' }}>
+            <Sidebar
+                disableTrigger={true}
+                initialStatus={'open'}
+                top={() => ShowCaseSidebarNavigator({ sectionName, sections })}
+            />
+            <Page style={{ width: 'calc(100% - 350px)'}}>
+                <PageHeader scrollRef={pageBodyRef}>
+                    <Breadcrumbs breadcrumbs={[
+                        { link: '/', label: 'Dashboard' },
+                        { label: 'Style Showcase' },
+                    ]} />
+                    Style Showcase
+                </PageHeader>
+                <PageBody fullHeight={true} withPageHeader={true} pageBodyRef={pageBodyRef}>
                     <SelectedComponent />
-                </ColumnBlock>
-                <ColumnBlock className="col-sm-12 col-md-3 col-lg-2 first-sm first-xs last-md">
-                    <Navigator
-                        selectedKey={sectionName}
-                        style={{ marginBottom: 15 }}
-                        sections={sections}
-                    />
-                </ColumnBlock>
-            </RowBlock>
-        </PageBody>
+                </PageBody>
+            </Page>
+        </div>
     </Fragment>;
+};
+
+function ShowCaseSidebarNavigator({ sectionName, sections }) {
+    return <SidebarMenu isPadded={true}>
+        {sections.map((section, index) => {
+            return <Fragment key={section.title}>
+                {index > 0 && <SidebarMenu.Separator />}
+                <SidebarMenu.Title>{section.title}</SidebarMenu.Title>
+                {section.items.map(item => {
+                    return <SidebarMenu.Entry
+                        key={item.key}
+                        isActive={item.key === sectionName}
+                        onClick={item.onClick}
+                    >
+                        {item.label}
+                        {item.comingSoon && <Badge backgroundColor="blue" color="neutral-light-l2">Coming Soon</Badge> }
+                    </SidebarMenu.Entry>;
+                })}
+            </Fragment>;
+        })}
+    </SidebarMenu>;
+}
+
+ShowCaseSidebarNavigator.propTypes = {
+    sectionName: PropTypes.string,
+    sections: PropTypes.array,
 };

@@ -9,52 +9,6 @@ import { Monospace } from 'components/ui/Text';
 
 import { PropsTable } from '../common/PropsTable';
 
-const showcaseSampleDropDown = `<DropDown trigger={<button className="ui-button">Click to Open Dropdown</button>}>
-    <DropDown.Entry onClick={() => window.alert('first row clicked')}>First row</DropDown.Entry>
-    <DropDown.Divider />
-    <DropDown.Entry>Non clickable row</DropDown.Entry>
-</DropDown>`;
-
-const showcaseSampleHoverDropDown = `<DropDown triggerOn="hover"
-    trigger={<button className="ui-button">Hover to Open Dropdown</button>}
->
-    <DropDown.Entry onClick={() => window.alert('first row clicked')}>First row</DropDown.Entry>
-    <DropDown.Divider />
-    <DropDown.Entry>Non clickable row</DropDown.Entry>
-</DropDown>`;
-
-const cssDropDown = `<div className="ui-dropdown__outer-container">
-    <div className="ui-dropdown__trigger ui-dropdown__trigger--manual">
-        <button className="ui-button">Trigger</button>
-        <div className="ui-dropdown__container">
-            <div className="ui-dropdown__entry ui-dropdown__entry--clickable"
-                onClick={() => window.alert('Clicked')}
-            >Click me</div>
-            <div className="ui-dropdown__divider" />
-            <div className="ui-dropdown__entry">Non clickable</div>
-        </div>
-    </div>
-</div>`;
-
-const sampleDropDown = `import { DropDown } from 'components/ui/DropDown';
-
-const Trigger = <Icon name="settings" modifiers="clickable" />;
-
-<DropDown trigger={Trigger}>
-    <DropDown.Entry onClick={() => window.alert('first row clicked')}>First row</DropDown.Entry>
-    <DropDown.Entry onClick={() => window.alert('second row clicked')}>Second row</DropDown.Entry>
-    <DropDown.Divider />
-    <DropDown.Entry>Third row</DropDown.Entry>
-</DropDown>`;
-
-const sampleDropDownHover = `const Trigger = <Icon name="settings" modifiers="clickable" />;
-
-<DropDown trigger={Trigger} triggerOn="hover">
-    <DropDown.Entry onClick={() => window.alert('first row clicked')}>First row</DropDown.Entry>
-    <DropDown.Entry onClick={() => window.alert('second row clicked')}>Second row</DropDown.Entry>
-    <DropDown.Divider />
-    <DropDown.Entry>Third row</DropDown.Entry>
-</DropDown>}`;
 
 export function ShowCaseDropDown() {
     return <Fragment>
@@ -262,3 +216,50 @@ function getDropDownWithPosition(position) {
         </DropDown>
     </div>;
 }
+
+const showcaseSampleDropDown = `<DropDown trigger={<button className="ui-button">Click to Open Dropdown</button>}>
+    <DropDown.Entry onClick={() => window.alert('first row clicked')}>First row</DropDown.Entry>
+    <DropDown.Divider />
+    <DropDown.Entry>Non clickable row</DropDown.Entry>
+</DropDown>`;
+
+const showcaseSampleHoverDropDown = `<DropDown triggerOn="hover"
+    trigger={<button className="ui-button">Hover to Open Dropdown</button>}
+>
+    <DropDown.Entry onClick={() => window.alert('first row clicked')}>First row</DropDown.Entry>
+    <DropDown.Divider />
+    <DropDown.Entry>Non clickable row</DropDown.Entry>
+</DropDown>`;
+
+const cssDropDown = `<div className="ui-dropdown__outer-container">
+    <div className="ui-dropdown__trigger ui-dropdown__trigger--manual">
+        <button className="ui-button">Trigger</button>
+        <div className="ui-dropdown__container">
+            <div className="ui-dropdown__entry ui-dropdown__entry--clickable"
+                onClick={() => window.alert('Clicked')}
+            >Click me</div>
+            <div className="ui-dropdown__divider" />
+            <div className="ui-dropdown__entry">Non clickable</div>
+        </div>
+    </div>
+</div>`;
+
+const sampleDropDown = `import { DropDown } from 'components/ui/DropDown';
+
+const Trigger = <Icon name="settings" modifiers="clickable" />;
+
+<DropDown trigger={Trigger}>
+    <DropDown.Entry onClick={() => window.alert('first row clicked')}>First row</DropDown.Entry>
+    <DropDown.Entry onClick={() => window.alert('second row clicked')}>Second row</DropDown.Entry>
+    <DropDown.Divider />
+    <DropDown.Entry>Third row</DropDown.Entry>
+</DropDown>`;
+
+const sampleDropDownHover = `const Trigger = <Icon name="settings" modifiers="clickable" />;
+
+<DropDown trigger={Trigger} triggerOn="hover">
+    <DropDown.Entry onClick={() => window.alert('first row clicked')}>First row</DropDown.Entry>
+    <DropDown.Entry onClick={() => window.alert('second row clicked')}>Second row</DropDown.Entry>
+    <DropDown.Divider />
+    <DropDown.Entry>Third row</DropDown.Entry>
+</DropDown>}`;

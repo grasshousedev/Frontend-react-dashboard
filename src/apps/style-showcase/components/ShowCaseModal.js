@@ -3,10 +3,11 @@ import { Lorem } from 'components/ui/Lorem';
 import { CodeHighlight } from 'components/style/CodeHighlight';
 import { ModalTrigger } from 'components/ui/Modal';
 import { Section } from 'components/ui/Section';
-import { Block, RowBlock, ColumnBlock } from 'components/ui/Blocks';
+import { Block, RowBlock } from 'components/ui/Blocks';
 import { Button } from 'components/ui/Button';
 import { Monospace } from 'components/ui/Text';
 import { PropsTable } from '../common/PropsTable';
+import { ColumnBlockCodeSplit } from '../common/ColumnBlockCodeSplit';
 
 
 export function ShowCaseModal() {
@@ -23,39 +24,37 @@ export function ShowCaseModal() {
 
         <Section title="Component">
             <Block title="Component usage" isOutstanding={true}>
-                <RowBlock>
-                    <ColumnBlock>
-                        <Block>
-                            Modals can be created via <Monospace>ModalTrigger</Monospace> component.
-                            Two properties are mandatory: <Monospace>Trigger</Monospace> and
-                            <Monospace>getModalWindowProps</Monospace>.
-                        </Block>
+                <Block>
+                    Modals can be created via <Monospace>ModalTrigger</Monospace> component.
+                    Two properties are mandatory: <Monospace>Trigger</Monospace> and
+                    <Monospace>getModalWindowProps</Monospace>.
+                </Block>
 
-                        <Block>
-                            They are both functions, which accept arguments needed to open the modal and
-                            control the behaviour, the style and the lifecycle.
-                        </Block>
-                        <Block>
-                            <ModalTrigger
-                                Trigger={({ setViewModalWindow }) =>
-                                    <Button onClick={() => setViewModalWindow(true)}>Open Modal</Button>
-                                }
-                                getModalWindowProps={({ setViewModalWindow }) => {
-                                    return {
-                                        title: 'Modal',
-                                        content: <div><Lorem /></div>,
-                                        footer: <Fragment>
-                                            <div>Left element</div>
-                                            <Button classes='primary' onClick={() => setViewModalWindow(false)}>Close</Button>
-                                        </Fragment>
-                                    };
-                                }}
-                            />
-                        </Block>
-                    </ColumnBlock>
-                    <ColumnBlock>
+                <Block>
+                    They are both functions, which accept arguments needed to open the modal and
+                    control the behaviour, the style and the lifecycle.
+                </Block>
+                <RowBlock>
+                    <ColumnBlockCodeSplit>
+                        <ModalTrigger
+                            Trigger={({ setViewModalWindow }) =>
+                                <Button onClick={() => setViewModalWindow(true)}>Open Modal</Button>
+                            }
+                            getModalWindowProps={({ setViewModalWindow }) => {
+                                return {
+                                    title: 'Modal',
+                                    content: <div><Lorem /></div>,
+                                    footer: <Fragment>
+                                        <div>Left element</div>
+                                        <Button classes='primary' onClick={() => setViewModalWindow(false)}>Close</Button>
+                                    </Fragment>
+                                };
+                            }}
+                        />
+                    </ColumnBlockCodeSplit>
+                    <ColumnBlockCodeSplit>
                         <CodeHighlight>{componentUsageSample}</CodeHighlight>
-                    </ColumnBlock>
+                    </ColumnBlockCodeSplit>
                 </RowBlock>
             </Block>
 

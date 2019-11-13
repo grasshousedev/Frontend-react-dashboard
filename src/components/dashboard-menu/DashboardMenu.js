@@ -39,7 +39,7 @@ export class DashboardMenu extends Component {
                 this.setState({
                     selectedItem: null,
                     bodyOpen: false
-                });            
+                });
             }
         } else {
             const newState = {selectedItem: item};
@@ -58,20 +58,17 @@ export class DashboardMenu extends Component {
 
     render() {
         const { bodyOpen, selectedItem, query } = this.state;
-        const usedSections = this.elementsProps.filter(elementProp => this.props[elementProp] !== undefined).length;
-        const sectionWidth = Math.floor(100 / usedSections);
-        
+
         const SelectedItemBody = selectedItem && selectedItem.hasOwnProperty('bodyItem') ? selectedItem.bodyItem : null;
 
         return <div className="dashboard-menu__container">
             <div className="dashboard-menu__header">
-                {this.elementsProps.map(elementProp => {
-                    if (!this.props[elementProp]) return <Fragment></Fragment>;
+                {this.elementsProps.map((elementProp, index) => {
+                    if (!this.props[elementProp]) return <Fragment key={index}></Fragment>;
                     const items = Array.isArray(this.props[elementProp]) ? this.props[elementProp] : [this.props[elementProp]];
 
                     return <div
                             className={`dashboard-menu__header-block dashboard-menu__header-block--${elementProp}`}
-                            style={{width: `${sectionWidth}%`}}
                             key={`dashboard-menu-header-${elementProp}`}
                         >
                         {items.map((item, index) => {

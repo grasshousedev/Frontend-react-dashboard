@@ -10,6 +10,7 @@ import { Input } from 'components/ui/form/Input';
 import { Select } from 'components/ui/form/Select';
 import { Toggle } from 'components/ui/form/Toggle';
 import { Checkbox } from 'components/ui/form/Checkbox';
+import { ColumnBlockCodeSplit } from '../common/ColumnBlockCodeSplit';
 
 const SAMPLE_ENTRIES = getEntries();
 
@@ -85,7 +86,7 @@ export function ShowCaseTable() {
 
             <Block title="Configurator">
                 <RowBlock>
-                    <ColumnBlock className="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                    <ColumnBlockCodeSplit>
                         <RowBlock>
                             <ColumnBlock className="col-xs-12 col-sm-6 col-md-6">
                                 <h4>Spacing and size</h4>
@@ -130,8 +131,8 @@ export function ShowCaseTable() {
                                 </Form>
                             </ColumnBlock>
                         </RowBlock>
-                    </ColumnBlock>
-                    <ColumnBlock className="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                    </ColumnBlockCodeSplit>
+                    <ColumnBlockCodeSplit>
                         <RowBlock>
                             <ColumnBlock className="col-xs-12 col-sm-6 col-md-6">
                                 <h4>Pagination</h4>
@@ -187,7 +188,7 @@ export function ShowCaseTable() {
                                 </RowBlock>
                             </ColumnBlock>
                         </RowBlock>
-                    </ColumnBlock>
+                    </ColumnBlockCodeSplit>
                 </RowBlock>
             </Block>
 
