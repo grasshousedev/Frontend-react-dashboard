@@ -49,10 +49,12 @@ export function ShowCaseTabs () {
                     Tabs are created via <Monospace>Tabs</Monospace> component.
                     The main and required property is <Monospace>tabs</Monospace> list,
                     with each element required to have two properties:
-                    <ul>
-                        <li><Monospace>label</Monospace></li>
-                        <li><Monospace>content</Monospace></li>
-                    </ul>
+                </p>
+                <ul>
+                    <li><Monospace>label</Monospace></li>
+                    <li><Monospace>content</Monospace></li>
+                </ul>
+                <p>
                     Both of the properties accepts React nodes.
                 </p>
             </Block>

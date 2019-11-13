@@ -1,5 +1,6 @@
-import React, { Fragment, useState, useRef } from 'react';
+import React, { Fragment, useRef } from 'react';
 import PropTypes from 'prop-types';
+import { Route, Switch, Link, useParams, useLocation, matchPath } from 'react-router-dom';
 
 import { Badge } from 'components/ui/Badge';
 import { Block } from 'components/ui/Blocks';
@@ -25,14 +26,13 @@ import { GridComponent } from './GridComponent';
 import { TimelineComponent } from './TimelineComponent';
 
 import './style-showcase.scss';
-import { Panels } from './Panels';
 
 
-function ComingSoon() {
-    return <Block isOutstanding={true} isContentCentered={true} style={{ height: '400px' }}>
-        <h1>This component documentation is coming soon!</h1>
-    </Block>;
-}
+const STYLE_SHOWCASE_URL = '/style-showcase';
+const STYLE_SHOWCASE_BREADCRUMBS = [
+    { link: '/', label: 'Dashboard' },
+    { link: STYLE_SHOWCASE_URL, label: 'Style Showcase' },
+];
 
 const SECTIONS = {
     BADGE: { component: ComingSoon, label: 'Badges', comingSoon: true },
@@ -47,7 +47,6 @@ const SECTIONS = {
     LOADERS: { component: ShowCaseLoaders, label: 'Loaders' },
     MODAL: { component: ShowCaseModal, label: 'Modals' },
     PAGE: { component: ComingSoon, label: 'Page', comingSoon: true },
-    PANELS: { component: Panels, label: 'Panels' },
     TABS: { component: ShowCaseTabs, label: 'Tabs' },
     TABLE: { component: ShowCaseTable, label: 'Tables' },
     TILES: { component: ShowCaseTiles, label: 'Tiles' },
@@ -57,12 +56,88 @@ const SECTIONS = {
     SIDEBAR_MENU: { component: ComingSoon, label: 'Sidebar Menu', comingSoon: true },
 };
 
-function getNavigatorSections(setSectionName) {
+
+export function StyleShowcase() {
+    const pageBodyRef = useRef(null);
+    const { pathname } = useLocation();
+    const routeMatch = matchPath(pathname, {
+        path: `${STYLE_SHOWCASE_URL}/:sectionName`,
+        exact: true,
+        strict: true
+    });
+    const sectionName = routeMatch ? routeMatch.params.sectionName : '';
+    const sectionNameKey = sectionName.toUpperCase().replace('-', '_');
+    const sections = getNavigatorSections({ sectionName });
+
+    return <Fragment>
+        <div style={{ display: 'flex' }}>
+            <Sidebar
+                disableTrigger={true}
+                initialStatus={'open'}
+                top={() => ShowCaseSidebarNavigator({ sectionName, sections })}
+            />
+            <Page style={{ width: 'calc(100% - 350px)'}}>
+                <PageHeader scrollRef={pageBodyRef}>
+                    <Breadcrumbs breadcrumbs={STYLE_SHOWCASE_BREADCRUMBS} />
+                    {sectionNameKey ? SECTIONS[sectionNameKey].label : 'Style Showcase'}
+                </PageHeader>
+                <PageBody fullHeight={true} withPageHeader={true} pageBodyRef={pageBodyRef}>
+                    <Switch>
+                        <Route exact path={STYLE_SHOWCASE_URL} component={StyleShowcaseLanding} />
+                        <Route path={`${STYLE_SHOWCASE_URL}/:sectionName`} component={StyleShowcaseComponentView} />
+                    </Switch>
+                </PageBody>
+            </Page>
+        </div>
+    </Fragment>;
+};
+
+
+function StyleShowcaseLanding() {
+    return <Block isOutstanding={true} isContentCentered={true} style={{ height: '400px' }}>
+        <div>
+            <h1>The main page is coming soon!</h1>
+            <p>
+                In the meantime, you can use the navigator to view the available documentation.
+            </p>
+        </div>
+    </Block>;
+
+}
+
+function StyleShowcaseComponentView() {
+    const { sectionName } = useParams();
+    const sectionNameKey = sectionName.toUpperCase().replace('-', '_');
+
+    if (!SECTIONS[sectionNameKey]) return <InvalidSection />;
+
+    const SelectedComponent = SECTIONS[sectionNameKey].component;
+
+    return <SelectedComponent />;
+
+}
+
+
+function ComingSoon() {
+    return <Block isOutstanding={true} isContentCentered={true} style={{ height: '400px' }}>
+        <h1>This component documentation is coming soon!</h1>
+    </Block>;
+}
+
+
+function InvalidSection() {
+    return <Block isOutstanding={true} isContentCentered={true} style={{ height: '400px' }}>
+        <h1>This section does not exists.</h1>
+    </Block>;
+}
+
+function getNavigatorSections() {
     const getItem = (section) => {
+        const url = section.toLowerCase().replace('_', '-');
         return {
             ...SECTIONS[section],
-            key: section,
-            onClick: () => setSectionName(section),
+            key: url,
+            to: `${STYLE_SHOWCASE_URL}/${url}`,
         };
     };
 
@@ -73,7 +148,6 @@ function getNavigatorSections(setSectionName) {
                 getItem('TYPOGRAPHY'),
                 getItem('PAGE'),
                 getItem('BLOCKS'),
-                getItem('PANELS'),
                 getItem('COLORS'),
                 getItem('GRID_SYSTEM'),
             ]
@@ -104,36 +178,6 @@ function getNavigatorSections(setSectionName) {
     ];
 }
 
-export function StyleShowcase() {
-    const pageBodyRef = useRef(null);
-    const [sectionName, setSectionName] = useState('SIDEBAR');
-    const sections = getNavigatorSections(setSectionName);
-
-
-    const SelectedComponent = SECTIONS[sectionName].component;
-
-    return <Fragment>
-        <div style={{ display: 'flex' }}>
-            <Sidebar
-                disableTrigger={true}
-                initialStatus={'open'}
-                top={() => ShowCaseSidebarNavigator({ sectionName, sections })}
-            />
-            <Page style={{ width: 'calc(100% - 350px)'}}>
-                <PageHeader scrollRef={pageBodyRef}>
-                    <Breadcrumbs breadcrumbs={[
-                        { link: '/', label: 'Dashboard' },
-                        { label: 'Style Showcase' },
-                    ]} />
-                    Style Showcase
-                </PageHeader>
-                <PageBody fullHeight={true} withPageHeader={true} pageBodyRef={pageBodyRef}>
-                    <SelectedComponent />
-                </PageBody>
-            </Page>
-        </div>
-    </Fragment>;
-};
 
 function ShowCaseSidebarNavigator({ sectionName, sections }) {
     return <SidebarMenu isPadded={true}>
@@ -145,10 +189,17 @@ function ShowCaseSidebarNavigator({ sectionName, sections }) {
                     return <SidebarMenu.Entry
                         key={item.key}
                         isActive={item.key === sectionName}
-                        onClick={item.onClick}
+                        tag={Link}
+                        to={item.to}
                     >
                         {item.label}
-                        {item.comingSoon && <Badge backgroundColor="blue" color="neutral-light-l2">Coming Soon</Badge> }
+                        {item.comingSoon &&
+                            <Badge backgroundColor="blue" color="neutral-light-l2"
+                                style={{ marginLeft: '10px' }}
+                            >
+                                Coming Soon
+                            </Badge>
+                        }
                     </SidebarMenu.Entry>;
                 })}
             </Fragment>;

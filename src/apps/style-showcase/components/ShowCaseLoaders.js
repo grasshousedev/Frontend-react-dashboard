@@ -42,12 +42,13 @@ export function ShowCaseLoaders () {
             <Block title="Component usage" isOutstanding={true}>
                 <RowBlock>
                     <ColumnBlockCodeSplit>
+
+                        Two loaders are available:
+                        <ul>
+                            <li>Inline</li>
+                            <li>Full section</li>
+                        </ul>
                         <p>
-                            Two loaders are available:
-                            <ul>
-                                <li>Inline</li>
-                                <li>Full section</li>
-                            </ul>
                             The inline loader can be used between or inside other elements,
                             while the full section can be used as a page or section loader.
                         </p>
@@ -62,12 +63,12 @@ export function ShowCaseLoaders () {
                 <RowBlock>
                     <ColumnBlockCodeSplit>
                         The inline loader can be used inside buttons as well:
-                        <div>
+                        <Block>
                             <Button disabled={true}>Loading <InlineLoader /></Button>
-                        </div>
-                        <div>
+                        </Block>
+                        <Block>
                             <Button classes={['small', 'primary']}>Loading <InlineLoader /></Button>
-                        </div>
+                        </Block>
                     </ColumnBlockCodeSplit>
                     <ColumnBlockCodeSplit>
                         <CodeHighlight language="xml">{buttonLoader}</CodeHighlight>
