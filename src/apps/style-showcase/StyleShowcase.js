@@ -1,7 +1,10 @@
 import React, { Fragment, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
+import { Badge } from 'components/ui/Badge';
 import { Block } from 'components/ui/Blocks';
+import { Breadcrumbs } from 'components/ui/Breadcrumbs';
+import { Page } from 'components/ui/Page';
 import { PageBody } from 'components/ui/PageBody';
 import { PageHeader } from 'components/ui/PageHeader';
 import { Sidebar } from 'components/ui/Sidebar';
@@ -23,17 +26,18 @@ import { TimelineComponent } from './TimelineComponent';
 
 import './style-showcase.scss';
 import { Panels } from './Panels';
-import { Badge } from 'components/ui/Badge';
+
 
 function ComingSoon() {
     return <Block isOutstanding={true} isContentCentered={true} style={{ height: '400px' }}>
-        <h1>This component description is coming soon!</h1>
+        <h1>This component documentation is coming soon!</h1>
     </Block>;
 }
 
 const SECTIONS = {
     BADGE: { component: ComingSoon, label: 'Badges', comingSoon: true },
     BLOCKS: { component: ComingSoon, label: 'Blocks', comingSoon: true },
+    BREADCRUMBS: { component: ComingSoon, label: 'Breadcrumbs', comingSoon: true },
     BUTTON: { component: ShowCaseButton, label: 'Buttons' },
     CARDS: { component: ShowCaseCard, label: 'Cards' },
     COLORS: { component: Colors, label: 'Colors' },
@@ -42,6 +46,7 @@ const SECTIONS = {
     GRID_SYSTEM: { component: ComingSoon, label: 'Grid System', comingSoon: true },
     LOADERS: { component: ShowCaseLoaders, label: 'Loaders' },
     MODAL: { component: ShowCaseModal, label: 'Modals' },
+    PAGE: { component: ComingSoon, label: 'Page', comingSoon: true },
     PANELS: { component: Panels, label: 'Panels' },
     TABS: { component: ShowCaseTabs, label: 'Tabs' },
     TABLE: { component: ShowCaseTable, label: 'Tables' },
@@ -49,7 +54,7 @@ const SECTIONS = {
     TIMELINE: { component: TimelineComponent, label: 'Timeline' },
     TYPOGRAPHY: { component: Typography, label: 'Typography' },
     SIDEBAR: { component: ShowCaseSidebar, label: 'Sidebar' },
-    SIDEBAR_MENU: { component: ComingSoon, label: 'Sidebar Menu', comingSoon: true }
+    SIDEBAR_MENU: { component: ComingSoon, label: 'Sidebar Menu', comingSoon: true },
 };
 
 function getNavigatorSections(setSectionName) {
@@ -66,6 +71,7 @@ function getNavigatorSections(setSectionName) {
             title: 'Typography & Style',
             items: [
                 getItem('TYPOGRAPHY'),
+                getItem('PAGE'),
                 getItem('BLOCKS'),
                 getItem('PANELS'),
                 getItem('COLORS'),
@@ -76,6 +82,7 @@ function getNavigatorSections(setSectionName) {
             title: 'Components',
             items: [
                 getItem('BADGE'),
+                getItem('BREADCRUMBS'),
                 getItem('BUTTON'),
                 getItem('DROP_DOWN'),
                 getItem('CARDS'),
@@ -112,12 +119,18 @@ export function StyleShowcase() {
                 initialStatus={'open'}
                 top={() => ShowCaseSidebarNavigator({ sectionName, sections })}
             />
-            <div style={{ width: 'calc(100% - 350px)'}}>
-                <PageHeader scrollRef={pageBodyRef}>Style Showcase</PageHeader>
+            <Page style={{ width: 'calc(100% - 350px)'}}>
+                <PageHeader scrollRef={pageBodyRef}>
+                    <Breadcrumbs breadcrumbs={[
+                        { link: '/', label: 'Dashboard' },
+                        { label: 'Style Showcase' },
+                    ]} />
+                    Style Showcase
+                </PageHeader>
                 <PageBody fullHeight={true} withPageHeader={true} pageBodyRef={pageBodyRef}>
                     <SelectedComponent />
                 </PageBody>
-            </div>
+            </Page>
         </div>
     </Fragment>;
 };
