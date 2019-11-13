@@ -26,10 +26,10 @@ import { GridComponent } from './GridComponent';
 import { TimelineComponent } from './TimelineComponent';
 
 import './style-showcase.scss';
-import { Panels } from './Panels';
 
 
 const STYLE_SHOWCASE_URL = '/style-showcase';
+
 
 const SECTIONS = {
     BADGE: { component: ComingSoon, label: 'Badges', comingSoon: true },
@@ -44,7 +44,6 @@ const SECTIONS = {
     LOADERS: { component: ShowCaseLoaders, label: 'Loaders' },
     MODAL: { component: ShowCaseModal, label: 'Modals' },
     PAGE: { component: ComingSoon, label: 'Page', comingSoon: true },
-    PANELS: { component: Panels, label: 'Panels' },
     TABS: { component: ShowCaseTabs, label: 'Tabs' },
     TABLE: { component: ShowCaseTable, label: 'Tables' },
     TILES: { component: ShowCaseTiles, label: 'Tiles' },
