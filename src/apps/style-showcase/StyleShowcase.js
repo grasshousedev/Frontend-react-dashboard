@@ -29,7 +29,10 @@ import './style-showcase.scss';
 
 
 const STYLE_SHOWCASE_URL = '/style-showcase';
-
+const STYLE_SHOWCASE_BREADCRUMBS = [
+    { link: '/', label: 'Dashboard' },
+    { link: STYLE_SHOWCASE_URL, label: 'Style Showcase' },
+];
 
 const SECTIONS = {
     BADGE: { component: ComingSoon, label: 'Badges', comingSoon: true },
@@ -58,11 +61,12 @@ export function StyleShowcase() {
     const pageBodyRef = useRef(null);
     const { pathname } = useLocation();
     const routeMatch = matchPath(pathname, {
-        path: `${STYLE_SHOWCASE_URL}/sectionName`,
+        path: `${STYLE_SHOWCASE_URL}/:sectionName`,
         exact: true,
         strict: true
     });
     const sectionName = routeMatch ? routeMatch.params.sectionName : '';
+    const sectionNameKey = sectionName.toUpperCase().replace('-', '_');
     const sections = getNavigatorSections({ sectionName });
 
     return <Fragment>
@@ -70,15 +74,12 @@ export function StyleShowcase() {
             <Sidebar
                 disableTrigger={true}
                 initialStatus={'open'}
-                top={() => ShowCaseSidebarNavigator({ sections })}
+                top={() => ShowCaseSidebarNavigator({ sectionName, sections })}
             />
             <Page style={{ width: 'calc(100% - 350px)'}}>
                 <PageHeader scrollRef={pageBodyRef}>
-                    <Breadcrumbs breadcrumbs={[
-                        { link: '/', label: 'Dashboard' },
-                        { label: 'Style Showcase' },
-                    ]} />
-                    Style Showcase
+                    <Breadcrumbs breadcrumbs={STYLE_SHOWCASE_BREADCRUMBS} />
+                    {sectionNameKey ? SECTIONS[sectionNameKey].label : 'Style Showcase'}
                 </PageHeader>
                 <PageBody fullHeight={true} withPageHeader={true} pageBodyRef={pageBodyRef}>
                     <Switch>
@@ -132,10 +133,11 @@ function InvalidSection() {
 
 function getNavigatorSections() {
     const getItem = (section) => {
+        const url = section.toLowerCase().replace('_', '-');
         return {
             ...SECTIONS[section],
-            key: section,
-            to: `${STYLE_SHOWCASE_URL}/${section.toLowerCase().replace('_', '-')}`,
+            key: url,
+            to: `${STYLE_SHOWCASE_URL}/${url}`,
         };
     };
 

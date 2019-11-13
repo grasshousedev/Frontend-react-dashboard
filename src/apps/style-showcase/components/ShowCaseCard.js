@@ -96,20 +96,18 @@ export function ShowCaseCard () {
                 </RowBlock>
             </Block>
             <Block>
-                <p>
-                    The main container includes the following parts:
-                    <ul>
-                        <li>title</li>
-                        <li>subtitle</li>
-                        <li>description</li>
-                        <li>control</li>
-                    </ul>
+                The main container includes the following parts:
+                <ul>
+                    <li>title</li>
+                    <li>subtitle</li>
+                    <li>description</li>
+                    <li>control</li>
+                </ul>
 
-                    The following parts can be included in the side container:
-                    <ul>
-                        <li>icon</li>
-                    </ul>
-                </p>
+                The following parts can be included in the side container:
+                <ul>
+                    <li>icon</li>
+                </ul>
                 <p>
                     Note: the <Monospace>control</Monospace> section will align item at sides,
                     so you need to wrap them together if you want to see them on the same side.
