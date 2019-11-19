@@ -8,8 +8,8 @@ module.exports = {
         // List of external repositories that have to be added
         // to the testers to being correctly processed
         // const externalRepositories = [
-        //   '/home/<user>/repositories/stand-alone-repo',          
-        // ];          
+        //   '/home/<user>/repositories/stand-alone-repo',
+        // ];
         let externalRepositories = [];
         if (process.env.REACT_APP_EXTERNAL_REPOSITORIES) {
           externalRepositories = process.env.REACT_APP_EXTERNAL_REPOSITORIES.split(',');
@@ -17,7 +17,7 @@ module.exports = {
 
         // Set a list of repositories required for this project
         const projectRepositories = [
-          'dashboard-finance'          
+          'dashboard-finance'
         ];
 
         // Validate the user has set all of them before starting
@@ -32,6 +32,10 @@ module.exports = {
               ...(Array.isArray(test.include) ? test.include : [test.include]),
               ...externalRepositories,
             ];
+            config.module.rules[2].oneOf[index].exclude = [
+              ...(Array.isArray(test.exclude) ? test.exclude : [test.exclude]),
+              ...externalRepositories.map(repo => `${repo}/node_modules/**`),
+            ].filter(r => !!r);
           }
         });
         return config;
