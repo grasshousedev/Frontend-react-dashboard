@@ -4,6 +4,7 @@ $footer-height: 0;
 $ui-dashboard-background-color: #f8fafb;
 
 /* Global variables */
+$ui-text-color: #5a6168;
 $ui-page-padding: 15px;
 $ui-dashboard-header-height: $header-height;
 $ui-dashboard-footer-height: $footer-height;
@@ -25,6 +26,7 @@ body {
     font-size: $text-small;
     background-color: $ui-dashboard-background-color;
     color: $grey-d1;
+    color: $ui-text-color;
 }
 
 h1, h2, h3, h4, h5 {
