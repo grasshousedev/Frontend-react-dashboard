@@ -11,13 +11,14 @@ const CELL_CLASS = `${BODY_CLASS}__cell`;
 
 
 export default function TableBody({ columns, entries, config, pageState, stylesAndClasses, tableBodyContainerRef, pinnedLeft=[] }) {
+    const { className, style, ...rest } = config.bodyContainerProps;
     const firstElement = (pageState.page - 1) * pageState.pageSize;
     const lastElement = firstElement + pageState.pageSize;
     const entriesPage = config.pagination ? entries.slice(firstElement, lastElement) : entries;
+    const bodyContainerClass = `${stylesAndClasses.body__container.classes} ${className || ''}`;
+    const bodyContainerStyle = { ...getBodyContainerStyle(config), ...style };
 
-    const bodyContainerStyle = getBodyContainerStyle(config);
-
-    return <div className={stylesAndClasses.body__container.classes} ref={tableBodyContainerRef} style={bodyContainerStyle}>
+    return <div className={bodyContainerClass} ref={tableBodyContainerRef} style={bodyContainerStyle} {...rest}>
         <table className={BODY_CLASS} style={stylesAndClasses.body.style}>
             <tbody>
                 {entriesPage.map((entry, eIndex) => {

@@ -14,13 +14,15 @@ const CELL_CLASS = `${HEADER_CLASS}__cell`;
 
 
 export default function TableHeader({ columns, config, pinnedLeft=[], stylesAndClasses, tableHeaderContainerRef, tableStyleState, setTableStyleState }) {
+    const { className, style, ...rest } = config.headerContainerProps;
     const colClass = getHeaderColumnClass(COL_CLASS, { config });
     const cellClass = getHeaderCellClass(CELL_CLASS, { config });
-    const containerClass = getContainerClass(CONTAINER_CLASS, stylesAndClasses.header__container);
+    const headerContainerClass = `${getContainerClass(CONTAINER_CLASS, stylesAndClasses.header__container)} ${className || ''}`;
+    const headerContainerStyle = { ...stylesAndClasses.header__container.style, ...style };
 
     const sortedFields = tableStyleState.sortFields.reduce((sf, fo) => ({ ...sf, [fo.field]: fo.direction || 'asc' }), {});
 
-    return <div className={containerClass} ref={tableHeaderContainerRef} style={stylesAndClasses.header__container.style}>
+    return <div className={headerContainerClass} ref={tableHeaderContainerRef} style={headerContainerStyle} {...rest}>
         <table className={HEADER_CLASS} style={stylesAndClasses.header.style}>
             <thead>
                 <tr className={ROW_CLASS}>

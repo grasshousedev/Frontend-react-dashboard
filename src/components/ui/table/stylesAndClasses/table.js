@@ -26,6 +26,12 @@ export function getCellsStyle(columns, tableStyleState, config) {
         if (config.padding) {
             cellsStyle[col.prop].padding = config.padding + 'px';
         }
+        if (col.padding !== undefined) {
+            cellsStyle[col.prop].padding = col.padding + 'px';
+        }
+        if (col.style) {
+            cellsStyle[col.prop] = { ...cellsStyle[col.prop], ...col.style };
+        }
     });
     return cellsStyle;
 }

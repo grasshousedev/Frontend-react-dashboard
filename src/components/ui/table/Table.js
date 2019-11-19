@@ -12,6 +12,8 @@ const DEFAULT_CONFIG = {
     padding: 7,
     borderType: 'row',
     headerController: true,
+    headerContainerProps: {},
+    bodyContainerProps: {},
 };
 
 export function Table({ columns, entries, config, container }) {
@@ -101,6 +103,8 @@ Table.propTypes = {
         PropTypes.shape({
             prop: PropTypes.string.isRequired,
             title: PropTypes.string,
+            width: PropTypes.number,
+            padding: PropTypes.number,
         }).isRequired,
     ).isRequired,
     entries: PropTypes.array.isRequired,
@@ -118,6 +122,8 @@ Table.propTypes = {
             visible: PropTypes.bool,
             style: PropTypes.oneOf(['collapsed', 'expanded'])
         }),
+        bodyContainerProps: PropTypes.object,
+        headerContainerProps: PropTypes.object,
     }),
     container: PropTypes.object,
 };
