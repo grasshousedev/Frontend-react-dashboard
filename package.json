@@ -5,7 +5,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll",
     "eject": "react-scripts eject"
   },
   "dependencies": {
@@ -21,7 +21,7 @@
     "react-chartjs-2": "^2.7.6",
     "react-color": "^2.17.0",
     "react-dom": "^16.8",
-    "react-redux": "^6.0.0",
+    "react-redux": "^7.1.0",
     "react-router-dom": "^5.1.2",
     "react-select": "^2.4.3",
     "react-toastify": "^5.1.0",
