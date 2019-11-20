@@ -8,7 +8,7 @@ import { UI_FORM_BASE_CLASS } from './Form';
 function FormSelect({ options, extraClassName, value, key='value', ...rest }) {
     const selectClassName = `${UI_FORM_BASE_CLASS}__react-select ${extraClassName || ''}`;
     const mappedOptions = useMemo(() =>
-        options.reduce((all, o) => { all[o[key]] = o; console.log('l'); return all; }, {}),
+        options.reduce((all, o) => { all[o[key]] = o; return all; }, {}),
         [options, key]
     );
     const selectValue = mappedOptions[value];
