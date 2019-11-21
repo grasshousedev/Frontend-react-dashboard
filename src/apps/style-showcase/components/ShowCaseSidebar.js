@@ -265,6 +265,13 @@ function Props() {
             </div>
         },
         {
+            propName: 'className',
+            propType: 'string',
+            description: <div>
+                Class name to be added to the Sidebar Container.
+            </div>
+        },
+        {
             propName: 'children',
             propType: 'node',
             description: <div>

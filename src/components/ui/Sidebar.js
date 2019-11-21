@@ -38,7 +38,7 @@ SidebarProvider.defaultProps = {
 };
 
 
-export function Sidebar({ children, top, bottom, initialStatus, disableTrigger, height, sidebarContext, ...rest }) {
+export function Sidebar({ children, top, bottom, initialStatus, disableTrigger, height, sidebarContext, className='', ...rest }) {
     const emptyContext = React.createContext([{}, () => ({})]);
     const [contextState, setContextState] = useContext(sidebarContext || emptyContext);
     const [componentState, setComponentState] = useState({ status: initialStatus });
@@ -48,7 +48,7 @@ export function Sidebar({ children, top, bottom, initialStatus, disableTrigger, 
         : [componentState, setComponentState];
 
     const statusClass = `${UI_SIDEBAR_CONTAINER_CLASS}--${state.status}`;
-    const sidebarContainerClass = `${UI_SIDEBAR_CONTAINER_CLASS} ${statusClass}`;
+    const sidebarContainerClass = `${UI_SIDEBAR_CONTAINER_CLASS} ${statusClass} ${className}`;
     const elementsContainerTriggerClass = !disableTrigger ?
         `${UI_SIDEBAR_ELEMENTS_CONTAINER_CLASS}--with-trigger` : '';
     const elementsContainerClass = `${UI_SIDEBAR_ELEMENTS_CONTAINER_CLASS} ${elementsContainerTriggerClass}`;
@@ -87,6 +87,7 @@ Sidebar.propTypes = {
     initialStatus: PropTypes.oneOf(['open', 'closed']),
     disableTrigger: PropTypes.bool,
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    className: PropTypes.string,
     sidebarContext: PropTypes.object,
 };
 

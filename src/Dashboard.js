@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
-
+import { useLocation } from 'react-router-dom';
 
 import { withAuthentication } from 'libs/authentication/storeConnection';
 import { Header } from './scaffold/Header/Header';
@@ -12,6 +12,19 @@ import { Sidebar, SidebarContext } from 'components/ui/Sidebar';
 
 
 function Dashboard({ authentication }) {
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        const DASHBOARD_CLASS = 'dashboard__dashboard-view';
+        if (pathname === "" || pathname === "/") {
+            document.body.classList.add(DASHBOARD_CLASS);
+        } else {
+            if (document.body.classList.contains(DASHBOARD_CLASS)) {
+                document.body.classList.remove(DASHBOARD_CLASS);
+            }
+        }
+    }, [pathname]);
+
     if (!authentication.storageLoginAttempt)
         return <div className="ui-loader__preloader__container">
             <div className="ui-preloader__loader ui-loader ui-loader--large" />
@@ -33,7 +46,8 @@ function Dashboard({ authentication }) {
                     top={(sidebarState) => <SidebarContent sidebarState={sidebarState} />}
                     bottom={(sidebarState) => <Icon name="person" size="big" />}
                     sidebarContext={SidebarContext}
-                >                        
+                    className="dashboard__sidebar"
+                >
                 </Sidebar>
                 <div className="dashboard-content" style={{ display: 'inline-block', flexGrow: 1 }}>
                     <Routes />

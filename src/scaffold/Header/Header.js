@@ -15,8 +15,8 @@ function Header ({ authentication }) {
 
     const userLabel = authentication.user ? `Welcome ${authentication.user.first_name}!` : 'Login';
 
-    const SidebarTrigger = <span style={{ padding: '0 11px' }}
-        className="dashboard-menu__header-item dashboard-menu__header-dashboard-item"
+    const SidebarTrigger = <span style={{ padding: '0' }}
+        className="dashboard-menu__header-item dashboard-menu__header-dashboard-item dashboard__sidebar-trigger"
         onClick={() => {
             setSidebarState({ ...sidebarState, status: sidebarState.status === 'open' ? 'closed' : 'open' });
         }}

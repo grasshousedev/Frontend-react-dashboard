@@ -59,3 +59,42 @@ p {
     overflow: auto;
     background-color: $ui-dashboard-background-color;
 }
+
+body:not(.dashboard__dashboard-view) {
+    .dashboard__sidebar {
+        background-color: $grey-d1;
+
+        .ui-sidebar__entry {
+            color: $grey-light-l2;
+            &:hover {
+                background: $grey-light-d2;
+            }
+        }
+    }
+
+    .dashboard__sidebar-trigger {
+        background-color: $grey-d1;
+        color: $grey-light-l2;
+
+        &:hover {
+            background: $grey-light-d2;
+        }
+    }
+}
+
+body.dashboard__dashboard-view {
+    .dashboard__sidebar {
+        background-color: $ui-dashboard-background-color;
+        border-right: 1px solid $ui-dashboard-background-color;
+    }
+
+    .dashboard__sidebar-trigger {
+        border-right: 1px solid $ui-dashboard-background-color;
+    }
+}
+
+.dashboard__sidebar-trigger {
+    width: 45px;
+    justify-content: center;
+    transition: background-color 0.4s;
+}
