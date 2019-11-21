@@ -12,7 +12,7 @@ export function Page({ width, height, className, style, children, ...rest }) {
     const pageStyle = { width, height, ...style };
     const pageClass = `${PAGE_CONTAINER_CLASS} ${className}`;
 
-    return <div style={pageStyle} className={pageClass}>{children}</div>;
+    return <div style={pageStyle} className={pageClass} {...rest}>{children}</div>;
 }
 
 Page.propTypes = {
