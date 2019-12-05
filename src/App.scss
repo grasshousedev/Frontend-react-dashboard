@@ -54,6 +54,10 @@ p {
     margin-top: 0;
 }
 
+input.ui-form__field__input:focus {
+    box-shadow: none;
+}
+
 .dashboard-content {
     height: calc(100vh - #{($ui-dashboard-header-height + $ui-dashboard-footer-height)});
     overflow: auto;
