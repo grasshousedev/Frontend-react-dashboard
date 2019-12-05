@@ -41,9 +41,9 @@ export function IconPicker({ onPickConfirm, initialIcon='', containerProps={}, i
             return <div className={`${ICON_PICKER_TRIGGER_CONTAINER_CLASS}`}>
                 {initialIcon && <Icon name={initialIcon} size="small" className={ICON_PICKER_TRIGGER_ICON_CLASS} />}
                 <Button classes={['small']} onClick={() => setViewModalWindow(true)}>Pick</Button>
-                <Button classes={['small']} onClick={() => onPickConfirm('')}>
+                {initialIcon && <Button classes={['small']} onClick={() => onPickConfirm('')}>
                     <Icon name="close" size="small" />
-                </Button>
+                </Button>}
             </div>;
         }}
         getModalWindowProps={({ setViewModalWindow }) => {
