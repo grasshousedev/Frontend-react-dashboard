@@ -4,6 +4,7 @@ $footer-height: 0;
 $ui-dashboard-background-color: #f8fafb;
 
 /* Global variables */
+$ui-font: Lato;
 $ui-text-color: #5a6168;
 $ui-page-padding: 15px;
 $ui-dashboard-header-height: $header-height;
@@ -21,7 +22,7 @@ $dashboard-menu-height: $header-height;
 @import 'style/dashboard/login';
 
 body {
-    font-family: Lato;
+    font-family: $ui-font;
     font-weight: 400;
     font-size: $text-small;
     background-color: $ui-dashboard-background-color;
@@ -54,7 +55,8 @@ p {
     margin-top: 0;
 }
 
-input.ui-form__field__input:focus {
+input.ui-form__field__input:focus,
+textarea.ui-form__field__textarea:focus {
     box-shadow: none;
 }
 
