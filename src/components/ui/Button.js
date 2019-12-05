@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export function Button ({ children, onClick, disabled, classes, ...rest }) {
-    const buttonProps = { disabled };
+export function Button ({ children, onClick, disabled, type, classes, ...rest }) {
+    const buttonProps = {
+        disabled,
+        type: type || 'button',
+    };
     if (onClick) buttonProps.onClick = onClick;
 
     const extraClasses = classes
@@ -25,6 +28,7 @@ Button.propTypes = {
     ]).isRequired,
     onClick: PropTypes.func,
     disabled: PropTypes.bool,
+    type: PropTypes.string,
     classes: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
     className: PropTypes.string,
 };
