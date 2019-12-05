@@ -192,6 +192,14 @@ function Props() {
                     </ColumnBlock>
                 </RowBlock>
             </div>
+        },
+        {
+            propName: 'type',
+            propType: 'string',
+            default: 'button',
+            description: <div>
+                By default the button type is <Monospace>button</Monospace>.
+            </div>
         }
     ]} />;
 }
