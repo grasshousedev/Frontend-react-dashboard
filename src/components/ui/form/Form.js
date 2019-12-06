@@ -25,18 +25,31 @@ Form.propTypes = {
 };
 
 
-export function Field({ label, children, fieldProps, labelProps, inputProps }) {
-    const fProps = fieldProps || {};
-    const lProps = labelProps || {};
-    const iProps = inputProps || {};
+export function Field({ label, children, className, vertical=false, labelProps={}, inputProps={}, ...rest }) {
+    const {
+        className: labelClassName = '',
+        width: labelWidth = 175,
+        style: labelStyle = {},
+        ...lProps
+    } = labelProps;
+    const {
+        className: inputClassName = '',
+        ...iProps
+    } = inputProps;
 
-    const labelWidth = lProps.width || 175;
+    const fieldClass = `${FIELD_CLASS} ${vertical ? `${FIELD_CLASS}--vertical` : ''}`;
+    const labelClass = `${LABEL_CLASS} ${vertical ? `${LABEL_CLASS}--vertical` : ''}`;
+    const fieldInputClass = `${FIELD_INPUT_CLASS} ${vertical ? `${FIELD_INPUT_CLASS}--vertical` : ''}`;
 
-    return <div className={FIELD_CLASS} {...fProps.rest}>
-        <div className={LABEL_CLASS} style={{ width: labelWidth }} {...lProps.rest}>
-            {label}
-        </div>
-        <div className={FIELD_INPUT_CLASS} {...iProps.rest}>
+    return <div className={`${fieldClass} ${className}`} {...rest}>
+        {label &&
+            <div
+                className={`${labelClass} ${labelClassName}`}
+                style={{ width: labelWidth, ...labelStyle }}
+                {...lProps}
+            >{label}</div>
+        }
+        <div className={`${fieldInputClass} ${inputClassName}`} {...iProps}>
             {children}
             <span className={FIELD_INPUT_BORDER_CLASS}></span>
         </div>
@@ -46,13 +59,8 @@ export function Field({ label, children, fieldProps, labelProps, inputProps }) {
 Field.propTypes = {
     label: propTypeChildren,
     children: propTypeChildren,
-    fieldProps: PropTypes.shape({
-        rest: PropTypes.object,
-    }),
-    labelProps: PropTypes.shape({
-        rest: PropTypes.object,
-    }),
-    inputProps: PropTypes.shape({
-        rest: PropTypes.object,
-    }),
+    className: PropTypes.string,
+    vertical: PropTypes.bool,
+    labelProps: PropTypes.object,
+    inputProps: PropTypes.object,
 };
