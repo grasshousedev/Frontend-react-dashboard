@@ -37,11 +37,11 @@ export function Field({ label, children, className, vertical=false, labelProps={
         ...iProps
     } = inputProps;
 
-    const fieldClass = `${FIELD_CLASS} ${vertical ? `${FIELD_CLASS}--vertical` : ''}`;
+    const fieldClass = `${FIELD_CLASS} ${vertical ? `${FIELD_CLASS}--vertical` : ''} ${className || ''}`;
     const labelClass = `${LABEL_CLASS} ${vertical ? `${LABEL_CLASS}--vertical` : ''}`;
     const fieldInputClass = `${FIELD_INPUT_CLASS} ${vertical ? `${FIELD_INPUT_CLASS}--vertical` : ''}`;
 
-    return <div className={`${fieldClass} ${className}`} {...rest}>
+    return <div className={fieldClass} {...rest}>
         {label &&
             <div
                 className={`${labelClass} ${labelClassName}`}
