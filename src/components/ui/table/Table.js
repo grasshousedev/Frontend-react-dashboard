@@ -111,7 +111,7 @@ Table.propTypes = {
     config: PropTypes.shape({
         padding: PropTypes.number,
         singleLine: PropTypes.bool,
-        borderType: PropTypes.oneOf([undefined, 'row', 'cell']),
+        borderType: PropTypes.oneOf([undefined, 'none', 'row', 'cell']),
         height: PropTypes.number,
         pinnedLeft: PropTypes.arrayOf(PropTypes.string),
         headerController: PropTypes.bool,

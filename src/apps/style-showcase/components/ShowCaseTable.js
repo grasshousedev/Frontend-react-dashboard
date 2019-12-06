@@ -25,7 +25,7 @@ const SAMPLE_COLUMNS = [
 ];
 
 const BORDER_TYPES = [
-    { value: '', label: 'None' },
+    { value: 'none', label: 'None' },
     { value: 'row', label: 'Row' },
     { value: 'cell', label: 'Cell' },
 ];
@@ -264,7 +264,7 @@ function PropsConfig() {
             description: <div>
                 Set the border type. Following values are accepted:
                 <ul>
-                    <li><pre className="ui-text__monospace">undefined</pre></li>
+                    <li><pre className="ui-text__monospace">none</pre></li>
                     <li><pre className="ui-text__monospace">row</pre></li>
                     <li><pre className="ui-text__monospace">cell</pre></li>
                 </ul>
