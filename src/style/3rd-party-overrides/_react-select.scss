@@ -1,8 +1,11 @@
 @import '~@vzamboni/dashboard-ui-style/vars/colors';
 
 .dashboard-content {
+    .react-select__placeholder {
+        color: $neutral-light-d1;
+    }
     .react-select__value-container {
-        padding: 0 8px;
+        padding: 0;
     }
     .react-select__input {
         input:focus {
