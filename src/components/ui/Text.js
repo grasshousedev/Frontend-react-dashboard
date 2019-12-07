@@ -1,11 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { propTypeChildren } from 'components/utils';
+
+const TEXT_CLASS = 'ui-text';
+const TEXT_MONOSPACE_CLASS = `${TEXT_CLASS}__monospace`;
 
 
-export function Monospace({ children }) {
-    return <span className="ui-text__monospace">{children}</span>;
+export function Monospace({ children, className='' }) {
+    const monospaceClassName = `${TEXT_MONOSPACE_CLASS} ${className}`;
+
+    return <span className={monospaceClassName}>{children}</span>;
 }
 
 Monospace.propTypes = {
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
+    children: propTypeChildren,
+    className: PropTypes.string,
 };
