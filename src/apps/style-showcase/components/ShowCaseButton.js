@@ -137,6 +137,14 @@ function Props() {
             </div>
         },
         {
+            propName: 'tag',
+            propType: ['string', 'object'],
+            default: 'button',
+            description: <div>
+                Tag that will be used to create the button.
+            </div>
+        },
+        {
             propName: 'onClick',
             propType: 'function',
             description: <div>

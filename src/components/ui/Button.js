@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { propTypeChildren } from 'components/utils';
 
-export function Button ({ children, onClick, disabled, type, classes, ...rest }) {
+export function Button ({ children, tag: Tag='button', onClick, disabled, type, classes, ...rest }) {
     const buttonProps = {
         disabled,
         type: type || 'button',
@@ -16,16 +17,14 @@ export function Button ({ children, onClick, disabled, type, classes, ...rest })
 
     const buttonClass = `ui-button ${extraClasses}`;
 
-    return <button className={buttonClass} {...buttonProps} {...rest}>
+    return <Tag className={buttonClass} {...buttonProps} {...rest}>
         {children}
-    </button>;
+    </Tag>;
 }
 
 Button.propTypes = {
-    children: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.node),
-        PropTypes.node
-    ]).isRequired,
+    children: propTypeChildren.isRequired,
+    tag: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     onClick: PropTypes.func,
     disabled: PropTypes.bool,
     type: PropTypes.string,
