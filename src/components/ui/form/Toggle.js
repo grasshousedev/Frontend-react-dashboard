@@ -1,20 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { UI_FORM_BASE_CLASS, SPACEBAR_CODE } from './Form';
+import { FORM_BASE_CLASS, SPACEBAR_CODE } from './Form';
 
-const UI_FORM_TOGGLE_CLASS = `${UI_FORM_BASE_CLASS}__field__toggle`;
-const UI_FORM_TOGGLE_CHECKBOX_CLASS = `${UI_FORM_TOGGLE_CLASS}__checkbox`;
-const UI_FORM_TOGGLE_SWITCH_CLASS = `${UI_FORM_TOGGLE_CLASS}__switch`;
+const FORM_TOGGLE_CLASS = `${FORM_BASE_CLASS}__field__toggle`;
+const FORM_TOGGLE_CHECKED_CLASS = `${FORM_TOGGLE_CLASS}--checked`;
+const FORM_TOGGLE_DISABLED_CLASS = `${FORM_TOGGLE_CLASS}--disabled`;
+const FORM_TOGGLE_CHECKBOX_CLASS = `${FORM_TOGGLE_CLASS}__checkbox`;
+const FORM_TOGGLE_SWITCH_CLASS = `${FORM_TOGGLE_CLASS}__switch`;
+const FORM_TOGGLE_SWITCH_CHECKED_CLASS = `${FORM_TOGGLE_SWITCH_CLASS}--checked`;
+const FORM_TOGGLE_SWITCH_DISABLED_CLASS = `${FORM_TOGGLE_SWITCH_CLASS}--checked`;
 
 
 export function Toggle({ checked, onClick, disabled, ...rest }) {
-    const checkedToggleClass = checked ? 'ui-form__field__toggle--checked' : '';
-    const disabledToggleClass = disabled ? 'ui-form__field__toggle--disabled' : '';
-    const toggleClass = `${UI_FORM_TOGGLE_CLASS} ${checkedToggleClass} ${disabledToggleClass}`;
-    const checkedSwitchClass = checked ? 'ui-form__field__toggle__switch--checked' : '';
-    const disabledSwitchClass = disabled ? 'ui-form__field__toggle__switch--disabled' : '';
-    const switchClass = `${UI_FORM_TOGGLE_SWITCH_CLASS} ${checkedSwitchClass} ${disabledSwitchClass}`;
+    const checkedToggleClass = checked ? FORM_TOGGLE_CHECKED_CLASS : '';
+    const disabledToggleClass = disabled ? FORM_TOGGLE_DISABLED_CLASS : '';
+    const toggleClass = `${FORM_TOGGLE_CLASS} ${checkedToggleClass} ${disabledToggleClass}`;
+    const checkedSwitchClass = checked ? FORM_TOGGLE_SWITCH_CHECKED_CLASS : '';
+    const disabledSwitchClass = disabled ? FORM_TOGGLE_SWITCH_DISABLED_CLASS : '';
+    const switchClass = `${FORM_TOGGLE_SWITCH_CLASS} ${checkedSwitchClass} ${disabledSwitchClass}`;
 
     const onToggleClick = () => !disabled && onClick(!checked);
     const onKeyDown = e => {
@@ -30,7 +34,7 @@ export function Toggle({ checked, onClick, disabled, ...rest }) {
         tabIndex="0"
     >
         <input type="checkbox"
-            className={UI_FORM_TOGGLE_CHECKBOX_CLASS}
+            className={FORM_TOGGLE_CHECKBOX_CLASS}
             checked={checked}
             disabled={disabled}
             onChange={onToggleClick}

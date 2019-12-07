@@ -1,23 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { UI_FORM_BASE_CLASS, SPACEBAR_CODE } from './Form';
+import { FORM_BASE_CLASS, SPACEBAR_CODE } from './Form';
 import { propTypeChildren } from 'components/utils';
 
-const UI_FORM_CHECKBOX_CLASS = `${UI_FORM_BASE_CLASS}__field__checkbox`;
-const UI_FORM_CHECKBOX_CHECKBOX_CLASS = `${UI_FORM_CHECKBOX_CLASS}__checkbox`;
-const UI_FORM_CHECKBOX_INDICATOR_CLASS = `${UI_FORM_CHECKBOX_CLASS}__indicator`;
-const UI_FORM_LABEL_CLASS = `${UI_FORM_CHECKBOX_CLASS}__label`;
+const FORM_CHECKBOX_CLASS = `${FORM_BASE_CLASS}__field__checkbox`;
+const FORM_CHECKBOX_CHECKBOX_CLASS = `${FORM_CHECKBOX_CLASS}__checkbox`;
+const FORM_CHECKBOX_INDICATOR_CLASS = `${FORM_CHECKBOX_CLASS}__indicator`;
+const FORM_LABEL_CLASS = `${FORM_CHECKBOX_CLASS}__label`;
 
 
 export function Checkbox({ checked, onClick, label, disabled, ...rest }) {
-    const checkedCheckboxClass = checked ? `${UI_FORM_CHECKBOX_CLASS}--checked` : '';
-    const disabledCheckboxClass = disabled ? `${UI_FORM_CHECKBOX_CLASS}--disabled` : '';
-    const checkboxClass = `${UI_FORM_CHECKBOX_CLASS} ${checkedCheckboxClass} ${disabledCheckboxClass}`;
-    const checkedCheckboxIndicatorClass = checked ? `${UI_FORM_CHECKBOX_INDICATOR_CLASS}--checked` : '';
-    const disabledCheckboxIndicatorClass = disabled ? `${UI_FORM_CHECKBOX_INDICATOR_CLASS}--disabled` : '';
-    const indicatorClass = `${UI_FORM_CHECKBOX_INDICATOR_CLASS} ${checkedCheckboxIndicatorClass} ${disabledCheckboxIndicatorClass}`;
-    const labelClass = `${UI_FORM_LABEL_CLASS}`;
+    const checkedCheckboxClass = checked ? `${FORM_CHECKBOX_CLASS}--checked` : '';
+    const disabledCheckboxClass = disabled ? `${FORM_CHECKBOX_CLASS}--disabled` : '';
+    const checkboxClass = `${FORM_CHECKBOX_CLASS} ${checkedCheckboxClass} ${disabledCheckboxClass}`;
+    const checkedCheckboxIndicatorClass = checked ? `${FORM_CHECKBOX_INDICATOR_CLASS}--checked` : '';
+    const disabledCheckboxIndicatorClass = disabled ? `${FORM_CHECKBOX_INDICATOR_CLASS}--disabled` : '';
+    const indicatorClass = `${FORM_CHECKBOX_INDICATOR_CLASS} ${checkedCheckboxIndicatorClass} ${disabledCheckboxIndicatorClass}`;
+    const labelClass = `${FORM_LABEL_CLASS}`;
 
     const onCheckboxClick = () => !disabled && onClick(!checked);
     const onKeyDown = e => {
@@ -34,7 +34,7 @@ export function Checkbox({ checked, onClick, label, disabled, ...rest }) {
         tabIndex="0"
     >
         <input type="checkbox"
-            className={UI_FORM_CHECKBOX_CHECKBOX_CLASS}
+            className={FORM_CHECKBOX_CHECKBOX_CLASS}
             checked={checked}
             disabled={disabled}
             onChange={onCheckboxClick}

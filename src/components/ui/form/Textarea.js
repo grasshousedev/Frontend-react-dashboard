@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { UI_FORM_BASE_CLASS } from './Form';
+import { FORM_BASE_CLASS } from './Form';
 
 
-const FORM_TEXTAREA_CLASS = `${UI_FORM_BASE_CLASS}__field__textarea`;
+const FORM_TEXTAREA_CLASS = `${FORM_BASE_CLASS}__field__textarea`;
 
 
 export function Textarea({ className, ...rest }) {

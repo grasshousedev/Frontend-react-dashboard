@@ -3,13 +3,9 @@ import { CodeHighlight } from 'components/style/CodeHighlight';
 import { Block, RowBlock, ColumnBlock } from 'components/ui/Blocks';
 import { Section } from 'components/ui/Section';
 import { Table } from 'components/ui/table/Table';
-import { Form, Field } from 'components/ui/form/Form';
+import { Checkbox, Form, HField, Input, Select, Toggle } from 'components/ui/form';
 
 import { PropsTable } from '../common/PropsTable';
-import { Input } from 'components/ui/form/Input';
-import { Select } from 'components/ui/form/Select';
-import { Toggle } from 'components/ui/form/Toggle';
-import { Checkbox } from 'components/ui/form/Checkbox';
 import { ColumnBlockCodeSplit } from '../common/ColumnBlockCodeSplit';
 
 const SAMPLE_ENTRIES = getEntries();
@@ -92,42 +88,42 @@ export function ShowCaseTable() {
                                 <h4>Spacing and size</h4>
                                 <Block>
                                     <Form>
-                                        <Field label="Padding">
+                                        <HField label="Padding">
                                             <Input value={padding || ''} onChange={e => setPadding(e.target.value ? +e.target.value : undefined)} />
-                                        </Field>
-                                        <Field label="Height">
+                                        </HField>
+                                        <HField label="Height">
                                             <Input value={height || ''} onChange={e => setHeight(e.target.value ? +e.target.value : undefined)} />
-                                        </Field>
+                                        </HField>
                                     </Form>
                                 </Block>
                             </ColumnBlock>
                             <ColumnBlock className="col-xs-12 col-sm-6 col-md-6">
                                 <h4>Header</h4>
                                 <Form>
-                                    <Field label="Header Controller">
+                                    <HField label="Header Controller">
                                         <Toggle checked={headerController} onClick={setHeaderController} />
-                                    </Field>
+                                    </HField>
                                 </Form>
 
                                 <h4>Body</h4>
                                 <Form>
-                                    <Field label="Zebra">
+                                    <HField label="Zebra">
                                         <Toggle checked={zebra} onClick={setZebra} />
-                                    </Field>
-                                    <Field label="Border Type">
+                                    </HField>
+                                    <HField label="Border Type">
                                         <Select
                                             value={borderType}
                                             onChange={bt => setBorderType(bt.value || undefined)}
                                             options={BORDER_TYPES}
                                         />
-                                    </Field>
-                                    <Field label="Vertical Alignment">
+                                    </HField>
+                                    <HField label="Vertical Alignment">
                                         <Select
                                             value={verticalAlignment}
                                             onChange={va => setVerticalAlignment(va.value || undefined)}
                                             options={VERTICAL_ALIGNMENTS}
                                         />
-                                    </Field>
+                                    </HField>
                                 </Form>
                             </ColumnBlock>
                         </RowBlock>
@@ -137,29 +133,29 @@ export function ShowCaseTable() {
                             <ColumnBlock className="col-xs-12 col-sm-6 col-md-6">
                                 <h4>Pagination</h4>
                                 <Form>
-                                    <Field label="Use Pagination">
+                                    <HField label="Use Pagination">
                                         <Toggle checked={pagination} onClick={setPagination} />
-                                    </Field>
+                                    </HField>
                                     <h4>Page controller</h4>
-                                    <Field label="Visible">
+                                    <HField label="Visible">
                                         <Toggle
                                             checked={pageController.visible}
                                             onClick={checked => setPageController({ ...pageController, visible: checked })}
                                         />
-                                    </Field>
-                                    <Field label="Style">
+                                    </HField>
+                                    <HField label="Style">
                                         <Select
                                             value={pageController.style}
                                             onChange={pcs => setPageController({ ...pageController, style: pcs.value })}
                                             options={PAGE_CONTROLLER_STYLES}
                                         />
-                                    </Field>
+                                    </HField>
                                 </Form>
                                 <h4>Other</h4>
                                 <Form>
-                                    <Field label="Single Line">
+                                    <HField label="Single Line">
                                         <Toggle checked={singleLine} onClick={setSingleLine} />
-                                    </Field>
+                                    </HField>
                                 </Form>
                             </ColumnBlock>
                             <ColumnBlock className="col-xs-12 col-sm-6 col-md-6">
