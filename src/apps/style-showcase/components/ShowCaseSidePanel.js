@@ -51,7 +51,7 @@ export function ShowCaseSidePanel () {
         </Section>
 
         <Section title="Component">
-            <Block title="Optional requirement" isOutstanding={true}>
+            <Block title="Optional Root" isOutstanding={true}>
                 <Monospace>SidePanel</Monospace> component requires a Div with ID
                 <Monospace>side-panel-root</Monospace> and class <Monospace>ui-side-panel</Monospace>.
                 <br />

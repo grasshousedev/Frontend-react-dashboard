@@ -23,6 +23,12 @@ export function ShowCaseModal() {
         </Section>
 
         <Section title="Component">
+            <Block title="Optional Root" isOutstanding={true}>
+                <Monospace>ModalTrigger</Monospace> component requires a Div with ID
+                <Monospace>modal-root</Monospace>.
+                <br />
+                If this element is not found, a new Div will be added to the document body.
+            </Block>
             <Block title="Component usage" isOutstanding={true}>
                 <Block>
                     Modals can be created via <Monospace>ModalTrigger</Monospace> component.
