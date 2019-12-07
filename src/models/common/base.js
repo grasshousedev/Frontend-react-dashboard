@@ -48,7 +48,10 @@ export default class BaseEntity {
         const self = this;
         setApplicationLoading(true);
         return getRequest(this.getUrl('getAll'), { timeout: 5000 }).then(response => {
-            const data = self.hasPagination ? response.results : response;
+            let data = self.hasPagination ? response.results : response;
+            if (options.mapData) {
+                data = options.mapData(data);
+            }
             options.fetchActionSet && store.dispatch({ type: options.fetchActionSet, data });
             if (!options.keepLoading) {
                 setApplicationLoading(false);
