@@ -17,6 +17,7 @@ import { ShowCaseDropDown } from './components/ShowCaseDropDown';
 import { ShowCaseLoaders } from './components/ShowCaseLoaders';
 import { ShowCaseModal } from './components/ShowCaseModal';
 import { ShowCaseSidebar } from './components/ShowCaseSidebar';
+import { ShowCaseSidePanel } from './components/ShowCaseSidePanel';
 import { ShowCaseTable } from './components/ShowCaseTable';
 import { ShowCaseTabs } from './components/ShowCaseTabs';
 import { ShowCaseTiles } from './components/ShowCaseTiles';
@@ -54,6 +55,7 @@ const SECTIONS = {
     TYPOGRAPHY: { component: Typography, label: 'Typography' },
     SIDEBAR: { component: ShowCaseSidebar, label: 'Sidebar' },
     SIDEBAR_MENU: { component: ComingSoon, label: 'Sidebar Menu', comingSoon: true },
+    SIDE_PANEL: { component: ShowCaseSidePanel, label: 'Side Panel' },
 };
 
 
@@ -166,6 +168,7 @@ function getNavigatorSections() {
                 getItem('MODAL'),
                 getItem('SIDEBAR'),
                 getItem('SIDEBAR_MENU'),
+                getItem('SIDE_PANEL'),
             ]
         },
         {
