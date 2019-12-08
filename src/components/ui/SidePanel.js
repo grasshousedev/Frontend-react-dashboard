@@ -22,11 +22,23 @@ const SIDE_PANEL_ROOT_ID = 'side-panel-root';
 
 export const DEFAULT_SIDE_PANEL_WIDTH = 500;
 
+let lastSetVisible = null;
+
+
 export function SidePanel({ Trigger, getSidePanelContentProps }) {
     const [visible, setVisible] = useState(false);
+    getSidePanelRoot(); // use here to prepare the panel
+
+    const uniqueSetVisible = state => {
+        if (state) {
+            if (lastSetVisible) lastSetVisible(false);
+            lastSetVisible = null;
+        }
+        setVisible(state);
+    };
 
     return <Fragment>
-        <Trigger setVisible={setVisible} />
+        <Trigger setVisible={uniqueSetVisible} visible={visible} />
         {visible && <SidePanelContent {...getSidePanelContentProps({ setVisible })} visible={visible} setVisible={setVisible} />}
     </Fragment>;
 }
@@ -47,21 +59,14 @@ function SidePanelContent({
     width=DEFAULT_SIDE_PANEL_WIDTH,
     contentWidth=DEFAULT_SIDE_PANEL_WIDTH,
 }) {
-    const [sidePanelContainer] = useState(document.createElement('div'));
     const [sidePanelState, setsidePanelState] = useState({
         isLoading: hooks.onOpen ? true : false,
     });
-    let sidePanelRoot = document.getElementById(SIDE_PANEL_ROOT_ID);
-    if (sidePanelRoot === null) {
-        sidePanelRoot = document.createElement('div');
-        sidePanelRoot.setAttribute('id', SIDE_PANEL_ROOT_ID);
-        sidePanelRoot.classList.add(SIDE_PANEL_CLASS);
-        document.body.appendChild(sidePanelRoot);
-    }
+    const sidePanelRoot = getSidePanelRoot();
+
+    lastSetVisible = setVisible;
 
     useEffect(() => {
-        sidePanelRoot.appendChild(sidePanelContainer);
-
         const openPromise = new Promise((resolve, reject) => {
             if (hooks.onOpen)
                 return hooks.onOpen({ resolve, reject });
@@ -72,7 +77,6 @@ function SidePanelContent({
         });
 
         return function cleanup() {
-            sidePanelRoot.removeChild(sidePanelContainer);
             sidePanelRoot.classList.remove(SIDE_PANEL_VISIBLE_CLASS);
             sidePanelRoot.style.width = 0;
         };
@@ -116,3 +120,15 @@ SidePanelContent.propTypes = {
     contentWidth: PropTypes.number,
     setVisible: PropTypes.func.isRequired,
 };
+
+function getSidePanelRoot() {
+    let sidePanelRoot = document.getElementById(SIDE_PANEL_ROOT_ID);
+    if (sidePanelRoot === null) {
+        sidePanelRoot = document.createElement('div');
+        sidePanelRoot.setAttribute('id', SIDE_PANEL_ROOT_ID);
+        sidePanelRoot.classList.add(SIDE_PANEL_CLASS);
+        sidePanelRoot.style.width = 0;
+        document.body.appendChild(sidePanelRoot);
+    }
+    return sidePanelRoot;
+}

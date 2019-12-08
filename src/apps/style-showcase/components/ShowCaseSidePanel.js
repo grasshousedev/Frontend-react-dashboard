@@ -100,6 +100,13 @@ function Props() {
             isRequired: true,
             description: <div>
                 Element that will be shown. When clicked, will open the side panel and render the content.
+                <br />
+                Two props are passed:
+                <ul>
+                    <Monospace>visible</Monospace>: if the side panel is currently visible or not;
+                    <Monospace>setVisible</Monospace>: set the visibility of the side panel.
+                </ul>
+                The <Monospace>visible</Monospace> property can be used to create triggers that toggle the status.
             </div>
         },
         {
