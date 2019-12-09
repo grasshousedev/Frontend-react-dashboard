@@ -4,10 +4,13 @@ import { Link } from 'react-router-dom';
 
 import { propTypeChildren } from 'components/utils';
 
-const UI_LINK_CLASS = 'ui-link';
+const LINK_CLASS = 'ui-link';
+const LINK_CONTENT_CLASS = `${LINK_CLASS}__content`;
 
-export function ALink({ className, children, ...rest }) {
-    return <Link className={`${className} ${UI_LINK_CLASS}`} {...rest}>{children}</Link>;
+export function ALink({ className='', children, ...rest }) {
+    return <Link className={`${className} ${LINK_CLASS}`} {...rest}>
+        <span className={LINK_CONTENT_CLASS}>{children}</span>
+    </Link>;
 }
 
 ALink.propTypes = {
