@@ -7,13 +7,16 @@ import { propTypeChildren } from 'components/utils';
 const LINK_CLASS = 'ui-link';
 const LINK_CONTENT_CLASS = `${LINK_CLASS}__content`;
 
-export function ALink({ className='', children, ...rest }) {
+export function ALink({ className='', classes=[], children, ...rest }) {
+    const contentClassName = `${LINK_CONTENT_CLASS} ${classes.map(c => `${LINK_CONTENT_CLASS}--${c}`)}`;
+
     return <Link className={`${className} ${LINK_CLASS}`} {...rest}>
-        <span className={LINK_CONTENT_CLASS}>{children}</span>
+        <span className={contentClassName}>{children}</span>
     </Link>;
 }
 
 ALink.propTypes = {
     className: PropTypes.string,
+    classes: PropTypes.array,
     children: propTypeChildren,
 };
