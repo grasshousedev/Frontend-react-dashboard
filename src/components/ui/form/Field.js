@@ -6,11 +6,12 @@ import { FORM_BASE_CLASS } from './Form';
 
 const FIELD_CLASS = `${FORM_BASE_CLASS}__field`;
 const LABEL_CLASS = `${FORM_BASE_CLASS}__label`;
+const LABEL_REQUIRED_CLASS = `${LABEL_CLASS}__required`;
 const FIELD_INPUT_CLASS = `${FORM_BASE_CLASS}__field-input`;
 const FIELD_INPUT_BORDER_CLASS = `${FIELD_INPUT_CLASS}__border`;
 
 
-export function Field({ label, children, className, vertical=true, labelProps={}, inputProps={}, ...rest }) {
+export function Field({ label, children, className, required=false, vertical=true, labelProps={}, inputProps={}, ...rest }) {
     const {
         className: labelClassName = '',
         width: labelWidth = 175,
@@ -32,7 +33,7 @@ export function Field({ label, children, className, vertical=true, labelProps={}
                 className={`${labelClass} ${labelClassName}`}
                 style={{ width: labelWidth, ...labelStyle }}
                 {...lProps}
-            >{label}</div>
+            >{label} {required && <span className={LABEL_REQUIRED_CLASS}>*</span>}</div>
         }
         <div className={`${fieldInputClass} ${inputClassName}`} {...iProps}>
             {children}
@@ -45,6 +46,7 @@ Field.propTypes = {
     label: propTypeChildren,
     children: propTypeChildren,
     className: PropTypes.string,
+    required: PropTypes.bool,
     vertical: PropTypes.bool,
     labelProps: PropTypes.object,
     inputProps: PropTypes.object,
