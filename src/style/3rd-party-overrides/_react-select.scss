@@ -39,3 +39,11 @@
         padding: 3px;
     }
 }
+
+/*
+.ui-form__react-select {}
+*/
+
+.ui-form__react-select--invalid {
+    border: 1px solid $red-light;
+}
