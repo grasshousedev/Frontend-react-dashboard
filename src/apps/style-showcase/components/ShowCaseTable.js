@@ -3,6 +3,7 @@ import { CodeHighlight } from 'components/style/CodeHighlight';
 import { Block, RowBlock, ColumnBlock } from 'components/ui/Blocks';
 import { Section } from 'components/ui/Section';
 import { Table } from 'components/ui/table/Table';
+import { Monospace } from 'components/ui/Text';
 import { Checkbox, Form, HField, Input, Select, Toggle } from 'components/ui/form';
 
 import { PropsTable } from '../common/PropsTable';
@@ -260,9 +261,9 @@ function PropsConfig() {
             description: <div>
                 Set the border type. Following values are accepted:
                 <ul>
-                    <li><pre className="ui-text__monospace">none</pre></li>
-                    <li><pre className="ui-text__monospace">row</pre></li>
-                    <li><pre className="ui-text__monospace">cell</pre></li>
+                    <li><Monospace>none</Monospace></li>
+                    <li><Monospace>row</Monospace></li>
+                    <li><Monospace>cell</Monospace></li>
                 </ul>
             </div>},
         {
@@ -283,9 +284,9 @@ function PropsConfig() {
             description: <div>
                 Set the vertical alignment of Body cells. Accepted values are:
                 <ul>
-                    <li><pre className="ui-text__monospace">top</pre></li>
-                    <li><pre className="ui-text__monospace">middle</pre></li>
-                    <li><pre className="ui-text__monospace">bottom</pre></li>
+                    <li><Monospace>top</Monospace></li>
+                    <li><Monospace>middle</Monospace></li>
+                    <li><Monospace>bottom</Monospace></li>
                 </ul>
             </div>
         },
@@ -298,12 +299,20 @@ function PropsConfig() {
         {
             propName: 'pageController',
             propType: 'object',
+            default: '{ visible: true, style: "collapsed" }',
             description: <div>
                 An object with the following properties:
                 <ul>
-                    <li><pre className="ui-text__monospace">visible</pre>: shows page controller (under the table)</li>
-                    <li><pre className="ui-text__monospace">style</pre>: can be `collapsed` (all aligned to the right) or `expanded` (spread over all the width)</li>
+                    <li><Monospace>visible</Monospace>: shows page controller (under the table)</li>
+                    <li><Monospace>style</Monospace>: can be `collapsed` (all aligned to the right) or `expanded` (spread over all the width)</li>
                 </ul>
+            </div>
+        },
+        {
+            propName: 'hideHeader',
+            propType: 'bool',
+            description: <div>
+                Hide the header of the table.
             </div>
         },
     ]} />;

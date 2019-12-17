@@ -271,7 +271,6 @@ const openModalSample = `// Trigger and modal window props are passed to ModalTr
         // Define a closeModal function, so the effect will be the same with a close button or x icon
         // If no closeModal is defined, setViewModalWindow(false) is called automatically from x icon
         const closeModal = ({ source }) => {
-            console.log('Modal closed from', source);
             const closePromise = new Promise((resolve, reject) => {
                 if (window.confirm('Are you sure you want to close?')) resolve();
                 else reject();
