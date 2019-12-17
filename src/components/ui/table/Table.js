@@ -4,8 +4,10 @@ import PropTypes from 'prop-types';
 import { MainTable } from './MainTable';
 import { PageController } from './PageController';
 import { PinnedLeftTable } from './PinnedLeftTable';
+import { StatusBar } from './StatusBar';
 import { useScrollSync, useTableElements, useWindowSize } from './effects';
 import { getComponentContainerStyleAndClasses, getColumnsStyle, getCellsStyle } from './stylesAndClasses/table';
+import { getFooterContainerClass } from './stylesAndClasses/footer';
 import { sortHandler } from './utils/sorting';
 
 const DEFAULT_CONFIG = {
@@ -37,6 +39,7 @@ export function Table({ columns, entries, config, container }) {
     };
 
     const componentContainerStyleAndClasses = getComponentContainerStyleAndClasses({ columns });
+    const footerContainerClass = getFooterContainerClass();
 
     const tableContainerRef = useRef(null);
     const tableHeaderContainerRef = useRef(null);
@@ -57,7 +60,9 @@ export function Table({ columns, entries, config, container }) {
         ? columns.filter(col => tableStyleState.pinnedLeft.includes(col.prop))
         : [];
 
-    const pageController = tableConfig.pageController || {};
+    const pageController = { visible: true, style: 'collapsed', ...(tableConfig.pageController || {}) };
+    const statusBarController = { visible: true, ...(tableConfig.statusBarController || {}) };
+
     const sortFunction = tableConfig.sortHandler || sortHandler;
 
     const filteredEntries = tableStyleState.sortFields.length > 0
@@ -65,7 +70,12 @@ export function Table({ columns, entries, config, container }) {
         : entries;
 
     const commonConfig = {
-        config: tableConfig, commonStyles, tableStyleState, setTableStyleState, setScrollMaster, pageState
+        config: tableConfig,
+        commonStyles,
+        tableStyleState,
+        setTableStyleState,
+        setScrollMaster,
+        pageState
     };
 
     return <div
@@ -89,12 +99,25 @@ export function Table({ columns, entries, config, container }) {
                 shadowedPinnedLeft={shadowedPinnedLeft}
             />
         }
-        {pageController.visible && tableConfig.pagination && <PageController
-            config={tableConfig}
-            pageState={pageState}
-            setPageState={setPageState}
-            totEntries={filteredEntries.length}
-        />}
+        {(statusBarController.visible || pageController.visible) &&
+            <div className={footerContainerClass}>
+                <div>
+                    {statusBarController.visible && <StatusBar
+                        config={{ ...tableConfig, statusBarController }}
+                        pageState={pageState}
+                        entries={filteredEntries}
+                    />}
+                </div>
+                <div>
+                    {pageController.visible && tableConfig.pagination && <PageController
+                        config={{ ...tableConfig, pageController }}
+                        pageState={pageState}
+                        setPageState={setPageState}
+                        totEntries={filteredEntries.length}
+                    />}
+                </div>
+            </div>
+        }
     </div>;
 }
 
@@ -122,8 +145,12 @@ Table.propTypes = {
             visible: PropTypes.bool,
             style: PropTypes.oneOf(['collapsed', 'expanded'])
         }),
+        statusBarController: PropTypes.shape({
+            visible: PropTypes.bool,
+        }),
         bodyContainerProps: PropTypes.object,
         headerContainerProps: PropTypes.object,
+        hideHeader: PropTypes.bool,
     }),
     container: PropTypes.object,
 };
