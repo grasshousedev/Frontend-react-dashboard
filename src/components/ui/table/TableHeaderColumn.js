@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { DropDown } from '../DropDown';
+import { Icon } from '../Icon';
 
 import { UI_TABLE_BASE_CLASS } from './constants';
 import { useHover } from './effects';
@@ -12,9 +13,9 @@ import { togglePinnedColumn } from './utils/pinned';
 const HEADER_CLASS = `${UI_TABLE_BASE_CLASS}__header`;
 const COL_CLASS = `${HEADER_CLASS}__col`;
 const CELL_CLASS = `${HEADER_CLASS}__cell`;
-const ARROW_DOWN_CLASS = 'fas fa-angle-down';
-const ARROW_UP_CLASS = 'fas fa-angle-up';
-const COG_CLASS = 'fas fa-cog';
+const ICON_SORT_DESC = 'keyboard_arrow_down';
+const ICON_SORT_ASC = 'keyboard_arrow_up';
+const ICON_CONTROL = 'settings';
 
 
 export function TableHeaderColumn({ col, stylesAndClasses, tableStyleState, setTableStyleState, sortedFields, isPinned, config }) {
@@ -26,8 +27,8 @@ export function TableHeaderColumn({ col, stylesAndClasses, tableStyleState, setT
     const cellClass = getCellClass(CELL_CLASS, stylesAndClasses.cell.classes, { isHovered });
     const cellStyle = stylesAndClasses.cell.style;
 
-    const sortClass = sortedFields[col.prop] === 'desc' ? ARROW_DOWN_CLASS : ARROW_UP_CLASS;
-    const controlsStyle = { display: isHovered ? 'inline-flex' : 'none' };
+    const sortIconName = sortedFields[col.prop] === 'desc' ? ICON_SORT_DESC : ICON_SORT_ASC;
+    const controlsStyle = { height: 16, display: isHovered ? 'inline-flex' : 'none' };
 
     // isPinned means that the column is pinned in the current table
     // isPinnedColumn means that the column is pinned globally, used to show unpin/pin options
@@ -40,12 +41,12 @@ export function TableHeaderColumn({ col, stylesAndClasses, tableStyleState, setT
             </span>
             {sortedFields[col.prop] &&
                 <span className={`${COL_CLASS}__order`}>
-                    <i className={sortClass} />
+                    <Icon size="smaller" modifier="pointer" name={sortIconName} />
                 </span>
             }
             {config.headerController && <span className={`${COL_CLASS}__controls`} style={controlsStyle}>
                 <span className={`${COL_CLASS}__controls__control`}>
-                    <DropDown trigger={<i className={COG_CLASS} />}>
+                    <DropDown trigger={<Icon size="smaller" modifier="pointer" name={ICON_CONTROL} />}>
                         <DropDown.Entry onClick={() => setSortDirection(setTableStyleState, col.prop, 'asc')}>
                             Sort Ascending
                         </DropDown.Entry>
