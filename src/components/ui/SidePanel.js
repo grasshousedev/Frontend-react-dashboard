@@ -39,7 +39,10 @@ export function SidePanel({ Trigger, getSidePanelContentProps }) {
 
     return <Fragment>
         <Trigger setVisible={uniqueSetVisible} visible={visible} />
-        {visible && <SidePanelContent {...getSidePanelContentProps({ setVisible })} visible={visible} setVisible={setVisible} />}
+        {visible && <SidePanelContent
+            {...getSidePanelContentProps({ setVisible })}
+            visible={visible} setVisible={setVisible}
+        />}
     </Fragment>;
 }
 
@@ -57,7 +60,7 @@ function SidePanelContent({
     hooks={},
     setVisible,
     width=DEFAULT_SIDE_PANEL_WIDTH,
-    contentWidth=DEFAULT_SIDE_PANEL_WIDTH,
+    innerContainerWidth,
 }) {
     const [sidePanelState, setsidePanelState] = useState({
         isLoading: hooks.onOpen ? true : false,
@@ -65,6 +68,8 @@ function SidePanelContent({
     const sidePanelRoot = getSidePanelRoot();
 
     lastSetVisible = setVisible;
+    const styleWidth = typeof width === 'number' ? `${width}px` : width;
+    const innerContainerStyleWidth = innerContainerWidth || styleWidth;
 
     useEffect(() => {
         const openPromise = new Promise((resolve, reject) => {
@@ -85,11 +90,11 @@ function SidePanelContent({
     useEffect(() => {
         if (visible) {
             sidePanelRoot.classList.add(SIDE_PANEL_VISIBLE_CLASS);
-            sidePanelRoot.style.width = typeof width === 'number' ? `${width}px` : width;
+            sidePanelRoot.style.width = styleWidth;
         }
-    }, [visible, sidePanelRoot, width]);
+    }, [visible, sidePanelRoot, styleWidth]);
 
-    return createPortal(<div className={SIDE_PANEL_CONTAINER_CLASS} style={{ width: contentWidth }}>
+    return createPortal(<div className={SIDE_PANEL_CONTAINER_CLASS} style={{ width: innerContainerStyleWidth }}>
         <div className={SIDE_PANEL_HEADER_CLASS}>
             <div className={SIDE_PANEL_HEADER_TITLE_CLASS}>{title}</div>
             <div className={SIDE_PANEL_HEADER_CONTROLS_CLASS}>
@@ -116,7 +121,7 @@ SidePanelContent.propTypes = {
     footer: propTypeChildren,
     visible: PropTypes.bool,
     hooks: PropTypes.object,
-    width: PropTypes.number,
+    width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     contentWidth: PropTypes.number,
     setVisible: PropTypes.func.isRequired,
 };
