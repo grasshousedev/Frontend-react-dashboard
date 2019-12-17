@@ -30,21 +30,24 @@ Block.propTypes = {
 };
 
 
-export function RowBlock({ children }) {
-    return <div className="row">
+export function RowBlock({ children, className='', ...rest }) {
+    const rowClassName = `row ${className}`;
+
+    return <div className={rowClassName} {...rest}>
         {children}
     </div>;
 }
 
 RowBlock.propTypes = {
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
+    className: PropTypes.string,
 };
 
 
-export function ColumnBlock({ children, size=6, className='' }) {
+export function ColumnBlock({ children, size=6, className='', ...rest }) {
     const colClassName = className ? className : `col-xs-12 col-sm-${size}`;
 
-    return <div className={colClassName}>
+    return <div className={colClassName} {...rest}>
         {children}
     </div>;
 }

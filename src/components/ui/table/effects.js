@@ -41,7 +41,76 @@ export function useScrollSync(master, elementsToSync, scrollMaster, sync, onChan
 }
 
 
+export function useContainerSizeForAutoWidth(tableContainerRef, columns, setTableStyleState, tableStyleState) {
+
+    useEffect(() => {
+        if (tableContainerRef.current && !tableStyleState.configured) {
+            const containerEl = tableContainerRef.current;
+            const newTableStyleState = {};
+
+            if (columns.some(col => !col.width)) {
+                const columnsWidth = columns.reduce((tot, col) => tot += col.width || 0, 0);
+                const expandableColumnWidth = containerEl.clientWidth - columnsWidth;
+                newTableStyleState.expandableColumnWidth = Math.max(expandableColumnWidth, 100);
+            }
+
+            newTableStyleState.totalWidth = columns.reduce((tot, col) => {
+                return tot + (col.width ? col.width : newTableStyleState.expandableColumnWidth);
+            }, 0);
+
+            setTableStyleState({ ...tableStyleState, ...newTableStyleState, configured: true });
+        }
+    }, [columns, tableStyleState, setTableStyleState]); // eslint-disable-line
+};
+
+
 export function useTableElements(tableHeaderContainerRef, tableBodyContainerRef, columns, config, setTableStyleState, tableStyleState, windowWidth, container) {
+    const subState = {
+        bodyHasVericalScrollBar: tableStyleState.bodyHasVericalScrollBar,
+        bodyHasHorizontalScrollBar: tableStyleState.bodyHasHorizontalScrollBar,
+        expandableColumnWidth: tableStyleState.expandableColumnWidth,
+        totalWidth: tableStyleState.totalWidth,
+        pinnedLeft: tableStyleState.pinnedLeft,
+    };
+    const prevTableStyleState = usePrevious(subState);
+    const prevContainerWidth = usePrevious(container && container.current && container.current.clientWidth);
+
+    useEffect(() => {
+        if (tableStyleState.configured) {
+            const stateChanged = JSON.stringify(subState) !== JSON.stringify(prevTableStyleState);
+            const currentContainerWidth = container && container.current && container.current.clientWidth;
+            const containerWidthChanged = prevContainerWidth !== currentContainerWidth;
+            if (tableHeaderContainerRef.current && tableBodyContainerRef.current && (stateChanged || containerWidthChanged)) {
+                const headerEl = tableHeaderContainerRef.current;
+                const bodyEl = tableBodyContainerRef.current;
+                const bodyHasVericalScrollBar = bodyEl.offsetHeight !== bodyEl.scrollHeight;
+                const bodyHasHorizontalScrollBar = (bodyEl.offsetWidth - (bodyEl.scrollWidth + bodyHasVericalScrollBar * 15)) !== 0;
+                const newTableStyleState = { bodyHasVericalScrollBar, bodyHasHorizontalScrollBar };
+
+                if (columns.some(col => !col.width)) {
+                    const columnsWidth = columns.reduce((tot, col) => tot += col.width || 0, 0);
+                    const expandableColumnWidth = headerEl.clientWidth
+                        - columnsWidth
+                        - (SCROLLBAR_SIZE * bodyHasVericalScrollBar)
+                        - (SCROLLBAR_SIZE * bodyHasHorizontalScrollBar)
+                    ;
+                    newTableStyleState.expandableColumnWidth = Math.max(expandableColumnWidth, 100);
+                    newTableStyleState.bodyHasHorizontalScrollBar = false;
+                }
+                newTableStyleState.totalWidth = columns.reduce((tot, col) => {
+                    return tot + (col.width ? col.width : newTableStyleState.expandableColumnWidth);
+                }, 0);
+
+                setTableStyleState({ ...tableStyleState, ...newTableStyleState });
+            }
+        }
+    }, [columns, config, windowWidth, tableStyleState, prevContainerWidth]); // eslint-disable-line
+};
+
+
+export function useScrollbarsState(tableHeaderContainerRef, tableBodyContainerRef, tableStyleState, windowWidth, container) {
+    const [scrollbarsState, setScrollbarsState] = useState({ horizontal: false, vertical: false });
+
     const prevTableStyleState = usePrevious(tableStyleState);
     const prevContainerWidth = usePrevious(container && container.current && container.current.clientWidth);
 
@@ -50,29 +119,15 @@ export function useTableElements(tableHeaderContainerRef, tableBodyContainerRef,
         const currentContainerWidth = container && container.current && container.current.clientWidth;
         const containerWidthChanged = prevContainerWidth !== currentContainerWidth;
         if (tableHeaderContainerRef.current && tableBodyContainerRef.current && (stateChanged || containerWidthChanged)) {
-            const headerEl = tableHeaderContainerRef.current;
             const bodyEl = tableBodyContainerRef.current;
             const bodyHasVericalScrollBar = bodyEl.offsetHeight !== bodyEl.scrollHeight;
             const bodyHasHorizontalScrollBar = (bodyEl.offsetWidth - (bodyEl.scrollWidth + bodyHasVericalScrollBar * 15)) !== 0;
-            const newTableStyleState = { bodyHasVericalScrollBar, bodyHasHorizontalScrollBar };
 
-            if (columns.some(col => !col.width)) {
-                const columnsWidth = columns.reduce((tot, col) => tot += col.width || 0, 0);
-                const expandableColumnWidth = headerEl.clientWidth
-                    - columnsWidth
-                    - (SCROLLBAR_SIZE * bodyHasVericalScrollBar)
-                    - (SCROLLBAR_SIZE * bodyHasHorizontalScrollBar)
-                ;
-                newTableStyleState.expandableColumnWidth = Math.max(expandableColumnWidth, 100);
-                newTableStyleState.bodyHasHorizontalScrollBar = false;
-            }
-            newTableStyleState.totalWidth = columns.reduce((tot, col) => {
-                return tot + (col.width ? col.width : newTableStyleState.expandableColumnWidth);
-            }, 0);
-
-            setTableStyleState({ ...tableStyleState, ...newTableStyleState });
+            setScrollbarsState({ horizontal: bodyHasHorizontalScrollBar, vertical: bodyHasVericalScrollBar });
         }
-    }, [columns, config, windowWidth, tableStyleState, prevContainerWidth]); // eslint-disable-line
+    }, [windowWidth, tableStyleState, prevContainerWidth]); // eslint-disable-line
+
+    return scrollbarsState;
 };
 
 export function useHover(ref) {

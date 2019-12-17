@@ -1,5 +1,8 @@
 import { SCROLLBAR_SIZE } from '../constants';
 
+export const TABLE_CLASS = 'ui-table';
+const TABLE_CONTAINER_CLASS = `${TABLE_CLASS}__container`;
+
 
 export function getColumnsStyle(columns, tableStyleState) {
     const columnsStyle = {};
@@ -39,7 +42,7 @@ export function getCellsStyle(columns, tableStyleState, config) {
 export function getComponentContainerStyleAndClasses({ columns }) {
     const container = {
         style: {},
-        classes: 'ui-table__container',
+        classes: TABLE_CONTAINER_CLASS,
     };
 
     const allColumnsHaveWidth = columns.every(c => c.width !== undefined);

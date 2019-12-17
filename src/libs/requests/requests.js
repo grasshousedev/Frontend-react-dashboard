@@ -12,6 +12,15 @@ export const METHODS = {
 export class RequestInvalid extends Exception {}
 export class RequestError extends Exception {}
 
+let logRequests = false;
+
+export function setLogRequests(v) {
+    logRequests = v;
+}
+
+if (typeof window !== undefined)
+    window.requestsSetLogRequests = setLogRequests;
+
 let commonHeaders = {};
 
 export function setCommonHeaders(common) {
@@ -50,10 +59,12 @@ export default function request(
 
     const requestUrl = url.indexOf('http://') >= 0 || url.indexOf('https://') >= 0 ? url : `${BACKEND_URL}${url}`;
 
-    console.log(`Request [${params.method}]: `, url, params);
+    if (logRequests)
+        console.info(`Request [${params.method}]: `, url, params);
     return fetch(requestUrl, params)
         .then(response => {
-            console.log('Request: response to ', url, response);
+            if (logRequests)
+                console.info('Request: response to ', url, response);
             if (!response.ok) {
                 console.error('Request: Invalid!', response.status, response.statusText);
                 throw new RequestInvalid(response);

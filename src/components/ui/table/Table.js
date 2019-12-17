@@ -1,12 +1,11 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import { MainTable } from './MainTable';
-import { PageController } from './PageController';
-import { PinnedLeftTable } from './PinnedLeftTable';
-import { useScrollSync, useTableElements, useWindowSize } from './effects';
-import { getComponentContainerStyleAndClasses, getColumnsStyle, getCellsStyle } from './stylesAndClasses/table';
-import { sortHandler } from './utils/sorting';
+import { useContainerSizeForAutoWidth } from './effects';
+import { getComponentContainerStyleAndClasses } from './stylesAndClasses/table';
+
+import { TableWrapper } from './TableWrapper';
+
 
 const DEFAULT_CONFIG = {
     padding: 7,
@@ -19,8 +18,8 @@ const DEFAULT_CONFIG = {
 export function Table({ columns, entries, config, container }) {
     const tableConfig = { ...DEFAULT_CONFIG, ...config };
 
-    const [pageState, setPageState] = useState({ page: 1, pageSize: 20 });
     const [tableStyleState, setTableStyleState] = useState({
+        configured: false,
         expandableColumnWidth: null,
         bodyHasVericalScrollBar: false,
         bodyHasHorizontalScrollBar: false,
@@ -28,73 +27,28 @@ export function Table({ columns, entries, config, container }) {
         pinnedLeft: [...(tableConfig.pinnedLeft || [])],
         sortFields: [],
     });
-    const [scrollMaster, setScrollMaster] = useState(null);
-    const [shadowedPinnedLeft, setShadowedPinnedLeft] = useState(false);
-
-    const commonStyles = {
-        columns: { style: getColumnsStyle(columns, tableStyleState) },
-        cells: { style: getCellsStyle(columns, tableStyleState, tableConfig) },
-    };
 
     const componentContainerStyleAndClasses = getComponentContainerStyleAndClasses({ columns });
 
     const tableContainerRef = useRef(null);
-    const tableHeaderContainerRef = useRef(null);
-    const tableBodyContainerRef = useRef(null);
-    const pinnedLeftTableHeaderContainerRef = useRef(null);
-    const pinnedLeftTableBodyContainerRef = useRef(null);
 
-    useScrollSync(tableBodyContainerRef, [tableHeaderContainerRef], scrollMaster, { scrollLeft: true },
-        (scroll) => setShadowedPinnedLeft(scroll !== 0));
-    useScrollSync(tableBodyContainerRef, [pinnedLeftTableBodyContainerRef], scrollMaster, { scrollTop: true });
-    useScrollSync(pinnedLeftTableBodyContainerRef, [tableBodyContainerRef], scrollMaster, { scrollTop: true });
-
-    const { width: windowWidth } = useWindowSize();
-
-    useTableElements(tableHeaderContainerRef, tableBodyContainerRef, columns, config, setTableStyleState, tableStyleState, windowWidth, container);
-
-    const pinnedLeft = tableStyleState.pinnedLeft
-        ? columns.filter(col => tableStyleState.pinnedLeft.includes(col.prop))
-        : [];
-
-    const pageController = tableConfig.pageController || {};
-    const sortFunction = tableConfig.sortHandler || sortHandler;
-
-    const filteredEntries = tableStyleState.sortFields.length > 0
-        ? sortFunction(entries, tableStyleState.sortFields)
-        : entries;
-
-    const commonConfig = {
-        config: tableConfig, commonStyles, tableStyleState, setTableStyleState, setScrollMaster, pageState
-    };
+    useContainerSizeForAutoWidth(tableContainerRef, columns, setTableStyleState, tableStyleState);
 
     return <div
         ref={tableContainerRef}
         className={componentContainerStyleAndClasses.classes}
         style={componentContainerStyleAndClasses.style}
     >
-        <MainTable
-            columns={columns}
-            entries={filteredEntries}
-            refs={{ tableHeaderContainerRef, tableBodyContainerRef }}
-            { ...commonConfig }
-            pinnedLeft={pinnedLeft}
-        />
-        {pinnedLeft.length > 0 &&
-            <PinnedLeftTable
-                columns={pinnedLeft}
-                entries={filteredEntries}
-                refs={{ pinnedLeftTableHeaderContainerRef, pinnedLeftTableBodyContainerRef }}
-                { ...commonConfig }
-                shadowedPinnedLeft={shadowedPinnedLeft}
+        {tableStyleState.configured &&
+            <TableWrapper
+                columns={columns}
+                entries={entries}
+                config={tableConfig}
+                tableStyleState={tableStyleState}
+                setTableStyleState={setTableStyleState}
+                container={container}
             />
-        }
-        {pageController.visible && tableConfig.pagination && <PageController
-            config={tableConfig}
-            pageState={pageState}
-            setPageState={setPageState}
-            totEntries={filteredEntries.length}
-        />}
+    }
     </div>;
 }
 
@@ -111,7 +65,7 @@ Table.propTypes = {
     config: PropTypes.shape({
         padding: PropTypes.number,
         singleLine: PropTypes.bool,
-        borderType: PropTypes.oneOf([undefined, 'row', 'cell']),
+        borderType: PropTypes.oneOf([undefined, 'none', 'row', 'cell']),
         height: PropTypes.number,
         pinnedLeft: PropTypes.arrayOf(PropTypes.string),
         headerController: PropTypes.bool,
@@ -122,8 +76,12 @@ Table.propTypes = {
             visible: PropTypes.bool,
             style: PropTypes.oneOf(['collapsed', 'expanded'])
         }),
+        statusBarController: PropTypes.shape({
+            visible: PropTypes.bool,
+        }),
         bodyContainerProps: PropTypes.object,
         headerContainerProps: PropTypes.object,
+        hideHeader: PropTypes.bool,
     }),
     container: PropTypes.object,
 };

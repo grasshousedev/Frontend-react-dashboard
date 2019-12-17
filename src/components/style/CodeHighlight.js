@@ -64,7 +64,7 @@ export class CodeHighlight extends Component {
         const toggleStyle = { marginBottom: '0.5rem', cursor: 'pointer' };
         return <Fragment>
             {toggle &&
-                <div onClick={() => this.setState({ visible: !visible })} style={toggleStyle}>
+                <div onClick={() => this.setState({ visible: !visible })} className="grey-light-d1" style={toggleStyle}>
                     {visible ? 'Hide code' : 'View code'}
                 </div>
             }

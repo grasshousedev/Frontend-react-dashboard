@@ -1,8 +1,11 @@
 @import '~@vzamboni/dashboard-ui-style/vars/colors';
 
-.ui-form {
+.dashboard-content {
+    .react-select__placeholder {
+        color: $neutral-light-d1;
+    }
     .react-select__value-container {
-        padding: 0 8px;
+        padding: 0;
     }
     .react-select__input {
         input:focus {
@@ -35,4 +38,12 @@
     .react-select__dropdown-indicator {
         padding: 3px;
     }
+}
+
+/*
+.ui-form__react-select {}
+*/
+
+.ui-form__react-select--invalid {
+    border: 1px solid $red-light;
 }

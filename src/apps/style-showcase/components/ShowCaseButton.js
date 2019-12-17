@@ -137,6 +137,14 @@ function Props() {
             </div>
         },
         {
+            propName: 'tag',
+            propType: ['string', 'object'],
+            default: 'button',
+            description: <div>
+                Tag that will be used to create the button.
+            </div>
+        },
+        {
             propName: 'onClick',
             propType: 'function',
             description: <div>
@@ -191,6 +199,14 @@ function Props() {
                         <CodeHighlight language="xml">{disabledComponentButton}</CodeHighlight>
                     </ColumnBlock>
                 </RowBlock>
+            </div>
+        },
+        {
+            propName: 'type',
+            propType: 'string',
+            default: 'button',
+            description: <div>
+                By default the button type is <Monospace>button</Monospace>.
             </div>
         }
     ]} />;

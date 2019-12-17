@@ -1,9 +1,10 @@
 /* Local variables */
 $header-height: 46px;
 $footer-height: 0;
-$ui-dashboard-background-color: #f8fafb;
 
 /* Global variables */
+$ui-background-color: #f8fafb;
+$ui-font: Lato;
 $ui-text-color: #5a6168;
 $ui-page-padding: 15px;
 $ui-dashboard-header-height: $header-height;
@@ -21,10 +22,10 @@ $dashboard-menu-height: $header-height;
 @import 'style/dashboard/login';
 
 body {
-    font-family: Lato;
+    font-family: $ui-font;
     font-weight: 400;
     font-size: $text-small;
-    background-color: $ui-dashboard-background-color;
+    background-color: $ui-background-color;
     color: $grey-d1;
     color: $ui-text-color;
 }
@@ -54,10 +55,15 @@ p {
     margin-top: 0;
 }
 
+input.ui-form__field__input:focus,
+textarea.ui-form__field__textarea:focus {
+    box-shadow: none;
+}
+
 .dashboard-content {
     height: calc(100vh - #{($ui-dashboard-header-height + $ui-dashboard-footer-height)});
     overflow: auto;
-    background-color: $ui-dashboard-background-color;
+    background-color: $ui-background-color;
 }
 
 body:not(.dashboard__dashboard-view) {
@@ -84,12 +90,12 @@ body:not(.dashboard__dashboard-view) {
 
 body.dashboard__dashboard-view {
     .dashboard__sidebar {
-        background-color: $ui-dashboard-background-color;
-        border-right: 1px solid $ui-dashboard-background-color;
+        background-color: $ui-background-color;
+        border-right: 1px solid $ui-background-color;
     }
 
     .dashboard__sidebar-trigger {
-        border-right: 1px solid $ui-dashboard-background-color;
+        border-right: 1px solid $ui-background-color;
     }
 }
 

@@ -13,7 +13,7 @@ import { Button } from 'components/ui/Button';
 import { PropsTable } from '../common/PropsTable';
 import { ColumnBlockCodeSplit } from '../common/ColumnBlockCodeSplit';
 
-const SidebarContextSample = createContext([{}, () => { console.log('NOOP'); return {}; }]);
+const SidebarContextSample = createContext([{}, () => ({})]);
 
 const SidebarProviderSample = ({ children, initialStatus }) => {
     const [state, setState] = useState({ status: initialStatus });
@@ -206,7 +206,6 @@ function SidebarContextSampleComponent() {
             <Block>
                 <Button classes="primary" onClick={() => {
                     const status = sidebarStateSample.status;
-                    console.log('clicked', status);
                     setSidebarStateSample({ ...sidebarStateSample, status: status === 'open' ? 'closed' : 'open'});
                 }}>Toggle</Button>
             </Block>
@@ -424,7 +423,6 @@ function SidebarContextSampleComponent() {
             <Block>
                 <Button classes="primary" onClick={() => {
                     const status = sidebarStateSample.status;
-                    console.log('clicked', status);
                     setSidebarStateSample({ ...sidebarStateSample, status: status === 'open' ? 'closed' : 'open'});
                 }}>Toggle</Button>
             </Block>

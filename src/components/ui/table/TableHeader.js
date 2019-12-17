@@ -10,6 +10,7 @@ const HEADER_CLASS = `${UI_TABLE_BASE_CLASS}__header`;
 const CONTAINER_CLASS = `${HEADER_CLASS}__container`;
 const ROW_CLASS = `${HEADER_CLASS}__row`;
 const COL_CLASS = `${HEADER_CLASS}__col`;
+const COL_PINNED_OUTSIDE_CLASS = `${COL_CLASS}--pinned-outside`;
 const CELL_CLASS = `${HEADER_CLASS}__cell`;
 
 
@@ -20,6 +21,11 @@ export default function TableHeader({ columns, config, pinnedLeft=[], stylesAndC
     const headerContainerClass = `${getContainerClass(CONTAINER_CLASS, stylesAndClasses.header__container)} ${className || ''}`;
     const headerContainerStyle = { ...stylesAndClasses.header__container.style, ...style };
 
+    if (config.hideHeader) {
+        headerContainerStyle.height = 0;
+        headerContainerStyle.marginBottom = 0;
+    }
+
     const sortedFields = tableStyleState.sortFields.reduce((sf, fo) => ({ ...sf, [fo.field]: fo.direction || 'asc' }), {});
 
     return <div className={headerContainerClass} ref={tableHeaderContainerRef} style={headerContainerStyle} {...rest}>
@@ -28,7 +34,7 @@ export default function TableHeader({ columns, config, pinnedLeft=[], stylesAndC
                 <tr className={ROW_CLASS}>
                     {pinnedLeft.map(col => {
                         return <th key={`table-header-col-${col.prop}-hidden-pinned`}
-                            className={`${COL_CLASS} ${COL_CLASS}--pinned-outside`}
+                            className={`${COL_CLASS} ${COL_PINNED_OUTSIDE_CLASS}`}
                             style={stylesAndClasses.columns.style[col.prop]}
                         ></th>;
                     })}
