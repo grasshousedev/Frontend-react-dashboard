@@ -9,17 +9,20 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css';
 const UI_ICON_CLASS = 'ui-icon';
 
 
-export function Icon({ name, size='normal', modifiers='', className='', ...rest }) {
+export function Icon({ name, size='normal', modifiers=[], className='', ...rest }) {
     const sizeClass = `${UI_ICON_CLASS}--${size}`;
-    const modifiersClasses = Array.isArray(modifiers)
-        ? modifiers.map(m => `${UI_ICON_CLASS}--${m}`).join(' ')
-        : typeof modifiers === 'string' ? `${UI_ICON_CLASS}--${modifiers}` : '';
+
+    const modifiersList = Array.isArray(modifiers) ? modifiers : [modifiers];
+    if (rest.onClick && !modifiersList.includes('clickable'))
+        modifiersList.push('clickable');
+    const modifiersClasses = modifiersList.map(m => `${UI_ICON_CLASS}--${m}`).join(' ');
+
     return <i className={`${UI_ICON_CLASS} material-icons ${name} ${modifiersClasses} ${sizeClass} ${className}`} {...rest} />;
 }
 
 Icon.propTypes = {
     name: PropTypes.string.isRequired,
-    modifiers: PropTypes.string,
+    modifiers: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
     className: PropTypes.string,
     size: PropTypes.oneOf(['smaller', 'small', 'normal', 'big', 'bigger', 'huge']),
 };
