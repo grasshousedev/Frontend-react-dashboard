@@ -1,0 +1,41 @@
+
+
+.widgets__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.widget {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 220px;
+    margin-bottom: 20px;
+}
+
+.widget__title {
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: $primary;
+    text-align: center;
+}
+
+.widget__title--margin {
+    margin: 0 0 15px 0;
+}
+
+.widget__value {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    font-weight: 300;
+}
+
+.widget__message {
+    font-size: 12px;
+    color: $color-text-light;
+}
