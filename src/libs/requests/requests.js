@@ -13,6 +13,8 @@ export class RequestInvalid extends Exception {}
 export class RequestError extends Exception {}
 
 let logRequests = false;
+let commonHeaders = {};
+let mocks = {};
 
 export function setLogRequests(v) {
     logRequests = v;
@@ -20,8 +22,6 @@ export function setLogRequests(v) {
 
 if (typeof window !== undefined)
     window.requestsSetLogRequests = setLogRequests;
-
-let commonHeaders = {};
 
 export function setCommonHeaders(common) {
     commonHeaders = { ...common };
@@ -31,23 +31,45 @@ export function getCommonHeaders() {
     return { ...commonHeaders };
 }
 
+export function setMock(url, response) {
+    mocks[url] = response;
+}
+
+export function removeMock(url) {
+    mocks[url] && delete mocks[url];
+}
+
+export function t(a, b) {
+    console.log(a, b);
+}
+
 export default function request(
     url,
-    { payload, method = METHODS.GET, headers = {}, body, extraOptions = {} } = {}
+    { payload, method = METHODS.GET, headers = {}, body, extraOptions = {}, fetchParams, responseType='json', returnResponse=false } = {}
 ) {
-    const params = {
-        method,
-        headers: { ...getCommonHeaders(), ...headers },
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        redirect: 'follow',
-        referrer: 'no-referrer',
-        ...extraOptions
-    };
+
+    if (mocks[url]) {
+        if (logRequests)
+            console.info('Return mocked response for ', url, mocks[url]);
+        return new Promise(resolve => {
+            resolve(mocks[url]);
+        });
+    }
+
+    const params = fetchParams ||
+        {
+            method,
+            headers: { ...getCommonHeaders(), ...headers },
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            redirect: 'follow',
+            referrer: 'no-referrer',
+            ...extraOptions
+        };
 
     // Set auto header to JSON
-    if (!params.headers['Content-Type']) {
+    if (params.headers && payload && !params.headers['Content-Type']) {
         params.headers['Content-Type'] = 'application/json';
     }
 
@@ -69,7 +91,10 @@ export default function request(
                 console.error('Request: Invalid!', response.status, response.statusText);
                 throw new RequestInvalid(response);
             }
-            return response.status !== 204 ? response.json() : true;
+
+            if (returnResponse) return response;
+
+            return response.status !== 204 && responseType === 'json' ? response.json() : response.text();
         })
         .catch(error => {
             if (error instanceof RequestInvalid) throw error;
