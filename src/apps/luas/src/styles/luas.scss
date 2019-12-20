@@ -1,0 +1,121 @@
+$primary: #1280bf !default;
+$color-text-light: #9aa5b1 !default;
+$grey-light-l1: hsl(214, 15%, 91%) !default;
+
+
+
+.luas__forecast__container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.luas__forecast__title {
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: $primary;
+    text-align: center;
+    flex-grow: 1;
+}
+.luas__forecast__title--margin {
+    margin: 0 0 15px 0;
+}
+
+.luas__forecast__last-update {
+    color: $color-text-light;
+    font-size: 12px;
+    margin: 0 10px;
+}
+
+.luas__forecast__directions__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.luas__forecast__message {
+    text-align: center;
+    font-size: 12px;
+    margin: 5px;
+}
+
+
+.luas__multi-forecast__container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0 0 15px 0;
+}
+
+.luas__multi-forecast__control {
+    width: 30px;
+}
+
+.luas__forecast-direction__container {
+    width: 260px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.luas__forecast-direction__title__container {
+    width: 35px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 5px 10px 0 0;
+    border-right: 1px solid $grey-light-l1;
+}
+
+.luas__forecast-direction__title {
+    font-size: 14px;
+    color: $primary;
+    text-transform: uppercase;
+}
+
+.luas__forecast-direction__trams__container {
+    width: calc(100% - 35px);
+    margin-bottom: 10px;
+}
+
+/* .luas__forecast-direction__first-tram {} */
+
+.luas__forecast-direction__first-tram__due {
+    font-size: 36px;
+    font-weight: 300;
+}
+
+.luas__forecast-direction__first-tram__due,
+.luas__forecast-direction__tram__due {
+    width: 85px;
+    padding: 0 5px;
+    display: inline-flex;
+    text-align: right;
+    box-sizing: border-box;
+    justify-content: flex-end;
+}
+
+.luas__forecast-direction__first-tram__destination {
+    font-size: 22px;
+}
+
+.luas__forecast-direction__first-tram__destination,
+.luas__forecast-direction__tram__destination {
+    width: calc(100% - 85px);
+    padding: 0 5px;
+    display: inline-flex;
+    box-sizing: border-box;
+}
+
+.luas__forecast-direction__tram__due,
+.luas__forecast-direction__tram__destination {
+    color: $color-text-light;
+}
+
+.luas__forecast-direction__tram {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+}
+

@@ -27,4 +27,5 @@ yarn-error.log*
 
 # Apps
 src/apps/*
+!src/apps/luas/
 !src/apps/style-showcase/
