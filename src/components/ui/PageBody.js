@@ -9,7 +9,7 @@ export function PageBody({ children, fullHeight, withPageHeader, className, page
     const fullHeightClass = fullHeight
         ? withPageHeader
             ? `${PAGE_BODY_CLASS}--full-height__with-page-header`
-            : `${PAGE_BODY_CLASS}__body--full-height`
+            : `${PAGE_BODY_CLASS}--full-height`
         : '';
     const bodyClass = `${PAGE_BODY_CLASS} ${fullHeightClass} ${className}`;
 
