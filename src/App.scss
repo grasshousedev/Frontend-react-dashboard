@@ -21,6 +21,10 @@ $dashboard-menu-height: $header-height;
 @import 'style/3rd-party-overrides';
 @import 'style/dashboard/login';
 
+@import 'apps/luas/src/styles/luas.scss';
+@import 'pages/widgets.scss';
+
+
 body {
     font-family: $ui-font;
     font-weight: 400;
