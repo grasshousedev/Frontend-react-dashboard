@@ -1,7 +1,7 @@
 import { SEARCH_OPERATORS, SEARCH_TYPES } from "../constants";
 
 export function filterHandler(entries, filters, searchConfig) {
-    console.log('filter entries:', entries, filters);
+
     if (!filters || filters.length === 0) return entries;
     const { fields_map } = searchConfig;
 
@@ -45,9 +45,9 @@ export function filterHandler(entries, filters, searchConfig) {
                 default: {}
             }
         }
+
         return false;
     });
 
-    console.log('filtered', filtered);
     return filtered;
 }

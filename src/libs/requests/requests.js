@@ -39,10 +39,6 @@ export function removeMock(url) {
     mocks[url] && delete mocks[url];
 }
 
-export function t(a, b) {
-    console.log(a, b);
-}
-
 export default function request(
     url,
     { payload, method = METHODS.GET, headers = {}, body, extraOptions = {}, fetchParams, responseType='json', returnResponse=false } = {}
