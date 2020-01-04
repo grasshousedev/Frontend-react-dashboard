@@ -7,7 +7,7 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css';
 
 
 const UI_ICON_CLASS = 'ui-icon';
-
+const SPACEBAR_CODE = 32;
 
 export function Icon({ name, size='normal', modifiers=[], className='', ...rest }) {
     const sizeClass = `${UI_ICON_CLASS}--${size}`;
@@ -31,7 +31,17 @@ Icon.propTypes = {
 export function IconControl({ className='', ...rest }) {
     const iconControlClassName = `${className} ui-icon__control`;
 
-    return <Icon size="smaller" className={iconControlClassName} {...rest} />;
+    const onKeyDown = rest.onKeyDown ? rest.onKeyDown : rest.onClick
+        ? e => {
+            if (e.keyCode === SPACEBAR_CODE) {
+                e.preventDefault();
+                e.stopPropagation();
+                rest.onClick();
+            }
+        }
+        : undefined;
+
+    return <Icon size="smaller" className={iconControlClassName} onKeyDown={onKeyDown} {...rest} />;
 }
 
 IconControl.propTypes = {
