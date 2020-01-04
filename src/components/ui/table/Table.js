@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { useContainerSizeForAutoWidth } from './effects';
 import { getComponentContainerStyleAndClasses } from './stylesAndClasses/table';
-
+import { getSearchConfig } from './utils/search';
 import { TableWrapper } from './TableWrapper';
 
 
@@ -13,10 +13,12 @@ const DEFAULT_CONFIG = {
     headerController: true,
     headerContainerProps: {},
     bodyContainerProps: {},
+    searchBar: true,
 };
 
-export function Table({ columns, entries, config, container }) {
+export function Table({ columns, entries, config, container, filters }) {
     const tableConfig = { ...DEFAULT_CONFIG, ...config };
+    tableConfig.searchConfig = getSearchConfig(columns, tableConfig);
 
     const [tableStyleState, setTableStyleState] = useState({
         configured: false,
@@ -47,6 +49,7 @@ export function Table({ columns, entries, config, container }) {
                 tableStyleState={tableStyleState}
                 setTableStyleState={setTableStyleState}
                 container={container}
+                filters={filters}
             />
     }
     </div>;
@@ -84,4 +87,9 @@ Table.propTypes = {
         hideHeader: PropTypes.bool,
     }),
     container: PropTypes.object,
+    filters: PropTypes.shape({
+        enabled: PropTypes.bool,
+        initial: PropTypes.array,
+        values: PropTypes.object,
+    }),
 };

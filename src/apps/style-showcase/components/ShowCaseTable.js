@@ -8,6 +8,8 @@ import { Checkbox, Form, HField, Input, Select, Toggle } from 'components/ui/for
 
 import { PropsTable } from '../common/PropsTable';
 import { ColumnBlockCodeSplit } from '../common/ColumnBlockCodeSplit';
+import { SEARCH_TYPES, SEARCH_FILTER_OPERATORS } from 'components/ui/table/constants';
+
 
 const SAMPLE_ENTRIES = getEntries();
 
@@ -213,6 +215,8 @@ export function ShowCaseTable() {
 
         <Props />
         <PropsConfig />
+        <PropsFilters />
+        <SearchDoc />
     </Fragment>;
 }
 
@@ -222,7 +226,7 @@ function Props() {
             propName: 'columns',
             propType: 'array',
             isRequired: true,
-            description: 'A list of columns defintion. Each defintion is an object with the following properties: prop, title and width.'
+            description: 'A list of columns defintion. Each defintion is an object with the following properties: prop, title, width and search (see Search below).'
         },
         {
             propName: 'entries',
@@ -234,7 +238,32 @@ function Props() {
             propName: 'config',
             propType: 'array',
             isRequired: false,
-            description: 'An object with the properties described in the table below.'
+            description: 'An object with the properties described in the table below. See "Config" below.'
+        },
+        {
+            propName: 'filters',
+            propType: 'object',
+            isRequired: false,
+            description: 'Filters configuration. See "Filters" below.'
+        },
+    ]} />;
+}
+
+function PropsFilters() {
+    return <PropsTable title="Filters" propsList={[
+        {
+            propName: 'initial',
+            propType: 'array',
+            description: <div>
+                A list of filters. Each filter is an object configured with the following keys:
+                <ul>
+                    <li><Monospace>field</Monospace>: the field that will be filtered</li>
+                    <li><Monospace>operator</Monospace>: a valid operator for the field type</li>
+                    <li><Monospace>value</Monospace>: the value that will be used as a filter</li>
+                </ul>
+                Depending on how fields are configured, different operators are available.
+                See {'"Operators"'} section in the Search below.
+            </div>
         },
     ]} />;
 }
@@ -304,7 +333,10 @@ function PropsConfig() {
                 An object with the following properties:
                 <ul>
                     <li><Monospace>visible</Monospace>: shows page controller (under the table)</li>
-                    <li><Monospace>style</Monospace>: can be `collapsed` (all aligned to the right) or `expanded` (spread over all the width)</li>
+                    <li>
+                        <Monospace>style</Monospace>: can be `collapsed` (all aligned to the right)
+                        or `expanded` (spread over all the width)
+                    </li>
                 </ul>
             </div>
         },
@@ -316,6 +348,61 @@ function PropsConfig() {
             </div>
         },
     ]} />;
+}
+
+function SearchDoc() {
+    return <Block title="Search">
+        <p>
+            It is possible to enable a Search Bar inside the Tool Bar (above the table).
+            <br />
+            The Search Bar will create three controllers that will allow to select a field,
+            an operator related to the field and to set a value.
+            The first two are <Monospace>select</Monospace>, the third is an <Monospace>input</Monospace>.
+        </p>
+
+        <h3>Fields</h3>
+        <div>
+            The list of fields is generated from the main <Monospace>columns</Monospace> prop.
+            Each field is added by default with a <Monospace>string</Monospace> type.
+            It is possible to pass a <Monospace>search</Monospace> configuration to the column.
+            This object can have the following properties:
+            <ul>
+                <li>
+                    <Monospace>exclude</Monospace>: set to <Monospace>true</Monospace>
+                    if the field has to be excluded from the searchable fields
+                </li>
+                <li><Monospace>title</Monospace>: specify a title if different from the column title.</li>
+                <li>
+                    <Monospace>type</Monospace>: specify the {"field's"} value type.
+                    Valid types are
+                    {[...Object.values(SEARCH_TYPES).map(t => <Monospace key={t}>{t}</Monospace>)].join(', ')}
+                </li>
+            </ul>
+        </div>
+
+        <h3>Operators</h3>
+        Operators are set based on the field type.
+        <div className="p-15">
+            {Object.values(SEARCH_TYPES).map(st => {
+                return <Fragment key={st}>
+                    <h4>{st}</h4>
+                    <ul>
+                        {SEARCH_FILTER_OPERATORS[st].map(sfo => {
+                            return <li key={sfo.value}><Monospace>{sfo.value}</Monospace></li>;
+                        })}
+                    </ul>
+                </Fragment>;
+            })}
+        </div>
+
+        <h3>Values</h3>
+        <div>
+            Each value should be the same type of value that an entry has.
+            Currently, reference keys are not supported but will be added soon (i.e. a select with values).
+        </div>
+
+
+    </Block>;
 }
 
 const pinColumn = function(column, pin, pinned) {
