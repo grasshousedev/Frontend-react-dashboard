@@ -88,8 +88,6 @@ Table.propTypes = {
     }),
     container: PropTypes.object,
     filters: PropTypes.shape({
-        enabled: PropTypes.bool,
         initial: PropTypes.array,
-        values: PropTypes.object,
     }),
 };

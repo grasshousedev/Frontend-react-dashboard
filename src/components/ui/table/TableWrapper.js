@@ -126,4 +126,5 @@ TableWrapper.propTypes = {
     tableStyleState: PropTypes.object,
     setTableStyleState: PropTypes.func,
     container: PropTypes.object,
+    filters: PropTypes.object,
 };

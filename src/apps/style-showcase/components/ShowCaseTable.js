@@ -374,8 +374,10 @@ function SearchDoc() {
                 <li><Monospace>title</Monospace>: specify a title if different from the column title.</li>
                 <li>
                     <Monospace>type</Monospace>: specify the {"field's"} value type.
-                    Valid types are
-                    {[...Object.values(SEARCH_TYPES).map(t => <Monospace key={t}>{t}</Monospace>)].join(', ')}
+                    Valid types are:
+                    <ul>
+                        {Object.values(SEARCH_TYPES).map(t => <li key={t}><Monospace>{t}</Monospace></li>)}
+                    </ul>
                 </li>
             </ul>
         </div>
@@ -401,6 +403,16 @@ function SearchDoc() {
             Currently, reference keys are not supported but will be added soon (i.e. a select with values).
         </div>
 
+        <h2>Custom values for entries</h2>
+        <div>
+            The value is filtered agains the <Monospace>entry</Monospace> value.
+            However, if this is a JSX value or a complex one, it might not be filtered properly.
+            <br />
+            To use a different value for a field, it is possible to decorate the single entry with an
+            <Monospace>_entry</Monospace> object field, which defines the fields value.
+            <CodeHighlight language="json">{JSON.stringify(searchEntrySample, null, 4)}</CodeHighlight>
+        </div>
+        T
 
     </Block>;
 }
@@ -433,3 +445,8 @@ function getEntries() {
 function randomNumber (min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
+
+const searchEntrySample = [
+    { id: 1, title: '<h4>Title 1</h4>', _entry: { title: 'Title 1' } },
+    { id: 2, title: '<h4>Title 2</h4>', _entry: { title: 'Title 2' } },
+];
