@@ -17,7 +17,7 @@ class Authentication {
                 return response;
             })
             .catch(exception => {
-                console.error('Authentication: Cannot authenticate:', exception);                 
+                console.error('Authentication: Cannot authenticate:', exception);
                 throw new AuthenticationError(exception.getErrorData());
             });
     }
@@ -35,7 +35,7 @@ class Authentication {
             resolve({ token: null });
         });
       }
-      
+
     setStorageLoggedUserToken = () => {
         const token = this.token;
         return new Promise((resolve, reject) => {
@@ -49,7 +49,7 @@ class Authentication {
             }
             resolve({ stored: false });
         });
-    }    
+    }
 
     setCommonAuthHeaders = () => {
         if (this.token)
@@ -61,11 +61,14 @@ class Authentication {
         return this.setStorageLoggedUserToken().then(this.getLoggedUser);
     }
 
-    getLoggedUser = () => {        
+    getLoggedUser = () => {
         return getRequest('dashboard/api/logged-user/').then((data) => {
             this.user = data;
             store.dispatch({ type: actions.REGISTER_USER, user: data });
             return data;
+        }).catch(error => {
+            console.warn('Cannot authenticate user.', error);
+            this.clearAuthentication();
         });
     }
 
@@ -89,7 +92,7 @@ class Authentication {
     }
 
     storageAutoLogin = () => {
-        function completeOperation(resolve, success, userData) {            
+        function completeOperation(resolve, success, userData) {
             store.dispatch({ type: actions.STORAGE_LOGIN_ATTEMPT, value: true });
             resolve({ success, userData });
         }

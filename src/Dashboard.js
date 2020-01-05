@@ -8,6 +8,7 @@ import { Routes } from 'routes/Routes';
 import { Login } from 'components/authentication/Login';
 import { DashboardLogin } from 'components/authentication/DashboardLogin';
 import { Icon } from 'components/ui/Icon';
+import { FullSectionLoader } from 'components/ui/Loader';
 import { Sidebar, SidebarContext } from 'components/ui/Sidebar';
 
 
@@ -26,9 +27,7 @@ function Dashboard({ authentication }) {
     }, [pathname]);
 
     if (!authentication.storageLoginAttempt)
-        return <div className="ui-loader__preloader__container">
-            <div className="ui-preloader__loader ui-loader ui-loader--large" />
-        </div>;
+        return <div style={{ height: '100vh' }}><FullSectionLoader /></div>;
 
     if (!authentication.loggedIn)
         return <div className="dashboard__full-screen__login__container">

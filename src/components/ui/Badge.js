@@ -10,7 +10,8 @@ export function Badge({ className, color, backgroundColor, type='rounded', tag: 
     const colorClass = color || '';
     const backgroundColorClass = backgroundColor ? `background-${backgroundColor}` : '';
     const typeClass = type && type !== 'squared' ? `${BADGE_CLASS}--${type}` : '';
-    const badgeClass = `${BADGE_CLASS} ${colorClass} ${backgroundColorClass} ${typeClass} ${className}`;
+    const clickableClass = rest.onClick ? `${BADGE_CLASS}--clickable` : '';
+    const badgeClass = `${BADGE_CLASS} ${colorClass} ${backgroundColorClass} ${typeClass} ${clickableClass} ${className}`;
 
     return <Tag className={badgeClass} {...rest}>{children}</Tag>;
 }

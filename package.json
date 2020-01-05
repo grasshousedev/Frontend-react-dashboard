@@ -16,6 +16,7 @@
     "flexboxgrid": "^6.3.1",
     "formik": "^1.5.1",
     "highlight.js": "^9.15.10",
+    "luxon": "^1.21.3",
     "material-design-icons-iconfont": "^5.0.1",
     "react": "^16.8",
     "react-chartjs-2": "^2.7.6",
@@ -27,7 +28,8 @@
     "react-toastify": "^5.1.0",
     "react-virtualized": "^9.21.0",
     "react-window": "^1.8.1",
-    "redux": "^4.0.1"
+    "redux": "^4.0.1",
+    "xml-js": "^1.6.11"
   },
   "devDependencies": {
     "lato-font": "^3.0.0",
