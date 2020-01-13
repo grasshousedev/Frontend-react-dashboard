@@ -1,5 +1,5 @@
 export const URLS = {
-    FORECAST: 'http://luasforecasts.rpa.ie/xml/get.ashx?action=forecast&encrypt=false&stop=',
+    FORECAST: 'https://luasforecasts.rpa.ie/xml/get.ashx?action=forecast&encrypt=false&stop=',
 };
 
 export const DIRECTIONS = {
