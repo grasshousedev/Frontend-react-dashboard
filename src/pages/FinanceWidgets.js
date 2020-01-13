@@ -29,7 +29,9 @@ export function FinanceWidgets() {
                 <div className="widget__value">
                     {isIncreased && <Icon size="big" name="keyboard_arrow_up" className="color-negative" />}
                     {!isIncreased && <Icon size="big" name="keyboard_arrow_down" className="color-positive" />}
-                    <span className={isUnderBudget ? 'color-positive' : 'color-negative'}>{state.totals.current_month.total * -1}</span>
+                    <span className={isUnderBudget ? 'color-positive' : 'color-negative'}>
+                        {Math.round(state.totals.current_month.total * -1, 2)}
+                    </span>
                     <span style={{ width: 20 }} />
                 </div>
                 <div className="widget__message">Budget: {state.totals.current_month.budget}</div>
@@ -37,7 +39,7 @@ export function FinanceWidgets() {
             <div className="widget">
                 <div className="widget__title widget__title--margin">Previous Month</div>
                 <div className="widget__value">
-                    {state.totals.previous_month.total * -1}
+                    {Math.round(state.totals.previous_month.total * -1, 2)}
                 </div>
             </div>
         </div>
