@@ -8,7 +8,7 @@ export function generateTags(string) {
 export function hasTag(tags, tag) {
     const trimmedTag = tag.trim();
     for (let i=0; i<tags.length; i++) {
-        if (tags[i].indexOf(trimmedTag) >= 0) return true;
+        if (tags[i].toLowerCase().indexOf(trimmedTag.toLowerCase()) >= 0) return true;
     }
     return false;
 }
