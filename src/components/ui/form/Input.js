@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { FORM_BASE_CLASS } from './Form';
 
 
-const FORM_INPUT_CLASS = `${FORM_BASE_CLASS}__field__input`;
+export const FORM_INPUT_CLASS = `${FORM_BASE_CLASS}__field__input`;
 const FORM_INPUT_DISABLED_CLASS = `${FORM_INPUT_CLASS}--disabled`;
 const FORM_INPUT_INVALID_CLASS = `${FORM_INPUT_CLASS}--invalid`;
 

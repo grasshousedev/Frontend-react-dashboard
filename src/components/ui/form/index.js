@@ -1,4 +1,5 @@
 import { Checkbox } from './Checkbox';
+import { DatePicker } from './DatePicker';
 import { Form } from './Form';
 import { Field, HField, VField } from './Field';
 import { IconPicker } from './iconPicker/IconPicker';
@@ -9,6 +10,7 @@ import { Toggle } from './Toggle';
 
 export {
     Checkbox,
+    DatePicker,
     Form,
     Field,
     HField,

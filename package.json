@@ -21,6 +21,7 @@
     "react": "^16.8",
     "react-chartjs-2": "^2.7.6",
     "react-color": "^2.17.0",
+    "react-day-picker": "^7.4.0",
     "react-dom": "^16.8",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.1.2",
