@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import { FullSectionLoader } from '../../../../components/ui/Loader';
@@ -22,21 +22,30 @@ export function LuasForecast({ station, getTitle }) {
         return <FullSectionLoader />;
     }
 
-    const message = state[station.code].luas.stopInfo.message._text;
-    const inbound = getTramsByDirection(state[station.code].luas.stopInfo, DIRECTIONS.inbound);
-    const outbound = getTramsByDirection(state[station.code].luas.stopInfo, DIRECTIONS.outbound);
-
-    return <div className="luas__forecast__container">
-            {getTitle && getTitle(station.label, state[station.code].lastUpdate)}
-            {!getTitle && <h2 className="luas__forecast__title luas__forecast__title--margin">
-                {station.label}
-                <span className="luas__forecast__last-update">{state[station.code].lastUpdate}</span>
-            </h2>}
+    let content;
+    if (!state[station.code].luas) {
+        content = <div className="luas__forecast__message">Service Unavailable</div>;
+    } else {
+        const message = state[station.code].luas.stopInfo.message._text;
+        const inbound = getTramsByDirection(state[station.code].luas.stopInfo, DIRECTIONS.inbound);
+        const outbound = getTramsByDirection(state[station.code].luas.stopInfo, DIRECTIONS.outbound);
+        content = <Fragment>
             <div className="luas__forecast__directions__container">
                 <LuasForecastDirection trams={inbound} title={DIRECTIONS.inbound} />
                 <LuasForecastDirection trams={outbound} title={DIRECTIONS.outbound} />
             </div>
             <div className="luas__forecast__message">{message}</div>
+        </Fragment>;
+    }
+
+
+    return <div className="luas__forecast__container">
+        {getTitle && getTitle(station.label, state[station.code].lastUpdate)}
+        {!getTitle && <h2 className="luas__forecast__title luas__forecast__title--margin">
+            {station.label}
+            <span className="luas__forecast__last-update">{state[station.code].lastUpdate}</span>
+        </h2>}
+        {content}
     </div>;
 
 }

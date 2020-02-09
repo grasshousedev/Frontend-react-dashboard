@@ -11,17 +11,28 @@ export function getLuasData(station, setState) {
         responseType: 'xml',
     };
 
-    getRequest(`${URLS.FORECAST}${station.code}`, options).then(response => {
+    const getUpdateDate = () => {
         const dt = DateTime.local();
-        const updateDate = dt.toLocaleString(DateTime.TIME_24_WITH_SECONDS);
+        return dt.toLocaleString(DateTime.TIME_24_WITH_SECONDS);
+    }
 
+    getRequest(`${URLS.FORECAST}${station.code}`, options).then(response => {
         setState(s => ({
             ...s,
             [station.code]: {
                 luas: convert.xml2js(response, { compact: true }),
-                lastUpdate: updateDate
+                lastUpdate: getUpdateDate()
             }
         }));
         // convert.xml2json(response, { compact: true, spaces: 4 });
+    }).catch(error => {
+        setState(s => ({
+            ...s,
+            [station.code]: {
+                luas: null,
+                lastUpdate: getUpdateDate(),
+                error,
+            }
+        }));
     });
 };
