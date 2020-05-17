@@ -14,7 +14,7 @@ export function getLuasData(station, setState) {
     const getUpdateDate = () => {
         const dt = DateTime.local();
         return dt.toLocaleString(DateTime.TIME_24_WITH_SECONDS);
-    }
+    };
 
     getRequest(`${URLS.FORECAST}${station.code}`, options).then(response => {
         setState(s => ({
