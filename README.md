@@ -221,7 +221,7 @@ For example, to override `BACKEND_URL` in Dev mode, you can use the following `s
 # Custom react-script and Webpack configuration
 
 Following the tutorial of this [video](https://www.youtube.com/watch?v=I22TW-33dDE), I have [forked]() `create-react-app`. 
-Instead of ejecting and maintaining all the configurations, I changed the `create-react-app` / `react-scripts` to parse a file called `dashboardWebpack.config.js` and apply the `modify` function in a similar way of [razzle's createConfig.js](https://github.com/jaredpalmer/razzle/blob/master/packages/razzle/config/createConfig.js).
+Instead of ejecting and maintaining all the configurations, I changed the `create-react-app` / `react-scripts` to parse a file called `dashboardWebpack.config.js` and apply the `modify` function in a similar way of grasshousedev's createConfig.js.
 
 In this way, it's easy to change the Webpack configuration without ejecting!
 
